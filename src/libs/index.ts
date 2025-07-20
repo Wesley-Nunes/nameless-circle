@@ -1,2 +1,2 @@
-export { default as BattleSystem } from './BattleSystem'
+export { default as CombatSystem } from './CombatSystem'
 

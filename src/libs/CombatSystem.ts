@@ -1,6 +1,6 @@
-import type { CharacterI } from 'types'
+import type { ActionsI, CharacterI } from 'types'
 
-class BattleSystem {
+class CombatSystem {
     private order: { initiative: number, actor: CharacterI }[]
     private currentActorIndex = 0
     private _currentActor = {} as CharacterI
@@ -32,7 +32,20 @@ class BattleSystem {
 
         this._currentActor = this.order[newIndex].actor
     }
+
+    public targets(action: ActionsI): CharacterI[] {
+        const currentTeam = this.currentActor.team
+        const targets = [] as CharacterI[]
+
+        this.order.forEach(({ actor }) => {
+            if (action.type === 'attack' && actor.team !== currentTeam && actor.isAlive) {
+                targets.push(actor)
+            }
+        })
+
+        return targets
+    }
 }
 
-export default BattleSystem
+export default CombatSystem
 
