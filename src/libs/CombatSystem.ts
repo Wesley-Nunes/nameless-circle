@@ -1,4 +1,5 @@
-import type { ActionsI, CharacterI } from 'types'
+import type { ActionI, CharacterI } from 'types'
+import roll from './roll'
 
 class CombatSystem {
     private order: { initiative: number, actor: CharacterI }[]
@@ -11,15 +12,11 @@ class CombatSystem {
         }
 
         this.order = actors.map(actor => {
-            const initiative = this.roll() + actor.dexModifier
+            const initiative = roll() + actor.dexModifier
             return { initiative, actor }
         }).sort((a, b) => b.initiative - a.initiative || b.actor.dexModifier - a.actor.dexModifier)
 
         this.currentActor = this.currentActorIndex
-    }
-
-    private roll(dice = 20): number {
-        return Math.ceil(Math.random() * dice)
     }
 
     public get currentActor(): CharacterI {
@@ -33,7 +30,7 @@ class CombatSystem {
         this._currentActor = this.order[newIndex].actor
     }
 
-    public targets(action: ActionsI): CharacterI[] {
+    public targets(action: ActionI): CharacterI[] {
         const currentTeam = this.currentActor.team
         const targets = [] as CharacterI[]
 
