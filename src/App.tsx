@@ -8,6 +8,7 @@ const App: React.FC = () => {
         // NOTE: Fake Character
         const character = target.team === 'heroes' ? characters[1] : characters[0]
 
+        console.log(`Char ${character.team} attacks Char ${target.team}`)
         if (action.type === 'attack') {
             const modifier = item.range === 'melee' ? character.strModifier : character.dexModifier
             const attack = roll() + modifier
@@ -22,7 +23,11 @@ const App: React.FC = () => {
                 if (target.hp <= 0) {
                     target.isAlive = false
                 }
+                console.log(`giving ${damage} of damage`)
+            } else {
+                console.log('missing')
             }
+
         }
     }
     const actions: ActionI[] = [
@@ -38,8 +43,8 @@ const App: React.FC = () => {
             isAlive: true,
             team: 'heroes',
             dexModifier: 2,
-            strModifier: 1,
-            armorClass: 15,
+            strModifier: 0,
+            armorClass: 14,
             actions,
             hp: 20,
             items: [items[0]],
@@ -49,8 +54,8 @@ const App: React.FC = () => {
             id: 'char_02',
             isAlive: true,
             team: 'enemies',
-            strModifier: 2,
-            dexModifier: -1,
+            strModifier: 0,
+            dexModifier: 4,
             armorClass: 12,
             actions,
             hp: 20,
@@ -61,17 +66,23 @@ const App: React.FC = () => {
 
     useEffect(() => {
         const combat = new CombatSystem(characters)
-        const actor = combat.currentActor
-        // NOTE: The selection of action, item, and target will be done by:
-        // 1. UI for player
-        // 2. AI handler for npc/enemies
-        const action = actor.actions[0]
-        const item = actor.items[0]
-        const targets = combat.targets(action)
-        actor.exec(action, item, targets[0])
-        combat.endTurn()
-        // TEMP: 
-        setCharacters([actor, ...targets])
+
+        while (combat.inProgress()) {
+            const actor = combat.currentActor
+            // NOTE: The selection of action, item, and target will be done by:
+            // 1. UI for player
+            // 2. AI handler for npc/enemies
+            const action = actor.actions[0]
+            const item = actor.items[0]
+            const targets = combat.targets(action)
+            actor.exec(action, item, targets[0])
+            combat.endTurn()
+            // TEMP: 
+            setCharacters([actor, ...targets])
+        }
+        if (!combat.inProgress()) {
+            console.log(characters)
+        }
     }, [])
 
     useEffect(() => {

@@ -36,6 +36,12 @@ class CombatSystem {
             this.actorIndex = (this.actorIndex + 1) % this.order.length
         } while (!this.currentActor.isAlive)
     }
+    public inProgress(): boolean {
+        const isHeroesAlive = this.order.some(({ actor }) => actor.isAlive && actor.team === 'heroes')
+        const isEnemiesAlive = this.order.some(({ actor }) => actor.isAlive && actor.team === 'enemies')
+
+        return isHeroesAlive && isEnemiesAlive
+    }
 }
 
 export default CombatSystem
