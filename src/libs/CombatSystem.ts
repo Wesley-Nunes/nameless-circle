@@ -3,8 +3,7 @@ import roll from './roll'
 
 class CombatSystem {
     private order: { initiative: number, actor: CharacterI }[]
-    private currentActorIndex = 0
-    private _currentActor = {} as CharacterI
+    private actorIndex = 0
 
     constructor(actors: CharacterI[]) {
         if (actors.length < 2) {
@@ -15,21 +14,11 @@ class CombatSystem {
             const initiative = roll() + actor.dexModifier
             return { initiative, actor }
         }).sort((a, b) => b.initiative - a.initiative || b.actor.dexModifier - a.actor.dexModifier)
-
-        this.currentActor = this.currentActorIndex
     }
 
     public get currentActor(): CharacterI {
-        return this._currentActor
+        return this.order[this.actorIndex].actor
     }
-    private set currentActor(newIndex: number) {
-        if (newIndex >= this.order.length) {
-            throw new Error(`The index ${newIndex} is out of bounds.`)
-        }
-
-        this._currentActor = this.order[newIndex].actor
-    }
-
     public targets(action: ActionI): CharacterI[] {
         const currentTeam = this.currentActor.team
         const targets = [] as CharacterI[]
@@ -41,6 +30,11 @@ class CombatSystem {
         })
 
         return targets
+    }
+    public endTurn() {
+        do {
+            this.actorIndex = (this.actorIndex + 1) % this.order.length
+        } while (!this.currentActor.isAlive)
     }
 }
 

@@ -4,32 +4,25 @@ import type { ActionI, CharacterI, ItemI } from 'types'
 import roll from 'libs/roll'
 
 const App: React.FC = () => {
-    // The actions should be filtered based on **conditions**, 
-    // for example, if the character doesn't have any potions, 
-    // the option drink should no be displayed
     const exec = (action: ActionI, item: ItemI, target: CharacterI) => {
         // NOTE: Fake Character
         const character = target.team === 'heroes' ? characters[1] : characters[0]
-        console.log(character)
 
         if (action.type === 'attack') {
-            console.log(action)
-            console.log(item)
-            console.log(target)
-
             const modifier = item.range === 'melee' ? character.strModifier : character.dexModifier
             const attack = roll() + modifier
             const hitAC = attack >= target.armorClass
-            console.log({ modifier, attack, hitAC })
             if (hitAC) {
                 let damage = item.dice.modifier || 0
                 for (let i = 0; i < item.dice.count; i += 1) {
                     damage += roll(item.dice.sides)
                 }
                 target.hp -= damage
-                console.log({ damage })
+
+                if (target.hp <= 0) {
+                    target.isAlive = false
+                }
             }
-            console.log(target)
         }
     }
     const actions: ActionI[] = [
@@ -39,34 +32,32 @@ const App: React.FC = () => {
         { id: 'item_01', name: 'longsword', range: 'melee', dice: { count: 1, sides: 8 } },
         { id: 'item_02', name: 'spear', range: 'ranged', dice: { count: 1, sides: 6 } },
     ]
-    const [characters, setCharacters] = useState<CharacterI[]>(
-        [
-            {
-                id: 'char_01',
-                isAlive: true,
-                team: 'heroes',
-                dexModifier: 2,
-                strModifier: 1,
-                armorClass: 15,
-                actions,
-                hp: 20,
-                items: [items[0]],
-                exec
-            },
-            {
-                id: 'char_02',
-                isAlive: true,
-                team: 'enemies',
-                strModifier: 2,
-                dexModifier: -1,
-                armorClass: 12,
-                actions,
-                hp: 20,
-                items: [items[1]],
-                exec
-            }
-        ]
-    )
+    const [characters, setCharacters] = useState<CharacterI[]>([
+        {
+            id: 'char_01',
+            isAlive: true,
+            team: 'heroes',
+            dexModifier: 2,
+            strModifier: 1,
+            armorClass: 15,
+            actions,
+            hp: 20,
+            items: [items[0]],
+            exec
+        },
+        {
+            id: 'char_02',
+            isAlive: true,
+            team: 'enemies',
+            strModifier: 2,
+            dexModifier: -1,
+            armorClass: 12,
+            actions,
+            hp: 20,
+            items: [items[1]],
+            exec
+        }
+    ])
 
     useEffect(() => {
         const combat = new CombatSystem(characters)
@@ -78,6 +69,8 @@ const App: React.FC = () => {
         const item = actor.items[0]
         const targets = combat.targets(action)
         actor.exec(action, item, targets[0])
+        combat.endTurn()
+        // TEMP: 
         setCharacters([actor, ...targets])
     }, [])
 
