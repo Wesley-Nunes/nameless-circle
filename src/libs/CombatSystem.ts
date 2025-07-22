@@ -7,7 +7,7 @@ class CombatSystem {
 
     constructor(actors: CharacterI[]) {
         if (actors.length < 2) {
-            throw new Error('The actors size should be two or greather')
+            throw new Error('The actors size should be two or greater')
         }
 
         this.order = actors.map(actor => {
@@ -20,20 +20,17 @@ class CombatSystem {
         return this.order[this.actorIndex].actor
     }
     public targets(action: ActionI): CharacterI[] {
-        const currentTeam = this.currentActor.team
-        const targets = [] as CharacterI[]
+        if (action.type !== 'attack') return []
 
-        this.order.forEach(({ actor }) => {
-            if (action.type === 'attack' && actor.team !== currentTeam && actor.isAlive) {
-                targets.push(actor)
-            }
-        })
-
-        return targets
+        return this.order
+            .filter(item => item.actor.team !== this.currentActor.team && item.actor.isAlive)
+            .map(item => item.actor)
     }
     public endTurn() {
+        const startIdx = this.actorIndex
         do {
             this.actorIndex = (this.actorIndex + 1) % this.order.length
+            if (this.actorIndex === startIdx) break
         } while (!this.currentActor.isAlive)
     }
     public inProgress(): boolean {

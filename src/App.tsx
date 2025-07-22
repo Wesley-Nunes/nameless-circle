@@ -83,10 +83,6 @@ const App: React.FC = () => {
         if (!combat.inProgress()) {
             console.log(characters)
         }
-    }, [])
-
-    useEffect(() => {
-        console.log(characters)
     }, [characters])
 
     return <h1>Nameless Circle</h1>
