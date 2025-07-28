@@ -11,12 +11,21 @@ const validateTemplate = (template: AbilityTemplate) => {
     const isInvalid = isEmpty || invalidKeys || invalidValues
     if (isInvalid) {
         throw new Error(`Invalid template: '${JSON.stringify(template)}'.
-                        - Expected keys: str, dex, con, int, wis, cha
-                        - Expected values: Non-negative number`)
+                        - Required keys: str, dex, con, int, wis, cha
+                        - All values must be positive numbers `)
     }
 }
+const validateXp = (xp: number) => {
+    const isInvalid = !(typeof xp === 'number') || !(xp > 0)
+
+    if (isInvalid) {
+        throw new Error(`Invalid xp: '${xp}'. Value must be a positive number.`)
+    }
+}
+
 const getEnemyAbilities = (template: AbilityTemplate, xp: number): AbilityCharacter => {
     validateTemplate(template)
+    validateXp(xp)
 }
 
 export default getEnemyAbilities
