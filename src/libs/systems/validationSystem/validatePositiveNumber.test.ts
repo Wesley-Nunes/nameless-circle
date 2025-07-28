@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import validatePositiveNumber from './validatePositiveNumber'
 
 describe('validatePositiveNumber', () => {
-    it('should throw an error for an invalid points', () => {
+    it('should throw an error for an invalid numbers', () => {
         // @ts-expect-error  
         expect(() => validatePositiveNumber('alpha', 'damage'))
             .toThrowError("Invalid damage: 'alpha'. Must be a positive number.")
