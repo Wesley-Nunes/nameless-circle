@@ -10,5 +10,8 @@ describe('validateEnemyXp', () => {
         expect(() => validateEnemyXp(222))
             .toThrowError("Invalid xp: '222'. Value must be a number from the ENEMY_XP array.")
     })
+    it('should not throw an error for a valid xp value', () => {
+        expect(() => validateEnemyXp(100)).not.toThrow()
+    })
 })
 
