@@ -1,9 +1,10 @@
+import { ABILITY_KEYS } from 'libs/data/static/ability'
+
 import type { AbilityKey, AbilityTemplate } from 'libs/entities'
 
 const validateTemplate = (template: AbilityTemplate) => {
-    const keys: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha']
     const isEmpty = !template || !Object.values(template).length
-    const invalidKeys = !Object.keys(template).every((k) => keys.includes(k as AbilityKey))
+    const invalidKeys = !Object.keys(template).every((k) => ABILITY_KEYS.includes(k as AbilityKey))
     const invalidValues = !Object.values(template).every((v) => typeof v === 'number' && v > 0)
     const isInvalid = isEmpty || invalidKeys || invalidValues
 

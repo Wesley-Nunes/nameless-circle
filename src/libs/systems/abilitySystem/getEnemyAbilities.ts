@@ -1,14 +1,14 @@
 import { validateTemplate, validatePositiveNumber } from 'libs/systems/validationSystem'
 
-import type { AbilityBlock, AbilityKey, AbilityTemplate } from 'libs/entities'
+import { ABILITY_KEYS } from 'libs/data/static/ability'
 
-const ABILITIES_KEYS: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha']
+import type { AbilityBlock, AbilityKey, AbilityTemplate } from 'libs/entities'
 
 const getEnemyAbilities = (template: AbilityTemplate, abilityPoints: number): AbilityBlock => {
     validateTemplate(template)
     validatePositiveNumber(abilityPoints, 'abilityPoints')
 
-    const totalWeights = ABILITIES_KEYS.reduce(
+    const totalWeights = ABILITY_KEYS.reduce(
         (sum, ability) => sum + template[ability], 0
     )
     const abilityBlock: AbilityBlock = {
@@ -22,7 +22,7 @@ const getEnemyAbilities = (template: AbilityTemplate, abilityPoints: number): Ab
     const fractions: Partial<Record<AbilityKey, number>> = {}
     let totalBase = 0
 
-    ABILITIES_KEYS.forEach(ability => {
+    ABILITY_KEYS.forEach(ability => {
         const value = template[ability] * abilityPoints
         const base = Math.floor(value / totalWeights)
 
@@ -33,15 +33,15 @@ const getEnemyAbilities = (template: AbilityTemplate, abilityPoints: number): Ab
 
     const remainder = abilityPoints - totalBase
     if (remainder > 0) {
-        const sorted = [...ABILITIES_KEYS].sort((a, b) =>
-            fractions[b]! - fractions[a]! || ABILITIES_KEYS.indexOf(a) - ABILITIES_KEYS.indexOf(b)
+        const sorted = [...ABILITY_KEYS].sort((a, b) =>
+            fractions[b]! - fractions[a]! || ABILITY_KEYS.indexOf(a) - ABILITY_KEYS.indexOf(b)
         )
         for (let i = 0; i < remainder; i += 1) {
             abilityBlock[sorted[i]].score = abilityBlock[sorted[i]]!.score + 1
         }
     }
 
-    ABILITIES_KEYS.forEach(key => {
+    ABILITY_KEYS.forEach(key => {
         abilityBlock[key].modifier = Math.floor((abilityBlock[key].score - 10) / 2)
     })
 
