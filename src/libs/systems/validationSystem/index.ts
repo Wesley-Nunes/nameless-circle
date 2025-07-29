@@ -1,3 +1,4 @@
+export { default as validateCharacterSize } from './validateCharacterSize'
 export { default as validateEnemyXp } from './validateEnemyXp'
 export { default as validateIDParam } from './validateIDParam'
 export { default as validatePositiveNumber } from './validatePositiveNumber'
