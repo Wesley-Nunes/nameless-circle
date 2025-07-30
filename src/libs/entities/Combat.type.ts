@@ -4,7 +4,7 @@ import type { Enemy } from './Enemy.type'
 export type CombatTemplate = {
     id: string;
     enemies: (heroLevels: number[], difficulty: Difficulty) => Enemy[];
-    winConditions: { type: string }[]
+    winConditions: { basic: string, extra?: string }[]
 }
 
 export type Combat = Omit<CombatTemplate, 'enemies'> & { enemies: Enemy[] }

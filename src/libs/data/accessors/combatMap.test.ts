@@ -4,7 +4,7 @@ import { getCombat } from './combatMap'
 describe('getCombat - Functional Tests', () => {
     it('creates valid combat with enemies for known combat ID', () => {
         const expectedCombatId = 'blazefen_ambush_01'
-        const expectedWinConditions = [{ type: 'save_all_mounts' }]
+        const expectedWinConditions = [{ basic: 'kill_all_enemies', extra: 'save_all_mounts' }]
         const expectedEnemySize = 4
         const heroParty = [{ level: 3 }, { level: 3 }, { level: 4 }]
         const difficulty = 'moderate'

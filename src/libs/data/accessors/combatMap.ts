@@ -21,7 +21,7 @@ const COMBAT_MAP: Record<string, CombatTemplate> = {
 
             return party
         },
-        winConditions: [{ type: 'save_all_mounts' }]
+        winConditions: [{ basic: 'kill_all_enemies', extra: 'save_all_mounts' }]
     }
 }
 
