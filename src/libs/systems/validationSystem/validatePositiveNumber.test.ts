@@ -3,7 +3,7 @@ import validatePositiveNumber from './validatePositiveNumber'
 
 describe('validatePositiveNumber', () => {
     it('should throw an error for an invalid numbers', () => {
-        // @ts-expect-error  
+        // @ts-expect-error - Intentionally testing an invalid type
         expect(() => validatePositiveNumber('alpha', 'damage'))
             .toThrowError("Invalid damage: 'alpha'. Must be a positive number.")
 

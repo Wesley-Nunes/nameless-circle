@@ -3,14 +3,14 @@ import validateTemplate from './validateTemplate'
 
 describe('validateTemplate', () => {
     it('should throw an error for an invalid template', () => {
-        // @ts-expect-error  
+        // @ts-expect-error - Intentionally testing an invalid type
         expect(() => validateTemplate({})).toThrowError(
             `Invalid template: '{}'.
                         - Required keys: str, dex, con, int, wis, cha
                         - All values must be positive numbers`
         )
 
-        // @ts-expect-error  
+        // @ts-expect-error - Intentionally testing an invalid type
         expect(() => validateTemplate({ a: 2, b: 3 })).toThrowError(
             `Invalid template: '{"a":2,"b":3}'.
                         - Required keys: str, dex, con, int, wis, cha
@@ -18,7 +18,7 @@ describe('validateTemplate', () => {
         )
 
         expect(() => validateTemplate(
-            // @ts-expect-error  
+            // @ts-expect-error - Intentionally testing an invalid type
             { str: 'a', dex: 'b', con: 'c', int: 'd', wis: 'e', cha: 'f' })
         ).toThrowError(
             `Invalid template: '{"str":"a","dex":"b","con":"c","int":"d","wis":"e","cha":"f"}'.

@@ -3,7 +3,7 @@ import validateEnemyXp from './validateEnemyXp'
 
 describe('validateEnemyXp', () => {
     it('should throw an error for an invalid xp value', () => {
-        // @ts-expect-error  
+        // @ts-expect-error - Intentionally testing an invalid type
         expect(() => validateEnemyXp('high'))
             .toThrowError("Invalid xp: 'high'. Value must be a number from the ENEMY_XP array.")
 
