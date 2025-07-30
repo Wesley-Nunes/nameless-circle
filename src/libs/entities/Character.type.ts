@@ -1,18 +1,14 @@
+import type { AbilityBlock } from './Ability.type'
 import type { Action } from './Action.type'
 import type { Item } from './Item.type'
 import type { Race } from './Race.type'
 
 export type CharacterSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'gargantuan'
 
+export type CharacterType = 'humanoid' | 'elemental' | 'beast'
+
 export type Character = {
-    ability: {
-        str: { score: number, modifier: number },
-        dex: { score: number, modifier: number },
-        con: { score: number, modifier: number },
-        int: { score: number, modifier: number },
-        wis: { score: number, modifier: number },
-        cha: { score: number, modifier: number }
-    };
+    abilities: AbilityBlock;
     actions: Action[];
     armorClass: number;
     hp: number
@@ -23,6 +19,6 @@ export type Character = {
     race: Race,
     size: CharacterSize,
     team: 'heroes' | 'enemies';
-    type: Array<'humanoid' | 'elemental' | 'beast'>,
+    type: Array<CharacterType>,
 }
 

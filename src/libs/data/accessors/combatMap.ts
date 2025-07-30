@@ -1,9 +1,8 @@
-import createEnemy from '../factories/enemyFactory'
+import { createEnemy } from 'libs/data/factories'
 import { getEnemyAbilities, getEnemyAbilityPoints } from 'libs/systems/abilitySystem'
 import { getEnemyXp } from 'libs/systems/xpSystem'
 
-import BLAZEFEN_BASE from 'libs/data/static/enemies/BLAZEFEN'
-import { ENEMY_ROLE_TEMPLATES } from 'libs/data/static/enemies'
+import { BLAZEFEN_BASE, ENEMY_ROLE_TEMPLATES } from 'libs/data/static/enemies'
 
 import type { Combat, CombatTemplate, Difficulty, Hero } from 'libs/entities'
 
@@ -17,7 +16,7 @@ const COMBAT_MAP: Record<string, CombatTemplate> = {
                 const points = getEnemyAbilityPoints(xp)
                 const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['sharpshooter'], points)
 
-                return createEnemy(abilities, BLAZEFEN_BASE, xp)
+                return createEnemy(BLAZEFEN_BASE, { abilities, preferredTargets: ['beast'], xp })
             })
 
             return party

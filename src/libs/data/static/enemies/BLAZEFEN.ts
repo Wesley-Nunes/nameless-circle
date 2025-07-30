@@ -1,7 +1,7 @@
 import type { Enemy } from 'libs/entities'
 
 const BLAZEFEN_BASE: Enemy = {
-    ability: {
+    abilities: {
         str: { score: 0, modifier: 0 },
         dex: { score: 0, modifier: 0 },
         con: { score: 0, modifier: 0 },
