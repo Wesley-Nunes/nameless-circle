@@ -10,4 +10,3 @@ export type { Enemy } from './Enemy.type'
 export type { Hero } from './Hero.type'
 export type { Race } from './Race.type'
 
-

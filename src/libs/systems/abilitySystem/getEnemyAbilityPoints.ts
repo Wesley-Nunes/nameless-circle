@@ -1,8 +1,7 @@
-import { validateEnemyXp, validatePositiveNumber } from 'libs/systems/validationSystem'
+import { validateEnemyXp } from 'libs/systems/validationSystem'
 import { ENEMY_XP } from 'libs/data/static/enemies'
 
 const getEnemyAbilityPoints = (xp: number) => {
-    validatePositiveNumber(xp, 'xp')
     validateEnemyXp(xp)
 
     // NOTE: Starting with the simplest implementation first. 
