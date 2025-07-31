@@ -1,4 +1,8 @@
-import { validateTemplate, validatePositiveNumber } from 'libs/systems/validationSystem'
+import {
+    validateTemplate,
+    validatePositiveNumber,
+    validateIntegerNumber
+} from 'libs/systems/validationSystem'
 
 import { ABILITY_KEYS } from 'libs/data/static/ability'
 
@@ -7,6 +11,7 @@ import type { AbilityBlock, AbilityKey, AbilityTemplate } from 'libs/entities'
 const getEnemyAbilities = (template: AbilityTemplate, abilityPoints: number): AbilityBlock => {
     validateTemplate(template)
     validatePositiveNumber(abilityPoints, 'abilityPoints')
+    validateIntegerNumber(abilityPoints, 'abilityPoints')
 
     const totalWeights = ABILITY_KEYS.reduce(
         (sum, ability) => sum + template[ability], 0
