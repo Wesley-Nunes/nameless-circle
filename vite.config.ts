@@ -14,7 +14,10 @@ export default defineConfig({
                 '**/index.ts',
                 '**/vite-env.d.ts',
                 '**/*.config.*',
-                'src/main.tsx'
+                'src/main.tsx',
+                '**/use*.ts', // Remove React hooks
+                'src/libs/entities', // Remove types
+                'src/story'
             ]
         }
     }
