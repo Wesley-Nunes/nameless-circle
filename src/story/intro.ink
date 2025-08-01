@@ -1,0 +1,105 @@
+EXTERNAL setCombat(combatId)
+// EXTERNAL enemyValue(item, index)
+
+-> start
+
+// Mock functions
+=== function combatStatus() ===
+    // IN_PROGRESS || VICTORY || DEFEAT
+    ~ return "IN_PROGRESS"
+    
+=== function setCombat(combatId) ===
+    Current Combat: { combatId } - MOCK
+
+=== function enemyValue(item, index) ===
+    ~ return index
+    
+
+// Local functions
+=== CombatScene(combatId) ===
+    ~ setCombat(combatId)
+    -> combatLoop() ->
+    ->->
+
+=== combatLoop ===
+    { combatStatus() == "VICTORY":
+        You won the battle! ->->
+    }
+    { combatStatus() == "DEFEAT":
+        You were defeated... -> END
+    }
+  
+    -> displayEnemies ->
+  
+    ->->
+  
+=== displayEnemies ===
+    ~ temp enemyName1 = enemyValue("name", 0)
+    ~ temp enemyHp1 = enemyValue("hp", 0)
+    ~ temp enemyName2 = enemyValue("name", 1)
+    ~ temp enemyHp2 = enemyValue("hp", 1)
+  
+    { enemyHp1 > 0: 
+        Enemy: {enemyName1} (Hp: {enemyHp1})
+    }
+    { enemyHp2 > 0: 
+        Enemy: {enemyName2} (HP: {enemyHp2})
+    }
+  
+    ->->
+
+=== start ===
+When countless mouths are sated with innocent blood,
+The Abyss shall breathe its curse—ash, corruption, void—
+To blacken guardian rings of life,
+Until Seven Thrones crack and crash from heaven's height.
+Then, from the weeping ground,
+The Shadowed One shall raise its silent crown,
+And claim the shattered world as darkness drowns.
+
+The hue of the setting sun, nearly swallowed by night, blended with the swamp’s dark greens, staining the stagnant waters. Will-o’-wisps, like fragments of the cursed prophecy, broke free from the murk and began their ghostly dance above the sludge. A biting cold—far beyond twilight—enveloped the group, heavy with the stink of rot, sulfur, and decay.
+
+Lysandra’s eyes blazed, nostrils flared.
+
+"To hell with this prophecy! Protaxios, gather the stealthiest soldiers and scout the nearby swamps. Renpet-Ib, raise magical barriers around the village. We need more troops — I’ll go to the Citadel myself to bargain with some noble."
+
+As she shouted, you saw her tremble — and felt your own palms sweat.
+
+*   "Your sword serves better in stone courts than swamps, Commander." (Courtly Intrigue)
+    -> courtly_intrigue
+
+*   "My blade is silent as the mist." (Stealth)
+    -> stealth
+
+*   "The village will bleed, but it will hold." (Combat)
+    -> combat
+
+=== courtly_intrigue ===
+The sky deepened to indigo as stars slowly awakened. The southern road — the only path to the Citadel — narrowed, with few places to camp. Ancient trees leaned toward the path as if trying to delay travelers.
+
+Lysandra rode ahead, refusing an escort — only you, her new recruit, followed.
+"Protect the village!"
+She yelled to the soldiers.
+The weight of her choices echoed in your mind. Ahead in the forest, gleaming eyes tracked you.
+
+After hours of travel, Lysandra ordered a halt. She set up a makeshift camp between the road and a cluster of rocks.
+
+You’d barely shared sparse rations when unnatural heat surged — first, just the rustle of dry leaves. Then, sharp, rapid hisses multiplied in the darkness as fiery shapes approached.
+"An ambush!"
+Lysandra growled.
+From the shadows, three blazefen — salamander-men with amber eyes and flaming tongues — attacked. To everyone’s shock, one hurled a spear toward the horses, missing by inches. Lysandra saw their intent.
+"Protect the mounts!"
+
+Could word of Lysandra’s movements have leaked? Were there spies in the village? What seemed a random attack now had a clear goal: <i>delay her rush to the Citadel.</i>
+
+-> CombatScene("blazefen_ambush_01") ->
+
+Cont...
+-> END
+=== stealth ===
+// TBD
+-> END
+
+=== combat ===
+// TBD
+-> END
