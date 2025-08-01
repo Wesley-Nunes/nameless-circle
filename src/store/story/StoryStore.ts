@@ -3,20 +3,27 @@ import { Story } from 'inkjs'
 import type { InkStoryData } from 'story'
 
 class StoryStore {
+    private inkFunctionHandler: (funcName: string, ...args: string[]) => void
     private story: Story
     private updateCallback: (() => void) | null = null
     public content: string = ''
     public choices: { index: number; text: string }[] = []
 
-    constructor(storyContent: InkStoryData) {
+    constructor(
+        storyContent: InkStoryData,
+        inkFunctionHandler: (funcName: string, ...args: string[]) => void
+    ) {
         this.story = new Story(storyContent)
+        this.inkFunctionHandler = inkFunctionHandler
 
         this.bindInkFunctions()
         this.progressStory()
     }
 
     private bindInkFunctions() {
-        this.story.BindExternalFunction('setBattle', () => 'ok')
+        this.story.BindExternalFunction('setCombat', (...args) => {
+            return this.inkFunctionHandler('setCombat', ...args)
+        })
     }
     private progressStory() {
         let newContent = this.content

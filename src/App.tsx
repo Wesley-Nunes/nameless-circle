@@ -2,11 +2,11 @@ import React from 'react'
 
 import { GamePage } from 'pages'
 
-import { initStoryStore } from 'store/story'
+import { initStores } from 'store'
 import { storyContent } from 'story'
 
 const App: React.FC = () => {
-    initStoryStore(storyContent)
+    initStores(storyContent)
 
     return <GamePage />
 }

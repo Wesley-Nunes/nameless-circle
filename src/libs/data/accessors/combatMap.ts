@@ -25,7 +25,7 @@ const COMBAT_MAP: Record<string, CombatTemplate> = {
     }
 }
 
-export const getCombat = (
+const getCombat = (
     combatId: string,
     heroParty: Hero[],
     difficulty: Difficulty = 'low'
@@ -41,4 +41,6 @@ export const getCombat = (
 
     return combat
 }
+
+export default getCombat
 
