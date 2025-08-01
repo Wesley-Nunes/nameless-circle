@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+
 import { getStoryStore } from './StoryInstance'
 
 const useStoryStore = () => {
@@ -6,14 +7,10 @@ const useStoryStore = () => {
     const [content, setContent] = useState(storyStore.content)
     const [choices, setChoices] = useState(storyStore.choices)
 
-    useEffect(() => {
-        storyStore.onUpdate(() => {
-            setContent(storyStore.content)
-            setChoices([...storyStore.choices])
-        })
-
-        return () => storyStore.onUpdate(null)
-    }, [storyStore])
+    storyStore.onUpdate(() => {
+        setContent(storyStore.content)
+        setChoices([...storyStore.choices])
+    })
 
     return {
         content,
