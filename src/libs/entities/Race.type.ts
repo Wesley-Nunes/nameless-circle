@@ -1,2 +1,2 @@
-export type Race = 'blazefen'
+export type Race = 'blazefen' | 'human'
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getCombat } from './combatMap'
+import getCombat from './combatMap'
 
 describe('getCombat - Functional Tests', () => {
     it('creates valid combat with enemies for known combat ID', () => {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { getStoryStore } from './StoryInstance'
+import { getStoryStore } from '../StoreInstance'
 
 const useStoryStore = () => {
     const storyStore = getStoryStore()
