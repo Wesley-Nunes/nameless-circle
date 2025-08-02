@@ -24,6 +24,9 @@ class StoryStore {
         this.story.BindExternalFunction('setCombat', (...args) => {
             return this.inkFunctionHandler('setCombat', ...args)
         })
+        this.story.BindExternalFunction('getEnemyInfo', (...args) => {
+            return this.inkFunctionHandler('getEnemyInfo', ...args)
+        })
     }
     private progressStory() {
         let newContent = this.content

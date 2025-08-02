@@ -1,5 +1,5 @@
 EXTERNAL setCombat(combatId)
-// EXTERNAL enemyValue(item, index)
+EXTERNAL getEnemyInfo(index, item)
 
 -> start
 
@@ -9,10 +9,12 @@ EXTERNAL setCombat(combatId)
     ~ return "IN_PROGRESS"
     
 === function setCombat(combatId) ===
-    Current Combat: { combatId } - MOCK
+    0
+    // Current Combat: { combatId } - MOCK
 
-=== function enemyValue(item, index) ===
-    ~ return index
+=== function getEnemyInfo(index, prop) ===
+    // Current Enemy: { item } - MOCK
+    ~ return 0
     
 
 // Local functions
@@ -34,16 +36,27 @@ EXTERNAL setCombat(combatId)
     ->->
   
 === displayEnemies ===
-    ~ temp enemyName1 = enemyValue("name", 0)
-    ~ temp enemyHp1 = enemyValue("hp", 0)
-    ~ temp enemyName2 = enemyValue("name", 1)
-    ~ temp enemyHp2 = enemyValue("hp", 1)
+    ~ temp enemyName1 = getEnemyInfo(0, "name")
+    ~ temp enemyHp1 = getEnemyInfo(0, "hp")
+    ~ temp enemyName2 = getEnemyInfo(1, "name")
+    ~ temp enemyHp2 = getEnemyInfo(1, "hp")
+    ~ temp enemyName3 = getEnemyInfo(2, "name")
+    ~ temp enemyHp3 = getEnemyInfo(2, "hp")
+    ~ temp enemyName4 = getEnemyInfo(3, "name")
+    ~ temp enemyHp4 = getEnemyInfo(3, "hp")
+    
   
     { enemyHp1 > 0: 
         Enemy: {enemyName1} (Hp: {enemyHp1})
     }
     { enemyHp2 > 0: 
-        Enemy: {enemyName2} (HP: {enemyHp2})
+        Enemy: {enemyName2} (Hp: {enemyHp2})
+    }
+    { enemyHp3 > 0: 
+        Enemy: {enemyName3} (Hp: {enemyHp3})
+    }
+    { enemyHp4 > 0: 
+        Enemy: {enemyName4} (Hp: {enemyHp4})
     }
   
     ->->
@@ -87,7 +100,7 @@ After hours of travel, Lysandra ordered a halt. She set up a makeshift camp betw
 You’d barely shared sparse rations when unnatural heat surged — first, just the rustle of dry leaves. Then, sharp, rapid hisses multiplied in the darkness as fiery shapes approached.
 "An ambush!"
 Lysandra growled.
-From the shadows, three blazefen — salamander-men with amber eyes and flaming tongues — attacked. To everyone’s shock, one hurled a spear toward the horses, missing by inches. Lysandra saw their intent.
+From the shadows, four blazefen — salamander-men with amber eyes and flaming tongues — attacked. To everyone’s shock, one hurled a spear toward the horses, missing by inches. Lysandra saw their intent.
 "Protect the mounts!"
 
 Could word of Lysandra’s movements have leaked? Were there spies in the village? What seemed a random attack now had a clear goal: <i>delay her rush to the Citadel.</i>
