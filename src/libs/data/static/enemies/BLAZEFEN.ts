@@ -16,7 +16,7 @@ const BLAZEFEN_BASE: Enemy = {
     isAlive: false,
     items: [],
     name: 'blazefen',
-    race: 'blazefen',
+    species: 'blazefen',
     size: 'medium',
     team: 'enemies',
     type: ['elemental', 'humanoid'],

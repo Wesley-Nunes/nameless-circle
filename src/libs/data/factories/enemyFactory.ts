@@ -2,6 +2,7 @@ import { calculateEnemyHp } from 'libs/systems/hpSystem'
 import { generateID } from 'libs/systems/IDSystem'
 
 import type { AbilityBlock, Enemy } from 'libs/entities'
+import randomCharacterName from 'libs/systems/nameGeneratorSystem/randomCharacterName'
 
 const BASE_ARMOR_CLASS = 10
 
@@ -19,11 +20,11 @@ const createEnemy = (
 
     enemy.armorClass = BASE_ARMOR_CLASS + enemy.abilities.dex.modifier
     enemy.hp = calculateEnemyHp(enemy.xp, enemy.size, enemy.abilities.con.modifier).randomHp
+    enemy.name = enemyConfig?.name || randomCharacterName(enemy.species)
 
-    enemy.id = generateID(enemy.race)
+    enemy.id = generateID(enemy.species)
     enemy.isAlive = true
 
-    if (enemyConfig?.name) { enemy.name = enemyConfig.name }
     if (enemyConfig?.preferredTargets) { enemy.preferredTargets = [...enemyConfig.preferredTargets] }
 
     return enemy

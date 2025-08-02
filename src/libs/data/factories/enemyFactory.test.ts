@@ -24,8 +24,8 @@ describe('enemyFactory - createEnemy', () => {
             id: 'blazefen_0001',
             isAlive: true,
             items: [],
-            name: 'blazefen',
-            race: 'blazefen',
+            name: 'Vesmire',
+            species: 'blazefen',
             size: 'medium',
             team: 'enemies',
             type: ['elemental', 'humanoid'],
@@ -35,8 +35,9 @@ describe('enemyFactory - createEnemy', () => {
         const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['sharpshooter'], 60)
         const enemy = createEnemy(BLAZEFEN_BASE, { abilities, xp: 10 })
 
-        // Mock the hp, because it returns a random value
+        // Manual insert values, because it returns a random value
         enemy.hp = 4
+        enemy.name = 'Vesmire'
 
         expect(enemy).toStrictEqual(expectedEnemy)
     })

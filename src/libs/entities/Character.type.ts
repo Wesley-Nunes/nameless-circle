@@ -1,7 +1,7 @@
 import type { AbilityBlock } from './Ability.type'
 import type { Action } from './Action.type'
 import type { Item } from './Item.type'
-import type { Race } from './Race.type'
+import type { Species } from './Species.type'
 
 export type CharacterSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'gargantuan'
 
@@ -16,7 +16,7 @@ export type Character = {
     isAlive: boolean;
     items: Item[];
     name: string;
-    race: Race,
+    species: Species,
     size: CharacterSize,
     team: 'heroes' | 'enemies';
     type: Array<CharacterType>,

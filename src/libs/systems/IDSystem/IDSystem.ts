@@ -1,18 +1,19 @@
-import type { Race } from 'libs/entities'
-import { validateIDParam } from 'libs/systems/validationSystem'
+import type { Species } from 'libs/entities'
+import { validateSpecies } from 'libs/systems/validationSystem'
 
-const idCounters: Record<Race, number> = {
-    blazefen: 0
+const idCounters: Record<Species, number> = {
+    blazefen: 0,
+    human: 0
 }
 
-const generateID = (race: Race) => {
-    validateIDParam(race)
+const generateID = (species: Species) => {
+    validateSpecies(species)
 
-    idCounters[race]++
+    idCounters[species]++
 
-    const id = idCounters[race].toString(16).padStart(4, '0')
+    const id = idCounters[species].toString(16).padStart(4, '0')
 
-    return `${race}_${id}`
+    return `${species}_${id}`
 }
 
 export default generateID
