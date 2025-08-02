@@ -1,65 +1,10 @@
-EXTERNAL setCombat(combatId)
-EXTERNAL getEnemyInfo(index, item)
+INCLUDE functions.ink
+
+EXTERNAL get_character_info(team, index, prop)
+EXTERNAL get_party_size(team)
+EXTERNAL set_combat(combat_id)
 
 -> start
-
-// Mock functions
-=== function combatStatus() ===
-    // IN_PROGRESS || VICTORY || DEFEAT
-    ~ return "IN_PROGRESS"
-    
-=== function setCombat(combatId) ===
-    0
-    // Current Combat: { combatId } - MOCK
-
-=== function getEnemyInfo(index, prop) ===
-    // Current Enemy: { item } - MOCK
-    ~ return 0
-    
-
-// Local functions
-=== CombatScene(combatId) ===
-    ~ setCombat(combatId)
-    -> combatLoop() ->
-    ->->
-
-=== combatLoop ===
-    { combatStatus() == "VICTORY":
-        You won the battle! ->->
-    }
-    { combatStatus() == "DEFEAT":
-        You were defeated... -> END
-    }
-  
-    -> displayEnemies ->
-  
-    ->->
-  
-=== displayEnemies ===
-    ~ temp enemyName1 = getEnemyInfo(0, "name")
-    ~ temp enemyHp1 = getEnemyInfo(0, "hp")
-    ~ temp enemyName2 = getEnemyInfo(1, "name")
-    ~ temp enemyHp2 = getEnemyInfo(1, "hp")
-    ~ temp enemyName3 = getEnemyInfo(2, "name")
-    ~ temp enemyHp3 = getEnemyInfo(2, "hp")
-    ~ temp enemyName4 = getEnemyInfo(3, "name")
-    ~ temp enemyHp4 = getEnemyInfo(3, "hp")
-    
-  
-    { enemyHp1 > 0: 
-        Enemy: {enemyName1} (Hp: {enemyHp1})
-    }
-    { enemyHp2 > 0: 
-        Enemy: {enemyName2} (Hp: {enemyHp2})
-    }
-    { enemyHp3 > 0: 
-        Enemy: {enemyName3} (Hp: {enemyHp3})
-    }
-    { enemyHp4 > 0: 
-        Enemy: {enemyName4} (Hp: {enemyHp4})
-    }
-  
-    ->->
 
 === start ===
 When countless mouths are sated with innocent blood,
@@ -105,7 +50,7 @@ From the shadows, four blazefen — salamander-men with amber eyes and flaming t
 
 Could word of Lysandra’s movements have leaked? Were there spies in the village? What seemed a random attack now had a clear goal: <i>delay her rush to the Citadel.</i>
 
--> CombatScene("blazefen_ambush_01") ->
+-> combat_scene("blazefen_ambush_01") ->
 
 Cont...
 -> END

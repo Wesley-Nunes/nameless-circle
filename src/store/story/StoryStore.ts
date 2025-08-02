@@ -21,11 +21,14 @@ class StoryStore {
     }
 
     private bindInkFunctions() {
-        this.story.BindExternalFunction('setCombat', (...args) => {
-            return this.inkFunctionHandler('setCombat', ...args)
+        this.story.BindExternalFunction('set_combat', (...args) => {
+            return this.inkFunctionHandler('set_combat', ...args)
         })
-        this.story.BindExternalFunction('getEnemyInfo', (...args) => {
-            return this.inkFunctionHandler('getEnemyInfo', ...args)
+        this.story.BindExternalFunction('get_character_info', (...args) => {
+            return this.inkFunctionHandler('get_character_info', ...args)
+        })
+        this.story.BindExternalFunction('get_party_size', (...args) => {
+            return this.inkFunctionHandler('get_party_size', ...args)
         })
     }
     private progressStory() {
