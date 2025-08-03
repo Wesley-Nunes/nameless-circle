@@ -4,6 +4,7 @@ import { initiative } from 'libs/systems/combatSystem'
 import type { Character, Enemy, Hero } from 'libs/entities'
 
 class GameStore {
+    private charactersOrdered: (Hero | Enemy)[] = []
     private currentCharacterIndex: number = 0
     private enemies: Enemy[] = []
     private heroes: Hero[] = [
@@ -63,7 +64,6 @@ class GameStore {
             type: ['humanoid']
         }
     ]
-    private initiative: { id: string, initiative: number }[] = []
 
     private getTeam(teamName: string) {
         if (this.isTeam(teamName)) {
@@ -91,7 +91,19 @@ class GameStore {
     private isTeam(key: string): key is 'heroes' | 'enemies' {
         return ['heroes', 'enemies'].includes(key)
     }
-    private stringifyWithMarker(characters: Character[], i: number): string {
+    private runInitiative() {
+        this.charactersOrdered = initiative([...this.heroes, ...this.enemies])
+            .map((char) => {
+                const hero = this.heroes.find(hero => hero.id === char.id)
+                const enemy = this.enemies.find(enemy => enemy.id === char.id)
+
+                if (hero) return hero
+                if (enemy) return enemy
+
+                throw new Error('Fail to order the characters')
+            })
+    }
+    private stringifyWithMarker(characters: (Hero | Enemy)[], i: number): string {
         return characters.map((item, index) => (
             index === i ? `[x] ${item.name}` : item.name
         )).join(' / ')
@@ -100,19 +112,8 @@ class GameStore {
     public handleInkFunction(funcName: string, ...args: string[]) {
         switch (funcName) {
             case 'get_action_order': {
-                this.initiative = initiative([...this.heroes, ...this.enemies])
-
-                const charactersOrdered = this.initiative.map((char) => {
-                    const hero = this.heroes.find(hero => hero.id === char.id)
-                    const enemy = this.enemies.find(enemy => enemy.id === char.id)
-
-                    if (hero) return hero
-                    if (enemy) return enemy
-
-                    throw new Error('Fail to order the characters')
-                })
                 const initiativeStringified = this.stringifyWithMarker(
-                    charactersOrdered, this.currentCharacterIndex
+                    this.charactersOrdered, this.currentCharacterIndex
                 )
 
                 return initiativeStringified
@@ -132,18 +133,19 @@ class GameStore {
                 return team.length
             }
             case 'is_player_action': {
-                const characterId = this.initiative[this.currentCharacterIndex].id
-                const isPlayer = this.heroes.some(hero => (
-                    hero.isPlayer && hero.id === characterId)
+                const playerId = this.heroes.find(hero => hero.isPlayer)!.id
+                const isPlayerTurn = (
+                    this.charactersOrdered[this.currentCharacterIndex].id === playerId
                 )
 
-                return isPlayer
+                return isPlayerTurn
             }
             case 'set_combat': {
                 const [combatId] = args
                 const combat = getCombat(combatId, this.heroes)
 
                 this.enemies = combat.enemies
+                this.runInitiative()
 
                 break
             }
