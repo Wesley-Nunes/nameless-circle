@@ -1,11 +1,13 @@
 // Mock functions
+=== function attack(character_id) ===
+    attacking { character_id }
 === function combat_status() ===
     // IN_PROGRESS || VICTORY || DEFEAT
     ~ return "IN_PROGRESS"
 === function is_player_action() ===
     ~ return true
 === function get_character_info(team, index, prop) ===
-    ~ return 0
+    ~ return 1
 === function get_party_size(team) ===
     ~ return 1
 === function get_action_order() ===
@@ -34,12 +36,15 @@
     { get_action_order() }
     
     { - is_player_action():
-        // -> player_action_options ->
-        player is acting
+        -> player_action_options ->
       - else:
         // -> ai_action ->
         ai is acting
     }
+    // Action restult
+    // End turn
+    // initiaitve the next turn
+    TBD next turn
     ->->
 
 === enemy_loop(index) ===
@@ -62,4 +67,23 @@
     Hero: {hero_name} (Hp: {hero_hp})
     
     -> hero_loop(index + 1)
+
+// Right now, only the attack option is available    
+=== player_action_options ===
+    Select an enemy to attacked
+    -> enemy_choice_loop(0)
+    
+=== enemy_choice_loop(index) ===
+  ~ temp enemy_name = get_character_info("enemies", index, "name")
+  ~ temp enemy_hp = get_character_info("enemies", index, "hp")
+  ~ temp enemy_id = get_character_info("enemies", index, "id")
+
+  { enemy_hp > 0:
+    * [{enemy_name}]
+        ~ attack(enemy_id)
+        ->->
+  }
+  { index < get_party_size("enemies") - 1: -> enemy_choice_loop(index + 1)  }
+  
+  
     

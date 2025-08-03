@@ -1,5 +1,6 @@
 INCLUDE functions.ink
 
+EXTERNAL attack(character_id)
 EXTERNAL get_character_info(team, index, prop)
 EXTERNAL get_party_size(team)
 EXTERNAL get_action_order()
