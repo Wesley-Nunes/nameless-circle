@@ -1,6 +1,7 @@
 import { getCombat } from 'libs/data/accessors'
+import { initiative } from 'libs/systems/combatSystem'
 
-import type { Enemy, Hero } from 'libs/entities'
+import type { Character, Enemy, Hero } from 'libs/entities'
 
 class GameStore {
     private enemies: Enemy[] = []
@@ -52,7 +53,7 @@ class GameStore {
                 id: 'longsword-001',
                 name: 'Longsword',
                 range: 'melee',
-                dice: { count: 1, sides: 8, modifier: 3 }  // +3 from str mod
+                dice: { count: 1, sides: 8, modifier: 3 }
             }],
             actions: ['ATTACK'],
             size: 'medium',
@@ -60,53 +61,83 @@ class GameStore {
             type: ['humanoid']
         }
     ]
+    private initiative: { id: string, initiative: number }[] = []
 
-    private isEnemyKey(key: string, obj: Enemy): key is keyof Enemy {
-        return key in obj
+    private getTeam(teamName: string) {
+        if (this.isTeam(teamName)) {
+            return this[teamName]
+        }
+
+        throw new Error(`Team: $${teamName} not found.`)
     }
-    private isHeroKey(key: string, obj: Hero): key is keyof Hero {
-        return key in obj
+    private getChar(team: (Hero[] | Enemy[]), index: number): (Hero | Enemy) {
+        const char = team[index]
+
+        if (!char) {
+            throw new Error(`Failed to get character at index ${index} / team ${team}.`)
+        }
+
+        return team[index]
+    }
+    private getCharPropertyValue(char: (Hero | Enemy), prop: string) {
+        if (prop in char) {
+            return char[prop as keyof typeof char]
+        }
+
+        throw new Error(`getCharPropertyValue failed for property '${prop}'.`)
     }
     private isTeam(key: string): key is 'heroes' | 'enemies' {
         return ['heroes', 'enemies'].includes(key)
     }
+    private stringifyWithMarker(characters: Character[], i: number): string {
+        return characters.map((item, index) => (
+            index === i ? `[x] ${item.name}` : item.name
+        )).join(' / ')
+    }
 
     public handleInkFunction(funcName: string, ...args: string[]) {
         switch (funcName) {
+            case 'get_character_info': {
+                const [teamName, index, prop] = args
+                const team = this.getTeam(teamName)
+                const char = this.getChar(team, +index)
+                const value = this.getCharPropertyValue(char, prop)
+
+                return value
+            }
+            case 'get_initiative': {
+                this.initiative = initiative([...this.heroes, ...this.enemies])
+
+                const charactersOrdered = this.initiative.map((char) => {
+                    const hero = this.heroes.find(hero => hero.id === char.id)
+                    const enemy = this.enemies.find(enemy => enemy.id === char.id)
+
+                    if (hero) return hero
+                    if (enemy) return enemy
+
+                    throw new Error('Fail to order the characters')
+                })
+                const initiativeStringified = this.stringifyWithMarker(charactersOrdered, 0)
+
+                return initiativeStringified
+            }
+            case 'get_party_size': {
+                const [teamName] = args
+                const team = this.getTeam(teamName)
+
+                return team.length
+            }
             case 'set_combat': {
-                const combatId = args[0]
+                const [combatId] = args
                 const combat = getCombat(combatId, this.heroes)
+
                 this.enemies = combat.enemies
 
                 break
             }
-            case 'get_character_info': {
-                const [team, index, prop] = args
-
-                if (team === 'heroes') {
-                    const hero = this.heroes[+index]
-                    if (hero && this.isHeroKey(prop, hero)) {
-                        return hero[prop]
-                    }
-                } else if (team === 'enemies') {
-                    const enemy = this.enemies[+index]
-                    if (enemy && this.isEnemyKey(prop, enemy)) {
-                        return enemy[prop]
-                    }
-                }
-
-                throw new Error(`ERROR! get_character_info Check ${team}/${index}/${prop}`)
+            default: {
+                throw new Error(`Unhandled function: ${funcName}`)
             }
-            case 'get_party_size': {
-                const [team] = args
-
-                if (team && this.isTeam(team)) {
-                    return this[team].length
-                }
-
-                throw new Error(`ERROR! team ${team} not found`)
-            }
-
         }
     }
 }

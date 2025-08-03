@@ -10,6 +10,8 @@
     ~ return 0
 === function get_party_size(team) ===
     ~ return 1
+=== function get_initiative() ===
+    ~ return "[x] Hero 1 / Enemy 1"
 
 // Local functions
 === combat_scene(combat_id) ===
@@ -25,13 +27,15 @@
         You were defeated... -> END
     }
   
-    -> enemy_display_loop(0) ->
-    -_-_-_-
-    -> hero_display_loop(0) ->
+    -> enemy_loop(0) ->
+    
+    -> hero_loop(0) ->
+    '
+    { get_initiative() }
   
     ->->
 
-=== enemy_display_loop(index) ===
+=== enemy_loop(index) ===
     { index >= get_party_size("enemies"): ->-> }
     
     ~ temp enemy_name = get_character_info("enemies", index, "name")
@@ -41,9 +45,9 @@
         Enemy: {enemy_name} (Hp: {enemy_hp})
     }
     
-    -> enemy_display_loop(index + 1)
+    -> enemy_loop(index + 1)
     
-=== hero_display_loop(index) ===
+=== hero_loop(index) ===
     { index >= get_party_size("heroes"): ->-> }
     
     ~ temp hero_name = get_character_info("heroes", index, "name")
@@ -51,5 +55,6 @@
     
     Hero: {hero_name} (Hp: {hero_hp})
     
-    -> hero_display_loop(index + 1)
+    -> hero_loop(index + 1)
+    
     

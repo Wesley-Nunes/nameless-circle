@@ -3,7 +3,7 @@ import { Story } from 'inkjs'
 import type { InkStoryData } from 'story'
 
 class StoryStore {
-    private inkFunctionHandler: (funcName: string, ...args: string[]) => void
+    private inkFunctionHandler: ((funcName: string, ...args: string[]) => void) | null = null
     private story: Story
     private updateCallback: (() => void) | null = null
     public content: string = ''
@@ -11,25 +11,26 @@ class StoryStore {
 
     constructor(
         storyContent: InkStoryData,
-        inkFunctionHandler: (funcName: string, ...args: string[]) => void
+        inkFunctionHandler?: (funcName: string, ...args: string[]) => void
     ) {
         this.story = new Story(storyContent)
-        this.inkFunctionHandler = inkFunctionHandler
 
-        this.bindInkFunctions()
+        if (inkFunctionHandler) {
+            this.inkFunctionHandler = inkFunctionHandler
+
+            this.bindInkFunctions()
+        }
+
         this.progressStory()
     }
 
     private bindInkFunctions() {
-        this.story.BindExternalFunction('set_combat', (...args) => {
-            return this.inkFunctionHandler('set_combat', ...args)
-        })
-        this.story.BindExternalFunction('get_character_info', (...args) => {
-            return this.inkFunctionHandler('get_character_info', ...args)
-        })
-        this.story.BindExternalFunction('get_party_size', (...args) => {
-            return this.inkFunctionHandler('get_party_size', ...args)
-        })
+        ['set_combat', 'get_character_info', 'get_party_size', 'get_initiative']
+            .forEach(fn => {
+                this.story.BindExternalFunction(fn, (...args) => {
+                    return this.inkFunctionHandler!(fn, ...args)
+                })
+            })
     }
     private progressStory() {
         let newContent = this.content

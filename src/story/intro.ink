@@ -2,6 +2,7 @@ INCLUDE functions.ink
 
 EXTERNAL get_character_info(team, index, prop)
 EXTERNAL get_party_size(team)
+EXTERNAL get_initiative()
 EXTERNAL set_combat(combat_id)
 
 -> start
