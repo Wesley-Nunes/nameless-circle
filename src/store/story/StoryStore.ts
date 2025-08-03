@@ -25,12 +25,14 @@ class StoryStore {
     }
 
     private bindInkFunctions() {
-        ['set_combat', 'get_character_info', 'get_party_size', 'get_initiative']
-            .forEach(fn => {
-                this.story.BindExternalFunction(fn, (...args) => {
-                    return this.inkFunctionHandler!(fn, ...args)
-                })
+        [
+            'set_combat', 'get_character_info', 'get_party_size', 'get_action_order',
+            'is_player_action'
+        ].forEach(fn => {
+            this.story.BindExternalFunction(fn, (...args) => {
+                return this.inkFunctionHandler!(fn, ...args)
             })
+        })
     }
     private progressStory() {
         let newContent = this.content

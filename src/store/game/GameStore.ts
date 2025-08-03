@@ -4,6 +4,7 @@ import { initiative } from 'libs/systems/combatSystem'
 import type { Character, Enemy, Hero } from 'libs/entities'
 
 class GameStore {
+    private currentCharacterIndex: number = 0
     private enemies: Enemy[] = []
     private heroes: Hero[] = [
         {
@@ -14,13 +15,13 @@ class GameStore {
             abilities: {
                 str: { score: 10, modifier: 0 },
                 dex: { score: 16, modifier: 3 },
-                con: { score: 12, modifier: 1 },
-                int: { score: 14, modifier: 2 },
+                con: { score: 14, modifier: 2 },
+                int: { score: 12, modifier: 1 },
                 wis: { score: 13, modifier: 1 },
                 cha: { score: 8, modifier: -1 }
             },
             armorClass: 14,
-            hp: 9,
+            hp: 14,
             isAlive: true,
             items: [{
                 id: 'shortbow-001',
@@ -31,7 +32,8 @@ class GameStore {
             actions: ['ATTACK'],
             size: 'medium',
             team: 'heroes',
-            type: ['humanoid']
+            type: ['humanoid'],
+            isPlayer: true
         },
         {
             id: 'hero-002',
@@ -97,15 +99,7 @@ class GameStore {
 
     public handleInkFunction(funcName: string, ...args: string[]) {
         switch (funcName) {
-            case 'get_character_info': {
-                const [teamName, index, prop] = args
-                const team = this.getTeam(teamName)
-                const char = this.getChar(team, +index)
-                const value = this.getCharPropertyValue(char, prop)
-
-                return value
-            }
-            case 'get_initiative': {
+            case 'get_action_order': {
                 this.initiative = initiative([...this.heroes, ...this.enemies])
 
                 const charactersOrdered = this.initiative.map((char) => {
@@ -117,15 +111,33 @@ class GameStore {
 
                     throw new Error('Fail to order the characters')
                 })
-                const initiativeStringified = this.stringifyWithMarker(charactersOrdered, 0)
+                const initiativeStringified = this.stringifyWithMarker(
+                    charactersOrdered, this.currentCharacterIndex
+                )
 
                 return initiativeStringified
+            }
+            case 'get_character_info': {
+                const [teamName, index, prop] = args
+                const team = this.getTeam(teamName)
+                const char = this.getChar(team, +index)
+                const value = this.getCharPropertyValue(char, prop)
+
+                return value
             }
             case 'get_party_size': {
                 const [teamName] = args
                 const team = this.getTeam(teamName)
 
                 return team.length
+            }
+            case 'is_player_action': {
+                const characterId = this.initiative[this.currentCharacterIndex].id
+                const isPlayer = this.heroes.some(hero => (
+                    hero.isPlayer && hero.id === characterId)
+                )
+
+                return isPlayer
             }
             case 'set_combat': {
                 const [combatId] = args

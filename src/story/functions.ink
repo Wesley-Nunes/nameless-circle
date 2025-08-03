@@ -2,23 +2,23 @@
 === function combat_status() ===
     // IN_PROGRESS || VICTORY || DEFEAT
     ~ return "IN_PROGRESS"
-    
-=== function set_combat(combat_id) ===
-    { combat_id }
-
+=== function is_player_action() ===
+    ~ return true
 === function get_character_info(team, index, prop) ===
     ~ return 0
 === function get_party_size(team) ===
     ~ return 1
-=== function get_initiative() ===
+=== function get_action_order() ===
     ~ return "[x] Hero 1 / Enemy 1"
+=== function set_combat(combat_id) ===
+    { combat_id }
 
 // Local functions
 === combat_scene(combat_id) ===
     ~ set_combat(combat_id)
     -> combat_loop() ->
     ->->
-
+    
 === combat_loop ===
     { combat_status() == "VICTORY":
         You won the battle! ->->
@@ -31,8 +31,15 @@
     
     -> hero_loop(0) ->
     '
-    { get_initiative() }
-  
+    { get_action_order() }
+    
+    { - is_player_action():
+        // -> player_action_options ->
+        player is acting
+      - else:
+        // -> ai_action ->
+        ai is acting
+    }
     ->->
 
 === enemy_loop(index) ===
@@ -44,7 +51,6 @@
     { enemy_hp > 0:
         Enemy: {enemy_name} (Hp: {enemy_hp})
     }
-    
     -> enemy_loop(index + 1)
     
 === hero_loop(index) ===
@@ -56,5 +62,4 @@
     Hero: {hero_name} (Hp: {hero_hp})
     
     -> hero_loop(index + 1)
-    
     
