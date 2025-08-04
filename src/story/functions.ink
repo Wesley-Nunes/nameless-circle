@@ -12,6 +12,8 @@
     ~ return 1
 === function get_action_order() ===
     ~ return "[x] Hero 1 / Enemy 1"
+=== function get_action_result() ===
+    ~ return "Action result"
 === function set_combat(combat_id) ===
     { combat_id }
 
@@ -41,7 +43,8 @@
         // -> ai_action ->
         ai is acting
     }
-    // Action restult
+    ~ temp message = get_action_result()
+    { message }
     // End turn
     // initiaitve the next turn
     TBD next turn

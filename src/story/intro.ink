@@ -4,6 +4,7 @@ EXTERNAL attack(character_id)
 EXTERNAL get_character_info(team, index, prop)
 EXTERNAL get_party_size(team)
 EXTERNAL get_action_order()
+EXTERNAL get_action_result()
 EXTERNAL is_player_action()
 EXTERNAL set_combat(combat_id)
 

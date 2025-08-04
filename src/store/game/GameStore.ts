@@ -144,6 +144,12 @@ class GameStore {
 
                 return initiativeStringified
             }
+            case 'get_action_result': {
+                const lastLogIndex = this.log.length - 1
+                const lastLog = this.log[lastLogIndex]
+
+                return lastLog
+            }
             case 'get_character_info': {
                 const [teamName, index, prop] = args
                 const team = this.getTeam(teamName)
