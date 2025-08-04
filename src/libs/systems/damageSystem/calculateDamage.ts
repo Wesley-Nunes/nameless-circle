@@ -1,5 +1,5 @@
-import { getWeaponModifier } from '../abilitySystem'
-import { roll } from '../rollSystem'
+import { getWeaponModifier } from 'libs/systems/abilitySystem'
+import { roll } from 'libs/systems/rollSystem'
 
 import type { Enemy, Hero } from 'libs/entities'
 
@@ -12,7 +12,6 @@ const calculateDamage = (attacker: Hero | Enemy, isCriticalDamage: boolean): num
         damage += roll(attacker.weapon.dice.sides)
     }
 
-    console.log({ count, attackerModifier, damage, })
     return damage
 }
 

@@ -27,7 +27,7 @@ class StoryStore {
     private bindInkFunctions() {
         [
             'set_combat', 'get_character_info', 'get_party_size', 'get_action_order',
-            'is_player_action', 'attack', 'get_action_result'
+            'is_player_action', 'attack', 'get_action_result', 'end_turn', 'get_combat_status'
         ].forEach(fn => {
             this.story.BindExternalFunction(fn, (...args) => {
                 return this.inkFunctionHandler!(fn, ...args)

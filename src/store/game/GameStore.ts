@@ -4,10 +4,11 @@ import { generateCombatSentence } from 'libs/systems/textGeneratorSystem'
 
 import { getCombat } from 'libs/data/accessors'
 
-import type { Enemy, Hero } from 'libs/entities'
+import type { CombatStatus, Enemy, Hero } from 'libs/entities'
 
 class GameStore {
     private charactersOrdered: (Hero | Enemy)[] = []
+    private combatStatus: CombatStatus = 'IN_PROGRESS'
     private currentCharacterIndex: number = 0
     private enemies: Enemy[] = []
     private log: string[] = []
@@ -112,6 +113,15 @@ class GameStore {
             index === i ? `[x] ${item.name}` : item.name
         )).join(' / ')
     }
+    private updateCombatStatus() {
+        if (this.enemies.every(enemy => enemy.hp <= 0)) {
+            this.combatStatus = 'VICTORY'
+        } else if (this.heroes.every(hero => hero.hp <= 0)) {
+            this.combatStatus = 'DEFEAT'
+        } else {
+            this.combatStatus = 'IN_PROGRESS'
+        }
+    }
 
     public handleInkFunction(funcName: string, ...args: string[]) {
         switch (funcName) {
@@ -137,6 +147,16 @@ class GameStore {
 
                 break
             }
+            case 'end_turn': {
+                this.updateCombatStatus()
+
+                if (this.combatStatus === 'IN_PROGRESS') {
+                    const i = (this.currentCharacterIndex + 1) % this.charactersOrdered.length
+                    this.currentCharacterIndex = i
+                }
+
+                break
+            }
             case 'get_action_order': {
                 const initiativeStringified = this.stringifyWithMarker(
                     this.charactersOrdered, this.currentCharacterIndex
@@ -158,6 +178,9 @@ class GameStore {
                 const value = this.getCharPropertyValue(char, prop)
 
                 return value
+            }
+            case 'get_combat_status': {
+                return this.combatStatus
             }
             case 'get_party_size': {
                 const [teamName] = args

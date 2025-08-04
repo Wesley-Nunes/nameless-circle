@@ -1,6 +1,8 @@
 import type { Difficulty } from './Difficulty.type'
 import type { Enemy } from './Enemy.type'
 
+export type CombatStatus = 'IN_PROGRESS' | 'VICTORY' | 'DEFEAT'
+
 export type CombatTemplate = {
     id: string;
     enemies: (heroLevels: number[], difficulty: Difficulty) => Enemy[];
