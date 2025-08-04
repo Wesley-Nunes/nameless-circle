@@ -1,12 +1,16 @@
-import { getCombat } from 'libs/data/accessors'
-import { initiative } from 'libs/systems/combatSystem'
+import { attack, initiative } from 'libs/systems/combatSystem'
+import { calculateDamage } from 'libs/systems/damageSystem'
+import { generateCombatSentence } from 'libs/systems/textGeneratorSystem'
 
-import type { Character, Enemy, Hero } from 'libs/entities'
+import { getCombat } from 'libs/data/accessors'
+
+import type { Enemy, Hero } from 'libs/entities'
 
 class GameStore {
     private charactersOrdered: (Hero | Enemy)[] = []
     private currentCharacterIndex: number = 0
     private enemies: Enemy[] = []
+    private log: string[] = []
     private heroes: Hero[] = [
         {
             id: 'hero-001',
@@ -15,7 +19,7 @@ class GameStore {
             level: 1,
             abilities: {
                 str: { score: 10, modifier: 0 },
-                dex: { score: 16, modifier: 3 },
+                dex: { score: 16, modifier: 99 },
                 con: { score: 14, modifier: 2 },
                 int: { score: 12, modifier: 1 },
                 wis: { score: 13, modifier: 1 },
@@ -24,12 +28,12 @@ class GameStore {
             armorClass: 14,
             hp: 14,
             isAlive: true,
-            items: [{
+            weapon: {
                 id: 'shortbow-001',
                 name: 'Shortbow',
                 range: 'ranged',
                 dice: { count: 1, sides: 6, modifier: 3 }
-            }],
+            },
             actions: ['ATTACK'],
             size: 'medium',
             team: 'heroes',
@@ -52,12 +56,12 @@ class GameStore {
             armorClass: 16,
             hp: 28,
             isAlive: true,
-            items: [{
+            weapon: {
                 id: 'longsword-001',
                 name: 'Longsword',
                 range: 'melee',
                 dice: { count: 1, sides: 8, modifier: 3 }
-            }],
+            },
             actions: ['ATTACK'],
             size: 'medium',
             team: 'heroes',
@@ -76,7 +80,7 @@ class GameStore {
         const char = team[index]
 
         if (!char) {
-            throw new Error(`Failed to get character at index ${index} / team ${team}.`)
+            throw new Error(`Failed to get character at index ${index} / team ${JSON.stringify(team)}.`)
         }
 
         return team[index]
@@ -111,6 +115,28 @@ class GameStore {
 
     public handleInkFunction(funcName: string, ...args: string[]) {
         switch (funcName) {
+            case 'attack': {
+                const attacker = this.charactersOrdered[this.currentCharacterIndex]
+                const [targetId] = args
+                const target = this.charactersOrdered.find(character => character.id === targetId)
+
+                if (!target) {
+                    throw new Error(`Unable to find target: ${JSON.stringify(target)}.`)
+
+                }
+
+                const attackResult = attack(attacker, target)
+                if (attackResult.hit) {
+                    const damage = calculateDamage(attacker, attackResult.critical)
+                    // NOTE: HP is currently decreased directly from the Character object 
+                    // for simplicity. This will be handled by a dedicated HP system later.
+                    target.hp -= damage
+                }
+                const combatMessage = generateCombatSentence(attacker, target, attackResult)
+                this.log.push(combatMessage)
+
+                break
+            }
             case 'get_action_order': {
                 const initiativeStringified = this.stringifyWithMarker(
                     this.charactersOrdered, this.currentCharacterIndex
@@ -121,6 +147,7 @@ class GameStore {
             case 'get_character_info': {
                 const [teamName, index, prop] = args
                 const team = this.getTeam(teamName)
+
                 const char = this.getChar(team, +index)
                 const value = this.getCharPropertyValue(char, prop)
 

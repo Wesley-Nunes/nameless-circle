@@ -1,4 +1,4 @@
-import type { Enemy } from 'libs/entities'
+import type { Enemy, Weapon } from 'libs/entities'
 
 const BLAZEFEN_BASE: Enemy = {
     abilities: {
@@ -14,7 +14,7 @@ const BLAZEFEN_BASE: Enemy = {
     hp: 0,
     id: 'blazefen_',
     isAlive: false,
-    items: [],
+    weapon: {} as Weapon,
     name: 'blazefen',
     species: 'blazefen',
     size: 'medium',

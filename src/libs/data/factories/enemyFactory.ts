@@ -1,8 +1,8 @@
 import { calculateEnemyHp } from 'libs/systems/hpSystem'
 import { generateID } from 'libs/systems/IDSystem'
+import { randomCharacterName } from 'libs/systems/textGeneratorSystem'
 
 import type { AbilityBlock, Enemy } from 'libs/entities'
-import randomCharacterName from 'libs/systems/nameGeneratorSystem/randomCharacterName'
 
 const BASE_ARMOR_CLASS = 10
 

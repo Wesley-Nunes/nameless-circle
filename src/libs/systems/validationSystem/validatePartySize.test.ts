@@ -36,7 +36,7 @@ const mockCharacter: Character = {
     hp: 10,
     id: 't_0001',
     isAlive: true,
-    items: [],
+    weapon: {},
     name: 'Test',
     species: 'human',
     size: 'medium',

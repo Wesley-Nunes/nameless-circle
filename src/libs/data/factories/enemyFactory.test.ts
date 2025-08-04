@@ -23,7 +23,7 @@ describe('enemyFactory - createEnemy', () => {
             hp: 4,
             id: 'blazefen_0001',
             isAlive: true,
-            items: [],
+            weapon: {},
             name: 'Vesmire',
             species: 'blazefen',
             size: 'medium',
