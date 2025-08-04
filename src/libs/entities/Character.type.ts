@@ -1,6 +1,6 @@
 import type { AbilityBlock } from './Ability.type'
 import type { Action } from './Action.type'
-import type { Item } from './Item.type'
+import type { Weapon } from './Item.type'
 import type { Species } from './Species.type'
 
 export type CharacterSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'gargantuan'
@@ -14,7 +14,8 @@ export type Character = {
     hp: number
     id: string;
     isAlive: boolean;
-    items: Item[];
+    // NOTE: Equipment & Inventory should be developed to improve this feature
+    weapon: Weapon;
     name: string;
     species: Species,
     size: CharacterSize,

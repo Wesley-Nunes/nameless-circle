@@ -1,4 +1,4 @@
-export type Item = {
+export type Weapon = {
     id: string;
     name: string;
     range: 'melee' | 'ranged';

@@ -9,6 +9,6 @@ export type { Combat, CombatTemplate } from './Combat.type'
 export type { Difficulty } from './Difficulty.type'
 export type { Enemy } from './Enemy.type'
 export type { Hero } from './Hero.type'
-export type { Item } from './Item.type'
+export type { Weapon } from './Weapon.type'
 export type { Species } from './Species.type'
 

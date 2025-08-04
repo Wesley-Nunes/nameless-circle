@@ -9,7 +9,7 @@ vi.mock('libs/systems/rollSystem/roll', async () => {
 
     return {
         ...actual,
-        default: vi.fn(), // Mock the default export (roll)
+        default: vi.fn(),
     }
 })
 
@@ -97,7 +97,12 @@ const _characters: Enemy[] = [
         "hp": 16,
         "id": "blazefen_0002",
         "isAlive": true,
-        "items": [],
+        "weapon": {
+            id: 'shortbow-001',
+            name: 'Shortbow',
+            range: 'ranged',
+            dice: { count: 1, sides: 6, modifier: 3 }
+        },
         "name": "Glowell",
         "species": "blazefen",
         "size": "medium",
