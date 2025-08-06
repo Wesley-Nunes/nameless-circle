@@ -1,2 +1,2 @@
-export { default as generateID } from './IDSystem'
+export { generateID, resetID } from './IDSystem'
 

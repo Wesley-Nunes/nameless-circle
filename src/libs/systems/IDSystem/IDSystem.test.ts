@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import generateID from './IDSystem'
+import { generateID } from './IDSystem'
 
 describe('generateID', () => {
     it('should generate two distinct unique IDs for a blazefen entity', () => {

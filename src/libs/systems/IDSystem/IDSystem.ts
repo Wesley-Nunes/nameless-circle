@@ -6,7 +6,7 @@ const idCounters: Record<Species, number> = {
     human: 0
 }
 
-const generateID = (species: Species) => {
+export const generateID = (species: Species) => {
     validateSpecies(species)
 
     idCounters[species]++
@@ -16,4 +16,8 @@ const generateID = (species: Species) => {
     return `${species}_${id}`
 }
 
-export default generateID
+export const resetID = () => {
+    idCounters.blazefen = 0
+    idCounters.human = 0
+}
+
