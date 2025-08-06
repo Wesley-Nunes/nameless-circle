@@ -1,6 +1,6 @@
 import type { Enemy } from 'libs/entities'
 
-const BLAZEFEN_BASE: Enemy = {
+const COMMONER_BASE: Enemy = {
     abilities: {
         str: { score: 0, modifier: 0 },
         dex: { score: 0, modifier: 0 },
@@ -12,21 +12,21 @@ const BLAZEFEN_BASE: Enemy = {
     actions: ['ATTACK'],
     armorClass: 0,
     hp: 0,
-    id: 'blazefen_',
+    id: 'commoner_',
     isAlive: false,
     weapon: {
-        id: 'shortbow_0001',
-        name: 'Shortbow',
-        range: 'ranged',
-        dice: { count: 1, sides: 6, modifier: 0 }
+        id: 'club_0001',
+        name: 'Club',
+        range: 'melee',
+        dice: { count: 1, sides: 4, modifier: 0 }
     },
-    name: 'blazefen',
-    species: 'blazefen',
+    name: 'commoner',
+    species: 'human',
     size: 'medium',
     team: 'enemies',
-    type: ['elemental', 'humanoid'],
+    type: ['humanoid'],
     xp: 0
 }
 
-export default BLAZEFEN_BASE
+export default COMMONER_BASE
 

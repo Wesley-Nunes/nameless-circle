@@ -20,7 +20,12 @@ const createEnemy = (
 
     enemy.armorClass = BASE_ARMOR_CLASS + enemy.abilities.dex.modifier
     enemy.hp = calculateEnemyHp(enemy.xp, enemy.size, enemy.abilities.con.modifier).randomHp
-    enemy.name = enemyConfig?.name || randomCharacterName(enemy.species)
+    enemy.name = (
+        enemyConfig?.name
+        || randomCharacterName(enemy.species)
+        || baseEnemy?.name
+        || baseEnemy.species
+    )
 
     enemy.id = generateID(enemy.species)
     enemy.isAlive = true
