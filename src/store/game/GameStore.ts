@@ -1,5 +1,6 @@
-import { attack, getCombatStatus, getNextCharacterIndex, initiative } from 'libs/systems/combatSystem'
+import { attack, initiative, getCombatStatus, getNextCharacterIndex } from 'libs/systems/combatSystem'
 import { calculateDamage } from 'libs/systems/damageSystem'
+import { findTarget } from 'libs/systems/aiSystem'
 import { generateCombatSentence } from 'libs/systems/textGeneratorSystem'
 import { newParty } from 'libs/systems/playerSystem'
 
@@ -78,11 +79,7 @@ class GameStore {
             }
             case 'ai_action': {
                 const attacker = this.charactersOrdered[this.currentCharacterIndex]
-                const target = this.charactersOrdered.filter(
-                    character => (
-                        (character.team != attacker.team) && character.hp > 0
-                    )
-                )[0]
+                const target = findTarget(attacker, this.charactersOrdered)
 
                 this.attackAction(attacker, target)
 
