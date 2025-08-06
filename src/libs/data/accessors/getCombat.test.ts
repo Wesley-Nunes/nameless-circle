@@ -1,26 +1,29 @@
 import { describe, it, expect } from 'vitest'
-import getCombat from './combatMap'
+import getCombat from './getCombat'
 
 describe('getCombat - Functional Tests', () => {
-    it('creates valid combat with enemies for known combat ID', () => {
-        const expectedCombatId = 'blazefen_ambush_01'
-        const expectedWinConditions = [{ basic: 'kill_all_enemies', extra: 'save_all_mounts' }]
-        const expectedEnemySize = 4
+    it('creates valid combat with fixed test enemy', () => {
+        const expectedCombatId = 'test_combat_01'
+        const expectedWinConditions = [{ basic: 'kill_all_enemies' }]
         const heroParty = [{ level: 3 }, { level: 3 }, { level: 4 }]
         const difficulty = 'moderate'
 
-        // @ts-expect-error - Simple version of hero, the getCombat only uses the level property
+        // @ts-expect-error - Simple version of hero
         const combat = getCombat(expectedCombatId, heroParty, difficulty)
 
         expect(combat.id).toBe(expectedCombatId)
         expect(combat.winConditions).toEqual(expectedWinConditions)
-        expect(combat.enemies).toHaveLength(expectedEnemySize)
+        expect(combat.enemies).toHaveLength(1)
+
+        const enemy = combat.enemies[0]
+        expect(enemy.xp).toBe(10)
+        expect(enemy.preferredTargets).toBeUndefined()
     })
 
     it('throws error for unknown combat ID', () => {
         const heroParty = [{ level: 3 }, { level: 3 }, { level: 4 }]
 
-        // @ts-expect-error - Simple version of hero, the getCombat only uses the level property
+        // @ts-expect-error - Simple version of hero
         expect(() => getCombat('unknown_combat', heroParty)).toThrowError(
             'Unknown combat ID: unknown_combat'
         )

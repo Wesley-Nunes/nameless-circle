@@ -2,7 +2,7 @@ import { createEnemy } from 'libs/data/factories'
 import { getEnemyAbilities, getEnemyAbilityPoints } from 'libs/systems/abilitySystem'
 import { getEnemyXp } from 'libs/systems/xpSystem'
 
-import { BLAZEFEN_BASE, ENEMY_ROLE_TEMPLATES } from 'libs/data/static/enemies'
+import { BLAZEFEN_BASE, COMMONER_BASE, ENEMY_ROLE_TEMPLATES } from 'libs/data/static/enemies'
 
 import type { Combat, CombatTemplate, Difficulty, Hero } from 'libs/entities'
 
@@ -22,13 +22,26 @@ const COMBAT_MAP: Record<string, CombatTemplate> = {
             return party
         },
         winConditions: [{ basic: 'kill_all_enemies', extra: 'save_all_mounts' }]
+    },
+    // NOTE: Tests combats below:
+    test_combat_01: {
+        id: 'test_combat_01',
+        // NOTE: CR 0 / XP 10 single balanced enemy
+        enemies: () => {
+            const xp = 10
+            const points = getEnemyAbilityPoints(xp)
+            const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['balanced'], points)
+
+            return [createEnemy(COMMONER_BASE, { abilities, xp })]
+        },
+        winConditions: [{ basic: 'kill_all_enemies' }]
     }
 }
 
 const getCombat = (
     combatId: string,
     heroParty: Hero[],
-    difficulty: Difficulty = 'low'
+    difficulty: Difficulty = 'moderate'
 ): Combat => {
     const combatTemplate = COMBAT_MAP[combatId]
     if (!combatTemplate) throw new Error(`Unknown combat ID: ${combatId}`)
