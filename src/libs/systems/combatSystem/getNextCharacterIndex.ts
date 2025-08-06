@@ -4,16 +4,15 @@ const getNextCharacterIndex = (
     characters: (Hero | Enemy)[],
     currentIndex: number
 ): number => {
-    let newIndex = 0
+    let newIndex = currentIndex
     let keepGoing
     let entitiesAcc = characters.length - 1
 
     do {
-        newIndex = (newIndex + (currentIndex + 1)) % characters.length
+        newIndex = (newIndex + 1) % characters.length
 
         entitiesAcc -= 1
-        keepGoing = characters[newIndex].hp <= 0 && entitiesAcc > 0
-        console.log({ newIndex, entitiesAcc, keepGoing })
+        keepGoing = characters[newIndex].hp <= 0 && entitiesAcc >= 0
     } while (keepGoing)
 
     if (characters[newIndex].hp <= 0) {

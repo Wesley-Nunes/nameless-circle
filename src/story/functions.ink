@@ -1,4 +1,8 @@
 // Mock functions
+=== function add_to_hero_party(hero_id) ===
+    { hero_id }
+=== function ai_action() ===
+    ai acting
 === function attack(character_id) ===
     attacking { character_id }
 === function end_turn() ===
@@ -26,6 +30,7 @@
     ->->
     
 === combat_loop ===
+    >>>
     -> enemy_loop(0) ->
     
     -> hero_loop(0) ->
@@ -35,15 +40,17 @@
     { - is_player_action():
         -> player_action_options ->
       - else:
-        // -> ai_action ->
-        ai is acting
+        { ai_action() }
+        
     }
     
     { get_action_result() }
     { end_turn() }
     
     { get_combat_status() == "IN_PROGRESS":
-        Next turn! -> combat_loop
+        <<<<
+        Next turn! 
+        -> combat_loop
     }
     { get_combat_status() == "VICTORY":
         You won the battle! ->->

@@ -25,7 +25,7 @@ const generateCombatSentence = (
         `${target.name} evades.`,
         'Attack fails.'
     ]
-    const randomIndex = roll(5) - 1
+    const randomIndex = roll(4) - 1
 
     if (attackResult.hit && attackResult.critical) {
         return criticalHitMessage[randomIndex]

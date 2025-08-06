@@ -1,5 +1,7 @@
 INCLUDE functions.ink
 
+EXTERNAL add_to_hero_party(hero_id)
+EXTERNAL ai_action()
 EXTERNAL attack(character_id)
 EXTERNAL end_turn()
 EXTERNAL get_character_info(team, index, prop)
@@ -56,6 +58,9 @@ From the shadows, four blazefen — salamander-men with amber eyes and flaming t
 
 Could word of Lysandra’s movements have leaked? Were there spies in the village? What seemed a random attack now had a clear goal: <i>delay her rush to the Citadel.</i>
 
+// NOTE: Hero party is currently hardcoded 
+// (will be user-configurable later)
+{ add_to_hero_party("hero_0002") }
 -> combat_scene("blazefen_ambush_01") ->
 
 Cont...

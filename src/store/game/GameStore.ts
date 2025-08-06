@@ -1,106 +1,50 @@
-import { attack, initiative } from 'libs/systems/combatSystem'
+import { attack, getCombatStatus, getNextCharacterIndex, initiative } from 'libs/systems/combatSystem'
 import { calculateDamage } from 'libs/systems/damageSystem'
 import { generateCombatSentence } from 'libs/systems/textGeneratorSystem'
+import { newParty } from 'libs/systems/playerSystem'
 
-import { getCombat } from 'libs/data/accessors'
+import { getCombat, getHeroById } from 'libs/data/accessors'
+
+import { PLAYER_ID } from 'libs/data/static/heroes'
 
 import type { CombatStatus, Enemy, Hero } from 'libs/entities'
 
 class GameStore {
-    private charactersOrdered: (Hero | Enemy)[] = []
-    private combatStatus: CombatStatus = 'IN_PROGRESS'
-    private currentCharacterIndex: number = 0
-    private enemies: Enemy[] = []
-    private log: string[] = []
-    private heroes: Hero[] = [
-        {
-            id: 'hero-001',
-            name: 'Celcius', // NOTE: This is the player!
-            species: 'human',
-            level: 1,
-            abilities: {
-                str: { score: 10, modifier: 0 },
-                dex: { score: 16, modifier: 99 },
-                con: { score: 14, modifier: 2 },
-                int: { score: 12, modifier: 1 },
-                wis: { score: 13, modifier: 1 },
-                cha: { score: 8, modifier: -1 }
-            },
-            armorClass: 14,
-            hp: 14,
-            isAlive: true,
-            weapon: {
-                id: 'shortbow-001',
-                name: 'Shortbow',
-                range: 'ranged',
-                dice: { count: 1, sides: 6, modifier: 3 }
-            },
-            actions: ['ATTACK'],
-            size: 'medium',
-            team: 'heroes',
-            type: ['humanoid'],
-            isPlayer: true
-        },
-        {
-            id: 'hero-002',
-            name: 'Lysandra',
-            species: 'human',
-            level: 3,
-            abilities: {
-                str: { score: 16, modifier: 3 },
-                dex: { score: 14, modifier: 2 },
-                con: { score: 15, modifier: 2 },
-                int: { score: 10, modifier: 0 },
-                wis: { score: 12, modifier: 1 },
-                cha: { score: 13, modifier: 1 }
-            },
-            armorClass: 16,
-            hp: 28,
-            isAlive: true,
-            weapon: {
-                id: 'longsword-001',
-                name: 'Longsword',
-                range: 'melee',
-                dice: { count: 1, sides: 8, modifier: 3 }
-            },
-            actions: ['ATTACK'],
-            size: 'medium',
-            team: 'heroes',
-            type: ['humanoid']
-        }
-    ]
+    private availableHeroIds: string[]
+    private charactersOrdered: (Hero | Enemy)[]
+    private combatStatus: CombatStatus
+    private currentCharacterIndex: number
+    private currentHeroParty: Hero[]
+    private log: string[]
 
-    private getTeam(teamName: string) {
-        if (this.isTeam(teamName)) {
-            return this[teamName]
-        }
-
-        throw new Error(`Team: $${teamName} not found.`)
+    constructor() {
+        this.availableHeroIds = [PLAYER_ID, 'hero_0002']
+        this.charactersOrdered = []
+        this.combatStatus = getCombatStatus()
+        this.currentCharacterIndex = 0
+        this.currentHeroParty = [getHeroById(PLAYER_ID)]
+        this.log = []
     }
-    private getChar(team: (Hero[] | Enemy[]), index: number): (Hero | Enemy) {
-        const char = team[index]
 
-        if (!char) {
-            throw new Error(`Failed to get character at index ${index} / team ${JSON.stringify(team)}.`)
+    // NOTE: It should be moved to a proper system after create more action
+    private attackAction(attacker: (Hero | Enemy), target: (Hero | Enemy)) {
+        const attackResult = attack(attacker, target)
+
+        if (attackResult.hit) {
+            const damage = calculateDamage(attacker, attackResult.critical)
+            // NOTE: HP is currently decreased directly from the Character object 
+            // for simplicity. This will be handled by a dedicated HP system later.
+            target.hp -= damage
         }
+        const combatMessage = generateCombatSentence(attacker, target, attackResult)
 
-        return team[index]
+        this.log.push(combatMessage)
     }
-    private getCharPropertyValue(char: (Hero | Enemy), prop: string) {
-        if (prop in char) {
-            return char[prop as keyof typeof char]
-        }
-
-        throw new Error(`getCharPropertyValue failed for property '${prop}'.`)
-    }
-    private isTeam(key: string): key is 'heroes' | 'enemies' {
-        return ['heroes', 'enemies'].includes(key)
-    }
-    private runInitiative() {
-        this.charactersOrdered = initiative([...this.heroes, ...this.enemies])
+    private runInitiative(heroParty: Hero[], enemyParty: Enemy[]) {
+        this.charactersOrdered = initiative([...heroParty, ...enemyParty])
             .map((char) => {
-                const hero = this.heroes.find(hero => hero.id === char.id)
-                const enemy = this.enemies.find(enemy => enemy.id === char.id)
+                const hero = heroParty.find(hero => hero.id === char.id)
+                const enemy = enemyParty.find(enemy => enemy.id === char.id)
 
                 if (hero) return hero
                 if (enemy) return enemy
@@ -109,22 +53,41 @@ class GameStore {
             })
     }
     private stringifyWithMarker(characters: (Hero | Enemy)[], i: number): string {
-        return characters.map((item, index) => (
-            index === i ? `[x] ${item.name}` : item.name
-        )).join(' / ')
-    }
-    private updateCombatStatus() {
-        if (this.enemies.every(enemy => enemy.hp <= 0)) {
-            this.combatStatus = 'VICTORY'
-        } else if (this.heroes.every(hero => hero.hp <= 0)) {
-            this.combatStatus = 'DEFEAT'
-        } else {
-            this.combatStatus = 'IN_PROGRESS'
-        }
+        return characters
+            .map((character, index) => {
+                if (character.hp <= 0) {
+                    return `\u{1F480} - ${character.name}`
+                }
+
+                return index === i
+                    ? `\u{2694}\u{FE0F} ${character.name}`
+                    : `\u{23F3} ${character.name}`
+            }).join(' / ')
     }
 
-    public handleInkFunction(funcName: string, ...args: string[]) {
+    public handleInkFunction(funcName: string, ...args: ([] | [string] | [string, number, string])) {
         switch (funcName) {
+            case 'add_to_hero_party': {
+                const [heroId] = args as [string]
+
+                this.currentHeroParty = newParty(
+                    this.currentHeroParty, this.availableHeroIds, heroId
+                )
+
+                break
+            }
+            case 'ai_action': {
+                const attacker = this.charactersOrdered[this.currentCharacterIndex]
+                const target = this.charactersOrdered.filter(
+                    character => (
+                        (character.team != attacker.team) && character.hp > 0
+                    )
+                )[0]
+
+                this.attackAction(attacker, target)
+
+                break
+            }
             case 'attack': {
                 const attacker = this.charactersOrdered[this.currentCharacterIndex]
                 const [targetId] = args
@@ -132,27 +95,19 @@ class GameStore {
 
                 if (!target) {
                     throw new Error(`Unable to find target: ${JSON.stringify(target)}.`)
-
                 }
 
-                const attackResult = attack(attacker, target)
-                if (attackResult.hit) {
-                    const damage = calculateDamage(attacker, attackResult.critical)
-                    // NOTE: HP is currently decreased directly from the Character object 
-                    // for simplicity. This will be handled by a dedicated HP system later.
-                    target.hp -= damage
-                }
-                const combatMessage = generateCombatSentence(attacker, target, attackResult)
-                this.log.push(combatMessage)
+                this.attackAction(attacker, target)
 
                 break
             }
             case 'end_turn': {
-                this.updateCombatStatus()
+                this.combatStatus = getCombatStatus(this.charactersOrdered)
 
                 if (this.combatStatus === 'IN_PROGRESS') {
-                    const i = (this.currentCharacterIndex + 1) % this.charactersOrdered.length
-                    this.currentCharacterIndex = i
+                    this.currentCharacterIndex = getNextCharacterIndex(
+                        this.charactersOrdered, this.currentCharacterIndex
+                    )
                 }
 
                 break
@@ -172,36 +127,44 @@ class GameStore {
             }
             case 'get_character_info': {
                 const [teamName, index, prop] = args
-                const team = this.getTeam(teamName)
+                const character = this.charactersOrdered
+                    .filter(character => character.team === teamName)
+                    .find((character, i) => (
+                        i === index && prop && prop in character)
+                    )
 
-                const char = this.getChar(team, +index)
-                const value = this.getCharPropertyValue(char, prop)
+                if (character && prop && prop in character) {
+                    const value = character[prop as keyof typeof character]
 
-                return value
+                    return value
+                }
+
+                throw new Error(`get_character_info error! check: ${teamName} - ${index} - ${prop}`)
             }
             case 'get_combat_status': {
                 return this.combatStatus
             }
             case 'get_party_size': {
                 const [teamName] = args
-                const team = this.getTeam(teamName)
+                const team = this.charactersOrdered.filter(
+                    character => character.team === teamName
+                )
 
                 return team.length
             }
             case 'is_player_action': {
-                const playerId = this.heroes.find(hero => hero.isPlayer)!.id
                 const isPlayerTurn = (
-                    this.charactersOrdered[this.currentCharacterIndex].id === playerId
+                    this.charactersOrdered[this.currentCharacterIndex].id === PLAYER_ID
                 )
 
                 return isPlayerTurn
             }
             case 'set_combat': {
                 const [combatId] = args
-                const combat = getCombat(combatId, this.heroes)
+                const combat = getCombat(combatId!, this.currentHeroParty)
 
-                this.enemies = combat.enemies
-                this.runInitiative()
+                this.runInitiative(this.currentHeroParty, combat.enemies)
+                this.combatStatus = getCombatStatus(this.charactersOrdered)
 
                 break
             }
