@@ -1,14 +1,17 @@
 INCLUDE functions.ink
 
+EXTERNAL add_mount(mount_name, character_id, character_team)
 EXTERNAL add_to_hero_party(hero_id)
 EXTERNAL ai_action()
 EXTERNAL attack(character_id)
 EXTERNAL end_turn()
-EXTERNAL get_character_info(team, index, prop)
-EXTERNAL get_combat_status()
-EXTERNAL get_party_size(team)
 EXTERNAL get_action_order()
 EXTERNAL get_action_result()
+EXTERNAL get_character_info(team, index, prop)
+EXTERNAL get_combat_status()
+EXTERNAL get_mount_info(team, index, prop)
+EXTERNAL get_party_size(team)
+EXTERNAL has_mounts(team)
 EXTERNAL is_player_action()
 EXTERNAL set_combat(combat_id)
 
@@ -41,6 +44,11 @@ As she shouted, you saw her tremble — and felt your own palms sweat.
     -> combat
 
 === courtly_intrigue ===
+// NOTE: Hero party is currently hardcoded 
+// (will be user-configurable later)
+{ add_to_hero_party("hero_0002") }
+{ add_mount("Riding horse", "hero_0001", "heroes") }
+{ add_mount("Riding horse", "hero_0002", "heroes") }
 The sky deepened to indigo as stars slowly awakened. The southern road — the only path to the Citadel — narrowed, with few places to camp. Ancient trees leaned toward the path as if trying to delay travelers.
 
 Lysandra rode ahead, refusing an escort — only you, her new recruit, followed.
@@ -58,9 +66,6 @@ From the shadows, four blazefen — salamander-men with amber eyes and flaming t
 
 Could word of Lysandra’s movements have leaked? Were there spies in the village? What seemed a random attack now had a clear goal: <i>delay her rush to the Citadel.</i>
 
-// NOTE: Hero party is currently hardcoded 
-// (will be user-configurable later)
-{ add_to_hero_party("hero_0002") }
 -> combat_scene("blazefen_ambush_01") ->
 
 Cont...

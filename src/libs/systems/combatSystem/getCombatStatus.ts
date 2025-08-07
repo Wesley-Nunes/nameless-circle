@@ -1,6 +1,6 @@
-import type { CombatStatus, Enemy, Hero } from 'libs/entities'
+import type { CombatStatus, Enemy, Hero, Mount } from 'libs/entities'
 
-const getCombatStatus = (characters?: (Hero | Enemy)[]): CombatStatus => {
+const getCombatStatus = (characters?: (Hero | Enemy | Mount)[]): CombatStatus => {
     if (!characters) {
         return 'UNINITIALIZED'
     }

@@ -1,6 +1,6 @@
-import type { Species } from 'libs/entities'
+import { VALID_SPECIES } from 'libs/data/static/character'
 
-const VALID_SPECIES: Species[] = ['blazefen', 'human']
+import type { Species } from 'libs/entities'
 
 const validateSpecies = (species: Species) => {
     if (!VALID_SPECIES.includes(species)) {

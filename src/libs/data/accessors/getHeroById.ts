@@ -1,6 +1,7 @@
 import { player, lysandra, HERO_TEST } from 'libs/data/static/heroes'
 
 import type { Hero } from 'libs/entities'
+import { addID } from 'libs/systems/IDSystem'
 
 const heroRegistry: Record<string, Hero> = {
     [player.id]: player,
@@ -14,6 +15,8 @@ const getHeroById = (id: string): Hero => {
     if (!hero) {
         throw new Error(`Hero id: ${id} not found`)
     }
+
+    addID(hero.id)
 
     return hero
 }

@@ -1,2 +1,2 @@
-export type Species = 'blazefen' | 'human'
+export type Species = 'blazefen' | 'human' | 'equine'
 

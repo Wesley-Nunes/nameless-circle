@@ -1,20 +1,10 @@
-import { beforeEach, expect, describe, it, vi } from 'vitest'
+import { beforeEach, expect, describe, it } from 'vitest'
 
 import GameStore from './GameStore'
 import { calculateEnemyHp } from 'libs/systems/hpSystem'
 import { resetID } from 'libs/systems/IDSystem'
 
 import type { CharacterSize } from 'libs/entities'
-
-vi.mock('libs/data/static/heroes/player', async () => {
-    const { HERO_TEST, HERO_TEST_ID } = await vi.importActual
-        <typeof import('libs/data/static/heroes/HERO_TEST')>('libs/data/static/heroes/HERO_TEST')
-
-    return {
-        player: HERO_TEST,
-        PLAYER_ID: HERO_TEST_ID,
-    }
-})
 
 describe('GameStore', () => {
     let gameStore: GameStore
@@ -28,8 +18,8 @@ describe('GameStore', () => {
         const combatId = 'test_combat_01'
         const expectedPartySize = 1
         const expectedCombatStatus = 'IN_PROGRESS'
-        const expectedHeroName = 'hero test'
-        const expectedHeroHp = 13
+        const expectedHeroName = 'Celcius'
+        const expectedHeroHp = 15
         const expectedEnemyName = 'commoner'
 
         gameStore.handleInkFunction('set_combat', combatId)
@@ -55,7 +45,7 @@ describe('GameStore', () => {
         expect(enemyHp).toBeGreaterThanOrEqual(expectedEnemyHp.hp)
         expect(enemyHp).toBeLessThanOrEqual(expectedEnemyHp.maxHp)
 
-        const expectedActionOrder = ['⚔️ commoner / ⏳ hero test', '⚔️ hero test / ⏳ commoner']
+        const expectedActionOrder = ['⚔️ commoner / ⏳ Celcius', '⚔️ Celcius / ⏳ commoner']
         const actionOrder = gameStore.handleInkFunction('get_action_order')
         expect(actionOrder).toSatisfy(value =>
             value === expectedActionOrder[0] || value === expectedActionOrder[1]

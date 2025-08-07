@@ -1,9 +1,12 @@
 import { getWeaponModifier } from 'libs/systems/abilitySystem'
 import { roll } from 'libs/systems/rollSystem'
 
-import type { Enemy, Hero, } from 'libs/entities'
+import type { Enemy, Hero, Mount, } from 'libs/entities'
 
-const attack = (attacker: Hero | Enemy, target: Hero | Enemy): { hit: boolean, critical: boolean } => {
+const attack = (
+    attacker: Hero | Enemy | Mount,
+    target: Hero | Enemy | Mount
+): { hit: boolean, critical: boolean } => {
     const attackRoll = roll()
     const modifier = getWeaponModifier(attacker.weapon, attacker.abilities)
     const totalAttack = attackRoll + modifier

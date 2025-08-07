@@ -1,4 +1,6 @@
 // Mock functions
+=== function add_mount(mount_name, character_id, character_team) ===
+    {mount_name} - { character_id } - { character_team }
 === function add_to_hero_party(hero_id) ===
     { hero_id }
 === function ai_action() ===
@@ -9,17 +11,21 @@
     ~ return 0
 === function is_player_action() ===
     ~ return true
+=== function get_action_order() ===
+    ~ return "[x] Hero 1 / Enemy 1"
+=== function get_action_result() ===
+    ~ return "Action result"
 === function get_character_info(team, index, prop) ===
     ~ return 1
 === function get_combat_status() ===
     // IN_PROGRESS || VICTORY || DEFEAT
     ~ return "IN_PROGRESS"
+=== function get_mount_info(team, index, prop) ===
+    ~ return 1
 === function get_party_size(team) ===
     ~ return 1
-=== function get_action_order() ===
-    ~ return "[x] Hero 1 / Enemy 1"
-=== function get_action_result() ===
-    ~ return "Action result"
+=== function has_mounts(team) ===
+    ~ return false
 === function set_combat(combat_id) ===
     { combat_id }
 
@@ -32,8 +38,15 @@
 === combat_loop ===
     >>>
     -> enemy_loop(0) ->
-    
+    { has_mounts("enemies"):
+        Enemy mounts:
+        -> mount_loop(0, "enemies") ->
+    }
     -> hero_loop(0) ->
+    { has_mounts("heroes"):
+        Hero mounts:
+        -> mount_loop(0, "heroes") ->
+    }
     
     { get_action_order() }
     
@@ -84,7 +97,7 @@
 
 // Right now, only the attack option is available    
 === player_action_options ===
-    Select an enemy to attacked
+    Select an enemy to attack
     -> enemy_choice_loop(0)
     
 === enemy_choice_loop(index) ===
@@ -99,5 +112,15 @@
   }
   { index < get_party_size("enemies") - 1: -> enemy_choice_loop(index + 1)  }
   
-  
+=== mount_loop(index, team) ===
+    { index >= get_party_size(team): ->-> }
+    
+    ~ temp mount_name = get_mount_info(team, index, "name")
+    ~ temp mount_hp =  get_mount_info(team, index, "hp")
+
+    { mount_hp > 0:
+        - {mount_name} (Hp: {mount_hp})
+    }    
+    -> mount_loop(index + 1, team)
+
     

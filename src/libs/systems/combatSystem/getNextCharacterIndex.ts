@@ -1,7 +1,7 @@
-import type { Enemy, Hero } from 'libs/entities'
+import type { Enemy, Hero, Mount } from 'libs/entities'
 
 const getNextCharacterIndex = (
-    characters: (Hero | Enemy)[],
+    characters: (Hero | Enemy | Mount)[],
     currentIndex: number
 ): number => {
     let newIndex = currentIndex

@@ -2,6 +2,7 @@ import type { AbilityBlock } from './Ability.type'
 import type { Action } from './Action.type'
 import type { Weapon } from './Weapon.type'
 import type { Species } from './Species.type'
+import type { Team } from './Team.type'
 
 export type CharacterSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 'gargantuan'
 
@@ -19,7 +20,7 @@ export type Character = {
     name: string;
     species: Species,
     size: CharacterSize,
-    team: 'heroes' | 'enemies';
+    team: Team;
     type: Array<CharacterType>,
 }
 

@@ -1,10 +1,10 @@
 import { roll } from 'libs/systems/rollSystem'
 
-import type { Enemy, Hero } from 'libs/entities'
+import type { Enemy, Hero, Mount } from 'libs/entities'
 
 const generateCombatSentence = (
-    attacker: Enemy | Hero,
-    target: Enemy | Hero,
+    attacker: Enemy | Hero | Mount,
+    target: Enemy | Hero | Mount,
     attackResult: { hit: boolean, critical: boolean }
 ): string => {
     const criticalHitMessage = [

@@ -5,17 +5,23 @@ import { generateCombatSentence } from 'libs/systems/textGeneratorSystem'
 import { newParty } from 'libs/systems/playerSystem'
 
 import { getCombat, getHeroById } from 'libs/data/accessors'
+import { createMount } from 'libs/data/factories'
 
 import { PLAYER_ID } from 'libs/data/static/heroes'
 
-import type { CombatStatus, Enemy, Hero } from 'libs/entities'
+import type { CombatStatus, Enemy, Hero, Mount, Team } from 'libs/entities'
 
+type Args = ([] | [string] | [string, string, Team] | [string, number, string])
+// TODO:
+// 2. equalize the combat, and test in all difficulties
+// 3. Prosseguir com a história
 class GameStore {
     private availableHeroIds: string[]
     private charactersOrdered: (Hero | Enemy)[]
     private combatStatus: CombatStatus
     private currentCharacterIndex: number
     private currentHeroParty: Hero[]
+    private currentMounts: Mount[]
     private log: string[]
 
     constructor() {
@@ -24,11 +30,12 @@ class GameStore {
         this.combatStatus = getCombatStatus()
         this.currentCharacterIndex = 0
         this.currentHeroParty = [getHeroById(PLAYER_ID)]
+        this.currentMounts = []
         this.log = []
     }
 
     // NOTE: It should be moved to a proper system after create more action
-    private attackAction(attacker: (Hero | Enemy), target: (Hero | Enemy)) {
+    private attackAction(attacker: (Hero | Enemy), target: (Hero | Enemy | Mount)) {
         const attackResult = attack(attacker, target)
 
         if (attackResult.hit) {
@@ -66,8 +73,18 @@ class GameStore {
             }).join(' / ')
     }
 
-    public handleInkFunction(funcName: string, ...args: ([] | [string] | [string, number, string])) {
+    public handleInkFunction(funcName: string, ...args: Args) {
         switch (funcName) {
+            case 'add_mount': {
+                const [
+                    mountName, characterId, characterTeam
+                ] = args as [string, string, Team]
+                const mount = createMount(mountName, characterId, characterTeam)
+
+                this.currentMounts.push(mount)
+
+                break
+            }
             case 'add_to_hero_party': {
                 const [heroId] = args as [string]
 
@@ -79,7 +96,10 @@ class GameStore {
             }
             case 'ai_action': {
                 const attacker = this.charactersOrdered[this.currentCharacterIndex]
-                const target = findTarget(attacker, this.charactersOrdered)
+                const target = findTarget(
+                    attacker,
+                    [...this.charactersOrdered, ...this.currentMounts]
+                )
 
                 this.attackAction(attacker, target)
 
@@ -136,10 +156,29 @@ class GameStore {
                     return value
                 }
 
-                throw new Error(`get_character_info error! check: ${teamName} - ${index} - ${prop}`)
+                throw new Error(
+                    `get_character_info error! check: ${teamName} - ${index} - ${prop}`
+                )
             }
             case 'get_combat_status': {
                 return this.combatStatus
+            }
+            case 'get_mount_info': {
+                const [teamName, index, prop] = args
+
+                const mount = this.currentMounts
+                    .filter(mount => mount.team === teamName)
+                    .find((mount, i) => (
+                        i === index && prop && prop in mount)
+                    )
+
+                if (mount && prop && prop in mount) {
+                    const value = mount[prop as keyof typeof mount]
+
+                    return value
+                }
+
+                return false
             }
             case 'get_party_size': {
                 const [teamName] = args
@@ -148,6 +187,13 @@ class GameStore {
                 )
 
                 return team.length
+            }
+            case 'has_mounts': {
+                const [teamName] = args
+
+                return this.currentMounts.some(mount =>
+                    (mount.team === teamName && mount.hp > 0)
+                )
             }
             case 'is_player_action': {
                 const isPlayerTurn = (
