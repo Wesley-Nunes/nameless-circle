@@ -1,4 +1,4 @@
-import { attack, initiative, getCombatStatus, getNextCharacterIndex } from 'libs/systems/combatSystem'
+import { attack, initiative, getCombatStatus, getNextCharacterIndex, generateCombatResultPoints } from 'libs/systems/combatSystem'
 import { calculateDamage } from 'libs/systems/damageSystem'
 import { findTarget } from 'libs/systems/aiSystem'
 import { generateCombatSentence } from 'libs/systems/textGeneratorSystem'
@@ -9,33 +9,38 @@ import { createMount } from 'libs/data/factories'
 
 import { PLAYER_ID } from 'libs/data/static/heroes'
 
-import type { CombatStatus, Enemy, Hero, Mount, Team } from 'libs/entities'
+import type { Combatant, CombatStatus, Enemy, Hero, Mount, Team, WinCondition } from 'libs/entities'
 
 type Args = ([] | [string] | [string, string, Team] | [string, number, string])
-// TODO:
-// 2. equalize the combat, and test in all difficulties
-// 3. Prosseguir com a história
+
 class GameStore {
     private availableHeroIds: string[]
-    private charactersOrdered: (Hero | Enemy)[]
+    private charactersOrdered: Combatant[]
+    private combatId: string
+    private combatLog: Map<string, { combatStatus: CombatStatus, value: number }>
     private combatStatus: CombatStatus
     private currentCharacterIndex: number
     private currentHeroParty: Hero[]
     private currentMounts: Mount[]
-    private log: string[]
+    private turnLog: string[]
+    private winConditions: WinCondition
+
 
     constructor() {
         this.availableHeroIds = [PLAYER_ID, 'hero_0002']
         this.charactersOrdered = []
+        this.combatId = ''
+        this.combatLog = new Map()
         this.combatStatus = getCombatStatus()
         this.currentCharacterIndex = 0
         this.currentHeroParty = [getHeroById(PLAYER_ID)]
         this.currentMounts = []
-        this.log = []
+        this.turnLog = []
+        this.winConditions = []
     }
 
     // NOTE: It should be moved to a proper system after create more action
-    private attackAction(attacker: (Hero | Enemy), target: (Hero | Enemy | Mount)) {
+    private attackAction(attacker: Combatant, target: Combatant) {
         const attackResult = attack(attacker, target)
 
         if (attackResult.hit) {
@@ -43,10 +48,36 @@ class GameStore {
             // NOTE: HP is currently decreased directly from the Character object 
             // for simplicity. This will be handled by a dedicated HP system later.
             target.hp -= damage
+            if (target.hp <= 0) {
+                target.isAlive = false
+            }
         }
         const combatMessage = generateCombatSentence(attacker, target, attackResult)
 
-        this.log.push(combatMessage)
+        this.turnLog.push(combatMessage)
+    }
+    private endCombat() {
+        const combatResultPoints = generateCombatResultPoints(
+            [...this.charactersOrdered, ...this.currentMounts],
+            this.combatStatus,
+            this.winConditions
+        )
+        this.combatLog.set(
+            this.combatId,
+            {
+                combatStatus: this.combatStatus,
+                value: combatResultPoints
+            }
+        )
+
+        this.charactersOrdered = []
+        this.combatId = ''
+        this.combatStatus = 'UNINITIALIZED'
+        this.currentCharacterIndex = 0
+        // NOTE: The filter of the mounts should be improved 
+        // based on mounts availability
+        this.currentMounts = this.currentMounts.filter(mount => mount.isAlive)
+        this.turnLog = []
     }
     private runInitiative(heroParty: Hero[], enemyParty: Enemy[]) {
         this.charactersOrdered = initiative([...heroParty, ...enemyParty])
@@ -60,7 +91,7 @@ class GameStore {
                 throw new Error('Fail to order the characters')
             })
     }
-    private stringifyWithMarker(characters: (Hero | Enemy)[], i: number): string {
+    private stringifyWithMarker(characters: Combatant[], i: number): string {
         return characters
             .map((character, index) => {
                 if (character.hp <= 0) {
@@ -108,10 +139,13 @@ class GameStore {
             case 'attack': {
                 const attacker = this.charactersOrdered[this.currentCharacterIndex]
                 const [targetId] = args
-                const target = this.charactersOrdered.find(character => character.id === targetId)
+                const target = this.charactersOrdered
+                    .find(character => character.id === targetId)
 
                 if (!target) {
-                    throw new Error(`Unable to find target: ${JSON.stringify(target)}.`)
+                    throw new Error(
+                        `Unable to find target: ${JSON.stringify(target)}.`
+                    )
                 }
 
                 this.attackAction(attacker, target)
@@ -125,6 +159,8 @@ class GameStore {
                     this.currentCharacterIndex = getNextCharacterIndex(
                         this.charactersOrdered, this.currentCharacterIndex
                     )
+                } else {
+                    this.endCombat()
                 }
 
                 break
@@ -137,8 +173,8 @@ class GameStore {
                 return initiativeStringified
             }
             case 'get_action_result': {
-                const lastLogIndex = this.log.length - 1
-                const lastLog = this.log[lastLogIndex]
+                const lastLogIndex = this.turnLog.length - 1
+                const lastLog = this.turnLog[lastLogIndex]
 
                 return lastLog
             }
@@ -159,6 +195,17 @@ class GameStore {
                 throw new Error(
                     `get_character_info error! check: ${teamName} - ${index} - ${prop}`
                 )
+            }
+            case 'get_combat_result': {
+                const [combatId] = args
+
+                if (combatId && this.combatLog.has(combatId)) {
+                    const combatResult = this.combatLog.get(combatId)
+
+                    return combatResult?.value
+                }
+
+                throw Error(`Invalid combatId: ${combatId}.`)
             }
             case 'get_combat_status': {
                 return this.combatStatus
@@ -203,11 +250,13 @@ class GameStore {
                 return isPlayerTurn
             }
             case 'set_combat': {
-                const [combatId] = args
-                const combat = getCombat(combatId!, this.currentHeroParty)
+                const [combatId] = args as [string]
+                const { enemies, winConditions } = getCombat(combatId, this.currentHeroParty)
 
-                this.runInitiative(this.currentHeroParty, combat.enemies)
+                this.runInitiative(this.currentHeroParty, enemies)
                 this.combatStatus = getCombatStatus(this.charactersOrdered)
+                this.combatId = combatId
+                this.winConditions = winConditions
 
                 break
             }

@@ -88,7 +88,8 @@ describe('findTarget', () => {
         const invalidAI = { ...createTestHero('invalid', 100), team: 'invalid' }
         const party = [createTestHero('hero-1', 100)]
 
-        expect(() => findTarget(invalidAI as any, party)).toThrow('Team not found')
+        // @ts-expect-error - Invalid team
+        expect(() => findTarget(invalidAI, party)).toThrow('Team not found')
     })
 })
 

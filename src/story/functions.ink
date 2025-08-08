@@ -17,9 +17,11 @@
     ~ return "Action result"
 === function get_character_info(team, index, prop) ===
     ~ return 1
+=== function get_combat_result(combat_id) ===
+    ~ return 0
 === function get_combat_status() ===
     // IN_PROGRESS || VICTORY || DEFEAT
-    ~ return "IN_PROGRESS"
+    ~ return "VICTORY"
 === function get_mount_info(team, index, prop) ===
     ~ return 1
 === function get_party_size(team) ===
@@ -36,7 +38,6 @@
     ->->
     
 === combat_loop ===
-    >>>
     -> enemy_loop(0) ->
     { has_mounts("enemies"):
         Enemy mounts:
@@ -61,17 +62,10 @@
     { end_turn() }
     
     { get_combat_status() == "IN_PROGRESS":
-        <<<<
-        Next turn! 
+        Next turn!
         -> combat_loop
     }
-    { get_combat_status() == "VICTORY":
-        You won the battle! ->->
-    }
-    { get_combat_status() == "DEFEAT":
-        You were defeated... -> END
-    }
-    
+    ->->
     
 
 === enemy_loop(index) ===

@@ -13,6 +13,7 @@ const ridingHorse: Mount = {
     armorClass: 11,
     availability: 'TRAINING',
     id: 'ridingHorse_',
+    isTamedMount: false,
     hp: 13,
     isAlive: true,
     name: 'Riding horse',

@@ -82,7 +82,7 @@ describe('GameStore', () => {
         }
 
         expect(gameStore.handleInkFunction('get_combat_status')).toSatisfy(value =>
-            value === 'VICTORY' || value === 'DEFEAT'
+            value === 'VICTORY' || value === 'DEFEAT' || value === 'UNINITIALIZED'
         )
     })
     it.todo('', () => {

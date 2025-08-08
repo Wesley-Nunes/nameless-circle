@@ -8,6 +8,7 @@ EXTERNAL end_turn()
 EXTERNAL get_action_order()
 EXTERNAL get_action_result()
 EXTERNAL get_character_info(team, index, prop)
+EXTERNAL get_combat_result(combat_id)
 EXTERNAL get_combat_status()
 EXTERNAL get_mount_info(team, index, prop)
 EXTERNAL get_party_size(team)
@@ -66,10 +67,36 @@ From the shadows, four blazefen — salamander-men with amber eyes and flaming t
 
 Could word of Lysandra’s movements have leaked? Were there spies in the village? What seemed a random attack now had a clear goal: <i>delay her rush to the Citadel.</i>
 
--> combat_scene("blazefen_ambush_01") ->
-
-Cont...
+~ temp combat_id = "blazefen_ambush_01"
+-> combat_scene(combat_id) ->
+~ temp combat_result = get_combat_result(combat_id)
+{ combat_result:
+    - -1: -> defeat_scene -> END
+    - 0: -> draw_scene ->
+    - 1: -> steal_horses_quest ->
+    - 2: -> village_quest ->
+}
 -> END
+=== steal_horses_quest ===
+"Listen, recruit." — Lysandra said, wiping battle grime away.
+"From now on, it’s all about appearance, status, and deceit."
+She offered you fabric and water to clean yourself. 
+Her gaze fixed on the horizon as if recalling something.
+
+"Should any offer you gifts, ask yourself: Why now? Why here? What does this person gain?
+Never accept gifts without reading the intent behind the wrapping. 
+Never make deals without weighing every consequence."
+Lysandra watched you calmly. The impulsive soldier gave way to a measured noblewoman, like she was reliving an old lesson. She searched your eyes, reading your intent, and said:
+"We can’t enter the next village on foot. Whispers outrun horses. If the Citadel knows us as wanderers, I’ll recruit no soldiers."
+She paused, letting you absorb the gravity.
+"Simplest way: under night’s cover, we steal horses from an outlying villager."
+
+-> END
+
+=== village_quest ===
+TBD
+-> END
+
 === stealth ===
 // TBD
 -> END
@@ -77,3 +104,11 @@ Cont...
 === combat ===
 // TBD
 -> END
+
+=== defeat_scene ===
+Your vision blurs as you collapse to the ground. The clatter of your falling weapon echoes in your ears before darkness consumes you.  
+-> END
+
+=== draw_scene ===
+Panting heavily, you lock eyes with your opponent across the bloodied ground. Both of you stand trembling, weapons lowered in unspoken agreement - neither can land a decisive blow.  
+->->

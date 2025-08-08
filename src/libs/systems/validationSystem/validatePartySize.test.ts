@@ -36,7 +36,12 @@ const mockCharacter: Character = {
     hp: 10,
     id: 't_0001',
     isAlive: true,
-    weapon: {},
+    weapon: {
+        id: 'longsword_0001',
+        name: 'Longsword',
+        range: 'melee',
+        dice: { count: 1, sides: 8, modifier: 3 }
+    },
     name: 'Test',
     species: 'human',
     size: 'medium',

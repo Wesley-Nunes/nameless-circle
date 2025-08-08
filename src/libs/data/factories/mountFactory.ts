@@ -12,6 +12,7 @@ const createMount = (mountName: string, ownerId: string, ownerTeam: Team): Mount
 
     mount.availability = 'READY'
     mount.id = generateID(mount.species)
+    mount.isTamedMount = true
     mount.name = `${getHeroById(ownerId).name}'s ${mountName}`
     mount.ownerId = ownerId
     mount.team = ownerTeam

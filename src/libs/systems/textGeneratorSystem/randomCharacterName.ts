@@ -10,7 +10,7 @@ const randomCharacterName = (species: Species): string => {
     let name = ''
 
     if (species === 'blazefen') {
-        const { prefix, suffix } = NAMES[species]
+        const { prefix, suffix } = NAMES[species]!
         const prefixPos = roll(prefix.length - 1)
         const suffixPos = roll(suffix!.length - 1)
 

@@ -1,6 +1,6 @@
 import type { Species } from 'libs/entities'
 
-const NAMES: Record<Species, { prefix: string[], suffix?: string[] }> = {
+const NAMES: Record<Species, { prefix: string[], suffix?: string[] } | null> = {
     'blazefen': {
         prefix: ['Sizz', 'Zizz', 'Crack', 'Krack', 'Hiss', 'Iss', 'Ember', 'Emb',
             'Pyre', 'Pyr', 'Blaze', 'Bla', 'Fizz', 'Glow', 'Glo', 'Ves', 'Vess',
@@ -9,7 +9,8 @@ const NAMES: Record<Species, { prefix: string[], suffix?: string[] }> = {
             'vell', 'pool', 'pol', 'ooze', 'uz', 'thar', 'dar', 'ix', 'yx',
             'mire', 'mir', 'kel', 'gel', 'lurk']
     },
-    'human': { prefix: ['TBD'] }
+    'human': { prefix: ['TBD'] },
+    'equine': null,
 }
 
 export default NAMES

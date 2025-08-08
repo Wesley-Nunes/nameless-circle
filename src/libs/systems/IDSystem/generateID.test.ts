@@ -28,8 +28,9 @@ describe('generateID', () => {
         })
     })
     it('throws error for invalid keys', () => {
-        const invalidKey = 'invalid' as any
+        const invalidKey = 'invalid'
 
+        // @ts-expect-error - Invalid key 
         expect(() => generateID(invalidKey)).toThrowError(
             `Invalid key: 'invalid'.`
         )

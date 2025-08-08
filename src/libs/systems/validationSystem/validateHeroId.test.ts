@@ -26,9 +26,11 @@ describe('validateHeroId', () => {
         )
     })
     it('throws specific error when availableIds is falsy', () => {
-        const availableIds: any = undefined
+        const availableIds = undefined
         const invalidId = 'hero-1'
 
+
+        // @ts-expect-error - undefined Id
         expect(() => validateHeroId(availableIds, invalidId)).toThrowError(
             `Invalid (ID: ${invalidId}). No heroes are currently available.`
         )

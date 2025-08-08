@@ -13,7 +13,7 @@ const COMBAT_MAP: Record<string, CombatTemplate> = {
             const partySize = 4
             const partyXp = getEnemyXp(heroLevels, partySize, difficulty)
             const party = partyXp.map((xp) => {
-                const points = getEnemyAbilityPoints(xp)
+                const points = getEnemyAbilityPoints(xp) - 10
                 const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['sharpshooter'], points)
 
                 return createEnemy(BLAZEFEN_BASE, { abilities, preferredTargets: ['beast'], xp })
@@ -21,7 +21,11 @@ const COMBAT_MAP: Record<string, CombatTemplate> = {
 
             return party
         },
-        winConditions: [{ basic: 'kill_all_enemies', extra: 'save_all_mounts' }]
+        winConditions: [
+            { quantity: 4, team: 'enemies', isAlive: false },
+            { quantity: 1, team: 'heroes', isTamedMount: true, isAlive: true },
+            { quantity: 2, team: 'heroes', isTamedMount: true, isAlive: true }
+        ]
     },
     // NOTE: Tests combats below:
     test_combat_01: {
@@ -34,7 +38,7 @@ const COMBAT_MAP: Record<string, CombatTemplate> = {
 
             return [createEnemy(COMMONER_BASE, { abilities, xp })]
         },
-        winConditions: [{ basic: 'kill_all_enemies' }]
+        winConditions: [{ quantity: 1, team: 'enemies', isAlive: false }]
     }
 }
 

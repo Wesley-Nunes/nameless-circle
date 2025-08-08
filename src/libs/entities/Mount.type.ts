@@ -12,6 +12,7 @@ type MountAvailability =
 
 export type Mount = Character & {
     availability: MountAvailability,
-    ownerId: string
+    ownerId: string,
+    isTamedMount: boolean
 }
 

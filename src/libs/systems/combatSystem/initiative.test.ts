@@ -49,7 +49,12 @@ const _characters: Enemy[] = [
         "hp": 17,
         "id": "blazefen_0001",
         "isAlive": true,
-        "weapon": {},
+        "weapon": {
+            id: 'shortbow-001',
+            name: 'Shortbow',
+            range: 'ranged',
+            dice: { count: 1, sides: 6, modifier: 3 }
+        },
         "name": "Emberpol",
         "species": "blazefen",
         "size": "medium",
@@ -150,7 +155,12 @@ const _characters: Enemy[] = [
         "hp": 23,
         "id": "blazefen_0003",
         "isAlive": true,
-        "weapon": [],
+        "weapon": {
+            id: 'shortbow-001',
+            name: 'Shortbow',
+            range: 'ranged',
+            dice: { count: 1, sides: 6, modifier: 3 }
+        },
         "name": "Issmirk",
         "species": "blazefen",
         "size": "medium",
@@ -198,7 +208,12 @@ const _characters: Enemy[] = [
         "hp": 23,
         "id": "blazefen_0004",
         "isAlive": true,
-        "weapon": [],
+        "weapon": {
+            id: 'shortbow-001',
+            name: 'Shortbow',
+            range: 'ranged',
+            dice: { count: 1, sides: 6, modifier: 3 }
+        },
         "name": "Issmirk",
         "species": "blazefen",
         "size": "medium",

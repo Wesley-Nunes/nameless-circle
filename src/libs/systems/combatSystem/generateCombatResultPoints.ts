@@ -21,7 +21,7 @@ const generateCombatResultPoints = (
                     const combatantKey = key as keyof Combatant
 
                     return (
-                        combatant.hasOwnProperty(key) &&
+                        Object.hasOwn(combatant, key) &&
                         conditions[combatantKey] === combatant[combatantKey]
                     )
                 })

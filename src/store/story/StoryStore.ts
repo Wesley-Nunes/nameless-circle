@@ -1,9 +1,13 @@
 import { Story } from 'inkjs'
 
+import type { Team } from 'libs/entities'
+
 import type { InkStoryData } from 'story'
 
+type Args = ([] | [string] | [string, string, Team] | [string, number, string])
+
 class StoryStore {
-    private inkFunctionHandler: ((funcName: string, ...args: string[]) => void) | null = null
+    private inkFunctionHandler: ((funcName: string, ...args: Args) => void) | null = null
     private story: Story
     private updateCallback: (() => void) | null = null
     public content: string = ''
@@ -11,7 +15,7 @@ class StoryStore {
 
     constructor(
         storyContent: InkStoryData,
-        inkFunctionHandler?: (funcName: string, ...args: string[]) => void
+        inkFunctionHandler?: (funcName: string, ...args: Args) => void
     ) {
         this.story = new Story(storyContent)
 
@@ -29,7 +33,7 @@ class StoryStore {
             'add_to_hero_party', 'set_combat', 'get_character_info', 'get_party_size',
             'get_action_order', 'is_player_action', 'attack', 'get_action_result',
             'end_turn', 'get_combat_status', 'ai_action', 'add_mount', 'has_mounts',
-            'get_mount_info'
+            'get_mount_info', 'get_combat_result'
         ].forEach(fn => {
             this.story.BindExternalFunction(fn, (...args) => {
                 return this.inkFunctionHandler!(fn, ...args)

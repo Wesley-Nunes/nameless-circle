@@ -4,7 +4,11 @@ import getCombat from './getCombat'
 describe('getCombat - Functional Tests', () => {
     it('creates valid combat with fixed test enemy', () => {
         const expectedCombatId = 'test_combat_01'
-        const expectedWinConditions = [{ basic: 'kill_all_enemies' }]
+        const expectedWinConditions = [{
+            isAlive: false,
+            quantity: 1,
+            team: "enemies"
+        }]
         const heroParty = [{ level: 3 }, { level: 3 }, { level: 4 }]
         const difficulty = 'moderate'
 

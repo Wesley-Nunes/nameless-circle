@@ -1,9 +1,9 @@
-import type { Enemy, Hero, Mount } from 'libs/entities'
+import type { Combatant } from 'libs/entities'
 
 const findTarget = (
-    aiCharacter: (Hero | Enemy),
-    party: (Hero | Enemy | Mount)[]
-): (Hero | Enemy | Mount) => {
+    aiCharacter: Combatant,
+    party: Combatant[]
+): Combatant => {
     if (aiCharacter.team === 'heroes') {
         const enemiesAlive = party.filter(character => (
             character.team === 'enemies' &&
@@ -25,9 +25,11 @@ const findTarget = (
             character.team === 'heroes' &&
             character.hp > 0
         ))
-        const targets = heroesAlive.filter(hero =>
-            aiCharacter.preferredTargets?.some(target => hero.type.includes(target))
-        )
+        const targets = heroesAlive.filter(hero => {
+            if ('preferredTargets' in aiCharacter) {
+                return aiCharacter.preferredTargets?.some(target => hero.type.includes(target))
+            }
+        })
         const endTargets = targets.length > 0 ? targets : heroesAlive
 
         let strongestAlive = endTargets[0]
