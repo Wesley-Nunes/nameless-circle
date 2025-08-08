@@ -1,13 +1,9 @@
 import { Story } from 'inkjs'
 
-import type { Team } from 'libs/entities'
-
 import type { InkStoryData } from 'story'
 
-type Args = ([] | [string] | [string, string, Team] | [string, number, string])
-
 class StoryStore {
-    private inkFunctionHandler: ((funcName: string, ...args: Args) => void) | null = null
+    private inkFunctionHandler: ((funcName: string, ...args: any[]) => void) | null = null
     private story: Story
     private updateCallback: (() => void) | null = null
     public content: string = ''
@@ -15,7 +11,7 @@ class StoryStore {
 
     constructor(
         storyContent: InkStoryData,
-        inkFunctionHandler?: (funcName: string, ...args: Args) => void
+        inkFunctionHandler?: (funcName: string, ...args: any[]) => void
     ) {
         this.story = new Story(storyContent)
 
