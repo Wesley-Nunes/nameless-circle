@@ -9,16 +9,16 @@ EXTERNAL end_turn()
 EXTERNAL get_action_order()
 EXTERNAL get_action_skills_count()
 EXTERNAL get_action_result()
+EXTERNAL get_attempt_skill_count(skill_result)
 EXTERNAL get_character_info(team, index, prop)
 EXTERNAL get_combat_result(combat_id)
 EXTERNAL get_combat_status()
-EXTERNAL get_fail_count()
 EXTERNAL get_mount_info(team, index, prop)
 EXTERNAL get_party_size(team)
 EXTERNAL get_scene_skill_info(index, prop)
-EXTERNAL get_success_count()
 EXTERNAL has_mounts(team)
 EXTERNAL is_player_action()
+EXTERNAL last_attempt_skill_result()
 EXTERNAL set_combat(combat_id)
 EXTERNAL set_skill_scene(skill_scene_id)
 
@@ -114,44 +114,46 @@ The light struggled to penetrate the forest. Only when the shy moon occasionally
 
 = skill_scene
 -> available_skills_loop(0) ->
-TBD skill_scene 
--> END
-// Mudar a get_action_result() para algo como
-// last_attempt_skill_result
-// ~ temp skill_result =  get_action_result() 
-// ~ temp success_count = get_success_count()
-// ~ temp fail_count = get_fail_count()
-// { skill_result == "SUCCESS":
-//     -> success(success_count)
-//   - else:
-//     -> fail(fail_count)
-// }
+    ~ temp skill_result = last_attempt_skill_result()
+    { skill_result }
 
-// = success(index) 
-//     { index:
-//     - 1: A small habitation stood out in a neglected yard. Judging by its size, a few people lived there. Behind it sat an improvised stable. A small, slumbering bulldog lay in the yard.
-//         { end_skill_turn() }
-//         -> skill_scene
-//     - 2: Inside the stable you found a brown mare and an imposing black stallion, both well-kept, a vivid opposition to the decrepit surroundings.
-//         { end_skill_turn() }
-//         -> skill_scene
-//     - 3: You set out for the next village, both drained from little sleep. No conversation passed between you until the first rays of sun.
-//         { end_skill_scene() }
-//         -> village_quest
-//     }
+~ temp success_count = get_attempt_skill_count("SUCCESS")
+~ temp fail_count = get_attempt_skill_count("FAIL")
+{ skill_result == "SUCCESS":
+    -> success(success_count)
+  - else:
+    -> fail(fail_count)
+}
+
+= success(index) 
+    { index:
+    - 1: A small habitation stood out in a neglected yard. Judging by its size, a few people lived there. Behind it sat an improvised stable. A small, slumbering bulldog lay in the yard.
+        // { end_skill_turn() }
+        -> skill_scene
+    - 2: Inside the stable you found a brown mare and an imposing black stallion, both well-kept, a vivid opposition to the decrepit surroundings.
+        // { end_skill_turn() }
+        -> skill_scene
+    - 3: You set out for the next village, both drained from little sleep. No conversation passed between you until the first rays of sun.
+        // { end_skill_scene() }
+        -> village_quest
+    - else:
+        -> skill_scene
+    }
     
-// = fail(index)
-//     { index:
-//     - 1: Fail message 1
-//         { end_skill_turn() }
-//         -> skill_scene
-//     - 2: Fail message 2
-//         { end_skill_turn() }
-//         -> skill_scene
-//     - 3: Fail message 3 
-//         { end_skill_scene() }
-//         -> steal_horses_quest_fail
-//     }
+= fail(index)
+    { index:
+    - 1: Fail message 1
+        // { end_skill_turn() }
+        -> skill_scene
+    - 2: Fail message 2
+        // { end_skill_turn() }
+        -> skill_scene
+    - 3: Fail message 3 
+        // { end_skill_scene() }
+        -> steal_horses_quest_fail
+    - else:
+        -> skill_scene
+    }
 
 === steal_horses_quest_fail ===
 steal_horses_quest_fail TBD

@@ -29,8 +29,7 @@ const generateAttemptSkillSentence = (
     const outcome = attemptSkillResult.success
         ? success_phrases[randomIndex]
         : failure_phrases[randomIndex]
-    const prefix = attemptSkillResult.success ? 'Success' : 'Fail'
-    const skillSentence = `${prefix} \n Skill Check (${skillName}): ${outcome}`
+    const skillSentence = `Skill Check (${skillName}): ${outcome}`
 
     return skillSentence
 }

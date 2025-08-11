@@ -399,9 +399,225 @@ var storyContent = {
                         0,
                         '/ev',
                         { '->t->': 'available_skills_loop' },
-                        '^TBD skill_scene',
+                        'ev',
+                        { 'x()': 'last_attempt_skill_result' },
+                        '/ev',
+                        { 'temp=': 'skill_result' },
                         '\n',
-                        'end',
+                        'ev',
+                        { 'VAR?': 'skill_result' },
+                        'out',
+                        '/ev',
+                        '\n',
+                        'ev',
+                        'str',
+                        '^SUCCESS',
+                        '/str',
+                        { 'x()': 'get_attempt_skill_count', exArgs: 1 },
+                        '/ev',
+                        { 'temp=': 'success_count' },
+                        '\n',
+                        'ev',
+                        'str',
+                        '^FAIL',
+                        '/str',
+                        { 'x()': 'get_attempt_skill_count', exArgs: 1 },
+                        '/ev',
+                        { 'temp=': 'fail_count' },
+                        '\n',
+                        'ev',
+                        { 'VAR?': 'skill_result' },
+                        'str',
+                        '^SUCCESS',
+                        '/str',
+                        '==',
+                        '/ev',
+                        [
+                            { '->': '.^.b', c: true },
+                            {
+                                b: [
+                                    '\n',
+                                    'ev',
+                                    { 'VAR?': 'success_count' },
+                                    '/ev',
+                                    { '->': '.^.^.^.^.success' },
+                                    { '->': '.^.^.^.39' },
+                                    null
+                                ]
+                            }
+                        ],
+                        [
+                            { '->': '.^.b' },
+                            {
+                                b: [
+                                    '\n',
+                                    'ev',
+                                    { 'VAR?': 'fail_count' },
+                                    '/ev',
+                                    { '->': '.^.^.^.^.fail' },
+                                    { '->': '.^.^.^.39' },
+                                    null
+                                ]
+                            }
+                        ],
+                        'nop',
+                        '\n',
+                        { '#f': 1 }
+                    ],
+                    success: [
+                        { 'temp=': 'index' },
+                        'ev',
+                        { 'VAR?': 'index' },
+                        '/ev',
+                        [
+                            'du',
+                            'ev',
+                            1,
+                            '==',
+                            '/ev',
+                            { '->': '.^.b', c: true },
+                            {
+                                b: [
+                                    'pop',
+                                    '\n',
+                                    '^A small habitation stood out in a neglected yard. Judging by its size, a few people lived there. Behind it sat an improvised stable. A small, slumbering bulldog lay in the yard.',
+                                    '\n',
+                                    { '->': '.^.^.^.^.skill_scene' },
+                                    { '->': '.^.^.^.8' },
+                                    null
+                                ]
+                            }
+                        ],
+                        [
+                            'du',
+                            'ev',
+                            2,
+                            '==',
+                            '/ev',
+                            { '->': '.^.b', c: true },
+                            {
+                                b: [
+                                    'pop',
+                                    '\n',
+                                    '^Inside the stable you found a brown mare and an imposing black stallion, both well-kept, a vivid opposition to the decrepit surroundings.',
+                                    '\n',
+                                    { '->': '.^.^.^.^.skill_scene' },
+                                    { '->': '.^.^.^.8' },
+                                    null
+                                ]
+                            }
+                        ],
+                        [
+                            'du',
+                            'ev',
+                            3,
+                            '==',
+                            '/ev',
+                            { '->': '.^.b', c: true },
+                            {
+                                b: [
+                                    'pop',
+                                    '\n',
+                                    '^You set out for the next village, both drained from little sleep. No conversation passed between you until the first rays of sun.',
+                                    '\n',
+                                    { '->': 'village_quest' },
+                                    { '->': '.^.^.^.8' },
+                                    null
+                                ]
+                            }
+                        ],
+                        [
+                            { '->': '.^.b' },
+                            {
+                                b: [
+                                    'pop',
+                                    '\n',
+                                    { '->': '.^.^.^.^.skill_scene' },
+                                    { '->': '.^.^.^.8' },
+                                    null
+                                ]
+                            }
+                        ],
+                        'nop',
+                        '\n',
+                        { '#f': 1 }
+                    ],
+                    fail: [
+                        { 'temp=': 'index' },
+                        'ev',
+                        { 'VAR?': 'index' },
+                        '/ev',
+                        [
+                            'du',
+                            'ev',
+                            1,
+                            '==',
+                            '/ev',
+                            { '->': '.^.b', c: true },
+                            {
+                                b: [
+                                    'pop',
+                                    '\n',
+                                    '^Fail message 1',
+                                    '\n',
+                                    { '->': '.^.^.^.^.skill_scene' },
+                                    { '->': '.^.^.^.8' },
+                                    null
+                                ]
+                            }
+                        ],
+                        [
+                            'du',
+                            'ev',
+                            2,
+                            '==',
+                            '/ev',
+                            { '->': '.^.b', c: true },
+                            {
+                                b: [
+                                    'pop',
+                                    '\n',
+                                    '^Fail message 2',
+                                    '\n',
+                                    { '->': '.^.^.^.^.skill_scene' },
+                                    { '->': '.^.^.^.8' },
+                                    null
+                                ]
+                            }
+                        ],
+                        [
+                            'du',
+                            'ev',
+                            3,
+                            '==',
+                            '/ev',
+                            { '->': '.^.b', c: true },
+                            {
+                                b: [
+                                    'pop',
+                                    '\n',
+                                    '^Fail message 3',
+                                    '\n',
+                                    { '->': 'steal_horses_quest_fail' },
+                                    { '->': '.^.^.^.8' },
+                                    null
+                                ]
+                            }
+                        ],
+                        [
+                            { '->': '.^.b' },
+                            {
+                                b: [
+                                    'pop',
+                                    '\n',
+                                    { '->': '.^.^.^.^.skill_scene' },
+                                    { '->': '.^.^.^.8' },
+                                    null
+                                ]
+                            }
+                        ],
+                        'nop',
+                        '\n',
                         { '#f': 1 }
                     ],
                     '#f': 1
@@ -483,7 +699,6 @@ var storyContent = {
                 { '#f': 1 }
             ],
             end_turn: ['ev', 0, '/ev', '~ret', { '#f': 1 }],
-            is_player_action: ['ev', true, '/ev', '~ret', { '#f': 1 }],
             get_action_order: [
                 'ev',
                 'str',
@@ -499,6 +714,14 @@ var storyContent = {
                 'str',
                 '^Action result',
                 '/str',
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
+            get_attempt_skill_count: [
+                { 'temp=': 'skill_result' },
+                'ev',
+                1,
                 '/ev',
                 '~ret',
                 { '#f': 1 }
@@ -530,7 +753,6 @@ var storyContent = {
                 '~ret',
                 { '#f': 1 }
             ],
-            get_fail_count: ['ev', 1, '/ev', '~ret', { '#f': 1 }],
             get_mount_info: [
                 { 'temp=': 'prop' },
                 { 'temp=': 'index' },
@@ -558,11 +780,20 @@ var storyContent = {
                 '~ret',
                 { '#f': 1 }
             ],
-            get_success_count: ['ev', 3, '/ev', '~ret', { '#f': 1 }],
             has_mounts: [
                 { 'temp=': 'team' },
                 'ev',
                 false,
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
+            is_player_action: ['ev', true, '/ev', '~ret', { '#f': 1 }],
+            last_attempt_skill_result: [
+                'ev',
+                'str',
+                '^SUCCESS',
+                '/str',
                 '/ev',
                 '~ret',
                 { '#f': 1 }

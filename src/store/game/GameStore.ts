@@ -35,6 +35,7 @@ import type {
 class GameStore {
     private availableHeroIds: string[]
     private availableSceneSkills: SkillSceneChallenge[]
+    private attemptSkillCount: { SUCCESS: number; FAIL: number }
     private charactersOrdered: Combatant[]
     private combatId: string
     private combatLog: Map<
@@ -45,6 +46,7 @@ class GameStore {
     private currentCharacterIndex: number
     private currentHeroParty: Hero[]
     private currentMounts: Mount[]
+    private lastAttemptSkillResult: 'NONE' | 'SUCCESS' | 'FAIL'
     private skillSceneModifier: number
     private skillSceneTurn: number
     private skillSceneId: string
@@ -54,6 +56,7 @@ class GameStore {
     constructor() {
         this.availableHeroIds = [PLAYER_ID, 'hero_0002']
         this.availableSceneSkills = []
+        this.attemptSkillCount = { SUCCESS: 0, FAIL: 0 }
         this.charactersOrdered = []
         this.combatId = ''
         this.combatLog = new Map()
@@ -61,6 +64,7 @@ class GameStore {
         this.currentCharacterIndex = 0
         this.currentHeroParty = [getHeroById(PLAYER_ID)]
         this.currentMounts = []
+        this.lastAttemptSkillResult = 'NONE'
         this.skillSceneId = ''
         this.skillSceneModifier = 0
         this.skillSceneTurn = 0
@@ -161,6 +165,10 @@ class GameStore {
                     skillAttemptResult
                 )
 
+                this.lastAttemptSkillResult = skillAttemptResult.success
+                    ? 'SUCCESS'
+                    : 'FAIL'
+                this.attemptSkillCount[this.lastAttemptSkillResult] += 1
                 this.turnLog.push(message)
 
                 break
@@ -253,6 +261,13 @@ class GameStore {
 
                 return lastLog
             }
+            case 'get_attempt_skill_count': {
+                const [skillResult] = args as [string]
+
+                return this.attemptSkillCount[
+                    skillResult as keyof typeof this.attemptSkillCount
+                ]
+            }
             case 'get_character_info': {
                 const [teamName, index, prop] = args as [Team, number, string]
                 const character = this.charactersOrdered
@@ -337,6 +352,9 @@ class GameStore {
                     PLAYER_ID
 
                 return isPlayerTurn
+            }
+            case 'last_attempt_skill_result': {
+                return this.lastAttemptSkillResult
             }
             case 'set_combat': {
                 const [combatId] = args as [string]
