@@ -139,7 +139,10 @@
     { skill_name: 
         + [{skill_name}]
             ~ attempt_skill(skill_id)
+            { get_action_result() }
             ->-> 
     }
+    
+    
 
     { index < get_action_skills_count() - 1: -> available_skills_loop(index + 1) }

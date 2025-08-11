@@ -1,6 +1,4 @@
-import type { InkStoryData } from './InkStoryData.type'
-
-const storyContent: InkStoryData = {
+var storyContent = {
     inkVersion: 21,
     root: [
         [
@@ -1145,6 +1143,11 @@ const storyContent: InkStoryData = {
                                     '/ev',
                                     '\n',
                                     'ev',
+                                    { 'x()': 'get_action_result' },
+                                    'out',
+                                    '/ev',
+                                    '\n',
+                                    'ev',
                                     'void',
                                     '/ev',
                                     '->->',
@@ -1188,5 +1191,5 @@ const storyContent: InkStoryData = {
     ],
     listDefs: {}
 }
-
 export default storyContent
+
