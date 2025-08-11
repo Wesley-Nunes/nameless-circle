@@ -226,6 +226,10 @@ class GameStore {
 
                 break
             }
+            case 'end_skill_turn': {
+                this.skillSceneTurn += 1
+                break
+            }
             case 'end_turn': {
                 this.combatStatus = getCombatStatus(this.charactersOrdered)
 

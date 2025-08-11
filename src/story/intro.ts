@@ -1,4 +1,6 @@
-var storyContent = {
+import type { InkStoryData } from './InkStoryData.type'
+
+const storyContent: InkStoryData = {
     inkVersion: 21,
     root: [
         [
@@ -482,6 +484,11 @@ var storyContent = {
                                     '\n',
                                     '^A small habitation stood out in a neglected yard. Judging by its size, a few people lived there. Behind it sat an improvised stable. A small, slumbering bulldog lay in the yard.',
                                     '\n',
+                                    'ev',
+                                    { 'x()': 'end_skill_turn' },
+                                    'out',
+                                    '/ev',
+                                    '\n',
                                     { '->': '.^.^.^.^.skill_scene' },
                                     { '->': '.^.^.^.8' },
                                     null
@@ -500,6 +507,11 @@ var storyContent = {
                                     'pop',
                                     '\n',
                                     '^Inside the stable you found a brown mare and an imposing black stallion, both well-kept, a vivid opposition to the decrepit surroundings.',
+                                    '\n',
+                                    'ev',
+                                    { 'x()': 'end_skill_turn' },
+                                    'out',
+                                    '/ev',
                                     '\n',
                                     { '->': '.^.^.^.^.skill_scene' },
                                     { '->': '.^.^.^.8' },
@@ -560,6 +572,11 @@ var storyContent = {
                                     '\n',
                                     '^Fail message 1',
                                     '\n',
+                                    'ev',
+                                    { 'x()': 'end_skill_turn' },
+                                    'out',
+                                    '/ev',
+                                    '\n',
                                     { '->': '.^.^.^.^.skill_scene' },
                                     { '->': '.^.^.^.8' },
                                     null
@@ -578,6 +595,11 @@ var storyContent = {
                                     'pop',
                                     '\n',
                                     '^Fail message 2',
+                                    '\n',
+                                    'ev',
+                                    { 'x()': 'end_skill_turn' },
+                                    'out',
+                                    '/ev',
                                     '\n',
                                     { '->': '.^.^.^.^.skill_scene' },
                                     { '->': '.^.^.^.8' },
@@ -698,6 +720,7 @@ var storyContent = {
                 '\n',
                 { '#f': 1 }
             ],
+            end_skill_turn: ['^end skill turn', '\n', { '#f': 1 }],
             end_turn: ['ev', 0, '/ev', '~ret', { '#f': 1 }],
             get_action_order: [
                 'ev',
@@ -1422,5 +1445,5 @@ var storyContent = {
     ],
     listDefs: {}
 }
-export default storyContent
 
+export default storyContent

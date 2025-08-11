@@ -5,6 +5,7 @@ EXTERNAL add_to_hero_party(hero_id)
 EXTERNAL ai_action()
 EXTERNAL attack(character_id)
 EXTERNAL attempt_skill(skill_id)
+EXTERNAL end_skill_turn()
 EXTERNAL end_turn()
 EXTERNAL get_action_order()
 EXTERNAL get_action_skills_count()
@@ -128,10 +129,10 @@ The light struggled to penetrate the forest. Only when the shy moon occasionally
 = success(index) 
     { index:
     - 1: A small habitation stood out in a neglected yard. Judging by its size, a few people lived there. Behind it sat an improvised stable. A small, slumbering bulldog lay in the yard.
-        // { end_skill_turn() }
+        { end_skill_turn() }
         -> skill_scene
     - 2: Inside the stable you found a brown mare and an imposing black stallion, both well-kept, a vivid opposition to the decrepit surroundings.
-        // { end_skill_turn() }
+        { end_skill_turn() }
         -> skill_scene
     - 3: You set out for the next village, both drained from little sleep. No conversation passed between you until the first rays of sun.
         // { end_skill_scene() }
@@ -143,10 +144,10 @@ The light struggled to penetrate the forest. Only when the shy moon occasionally
 = fail(index)
     { index:
     - 1: Fail message 1
-        // { end_skill_turn() }
+        { end_skill_turn() }
         -> skill_scene
     - 2: Fail message 2
-        // { end_skill_turn() }
+        { end_skill_turn() }
         -> skill_scene
     - 3: Fail message 3 
         // { end_skill_scene() }

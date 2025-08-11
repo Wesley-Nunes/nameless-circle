@@ -48,7 +48,8 @@ class StoryStore {
             'get_scene_skill_info',
             'attempt_skill',
             'last_attempt_skill_result',
-            'get_attempt_skill_count'
+            'get_attempt_skill_count',
+            'end_skill_turn'
         ].forEach(fn => {
             this.story.BindExternalFunction(fn, (...args) => {
                 return this.inkFunctionHandler!(fn, ...args)
