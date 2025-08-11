@@ -31,4 +31,3 @@ const ridingHorse: Mount = {
 }
 
 export default ridingHorse
-

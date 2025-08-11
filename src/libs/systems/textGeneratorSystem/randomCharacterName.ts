@@ -21,4 +21,3 @@ const randomCharacterName = (species: Species): string => {
 }
 
 export default randomCharacterName
-

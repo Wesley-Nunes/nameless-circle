@@ -4,7 +4,7 @@ import getEnemyXp from './getEnemyXp'
 describe('getEnemyXp', () => {
     it('returns highest XP enemy for single hero', () => {
         const party = [3]
-        const enemyCount = 1;
+        const enemyCount = 1
         const expectedEnemyXp = [200]
 
         const result = getEnemyXp(party, enemyCount, 'moderate')
@@ -13,8 +13,8 @@ describe('getEnemyXp', () => {
     })
 
     it('distributes XP for party and multiple enemies', () => {
-        const party = [1, 1];
-        const enemyCount = 2;
+        const party = [1, 1]
+        const enemyCount = 2
         const expectedEnemyXp = [50, 50]
 
         const result = getEnemyXp(party, enemyCount, 'low')
@@ -60,4 +60,3 @@ describe('getEnemyXp', () => {
         )
     })
 })
-

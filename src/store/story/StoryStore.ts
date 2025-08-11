@@ -3,7 +3,9 @@ import { Story } from 'inkjs'
 import type { InkStoryData } from 'story'
 
 class StoryStore {
-    private inkFunctionHandler: ((funcName: string, ...args: any[]) => void) | null = null
+    private inkFunctionHandler:
+        | ((funcName: string, ...args: any[]) => void)
+        | null = null
     private story: Story
     private updateCallback: (() => void) | null = null
     public content: string = ''
@@ -25,11 +27,26 @@ class StoryStore {
     }
 
     private bindInkFunctions() {
-        [
-            'add_to_hero_party', 'set_combat', 'get_character_info', 'get_party_size',
-            'get_action_order', 'is_player_action', 'attack', 'get_action_result',
-            'end_turn', 'get_combat_status', 'ai_action', 'add_mount', 'has_mounts',
-            'get_mount_info', 'get_combat_result'
+        ;[
+            'add_to_hero_party',
+            'set_combat',
+            'get_character_info',
+            'get_party_size',
+            'get_action_order',
+            'is_player_action',
+            'attack',
+            'get_action_result',
+            'end_turn',
+            'get_combat_status',
+            'ai_action',
+            'add_mount',
+            'has_mounts',
+            'get_mount_info',
+            'get_combat_result',
+            'set_skill_scene',
+            'get_action_skills_count',
+            'get_scene_skill_info',
+            'attempt_skill'
         ].forEach(fn => {
             this.story.BindExternalFunction(fn, (...args) => {
                 return this.inkFunctionHandler!(fn, ...args)
@@ -44,13 +61,14 @@ class StoryStore {
         }
 
         if (newContent !== this.content) {
-            newContent += "\n\n"
+            newContent += '\n\n'
         }
 
         this.content = newContent
-        this.choices = this.story.currentChoices.map(
-            (c) => ({ index: c.index, text: c.text })
-        )
+        this.choices = this.story.currentChoices.map(c => ({
+            index: c.index,
+            text: c.text
+        }))
 
         this.triggerUpdate()
     }
@@ -68,4 +86,3 @@ class StoryStore {
 }
 
 export default StoryStore
-

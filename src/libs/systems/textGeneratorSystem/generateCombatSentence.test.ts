@@ -29,7 +29,7 @@ const hero: Hero = {
     actions: ['ATTACK'],
     size: 'medium',
     team: 'heroes',
-    type: ['humanoid'],
+    type: ['humanoid']
 }
 const enemy: Enemy = {
     id: 'enemy-001',
@@ -56,7 +56,7 @@ const enemy: Enemy = {
     size: 'medium',
     team: 'enemies',
     type: ['humanoid'],
-    xp: 0,
+    xp: 0
 }
 
 describe('generateCombatSentence', () => {
@@ -65,7 +65,7 @@ describe('generateCombatSentence', () => {
     })
 
     describe('Critical hits', () => {
-        const attackResult = { hit: true, critical: true }
+        const attackResult = { success: true, critical: true }
 
         it('returns correct message for roll=1', () => {
             vi.spyOn(rollSystem, 'roll').mockReturnValue(1)
@@ -98,7 +98,7 @@ describe('generateCombatSentence', () => {
     })
 
     describe('Normal hits', () => {
-        const attackResult = { hit: true, critical: false }
+        const attackResult = { success: true, critical: false }
 
         it('returns correct message for roll=1', () => {
             vi.spyOn(rollSystem, 'roll').mockReturnValue(1)
@@ -131,7 +131,7 @@ describe('generateCombatSentence', () => {
     })
 
     describe('Misses', () => {
-        const attackResult = { hit: false, critical: false }
+        const attackResult = { success: false, critical: false }
 
         it('returns correct message for roll=1', () => {
             vi.spyOn(rollSystem, 'roll').mockReturnValue(1)
@@ -167,36 +167,32 @@ describe('generateCombatSentence', () => {
         it('returns correct critical message', () => {
             vi.spyOn(rollSystem, 'roll').mockReturnValue(1)
 
-            const result = generateCombatSentence(
-                enemy,
-                hero,
-                { hit: true, critical: true }
-            )
+            const result = generateCombatSentence(enemy, hero, {
+                success: true,
+                critical: true
+            })
 
             expect(result).toBe('enemy-test critically smashes hero-test!')
         })
-        it('returns correct normal hit message', () => {
+        it('returns correct normal success message', () => {
             vi.spyOn(rollSystem, 'roll').mockReturnValue(1)
 
-            const result = generateCombatSentence(
-                enemy,
-                hero,
-                { hit: true, critical: false }
-            )
+            const result = generateCombatSentence(enemy, hero, {
+                success: true,
+                critical: false
+            })
 
             expect(result).toBe('enemy-test hits hero-test.')
         })
         it('returns correct miss message', () => {
             vi.spyOn(rollSystem, 'roll').mockReturnValue(1)
 
-            const result = generateCombatSentence(
-                enemy,
-                hero,
-                { hit: false, critical: false }
-            )
+            const result = generateCombatSentence(enemy, hero, {
+                success: false,
+                critical: false
+            })
 
             expect(result).toBe('enemy-test misses.')
         })
     })
 })
-

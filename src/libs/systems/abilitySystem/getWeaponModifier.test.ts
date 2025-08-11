@@ -4,7 +4,6 @@ import getWeaponModifier from './getWeaponModifier'
 
 import type { Weapon, AbilityBlock } from 'libs/entities'
 
-
 describe('getWeaponModifier', () => {
     const mockAbilities: AbilityBlock = {
         str: { score: 15, modifier: 2 },
@@ -41,4 +40,3 @@ describe('getWeaponModifier', () => {
         expect(result).toBe(mockAbilities.dex.modifier)
     })
 })
-

@@ -1,6 +1,8 @@
 import type { CombatStatus, Enemy, Hero, Mount } from 'libs/entities'
 
-const getCombatStatus = (characters?: (Hero | Enemy | Mount)[]): CombatStatus => {
+const getCombatStatus = (
+    characters?: (Hero | Enemy | Mount)[]
+): CombatStatus => {
     if (!characters) {
         return 'UNINITIALIZED'
     }
@@ -25,4 +27,3 @@ const getCombatStatus = (characters?: (Hero | Enemy | Mount)[]): CombatStatus =>
 }
 
 export default getCombatStatus
-

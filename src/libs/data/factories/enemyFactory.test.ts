@@ -3,7 +3,11 @@ import { describe, it, expect } from 'vitest'
 import createEnemy from './enemyFactory'
 import { getEnemyAbilities } from 'libs/systems/abilitySystem'
 
-import { BLAZEFEN_BASE, COMMONER_BASE, ENEMY_ROLE_TEMPLATES } from 'libs/data/static/enemies'
+import {
+    BLAZEFEN_BASE,
+    COMMONER_BASE,
+    ENEMY_ROLE_TEMPLATES
+} from 'libs/data/static/enemies'
 
 import type { CharacterType, Enemy } from 'libs/entities'
 
@@ -37,7 +41,10 @@ describe('enemyFactory - createEnemy', () => {
             xp: 10
         }
 
-        const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['sharpshooter'], 60)
+        const abilities = getEnemyAbilities(
+            ENEMY_ROLE_TEMPLATES['sharpshooter'],
+            60
+        )
         const enemy = createEnemy(BLAZEFEN_BASE, { abilities, xp: 10 })
 
         // Manual insert values, because it returns a random value
@@ -47,8 +54,11 @@ describe('enemyFactory - createEnemy', () => {
         expect(enemy).toStrictEqual(expectedEnemy)
     })
     it('should create enemy with custom name', () => {
-        const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['sharpshooter'], 60)
-        const customName = 'Zins\' Than King'
+        const abilities = getEnemyAbilities(
+            ENEMY_ROLE_TEMPLATES['sharpshooter'],
+            60
+        )
+        const customName = "Zins' Than King"
 
         const enemy = createEnemy(BLAZEFEN_BASE, {
             abilities,
@@ -59,7 +69,10 @@ describe('enemyFactory - createEnemy', () => {
         expect(enemy.name).toBe(customName)
     })
     it('should use random name when no custom name is provided', () => {
-        const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['sharpshooter'], 60)
+        const abilities = getEnemyAbilities(
+            ENEMY_ROLE_TEMPLATES['sharpshooter'],
+            60
+        )
 
         const baseEnemyWithoutName = {
             ...BLAZEFEN_BASE,
@@ -75,9 +88,12 @@ describe('enemyFactory - createEnemy', () => {
         expect(enemy.name).not.toBe('')
     })
     it('should use base enemy name when random name is not available', () => {
-        const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['sharpshooter'], 60)
+        const abilities = getEnemyAbilities(
+            ENEMY_ROLE_TEMPLATES['sharpshooter'],
+            60
+        )
         const baseEnemyWithName = {
-            ...COMMONER_BASE,
+            ...COMMONER_BASE
         }
 
         const enemy = createEnemy(baseEnemyWithName, {
@@ -88,7 +104,10 @@ describe('enemyFactory - createEnemy', () => {
         expect(enemy.name).toBe('commoner')
     })
     it('should use base enemy species when all other name sources are unavailable', () => {
-        const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['sharpshooter'], 60)
+        const abilities = getEnemyAbilities(
+            ENEMY_ROLE_TEMPLATES['sharpshooter'],
+            60
+        )
 
         const baseEnemyWithoutName = {
             ...COMMONER_BASE,
@@ -103,7 +122,10 @@ describe('enemyFactory - createEnemy', () => {
         expect(enemy.name).toBe(COMMONER_BASE.species)
     })
     it('should create enemy with preferred targets', () => {
-        const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['sharpshooter'], 60)
+        const abilities = getEnemyAbilities(
+            ENEMY_ROLE_TEMPLATES['sharpshooter'],
+            60
+        )
         const preferredTargets: Array<CharacterType> = ['humanoid']
 
         const enemy = createEnemy(BLAZEFEN_BASE, {
@@ -115,7 +137,10 @@ describe('enemyFactory - createEnemy', () => {
         expect(enemy.preferredTargets).toEqual(preferredTargets)
     })
     it('should create enemy with both custom name and preferred targets', () => {
-        const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['sharpshooter'], 60)
+        const abilities = getEnemyAbilities(
+            ENEMY_ROLE_TEMPLATES['sharpshooter'],
+            60
+        )
         const customName = 'Elite Blazefen'
         const preferredTargets: Array<CharacterType> = ['elemental', 'humanoid']
 
@@ -130,4 +155,3 @@ describe('enemyFactory - createEnemy', () => {
         expect(enemy.preferredTargets).toEqual(preferredTargets)
     })
 })
-

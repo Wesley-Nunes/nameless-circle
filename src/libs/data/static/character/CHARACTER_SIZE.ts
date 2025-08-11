@@ -1,6 +1,12 @@
 import type { CharacterSize } from 'libs/entities'
 
-const CHARACTER_SIZE: CharacterSize[] = ['tiny', 'small', 'medium', 'large', 'huge', 'gargantuan']
+const CHARACTER_SIZE: CharacterSize[] = [
+    'tiny',
+    'small',
+    'medium',
+    'large',
+    'huge',
+    'gargantuan'
+]
 
 export default CHARACTER_SIZE
-

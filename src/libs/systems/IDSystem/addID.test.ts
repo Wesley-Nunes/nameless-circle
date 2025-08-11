@@ -41,9 +41,6 @@ describe('addID', () => {
     it('throws error for invalid keys', () => {
         const id = 'invalid_0001'
 
-        expect(() => addID(id)).toThrowError(
-            "Invalid key: 'invalid'."
-        )
+        expect(() => addID(id)).toThrowError("Invalid key: 'invalid'.")
     })
 })
-

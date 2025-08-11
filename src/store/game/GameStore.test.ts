@@ -23,18 +23,62 @@ describe('GameStore', () => {
         const expectedEnemyName = 'commoner'
 
         gameStore.handleInkFunction('set_combat', combatId)
-        const heroPartySize = gameStore.handleInkFunction('get_party_size', 'heroes')
-        const enemyPartySize = gameStore.handleInkFunction('get_party_size', 'enemies')
+        const heroPartySize = gameStore.handleInkFunction(
+            'get_party_size',
+            'heroes'
+        )
+        const enemyPartySize = gameStore.handleInkFunction(
+            'get_party_size',
+            'enemies'
+        )
         const combatStatus = gameStore.handleInkFunction('get_combat_status')
-        const heroName = gameStore.handleInkFunction('get_character_info', 'heroes', 0, 'name')
-        const heroHp = gameStore.handleInkFunction('get_character_info', 'heroes', 0, 'hp')
-        const enemyId = gameStore.handleInkFunction('get_character_info', 'enemies', 0, 'id') as string
-        const enemyName = gameStore.handleInkFunction('get_character_info', 'enemies', 0, 'name')
-        const enemyHp = gameStore.handleInkFunction('get_character_info', 'enemies', 0, 'hp')
-        const enemyXp = gameStore.handleInkFunction('get_character_info', 'enemies', 0, 'xp')
-        const enemySize = gameStore.handleInkFunction('get_character_info', 'enemies', 0, 'size')
+        const heroName = gameStore.handleInkFunction(
+            'get_character_info',
+            'heroes',
+            0,
+            'name'
+        )
+        const heroHp = gameStore.handleInkFunction(
+            'get_character_info',
+            'heroes',
+            0,
+            'hp'
+        )
+        const enemyId = gameStore.handleInkFunction(
+            'get_character_info',
+            'enemies',
+            0,
+            'id'
+        ) as string
+        const enemyName = gameStore.handleInkFunction(
+            'get_character_info',
+            'enemies',
+            0,
+            'name'
+        )
+        const enemyHp = gameStore.handleInkFunction(
+            'get_character_info',
+            'enemies',
+            0,
+            'hp'
+        )
+        const enemyXp = gameStore.handleInkFunction(
+            'get_character_info',
+            'enemies',
+            0,
+            'xp'
+        )
+        const enemySize = gameStore.handleInkFunction(
+            'get_character_info',
+            'enemies',
+            0,
+            'size'
+        )
 
-        const expectedEnemyHp = calculateEnemyHp(enemyXp as number, enemySize as CharacterSize)
+        const expectedEnemyHp = calculateEnemyHp(
+            enemyXp as number,
+            enemySize as CharacterSize
+        )
 
         expect(heroPartySize).toBe(expectedPartySize)
         expect(enemyPartySize).toBe(expectedPartySize)
@@ -45,10 +89,15 @@ describe('GameStore', () => {
         expect(enemyHp).toBeGreaterThanOrEqual(expectedEnemyHp.hp)
         expect(enemyHp).toBeLessThanOrEqual(expectedEnemyHp.maxHp)
 
-        const expectedActionOrder = ['⚔️ commoner / ⏳ Celcius', '⚔️ Celcius / ⏳ commoner']
+        const expectedActionOrder = [
+            '⚔️ commoner / ⏳ Celcius',
+            '⚔️ Celcius / ⏳ commoner'
+        ]
         const actionOrder = gameStore.handleInkFunction('get_action_order')
-        expect(actionOrder).toSatisfy(value =>
-            value === expectedActionOrder[0] || value === expectedActionOrder[1]
+        expect(actionOrder).toSatisfy(
+            value =>
+                value === expectedActionOrder[0] ||
+                value === expectedActionOrder[1]
         )
 
         const isHeroAction = gameStore.handleInkFunction('is_player_action')
@@ -71,7 +120,9 @@ describe('GameStore', () => {
 
         gameStore.handleInkFunction('set_combat', combatId)
 
-        while (gameStore.handleInkFunction('get_combat_status') === 'IN_PROGRESS') {
+        while (
+            gameStore.handleInkFunction('get_combat_status') === 'IN_PROGRESS'
+        ) {
             if (gameStore.handleInkFunction('is_player_action')) {
                 gameStore.handleInkFunction('attack', 'human_0001')
             } else {
@@ -81,8 +132,11 @@ describe('GameStore', () => {
             gameStore.handleInkFunction('end_turn')
         }
 
-        expect(gameStore.handleInkFunction('get_combat_status')).toSatisfy(value =>
-            value === 'VICTORY' || value === 'DEFEAT' || value === 'UNINITIALIZED'
+        expect(gameStore.handleInkFunction('get_combat_status')).toSatisfy(
+            value =>
+                value === 'VICTORY' ||
+                value === 'DEFEAT' ||
+                value === 'UNINITIALIZED'
         )
     })
     it.todo('', () => {
@@ -95,7 +149,8 @@ describe('GameStore', () => {
     })
     it.todo('test combat log with multiple characters')
     it('throws error for unhandled functions', () => {
-        expect(() => gameStore.handleInkFunction('invalid_function'))
-            .toThrowError('Unhandled function: invalid_function')
+        expect(() =>
+            gameStore.handleInkFunction('invalid_function')
+        ).toThrowError('Unhandled function: invalid_function')
     })
 })

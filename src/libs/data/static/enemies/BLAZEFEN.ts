@@ -29,4 +29,3 @@ const BLAZEFEN_BASE: Enemy = {
 }
 
 export default BLAZEFEN_BASE
-

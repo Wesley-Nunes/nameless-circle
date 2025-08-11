@@ -9,4 +9,3 @@ const validateSpecies = (species: Species) => {
 }
 
 export default validateSpecies
-

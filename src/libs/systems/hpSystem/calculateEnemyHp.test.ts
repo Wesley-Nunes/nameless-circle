@@ -50,4 +50,3 @@ describe('calculateEnemyHp', () => {
         expect(result.randomHp).toBe(expectedHp)
     })
 })
-

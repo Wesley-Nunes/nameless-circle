@@ -5,7 +5,11 @@ import { getHeroById, getMountByName } from 'libs/data/accessors'
 
 import type { Mount, Team } from 'libs/entities'
 
-const createMount = (mountName: string, ownerId: string, ownerTeam: Team): Mount => {
+const createMount = (
+    mountName: string,
+    ownerId: string,
+    ownerTeam: Team
+): Mount => {
     validateID(ownerId)
 
     const mount = structuredClone(getMountByName(mountName))
@@ -21,4 +25,3 @@ const createMount = (mountName: string, ownerId: string, ownerTeam: Team): Mount
 }
 
 export default createMount
-

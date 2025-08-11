@@ -26,6 +26,5 @@ export const HERO_TEST: Hero = {
     actions: ['ATTACK'],
     size: 'medium',
     team: 'heroes',
-    type: ['humanoid'],
+    type: ['humanoid']
 }
-

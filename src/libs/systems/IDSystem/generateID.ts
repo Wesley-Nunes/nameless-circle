@@ -15,4 +15,3 @@ const generateID = (IDKey: IDKey) => {
 }
 
 export default generateID
-

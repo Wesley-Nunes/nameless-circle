@@ -1,4 +1,7 @@
-import { validateHeroId, validateHeroPartySize } from 'libs/systems/validationSystem'
+import {
+    validateHeroId,
+    validateHeroPartySize
+} from 'libs/systems/validationSystem'
 import { getHeroById } from 'libs/data/accessors'
 
 import type { Hero } from 'libs/entities'
@@ -22,4 +25,3 @@ const newParty = (
 }
 
 export default newParty
-

@@ -7,36 +7,51 @@
     ai acting
 === function attack(character_id) ===
     attacking { character_id }
+=== function attempt_skill(skill_id) ===
+    attempt skill { skill_id }
 === function end_turn() ===
     ~ return 0
 === function is_player_action() ===
     ~ return true
 === function get_action_order() ===
     ~ return "[x] Hero 1 / Enemy 1"
+=== function get_action_skills_count() ===
+    ~ return 3
 === function get_action_result() ===
     ~ return "Action result"
 === function get_character_info(team, index, prop) ===
     ~ return 1
 === function get_combat_result(combat_id) ===
-    ~ return 0
+    ~ return 1
 === function get_combat_status() ===
     // IN_PROGRESS || VICTORY || DEFEAT
     ~ return "VICTORY"
+=== function get_fail_count() ===
+    ~ return 1
 === function get_mount_info(team, index, prop) ===
     ~ return 1
 === function get_party_size(team) ===
     ~ return 1
+=== function get_scene_skill_info(index, prop) ===
+    ~ return 1
+=== function get_success_count() ===
+    ~ return 3
 === function has_mounts(team) ===
     ~ return false
 === function set_combat(combat_id) ===
     { combat_id }
+=== function set_skill_scene(skill_scene_id) ===
+    { skill_scene_id }
 
-// Local functions
+//========================================================//
+
+// scenes
 === combat_scene(combat_id) ===
     ~ set_combat(combat_id)
     -> combat_loop() ->
     ->->
-    
+
+// add 'combat' to the variables/fn
 === combat_loop ===
     -> enemy_loop(0) ->
     { has_mounts("enemies"):
@@ -55,10 +70,10 @@
         -> player_action_options ->
       - else:
         { ai_action() }
-        
     }
     
     { get_action_result() }
+    
     { end_turn() }
     
     { get_combat_status() == "IN_PROGRESS":
@@ -66,7 +81,6 @@
         -> combat_loop
     }
     ->->
-    
 
 === enemy_loop(index) ===
     { index >= get_party_size("enemies"): ->-> }
@@ -78,7 +92,7 @@
         Enemy: {enemy_name} (Hp: {enemy_hp})
     }
     -> enemy_loop(index + 1)
-    
+
 === hero_loop(index) ===
     { index >= get_party_size("heroes"): ->-> }
     
@@ -93,7 +107,7 @@
 === player_action_options ===
     Select an enemy to attack
     -> enemy_choice_loop(0)
-    
+
 === enemy_choice_loop(index) ===
   ~ temp enemy_name = get_character_info("enemies", index, "name")
   ~ temp enemy_hp = get_character_info("enemies", index, "hp")
@@ -105,7 +119,7 @@
         ->->
   }
   { index < get_party_size("enemies") - 1: -> enemy_choice_loop(index + 1)  }
-  
+
 === mount_loop(index, team) ===
     { index >= get_party_size(team): ->-> }
     
@@ -114,7 +128,18 @@
 
     { mount_hp > 0:
         - {mount_name} (Hp: {mount_hp})
-    }    
+    }   
+    
     -> mount_loop(index + 1, team)
 
-    
+=== available_skills_loop(index) ===
+    ~ temp skill_name = get_scene_skill_info(index, "name")
+    ~ temp skill_id = get_scene_skill_info(index, "id")
+
+    { skill_name: 
+        + [{skill_name}]
+            ~ attempt_skill(skill_id)
+            ->-> 
+    }
+
+    { index < get_action_skills_count() - 1: -> available_skills_loop(index + 1) }

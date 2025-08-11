@@ -17,25 +17,34 @@ describe('validateTemplate', () => {
                         - All values must be positive numbers`
         )
 
-        expect(() => validateTemplate(
-            // @ts-expect-error - Intentionally testing an invalid type
-            { str: 'a', dex: 'b', con: 'c', int: 'd', wis: 'e', cha: 'f' })
+        expect(() =>
+            validateTemplate(
+                // @ts-expect-error - Intentionally testing an invalid type
+                { str: 'a', dex: 'b', con: 'c', int: 'd', wis: 'e', cha: 'f' }
+            )
         ).toThrowError(
             `Invalid template: '{"str":"a","dex":"b","con":"c","int":"d","wis":"e","cha":"f"}'.
                         - Required keys: str, dex, con, int, wis, cha
                         - All values must be positive numbers`
         )
 
-        expect(() => validateTemplate(
-            { str: -2, dex: 1, con: 2, int: 3, wis: 1, cha: 2 })
+        expect(() =>
+            validateTemplate({
+                str: -2,
+                dex: 1,
+                con: 2,
+                int: 3,
+                wis: 1,
+                cha: 2
+            })
         ).toThrowError(
             `Invalid template: '{"str":-2,"dex":1,"con":2,"int":3,"wis":1,"cha":2}'.
                         - Required keys: str, dex, con, int, wis, cha
                         - All values must be positive numbers`
         )
 
-        expect(() => validateTemplate(
-            { str: 2, dex: 0, con: 2, int: 3, wis: 1, cha: 2 })
+        expect(() =>
+            validateTemplate({ str: 2, dex: 0, con: 2, int: 3, wis: 1, cha: 2 })
         ).toThrowError(
             `Invalid template: '{"str":2,"dex":0,"con":2,"int":3,"wis":1,"cha":2}'.
                         - Required keys: str, dex, con, int, wis, cha
@@ -43,4 +52,3 @@ describe('validateTemplate', () => {
         )
     })
 })
-

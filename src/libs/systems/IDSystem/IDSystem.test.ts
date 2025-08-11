@@ -13,4 +13,3 @@ describe('generateID', () => {
         expect(secondBlazefenId).toEqual(expectedSecondsBlazefenID)
     })
 })
-

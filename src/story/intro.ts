@@ -1,6 +1,1192 @@
 import type { InkStoryData } from './InkStoryData.type'
 
-const storyContent: InkStoryData = { "inkVersion": 21, "root": [["\n", { "->": "start" }, ["done", { "#f": 5, "#n": "g-0" }], null], "done", { "start": [["^When countless mouths are sated with innocent blood,", "\n", "^The Abyss shall breathe its curse—ash, corruption, void—", "\n", "^To blacken guardian rings of life,", "\n", "^Until Seven Thrones crack and crash from heaven's height.", "\n", "^Then, from the weeping ground,", "\n", "^The Shadowed One shall raise its silent crown,", "\n", "^And claim the shattered world as darkness drowns.", "\n", "^The hue of the setting sun, nearly swallowed by night, blended with the swamp’s dark greens, staining the stagnant waters. Will-o’-wisps, like fragments of the cursed prophecy, broke free from the murk and began their ghostly dance above the sludge. A biting cold—far beyond twilight—enveloped the group, heavy with the stink of rot, sulfur, and decay.", "\n", "^Lysandra’s eyes blazed, nostrils flared.", "\n", "^\"To hell with this prophecy! Protaxios, gather the stealthiest soldiers and scout the nearby swamps. Renpet-Ib, raise magical barriers around the village. We need more troops — I’ll go to the Citadel myself to bargain with some noble.\"", "\n", "^As she shouted, you saw her tremble — and felt your own palms sweat.", "\n", ["ev", { "^->": "start.0.22.$r1" }, { "temp=": "$r" }, "str", { "->": ".^.s" }, [{ "#n": "$r1" }], "/str", "/ev", { "*": ".^.^.c-0", "flg": 18 }, { "s": ["^\"Your sword serves better in stone courts than swamps, Commander.\" (Courtly Intrigue)", { "->": "$r", "var": true }, null] }], ["ev", { "^->": "start.0.23.$r1" }, { "temp=": "$r" }, "str", { "->": ".^.s" }, [{ "#n": "$r1" }], "/str", "/ev", { "*": ".^.^.c-1", "flg": 18 }, { "s": ["^\"My blade is silent as the mist.\" (Stealth)", { "->": "$r", "var": true }, null] }], ["ev", { "^->": "start.0.24.$r1" }, { "temp=": "$r" }, "str", { "->": ".^.s" }, [{ "#n": "$r1" }], "/str", "/ev", { "*": ".^.^.c-2", "flg": 18 }, { "s": ["^\"The village will bleed, but it will hold.\" (Combat)", { "->": "$r", "var": true }, null] }], { "c-0": ["ev", { "^->": "start.0.c-0.$r2" }, "/ev", { "temp=": "$r" }, { "->": ".^.^.22.s" }, [{ "#n": "$r2" }], "\n", { "->": "courtly_intrigue" }, { "#f": 5 }], "c-1": ["ev", { "^->": "start.0.c-1.$r2" }, "/ev", { "temp=": "$r" }, { "->": ".^.^.23.s" }, [{ "#n": "$r2" }], "\n", { "->": "stealth" }, { "#f": 5 }], "c-2": ["ev", { "^->": "start.0.c-2.$r2" }, "/ev", { "temp=": "$r" }, { "->": ".^.^.24.s" }, [{ "#n": "$r2" }], "\n", { "->": "combat" }, { "#f": 5 }] }], { "#f": 1 }], "courtly_intrigue": ["ev", "str", "^hero_0002", "/str", { "x()": "add_to_hero_party", "exArgs": 1 }, "out", "/ev", "\n", "ev", "str", "^Riding horse", "/str", "str", "^hero_0001", "/str", "str", "^heroes", "/str", { "x()": "add_mount", "exArgs": 3 }, "out", "/ev", "\n", "ev", "str", "^Riding horse", "/str", "str", "^hero_0002", "/str", "str", "^heroes", "/str", { "x()": "add_mount", "exArgs": 3 }, "out", "/ev", "\n", "^The sky deepened to indigo as stars slowly awakened. The southern road — the only path to the Citadel — narrowed, with few places to camp. Ancient trees leaned toward the path as if trying to delay travelers.", "\n", "^Lysandra rode ahead, refusing an escort — only you, her new recruit, followed.", "\n", "^\"Protect the village!\"", "\n", "^She yelled to the soldiers.", "\n", "^The weight of her choices echoed in your mind. Ahead in the forest, gleaming eyes tracked you.", "\n", "^After hours of travel, Lysandra ordered a halt. She set up a makeshift camp between the road and a cluster of rocks.", "\n", "^You’d barely shared sparse rations when unnatural heat surged — first, just the rustle of dry leaves. Then, sharp, rapid hisses multiplied in the darkness as fiery shapes approached.", "\n", "^\"An ambush!\"", "\n", "^Lysandra growled.", "\n", "^From the shadows, four blazefen — salamander-men with amber eyes and flaming tongues — attacked. To everyone’s shock, one hurled a spear toward the horses, missing by inches. Lysandra saw their intent.", "\n", "^\"Protect the mounts!\"", "\n", "^Could word of Lysandra’s movements have leaked? Were there spies in the village? What seemed a random attack now had a clear goal: <i>delay her rush to the Citadel.</i>", "\n", "ev", "str", "^blazefen_ambush_01", "/str", "/ev", { "temp=": "combat_id" }, "ev", { "VAR?": "combat_id" }, "/ev", { "->t->": "combat_scene" }, "ev", { "VAR?": "combat_id" }, { "x()": "get_combat_result", "exArgs": 1 }, "/ev", { "temp=": "combat_result" }, "\n", "ev", { "VAR?": "combat_result" }, "/ev", ["du", "ev", -1, "==", "/ev", { "->": ".^.b", "c": true }, { "b": ["pop", "\n", { "->t->": "defeat_scene" }, "end", { "->": ".^.^.^.84" }, null] }], ["du", "ev", 0, "==", "/ev", { "->": ".^.b", "c": true }, { "b": ["pop", "\n", { "->t->": "draw_scene" }, { "->": ".^.^.^.84" }, null] }], ["du", "ev", 1, "==", "/ev", { "->": ".^.b", "c": true }, { "b": ["pop", "\n", { "->t->": "steal_horses_quest" }, { "->": ".^.^.^.84" }, null] }], ["du", "ev", 2, "==", "/ev", { "->": ".^.b", "c": true }, { "b": ["pop", "\n", { "->t->": "village_quest" }, { "->": ".^.^.^.84" }, null] }], "pop", "nop", "\n", "end", { "#f": 1 }], "steal_horses_quest": ["^\"Listen, recruit.\" — Lysandra said, wiping battle grime away.", "\n", "^\"From now on, it’s all about appearance, status, and deceit.\"", "\n", "^She offered you fabric and water to clean yourself.", "\n", "^Her gaze fixed on the horizon as if recalling something.", "\n", "^\"Should any offer you gifts, ask yourself: Why now? Why here? What does this person gain?", "\n", "^Never accept gifts without reading the intent behind the wrapping.", "\n", "^Never make deals without weighing every consequence.\"", "\n", "^Lysandra watched you calmly. The impulsive soldier gave way to a measured noblewoman, like she was reliving an old lesson. She searched your eyes, reading your intent, and said:", "\n", "^\"We can’t enter the next village on foot. Whispers outrun horses. If the Citadel knows us as wanderers, I’ll recruit no soldiers.\"", "\n", "^She paused, letting you absorb the gravity.", "\n", "^\"Simplest way: under night’s cover, we steal horses from an outlying villager.\"", "\n", "end", { "#f": 1 }], "village_quest": ["^TBD", "\n", "end", { "#f": 1 }], "stealth": ["end", { "#f": 1 }], "combat": ["end", { "#f": 1 }], "defeat_scene": ["^Your vision blurs as you collapse to the ground. The clatter of your falling weapon echoes in your ears before darkness consumes you.", "\n", "end", { "#f": 1 }], "draw_scene": ["^Panting heavily, you lock eyes with your opponent across the bloodied ground. Both of you stand trembling, weapons lowered in unspoken agreement - neither can land a decisive blow.", "\n", "ev", "void", "/ev", "->->", { "#f": 1 }], "add_mount": [{ "temp=": "character_team" }, { "temp=": "character_id" }, { "temp=": "mount_name" }, "ev", { "VAR?": "mount_name" }, "out", "/ev", "^ - ", "ev", { "VAR?": "character_id" }, "out", "/ev", "^ - ", "ev", { "VAR?": "character_team" }, "out", "/ev", "\n", { "#f": 1 }], "add_to_hero_party": [{ "temp=": "hero_id" }, "ev", { "VAR?": "hero_id" }, "out", "/ev", "\n", { "#f": 1 }], "ai_action": ["^ai acting", "\n", { "#f": 1 }], "attack": [{ "temp=": "character_id" }, "^attacking ", "ev", { "VAR?": "character_id" }, "out", "/ev", "\n", { "#f": 1 }], "end_turn": ["ev", 0, "/ev", "~ret", { "#f": 1 }], "is_player_action": ["ev", true, "/ev", "~ret", { "#f": 1 }], "get_action_order": ["ev", "str", "^[x] Hero 1 / Enemy 1", "/str", "/ev", "~ret", { "#f": 1 }], "get_action_result": ["ev", "str", "^Action result", "/str", "/ev", "~ret", { "#f": 1 }], "get_character_info": [{ "temp=": "prop" }, { "temp=": "index" }, { "temp=": "team" }, "ev", 1, "/ev", "~ret", { "#f": 1 }], "get_combat_result": [{ "temp=": "combat_id" }, "ev", 0, "/ev", "~ret", { "#f": 1 }], "get_combat_status": ["ev", "str", "^VICTORY", "/str", "/ev", "~ret", { "#f": 1 }], "get_mount_info": [{ "temp=": "prop" }, { "temp=": "index" }, { "temp=": "team" }, "ev", 1, "/ev", "~ret", { "#f": 1 }], "get_party_size": [{ "temp=": "team" }, "ev", 1, "/ev", "~ret", { "#f": 1 }], "has_mounts": [{ "temp=": "team" }, "ev", false, "/ev", "~ret", { "#f": 1 }], "set_combat": [{ "temp=": "combat_id" }, "ev", { "VAR?": "combat_id" }, "out", "/ev", "\n", { "#f": 1 }], "combat_scene": [{ "temp=": "combat_id" }, "ev", { "VAR?": "combat_id" }, { "x()": "set_combat", "exArgs": 1 }, "pop", "/ev", "\n", { "->t->": "combat_loop" }, "ev", "void", "/ev", "->->", { "#f": 1 }], "combat_loop": ["ev", 0, "/ev", { "->t->": "enemy_loop" }, "ev", "str", "^enemies", "/str", { "x()": "has_mounts", "exArgs": 1 }, "/ev", [{ "->": ".^.b", "c": true }, { "b": ["\n", "^Enemy mounts:", "\n", "ev", 0, "str", "^enemies", "/str", "/ev", { "->t->": "mount_loop" }, { "->": ".^.^.^.11" }, null] }], "nop", "\n", "ev", 0, "/ev", { "->t->": "hero_loop" }, "ev", "str", "^heroes", "/str", { "x()": "has_mounts", "exArgs": 1 }, "/ev", [{ "->": ".^.b", "c": true }, { "b": ["\n", "^Hero mounts:", "\n", "ev", 0, "str", "^heroes", "/str", "/ev", { "->t->": "mount_loop" }, { "->": ".^.^.^.24" }, null] }], "nop", "\n", "ev", { "x()": "get_action_order" }, "out", "/ev", "\n", "ev", { "x()": "is_player_action" }, "_", "/ev", [{ "->": ".^.b", "c": true }, { "b": ["\n", { "->t->": "player_action_options" }, { "->": ".^.^.^.37" }, null] }], [{ "->": ".^.b" }, { "b": ["\n", "ev", { "x()": "ai_action" }, "out", "/ev", "\n", { "->": ".^.^.^.37" }, null] }], "nop", "\n", "ev", { "x()": "get_action_result" }, "out", "/ev", "\n", "ev", { "x()": "end_turn" }, "out", "/ev", "\n", "ev", { "x()": "get_combat_status" }, "str", "^IN_PROGRESS", "/str", "==", "/ev", [{ "->": ".^.b", "c": true }, { "b": ["\n", "^Next turn!", "\n", { "->": ".^.^.^" }, { "->": ".^.^.^.57" }, null] }], "nop", "\n", "ev", "void", "/ev", "->->", { "#f": 1 }], "enemy_loop": [{ "temp=": "index" }, "ev", { "VAR?": "index" }, "str", "^enemies", "/str", { "x()": "get_party_size", "exArgs": 1 }, ">=", "/ev", [{ "->": ".^.b", "c": true }, { "b": ["^ ", "ev", "void", "/ev", "->->", { "->": ".^.^.^.10" }, null] }], "nop", "\n", "ev", "str", "^enemies", "/str", { "VAR?": "index" }, "str", "^name", "/str", { "x()": "get_character_info", "exArgs": 3 }, "/ev", { "temp=": "enemy_name" }, "\n", "ev", "str", "^enemies", "/str", { "VAR?": "index" }, "str", "^hp", "/str", { "x()": "get_character_info", "exArgs": 3 }, "/ev", { "temp=": "enemy_hp" }, "\n", "ev", { "VAR?": "enemy_hp" }, 0, ">", "/ev", [{ "->": ".^.b", "c": true }, { "b": ["\n", "^Enemy: ", "ev", { "VAR?": "enemy_name" }, "out", "/ev", "^ (Hp: ", "ev", { "VAR?": "enemy_hp" }, "out", "/ev", "^)", "\n", { "->": ".^.^.^.42" }, null] }], "nop", "\n", "ev", { "VAR?": "index" }, 1, "+", "/ev", { "->": ".^" }, { "#f": 1 }], "hero_loop": [{ "temp=": "index" }, "ev", { "VAR?": "index" }, "str", "^heroes", "/str", { "x()": "get_party_size", "exArgs": 1 }, ">=", "/ev", [{ "->": ".^.b", "c": true }, { "b": ["^ ", "ev", "void", "/ev", "->->", { "->": ".^.^.^.10" }, null] }], "nop", "\n", "ev", "str", "^heroes", "/str", { "VAR?": "index" }, "str", "^name", "/str", { "x()": "get_character_info", "exArgs": 3 }, "/ev", { "temp=": "hero_name" }, "\n", "ev", "str", "^heroes", "/str", { "VAR?": "index" }, "str", "^hp", "/str", { "x()": "get_character_info", "exArgs": 3 }, "/ev", { "temp=": "hero_hp" }, "\n", "^Hero: ", "ev", { "VAR?": "hero_name" }, "out", "/ev", "^ (Hp: ", "ev", { "VAR?": "hero_hp" }, "out", "/ev", "^)", "\n", "ev", { "VAR?": "index" }, 1, "+", "/ev", { "->": ".^" }, { "#f": 1 }], "player_action_options": ["^Select an enemy to attack", "\n", "ev", 0, "/ev", { "->": "enemy_choice_loop" }, { "#f": 1 }], "enemy_choice_loop": [{ "temp=": "index" }, "ev", "str", "^enemies", "/str", { "VAR?": "index" }, "str", "^name", "/str", { "x()": "get_character_info", "exArgs": 3 }, "/ev", { "temp=": "enemy_name" }, "\n", "ev", "str", "^enemies", "/str", { "VAR?": "index" }, "str", "^hp", "/str", { "x()": "get_character_info", "exArgs": 3 }, "/ev", { "temp=": "enemy_hp" }, "\n", "ev", "str", "^enemies", "/str", { "VAR?": "index" }, "str", "^id", "/str", { "x()": "get_character_info", "exArgs": 3 }, "/ev", { "temp=": "enemy_id" }, "\n", "ev", { "VAR?": "enemy_hp" }, 0, ">", "/ev", [{ "->": ".^.b", "c": true }, { "b": ["\n", "ev", "str", "ev", { "VAR?": "enemy_name" }, "out", "/ev", "/str", "/ev", { "*": ".^.c-0", "flg": 4 }, { "->": ".^.^.^.43" }, { "c-0": ["\n", "ev", { "VAR?": "enemy_id" }, { "x()": "attack", "exArgs": 1 }, "pop", "/ev", "\n", "ev", "void", "/ev", "->->", { "#f": 5 }] }] }], "nop", "\n", "ev", { "VAR?": "index" }, "str", "^enemies", "/str", { "x()": "get_party_size", "exArgs": 1 }, 1, "-", "<", "/ev", [{ "->": ".^.b", "c": true }, { "b": ["^ ", "ev", { "VAR?": "index" }, 1, "+", "/ev", { "->": ".^.^.^" }, { "->": ".^.^.^.56" }, null] }], "nop", "\n", { "#f": 1 }], "mount_loop": [{ "temp=": "team" }, { "temp=": "index" }, "ev", { "VAR?": "index" }, { "VAR?": "team" }, { "x()": "get_party_size", "exArgs": 1 }, ">=", "/ev", [{ "->": ".^.b", "c": true }, { "b": ["^ ", "ev", "void", "/ev", "->->", { "->": ".^.^.^.9" }, null] }], "nop", "\n", "ev", { "VAR?": "team" }, { "VAR?": "index" }, "str", "^name", "/str", { "x()": "get_mount_info", "exArgs": 3 }, "/ev", { "temp=": "mount_name" }, "\n", "ev", { "VAR?": "team" }, { "VAR?": "index" }, "str", "^hp", "/str", { "x()": "get_mount_info", "exArgs": 3 }, "/ev", { "temp=": "mount_hp" }, "\n", "ev", { "VAR?": "mount_hp" }, 0, ">", "/ev", [{ "->": ".^.b", "c": true }, { "b": ["\n", "ev", { "VAR?": "mount_name" }, "out", "/ev", "^ (Hp: ", "ev", { "VAR?": "mount_hp" }, "out", "/ev", "^)", "\n", { "->": ".^.^.^.37" }, null] }], "nop", "\n", "ev", { "VAR?": "index" }, 1, "+", { "VAR?": "team" }, "/ev", { "->": ".^" }, { "#f": 1 }], "#f": 1 }], "listDefs": {} };
+const storyContent: InkStoryData = {
+    inkVersion: 21,
+    root: [
+        [
+            '\n',
+            { '->': 'steal_horses_quest' },
+            ['done', { '#f': 5, '#n': 'g-0' }],
+            null
+        ],
+        'done',
+        {
+            start: [
+                [
+                    '^“When countless mouths are sated with innocent blood,',
+                    '\n',
+                    '^The Abyss shall breathe its curse—ash, corruption, void—',
+                    '\n',
+                    '^To blacken guardian rings of life,',
+                    '\n',
+                    "^Until Seven Thrones crack and crash from heaven's height.",
+                    '\n',
+                    '^Then, from the weeping ground,',
+                    '\n',
+                    '^The Shadowed One shall raise its silent crown,',
+                    '\n',
+                    '^And claim the shattered world as darkness drowns.”',
+                    '\n',
+                    '^The hue of the setting sun, nearly swallowed by night, blended with the swamp’s dark greens, staining the stagnant waters. Will-o’-wisps, like fragments of the cursed prophecy, broke free from the murk and began their ghostly dance above the sludge. A biting cold—far beyond twilight—enveloped the group, heavy with the stink of rot, sulfur, and decay.',
+                    '\n',
+                    '^Lysandra’s eyes blazed, nostrils flared.',
+                    '\n',
+                    '^“To hell with this prophecy! Protaxios, gather the stealthiest soldiers and scout the nearby swamps. Renpet-Ib, raise magical barriers around the village. We need more troops. I’ll go to the Citadel myself to bargain with some noble.”',
+                    '\n',
+                    '^As she shouted, you saw her tremble — and felt your own palms sweat.',
+                    '\n',
+                    [
+                        'ev',
+                        { '^->': 'start.0.22.$r1' },
+                        { 'temp=': '$r' },
+                        'str',
+                        { '->': '.^.s' },
+                        [{ '#n': '$r1' }],
+                        '/str',
+                        '/ev',
+                        { '*': '.^.^.c-0', flg: 18 },
+                        {
+                            s: [
+                                '^“Your sword serves better in stone courts than swamps, Commander.”',
+                                { '->': '$r', var: true },
+                                null
+                            ]
+                        }
+                    ],
+                    [
+                        'ev',
+                        { '^->': 'start.0.23.$r1' },
+                        { 'temp=': '$r' },
+                        'str',
+                        { '->': '.^.s' },
+                        [{ '#n': '$r1' }],
+                        '/str',
+                        '/ev',
+                        { '*': '.^.^.c-1', flg: 18 },
+                        {
+                            s: [
+                                '^“My blade is silent as the mist.” ',
+                                { '->': '$r', var: true },
+                                null
+                            ]
+                        }
+                    ],
+                    [
+                        'ev',
+                        { '^->': 'start.0.24.$r1' },
+                        { 'temp=': '$r' },
+                        'str',
+                        { '->': '.^.s' },
+                        [{ '#n': '$r1' }],
+                        '/str',
+                        '/ev',
+                        { '*': '.^.^.c-2', flg: 18 },
+                        {
+                            s: [
+                                '^“The village will bleed, but it will hold.”',
+                                { '->': '$r', var: true },
+                                null
+                            ]
+                        }
+                    ],
+                    {
+                        'c-0': [
+                            'ev',
+                            { '^->': 'start.0.c-0.$r2' },
+                            '/ev',
+                            { 'temp=': '$r' },
+                            { '->': '.^.^.22.s' },
+                            [{ '#n': '$r2' }],
+                            '\n',
+                            { '->': 'courtly_intrigue' },
+                            { '#f': 5 }
+                        ],
+                        'c-1': [
+                            'ev',
+                            { '^->': 'start.0.c-1.$r2' },
+                            '/ev',
+                            { 'temp=': '$r' },
+                            { '->': '.^.^.23.s' },
+                            [{ '#n': '$r2' }],
+                            '\n',
+                            { '->': 'stealth' },
+                            { '#f': 5 }
+                        ],
+                        'c-2': [
+                            'ev',
+                            { '^->': 'start.0.c-2.$r2' },
+                            '/ev',
+                            { 'temp=': '$r' },
+                            { '->': '.^.^.24.s' },
+                            [{ '#n': '$r2' }],
+                            '\n',
+                            { '->': 'combat' },
+                            { '#f': 5 }
+                        ]
+                    }
+                ],
+                { '#f': 1 }
+            ],
+            courtly_intrigue: [
+                'ev',
+                'str',
+                '^hero_0002',
+                '/str',
+                { 'x()': 'add_to_hero_party', exArgs: 1 },
+                'out',
+                '/ev',
+                '\n',
+                'ev',
+                'str',
+                '^Riding horse',
+                '/str',
+                'str',
+                '^hero_0001',
+                '/str',
+                'str',
+                '^heroes',
+                '/str',
+                { 'x()': 'add_mount', exArgs: 3 },
+                'out',
+                '/ev',
+                '\n',
+                'ev',
+                'str',
+                '^Riding horse',
+                '/str',
+                'str',
+                '^hero_0002',
+                '/str',
+                'str',
+                '^heroes',
+                '/str',
+                { 'x()': 'add_mount', exArgs: 3 },
+                'out',
+                '/ev',
+                '\n',
+                '^The sky deepened to indigo as stars slowly awakened. The southern road — the only path to the Citadel — narrowed, with few places to camp. Ancient trees leaned toward the path as if trying to delay travelers.',
+                '\n',
+                '^Lysandra rode ahead, refusing an escort — only you, her new recruit, followed.',
+                '\n',
+                '^“Protect the village!”',
+                '\n',
+                '^She yelled to the soldiers.',
+                '\n',
+                '^The weight of her choices echoed in your mind. Ahead in the forest, gleaming eyes tracked you.',
+                '\n',
+                '^After hours of travel, Lysandra ordered a halt. She set up a makeshift camp between the road and a cluster of rocks.',
+                '\n',
+                '^You’d barely shared sparse rations when unnatural heat surged — first, just the rustle of dry leaves. Then, sharp, rapid hisses multiplied in the darkness as fiery shapes approached.',
+                '\n',
+                '^“An ambush!”',
+                '\n',
+                '^Lysandra growled.',
+                '\n',
+                '^From the shadows, three blazefen — salamander-men with amber eyes and flaming tongues — attacked. To everyone’s shock, one hurled a spear toward the horses, missing by inches. Lysandra saw their intent.',
+                '\n',
+                '^“Protect the mounts!”',
+                '\n',
+                '^Could word of Lysandra’s movements have leaked? Were there spies in the village? What seemed a random attack now had a clear goal: delay her rush to the Citadel.',
+                '\n',
+                'ev',
+                'str',
+                '^blazefen_ambush_01',
+                '/str',
+                '/ev',
+                { 'temp=': 'combat_id' },
+                'ev',
+                { 'VAR?': 'combat_id' },
+                '/ev',
+                { '->t->': 'combat_scene' },
+                'ev',
+                { 'VAR?': 'combat_id' },
+                { 'x()': 'get_combat_result', exArgs: 1 },
+                '/ev',
+                { 'temp=': 'combat_result' },
+                '\n',
+                'ev',
+                { 'VAR?': 'combat_result' },
+                '/ev',
+                [
+                    'du',
+                    'ev',
+                    -1,
+                    '==',
+                    '/ev',
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            'pop',
+                            '\n',
+                            { '->t->': 'defeat_scene' },
+                            'end',
+                            { '->': '.^.^.^.84' },
+                            null
+                        ]
+                    }
+                ],
+                [
+                    'du',
+                    'ev',
+                    0,
+                    '==',
+                    '/ev',
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            'pop',
+                            '\n',
+                            { '->t->': 'draw_scene' },
+                            'end',
+                            { '->': '.^.^.^.84' },
+                            null
+                        ]
+                    }
+                ],
+                [
+                    'du',
+                    'ev',
+                    1,
+                    '==',
+                    '/ev',
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            'pop',
+                            '\n',
+                            { '->': 'steal_horses_quest' },
+                            { '->': '.^.^.^.84' },
+                            null
+                        ]
+                    }
+                ],
+                [
+                    'du',
+                    'ev',
+                    2,
+                    '==',
+                    '/ev',
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            'pop',
+                            '\n',
+                            { '->t->': 'village_quest' },
+                            { '->': '.^.^.^.84' },
+                            null
+                        ]
+                    }
+                ],
+                'pop',
+                'nop',
+                '\n',
+                { '#f': 1 }
+            ],
+            steal_horses_quest: [
+                [
+                    'ev',
+                    'str',
+                    '^steal_horses_01',
+                    '/str',
+                    { 'x()': 'set_skill_scene', exArgs: 1 },
+                    'pop',
+                    '/ev',
+                    '\n',
+                    '^“Listen, recruit.”',
+                    '\n',
+                    '^Lysandra said, wiping battle grime away.',
+                    '\n',
+                    '^“From now on, it’s all about appearance, status, and deceit.”',
+                    '\n',
+                    '^She offered you fabric and water to clean yourself. Her gaze fixed on the horizon as if recalling something.',
+                    '\n',
+                    '^“Should anyone offer you gifts, ask yourself: Why now? Why here? What does this person gain?',
+                    '\n',
+                    '^Never accept gifts without reading the intent behind the wrapping. Never make deals without weighing every consequence.”',
+                    '\n',
+                    '^Lysandra watched you calmly. The impulsive soldier gave way to a measured noblewoman, like she was reliving an old lesson. She searched your eyes, reading your intent, and said:',
+                    '\n',
+                    '^“We can’t enter the next village on foot. Whispers outrun horses. If the Citadel knows us as wanderers, I’ll recruit no soldiers.”',
+                    '\n',
+                    '^She paused, letting you absorb the gravity.',
+                    '\n',
+                    '^“Simplest way: under night’s cover, we steal horses from an outlying villager.”',
+                    '\n',
+                    [
+                        'ev',
+                        { '^->': 'steal_horses_quest.0.28.$r1' },
+                        { 'temp=': '$r' },
+                        'str',
+                        { '->': '.^.s' },
+                        [{ '#n': '$r1' }],
+                        '/str',
+                        '/ev',
+                        { '*': '.^.^.c-0', flg: 18 },
+                        {
+                            s: [
+                                '^Agree — but avoid her gaze',
+                                { '->': '$r', var: true },
+                                null
+                            ]
+                        }
+                    ],
+                    [
+                        'ev',
+                        { '^->': 'steal_horses_quest.0.29.$r1' },
+                        { 'temp=': '$r' },
+                        'str',
+                        { '->': '.^.s' },
+                        [{ '#n': '$r1' }],
+                        '/str',
+                        '/ev',
+                        { '*': '.^.^.c-1', flg: 18 },
+                        {
+                            s: [
+                                '^"There\'s another way, Commander..."',
+                                { '->': '$r', var: true },
+                                null
+                            ]
+                        }
+                    ],
+                    {
+                        'c-0': [
+                            'ev',
+                            { '^->': 'steal_horses_quest.0.c-0.$r2' },
+                            '/ev',
+                            { 'temp=': '$r' },
+                            { '->': '.^.^.28.s' },
+                            [{ '#n': '$r2' }],
+                            '\n',
+                            '^“You agreed too fast, recruit.”',
+                            '\n',
+                            '^Her eyes narrowed, measuring your soul.',
+                            '\n',
+                            '^“Remember: even I could be your inquisitor tomorrow. But today… Today we need horses.”',
+                            '\n',
+                            { '->': '.^.^.g-0' },
+                            { '#f': 5 }
+                        ],
+                        'c-1': [
+                            'ev',
+                            { '^->': 'steal_horses_quest.0.c-1.$r2' },
+                            '/ev',
+                            { 'temp=': '$r' },
+                            { '->': '.^.^.29.s' },
+                            [{ '#n': '$r2' }],
+                            '\n',
+                            '^TBD 2',
+                            '\n',
+                            { '->': '.^.^.g-0' },
+                            { '#f': 5 }
+                        ],
+                        'g-0': [
+                            '^She took a deep breath: “For now, it’s a necessary evil.”',
+                            '\n',
+                            '^You walked on, both in silence. The only sounds piercing the night came from crickets and the occasional nocturnal creature.',
+                            '\n',
+                            '^After a brief time walking, Lysandra found a trail, discernible only by a path of grass slightly lower than its surroundings.',
+                            '\n',
+                            '^The light struggled to penetrate the forest. Only when the shy moon occasionally broke the imprisoning clouds did it offer a few more details of the terrain ahead. The dense woods suggested that whoever lived here — if anyone lived here — led a reclusive life.',
+                            '\n',
+                            '^“Circle around this path and look for any shelter before we near it.” Lysandra whispered.',
+                            '\n',
+                            { '->': '.^.^.^.skill_scene' },
+                            { '#f': 5 }
+                        ]
+                    }
+                ],
+                {
+                    skill_scene: [
+                        'ev',
+                        0,
+                        '/ev',
+                        { '->t->': 'available_skills_loop' },
+                        '^TBD skill_scene',
+                        '\n',
+                        'end',
+                        { '#f': 1 }
+                    ],
+                    '#f': 1
+                }
+            ],
+            steal_horses_quest_fail: [
+                '^steal_horses_quest_fail TBD',
+                '\n',
+                'end',
+                { '#f': 1 }
+            ],
+            village_quest: ['^village_quest TBD', '\n', 'end', { '#f': 1 }],
+            stealth: ['^stealth TBD', '\n', 'end', { '#f': 1 }],
+            combat: ['^combat TBD', '\n', 'end', { '#f': 1 }],
+            defeat_scene: [
+                '^Your vision blurs as you collapse to the ground. The clatter of your falling weapon echoes in your ears before darkness consumes you.',
+                '\n',
+                'end',
+                { '#f': 1 }
+            ],
+            draw_scene: [
+                '^Panting heavily, you lock eyes with your opponent across the bloodied ground. Both of you stand trembling, weapons lowered in unspoken agreement - neither can land a decisive blow.',
+                '\n',
+                'ev',
+                'void',
+                '/ev',
+                '->->',
+                { '#f': 1 }
+            ],
+            add_mount: [
+                { 'temp=': 'character_team' },
+                { 'temp=': 'character_id' },
+                { 'temp=': 'mount_name' },
+                'ev',
+                { 'VAR?': 'mount_name' },
+                'out',
+                '/ev',
+                '^ - ',
+                'ev',
+                { 'VAR?': 'character_id' },
+                'out',
+                '/ev',
+                '^ - ',
+                'ev',
+                { 'VAR?': 'character_team' },
+                'out',
+                '/ev',
+                '\n',
+                { '#f': 1 }
+            ],
+            add_to_hero_party: [
+                { 'temp=': 'hero_id' },
+                'ev',
+                { 'VAR?': 'hero_id' },
+                'out',
+                '/ev',
+                '\n',
+                { '#f': 1 }
+            ],
+            ai_action: ['^ai acting', '\n', { '#f': 1 }],
+            attack: [
+                { 'temp=': 'character_id' },
+                '^attacking ',
+                'ev',
+                { 'VAR?': 'character_id' },
+                'out',
+                '/ev',
+                '\n',
+                { '#f': 1 }
+            ],
+            attempt_skill: [
+                { 'temp=': 'skill_id' },
+                '^attempt skill ',
+                'ev',
+                { 'VAR?': 'skill_id' },
+                'out',
+                '/ev',
+                '\n',
+                { '#f': 1 }
+            ],
+            end_turn: ['ev', 0, '/ev', '~ret', { '#f': 1 }],
+            is_player_action: ['ev', true, '/ev', '~ret', { '#f': 1 }],
+            get_action_order: [
+                'ev',
+                'str',
+                '^[x] Hero 1 / Enemy 1',
+                '/str',
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
+            get_action_skills_count: ['ev', 3, '/ev', '~ret', { '#f': 1 }],
+            get_action_result: [
+                'ev',
+                'str',
+                '^Action result',
+                '/str',
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
+            get_character_info: [
+                { 'temp=': 'prop' },
+                { 'temp=': 'index' },
+                { 'temp=': 'team' },
+                'ev',
+                1,
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
+            get_combat_result: [
+                { 'temp=': 'combat_id' },
+                'ev',
+                1,
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
+            get_combat_status: [
+                'ev',
+                'str',
+                '^VICTORY',
+                '/str',
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
+            get_fail_count: ['ev', 1, '/ev', '~ret', { '#f': 1 }],
+            get_mount_info: [
+                { 'temp=': 'prop' },
+                { 'temp=': 'index' },
+                { 'temp=': 'team' },
+                'ev',
+                1,
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
+            get_party_size: [
+                { 'temp=': 'team' },
+                'ev',
+                1,
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
+            get_scene_skill_info: [
+                { 'temp=': 'prop' },
+                { 'temp=': 'index' },
+                'ev',
+                1,
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
+            get_success_count: ['ev', 3, '/ev', '~ret', { '#f': 1 }],
+            has_mounts: [
+                { 'temp=': 'team' },
+                'ev',
+                false,
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
+            set_combat: [
+                { 'temp=': 'combat_id' },
+                'ev',
+                { 'VAR?': 'combat_id' },
+                'out',
+                '/ev',
+                '\n',
+                { '#f': 1 }
+            ],
+            set_skill_scene: [
+                { 'temp=': 'skill_scene_id' },
+                'ev',
+                { 'VAR?': 'skill_scene_id' },
+                'out',
+                '/ev',
+                '\n',
+                { '#f': 1 }
+            ],
+            combat_scene: [
+                { 'temp=': 'combat_id' },
+                'ev',
+                { 'VAR?': 'combat_id' },
+                { 'x()': 'set_combat', exArgs: 1 },
+                'pop',
+                '/ev',
+                '\n',
+                { '->t->': 'combat_loop' },
+                'ev',
+                'void',
+                '/ev',
+                '->->',
+                { '#f': 1 }
+            ],
+            combat_loop: [
+                'ev',
+                0,
+                '/ev',
+                { '->t->': 'enemy_loop' },
+                'ev',
+                'str',
+                '^enemies',
+                '/str',
+                { 'x()': 'has_mounts', exArgs: 1 },
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '\n',
+                            '^Enemy mounts:',
+                            '\n',
+                            'ev',
+                            0,
+                            'str',
+                            '^enemies',
+                            '/str',
+                            '/ev',
+                            { '->t->': 'mount_loop' },
+                            { '->': '.^.^.^.11' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                0,
+                '/ev',
+                { '->t->': 'hero_loop' },
+                'ev',
+                'str',
+                '^heroes',
+                '/str',
+                { 'x()': 'has_mounts', exArgs: 1 },
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '\n',
+                            '^Hero mounts:',
+                            '\n',
+                            'ev',
+                            0,
+                            'str',
+                            '^heroes',
+                            '/str',
+                            '/ev',
+                            { '->t->': 'mount_loop' },
+                            { '->': '.^.^.^.24' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                { 'x()': 'get_action_order' },
+                'out',
+                '/ev',
+                '\n',
+                'ev',
+                { 'x()': 'is_player_action' },
+                '_',
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '\n',
+                            { '->t->': 'player_action_options' },
+                            { '->': '.^.^.^.37' },
+                            null
+                        ]
+                    }
+                ],
+                [
+                    { '->': '.^.b' },
+                    {
+                        b: [
+                            '\n',
+                            'ev',
+                            { 'x()': 'ai_action' },
+                            'out',
+                            '/ev',
+                            '\n',
+                            { '->': '.^.^.^.37' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                { 'x()': 'get_action_result' },
+                'out',
+                '/ev',
+                '\n',
+                'ev',
+                { 'x()': 'end_turn' },
+                'out',
+                '/ev',
+                '\n',
+                'ev',
+                { 'x()': 'get_combat_status' },
+                'str',
+                '^IN_PROGRESS',
+                '/str',
+                '==',
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '\n',
+                            '^Next turn!',
+                            '\n',
+                            { '->': '.^.^.^' },
+                            { '->': '.^.^.^.57' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                'void',
+                '/ev',
+                '->->',
+                { '#f': 1 }
+            ],
+            enemy_loop: [
+                { 'temp=': 'index' },
+                'ev',
+                { 'VAR?': 'index' },
+                'str',
+                '^enemies',
+                '/str',
+                { 'x()': 'get_party_size', exArgs: 1 },
+                '>=',
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '^ ',
+                            'ev',
+                            'void',
+                            '/ev',
+                            '->->',
+                            { '->': '.^.^.^.10' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                'str',
+                '^enemies',
+                '/str',
+                { 'VAR?': 'index' },
+                'str',
+                '^name',
+                '/str',
+                { 'x()': 'get_character_info', exArgs: 3 },
+                '/ev',
+                { 'temp=': 'enemy_name' },
+                '\n',
+                'ev',
+                'str',
+                '^enemies',
+                '/str',
+                { 'VAR?': 'index' },
+                'str',
+                '^hp',
+                '/str',
+                { 'x()': 'get_character_info', exArgs: 3 },
+                '/ev',
+                { 'temp=': 'enemy_hp' },
+                '\n',
+                'ev',
+                { 'VAR?': 'enemy_hp' },
+                0,
+                '>',
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '\n',
+                            '^Enemy: ',
+                            'ev',
+                            { 'VAR?': 'enemy_name' },
+                            'out',
+                            '/ev',
+                            '^ (Hp: ',
+                            'ev',
+                            { 'VAR?': 'enemy_hp' },
+                            'out',
+                            '/ev',
+                            '^)',
+                            '\n',
+                            { '->': '.^.^.^.42' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                { 'VAR?': 'index' },
+                1,
+                '+',
+                '/ev',
+                { '->': '.^' },
+                { '#f': 1 }
+            ],
+            hero_loop: [
+                { 'temp=': 'index' },
+                'ev',
+                { 'VAR?': 'index' },
+                'str',
+                '^heroes',
+                '/str',
+                { 'x()': 'get_party_size', exArgs: 1 },
+                '>=',
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '^ ',
+                            'ev',
+                            'void',
+                            '/ev',
+                            '->->',
+                            { '->': '.^.^.^.10' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                'str',
+                '^heroes',
+                '/str',
+                { 'VAR?': 'index' },
+                'str',
+                '^name',
+                '/str',
+                { 'x()': 'get_character_info', exArgs: 3 },
+                '/ev',
+                { 'temp=': 'hero_name' },
+                '\n',
+                'ev',
+                'str',
+                '^heroes',
+                '/str',
+                { 'VAR?': 'index' },
+                'str',
+                '^hp',
+                '/str',
+                { 'x()': 'get_character_info', exArgs: 3 },
+                '/ev',
+                { 'temp=': 'hero_hp' },
+                '\n',
+                '^Hero: ',
+                'ev',
+                { 'VAR?': 'hero_name' },
+                'out',
+                '/ev',
+                '^ (Hp: ',
+                'ev',
+                { 'VAR?': 'hero_hp' },
+                'out',
+                '/ev',
+                '^)',
+                '\n',
+                'ev',
+                { 'VAR?': 'index' },
+                1,
+                '+',
+                '/ev',
+                { '->': '.^' },
+                { '#f': 1 }
+            ],
+            player_action_options: [
+                '^Select an enemy to attack',
+                '\n',
+                'ev',
+                0,
+                '/ev',
+                { '->': 'enemy_choice_loop' },
+                { '#f': 1 }
+            ],
+            enemy_choice_loop: [
+                { 'temp=': 'index' },
+                'ev',
+                'str',
+                '^enemies',
+                '/str',
+                { 'VAR?': 'index' },
+                'str',
+                '^name',
+                '/str',
+                { 'x()': 'get_character_info', exArgs: 3 },
+                '/ev',
+                { 'temp=': 'enemy_name' },
+                '\n',
+                'ev',
+                'str',
+                '^enemies',
+                '/str',
+                { 'VAR?': 'index' },
+                'str',
+                '^hp',
+                '/str',
+                { 'x()': 'get_character_info', exArgs: 3 },
+                '/ev',
+                { 'temp=': 'enemy_hp' },
+                '\n',
+                'ev',
+                'str',
+                '^enemies',
+                '/str',
+                { 'VAR?': 'index' },
+                'str',
+                '^id',
+                '/str',
+                { 'x()': 'get_character_info', exArgs: 3 },
+                '/ev',
+                { 'temp=': 'enemy_id' },
+                '\n',
+                'ev',
+                { 'VAR?': 'enemy_hp' },
+                0,
+                '>',
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '\n',
+                            'ev',
+                            'str',
+                            'ev',
+                            { 'VAR?': 'enemy_name' },
+                            'out',
+                            '/ev',
+                            '/str',
+                            '/ev',
+                            { '*': '.^.c-0', flg: 4 },
+                            { '->': '.^.^.^.43' },
+                            {
+                                'c-0': [
+                                    '\n',
+                                    'ev',
+                                    { 'VAR?': 'enemy_id' },
+                                    { 'x()': 'attack', exArgs: 1 },
+                                    'pop',
+                                    '/ev',
+                                    '\n',
+                                    'ev',
+                                    'void',
+                                    '/ev',
+                                    '->->',
+                                    { '#f': 5 }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                { 'VAR?': 'index' },
+                'str',
+                '^enemies',
+                '/str',
+                { 'x()': 'get_party_size', exArgs: 1 },
+                1,
+                '-',
+                '<',
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '^ ',
+                            'ev',
+                            { 'VAR?': 'index' },
+                            1,
+                            '+',
+                            '/ev',
+                            { '->': '.^.^.^' },
+                            { '->': '.^.^.^.56' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                { '#f': 1 }
+            ],
+            mount_loop: [
+                { 'temp=': 'team' },
+                { 'temp=': 'index' },
+                'ev',
+                { 'VAR?': 'index' },
+                { 'VAR?': 'team' },
+                { 'x()': 'get_party_size', exArgs: 1 },
+                '>=',
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '^ ',
+                            'ev',
+                            'void',
+                            '/ev',
+                            '->->',
+                            { '->': '.^.^.^.9' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                { 'VAR?': 'team' },
+                { 'VAR?': 'index' },
+                'str',
+                '^name',
+                '/str',
+                { 'x()': 'get_mount_info', exArgs: 3 },
+                '/ev',
+                { 'temp=': 'mount_name' },
+                '\n',
+                'ev',
+                { 'VAR?': 'team' },
+                { 'VAR?': 'index' },
+                'str',
+                '^hp',
+                '/str',
+                { 'x()': 'get_mount_info', exArgs: 3 },
+                '/ev',
+                { 'temp=': 'mount_hp' },
+                '\n',
+                'ev',
+                { 'VAR?': 'mount_hp' },
+                0,
+                '>',
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '\n',
+                            'ev',
+                            { 'VAR?': 'mount_name' },
+                            'out',
+                            '/ev',
+                            '^ (Hp: ',
+                            'ev',
+                            { 'VAR?': 'mount_hp' },
+                            'out',
+                            '/ev',
+                            '^)',
+                            '\n',
+                            { '->': '.^.^.^.37' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                { 'VAR?': 'index' },
+                1,
+                '+',
+                { 'VAR?': 'team' },
+                '/ev',
+                { '->': '.^' },
+                { '#f': 1 }
+            ],
+            available_skills_loop: [
+                { 'temp=': 'index' },
+                'ev',
+                { 'VAR?': 'index' },
+                'str',
+                '^name',
+                '/str',
+                { 'x()': 'get_scene_skill_info', exArgs: 2 },
+                '/ev',
+                { 'temp=': 'skill_name' },
+                '\n',
+                'ev',
+                { 'VAR?': 'index' },
+                'str',
+                '^id',
+                '/str',
+                { 'x()': 'get_scene_skill_info', exArgs: 2 },
+                '/ev',
+                { 'temp=': 'skill_id' },
+                '\n',
+                'ev',
+                { 'VAR?': 'skill_name' },
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '\n',
+                            'ev',
+                            'str',
+                            'ev',
+                            { 'VAR?': 'skill_name' },
+                            'out',
+                            '/ev',
+                            '/str',
+                            '/ev',
+                            { '*': '.^.c-0', flg: 4 },
+                            { '->': '.^.^.^.23' },
+                            {
+                                'c-0': [
+                                    '\n',
+                                    'ev',
+                                    { 'VAR?': 'skill_id' },
+                                    { 'x()': 'attempt_skill', exArgs: 1 },
+                                    'pop',
+                                    '/ev',
+                                    '\n',
+                                    'ev',
+                                    'void',
+                                    '/ev',
+                                    '->->',
+                                    { '#f': 5 }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                { 'VAR?': 'index' },
+                { 'x()': 'get_action_skills_count' },
+                1,
+                '-',
+                '<',
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '^ ',
+                            'ev',
+                            { 'VAR?': 'index' },
+                            1,
+                            '+',
+                            '/ev',
+                            { '->': '.^.^.^' },
+                            { '->': '.^.^.^.33' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                { '#f': 1 }
+            ],
+            '#f': 1
+        }
+    ],
+    listDefs: {}
+}
 
 export default storyContent
-

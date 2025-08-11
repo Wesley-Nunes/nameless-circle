@@ -1,28 +1,27 @@
 import { getWeaponModifier } from 'libs/systems/abilitySystem'
 import { roll } from 'libs/systems/rollSystem'
 
-import type { Enemy, Hero, Mount, } from 'libs/entities'
+import type { ActionResult, Enemy, Hero, Mount } from 'libs/entities'
 
 const attack = (
     attacker: Hero | Enemy | Mount,
     target: Hero | Enemy | Mount
-): { hit: boolean, critical: boolean } => {
+): ActionResult => {
     const attackRoll = roll()
     const modifier = getWeaponModifier(attacker.weapon, attacker.abilities)
     const totalAttack = attackRoll + modifier
 
     if (attackRoll === 20) {
-        return { hit: true, critical: true }
+        return { success: true, critical: true }
     }
     if (attackRoll === 1) {
-        return { hit: false, critical: false }
+        return { success: false, critical: false }
     }
     if (totalAttack >= target.armorClass) {
-        return { hit: true, critical: false }
+        return { success: true, critical: false }
     }
 
-    return { hit: false, critical: false }
+    return { success: false, critical: false }
 }
 
 export default attack
-

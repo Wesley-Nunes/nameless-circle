@@ -43,4 +43,3 @@ const generateCombatResultPoints = (
 }
 
 export default generateCombatResultPoints
-

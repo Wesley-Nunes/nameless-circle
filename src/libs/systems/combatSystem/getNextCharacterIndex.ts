@@ -18,7 +18,7 @@ const getNextCharacterIndex = (
     if (characters[newIndex].hp <= 0) {
         throw new Error(
             'All characters are dead.' +
-            'Call getStatusCombat() to check combat status before invoking this function.'
+                'Call getStatusCombat() to check combat status before invoking this function.'
         )
     }
 
@@ -26,4 +26,3 @@ const getNextCharacterIndex = (
 }
 
 export default getNextCharacterIndex
-

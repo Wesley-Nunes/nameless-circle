@@ -17,4 +17,3 @@ const getMountByName = (name: string): Mount => {
 }
 
 export default getMountByName
-

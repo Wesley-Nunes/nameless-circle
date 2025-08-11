@@ -11,7 +11,7 @@ describe.skip('validateHeroPartySize', () => {
     const generateHeroes = (count: number): Hero[] => {
         return Array.from({ length: count }, (_, i) => ({
             ...getHeroById('hero_9999'),
-            id: `hero_${i + 1}`,
+            id: `hero_${i + 1}`
         }))
     }
 
@@ -33,7 +33,7 @@ describe.skip('validateHeroPartySize', () => {
         const party = generateHeroes(4)
         const expectedError = new Error(
             'Maximum party size reached (3 heroes). ' +
-            'Please remove a hero first using removeFromParty().'
+                'Please remove a hero first using removeFromParty().'
         )
 
         expect(() => validateHeroPartySize(party)).toThrow(expectedError)
@@ -49,10 +49,9 @@ describe.skip('validateHeroPartySize', () => {
         const largeParty = generateHeroes(5)
         const expectedError = new Error(
             'Maximum party size reached (3 heroes). ' +
-            'Please remove a hero first using removeFromParty().'
+                'Please remove a hero first using removeFromParty().'
         )
 
         expect(() => validateHeroPartySize(largeParty)).toThrow(expectedError)
     })
 })
-

@@ -10,4 +10,3 @@ export { default as validateSpecies } from './validateSpecies'
 export { default as validatePartySize } from './validatePartySize'
 export { default as validatePositiveNumber } from './validatePositiveNumber'
 export { default as validateTemplate } from './validateTemplate'
-

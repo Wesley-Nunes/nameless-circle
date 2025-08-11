@@ -9,10 +9,10 @@ const addID = (ID: string) => {
     validateIDKey(key)
     validateIDValue(IDCounters[key], Number(value))
 
-    IDCounters[key] = IDCounters[key] + 1 === Number(value)
-        ? Number(value)
-        : IDCounters[key as IDKey]
+    IDCounters[key] =
+        IDCounters[key] + 1 === Number(value)
+            ? Number(value)
+            : IDCounters[key as IDKey]
 }
 
 export default addID
-

@@ -6,7 +6,7 @@ import calculateDamage from './calculateDamage'
 import type { Hero, Weapon } from 'libs/entities'
 
 vi.mock('../rollSystem', () => ({
-    roll: vi.fn().mockReturnValue(4),
+    roll: vi.fn().mockReturnValue(4)
 }))
 
 describe('calculateDamage', () => {
@@ -86,7 +86,7 @@ describe('calculateDamage', () => {
                 ...baseHero.weapon,
                 dice: {
                     count: 1,
-                    sides: 6,
+                    sides: 6
                 }
             }
         }
@@ -156,4 +156,3 @@ describe('calculateDamage', () => {
         expect(roll).toHaveBeenCalledTimes(2)
     })
 })
-

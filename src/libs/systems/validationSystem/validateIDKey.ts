@@ -10,4 +10,3 @@ const validateIDKey = (IDKey: IDKey) => {
 }
 
 export default validateIDKey
-

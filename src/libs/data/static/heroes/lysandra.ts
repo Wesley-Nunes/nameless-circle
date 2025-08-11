@@ -29,4 +29,3 @@ const lysandra: Hero = {
 }
 
 export default lysandra
-

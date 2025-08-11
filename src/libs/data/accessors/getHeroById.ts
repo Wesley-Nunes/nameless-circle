@@ -22,4 +22,3 @@ const getHeroById = (id: string): Hero => {
 }
 
 export default getHeroById
-

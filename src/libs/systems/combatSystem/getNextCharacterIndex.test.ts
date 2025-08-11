@@ -10,7 +10,7 @@ const createTestHero = (id: string, hp: number): Hero => ({
     ...HERO_TEST,
     id,
     hp,
-    isAlive: hp > 0,
+    isAlive: hp > 0
 })
 const createTestEnemy = (id: string, hp: number): Enemy => ({
     ...HERO_TEST,
@@ -66,11 +66,12 @@ describe('getNextCharacterIndex', () => {
         ]
         const currentIndex = 0
 
-        expect(() => getNextCharacterIndex(characters, currentIndex))
-            .toThrowError(
-                'All characters are dead.' +
+        expect(() =>
+            getNextCharacterIndex(characters, currentIndex)
+        ).toThrowError(
+            'All characters are dead.' +
                 'Call getStatusCombat() to check combat status before invoking this function.'
-            )
+        )
     })
     it('handles consecutive dead characters correctly', () => {
         const characters = [
@@ -99,4 +100,3 @@ describe('getNextCharacterIndex', () => {
         expect(result).toBe(1)
     })
 })
-

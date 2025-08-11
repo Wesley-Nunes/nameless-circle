@@ -1,11 +1,11 @@
 import { roll } from 'libs/systems/rollSystem'
 
-import type { Enemy, Hero, Mount } from 'libs/entities'
+import type { ActionResult, Enemy, Hero, Mount } from 'libs/entities'
 
 const generateCombatSentence = (
     attacker: Enemy | Hero | Mount,
     target: Enemy | Hero | Mount,
-    attackResult: { hit: boolean, critical: boolean }
+    attackResult: ActionResult
 ): string => {
     const criticalHitMessage = [
         `${attacker.name} critically smashes ${target.name}!`,
@@ -27,14 +27,13 @@ const generateCombatSentence = (
     ]
     const randomIndex = roll(4) - 1
 
-    if (attackResult.hit && attackResult.critical) {
+    if (attackResult.success && attackResult.critical) {
         return criticalHitMessage[randomIndex]
     }
-    if (attackResult.hit && !attackResult.critical) {
+    if (attackResult.success && !attackResult.critical) {
         return hitMessage[randomIndex]
     }
     return missMessage[randomIndex]
 }
 
 export default generateCombatSentence
-

@@ -1,14 +1,10 @@
 import type { Combatant } from 'libs/entities'
 
-const findTarget = (
-    aiCharacter: Combatant,
-    party: Combatant[]
-): Combatant => {
+const findTarget = (aiCharacter: Combatant, party: Combatant[]): Combatant => {
     if (aiCharacter.team === 'heroes') {
-        const enemiesAlive = party.filter(character => (
-            character.team === 'enemies' &&
-            character.hp > 0
-        ))
+        const enemiesAlive = party.filter(
+            character => character.team === 'enemies' && character.hp > 0
+        )
         let weakestAlive = enemiesAlive[0]
 
         for (const char of enemiesAlive) {
@@ -21,13 +17,14 @@ const findTarget = (
     }
 
     if (aiCharacter.team === 'enemies') {
-        const heroesAlive = party.filter(character => (
-            character.team === 'heroes' &&
-            character.hp > 0
-        ))
+        const heroesAlive = party.filter(
+            character => character.team === 'heroes' && character.hp > 0
+        )
         const targets = heroesAlive.filter(hero => {
             if ('preferredTargets' in aiCharacter) {
-                return aiCharacter.preferredTargets?.some(target => hero.type.includes(target))
+                return aiCharacter.preferredTargets?.some(target =>
+                    hero.type.includes(target)
+                )
             }
         })
         const endTargets = targets.length > 0 ? targets : heroesAlive
@@ -47,4 +44,3 @@ const findTarget = (
 }
 
 export default findTarget
-

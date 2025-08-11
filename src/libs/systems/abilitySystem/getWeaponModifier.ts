@@ -1,6 +1,9 @@
 import type { AbilityBlock, Weapon } from 'libs/entities'
 
-const getWeaponModifier = (weapon: Weapon, characterAbilities: AbilityBlock): number => {
+const getWeaponModifier = (
+    weapon: Weapon,
+    characterAbilities: AbilityBlock
+): number => {
     if (weapon.range === 'melee') {
         return characterAbilities.str.modifier
     } else if (weapon.range === 'ranged') {
@@ -11,4 +14,3 @@ const getWeaponModifier = (weapon: Weapon, characterAbilities: AbilityBlock): nu
 }
 
 export default getWeaponModifier
-

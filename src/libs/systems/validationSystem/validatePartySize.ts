@@ -7,4 +7,3 @@ const validatePartySize = (party: Character[]) => {
 }
 
 export default validatePartySize
-

@@ -25,21 +25,26 @@ describe('validateIDValue', () => {
         const gapValue = 7
         const expectedError = `The value should be continuous. Last value register was: ${lastID}`
 
-        expect(() => validateIDValue(lastID, gapValue)).toThrowError(expectedError)
+        expect(() => validateIDValue(lastID, gapValue)).toThrowError(
+            expectedError
+        )
     })
     it('should include last ID value in error message', () => {
         const lastID = 10
         const gapValue = 15
         const expectedMessage = `Last value register was: ${lastID}`
 
-        expect(() => validateIDValue(lastID, gapValue)).toThrowError(expectedMessage)
+        expect(() => validateIDValue(lastID, gapValue)).toThrowError(
+            expectedMessage
+        )
     })
     it('should throw for non-consecutive values with negative numbers', () => {
         const lastID = -3
         const gapValue = 0
         const expectedError = `The value should be continuous. Last value register was: ${lastID}`
 
-        expect(() => validateIDValue(lastID, gapValue)).toThrowError(expectedError)
+        expect(() => validateIDValue(lastID, gapValue)).toThrowError(
+            expectedError
+        )
     })
 })
-

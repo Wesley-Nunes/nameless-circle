@@ -30,7 +30,7 @@ const hero: Hero = {
     actions: ['ATTACK'],
     size: 'medium',
     team: 'heroes',
-    type: ['humanoid'],
+    type: ['humanoid']
 }
 const enemy: Enemy = {
     id: 'enemy-001',
@@ -57,46 +57,48 @@ const enemy: Enemy = {
     size: 'medium',
     team: 'enemies',
     type: ['humanoid'],
-    xp: 0,
+    xp: 0
 }
 
 describe('attack function', () => {
-    it('CRITICAL HIT: returns {hit: true, critical: true} on natural 20', () => {
+    it('CRITICAL HIT: returns {success: true, critical: true} on natural 20', () => {
         vi.spyOn(rollSystem, 'roll').mockReturnValueOnce(20)
 
         const attacker = hero
         const target = enemy
 
         const result = attack(attacker, target)
-        expect(result).toEqual({ hit: true, critical: true })
+        expect(result).toEqual({ success: true, critical: true })
     })
-    it('CRITICAL MISS: returns {hit: false, critical: false} on natural 1', () => {
+    it('CRITICAL MISS: returns {success: false, critical: false} on natural 1', () => {
         vi.spyOn(rollSystem, 'roll').mockReturnValueOnce(1)
 
         const attacker = hero
         const target = enemy
 
         const result = attack(attacker, target)
-        expect(result).toEqual({ hit: false, critical: false })
+        expect(result).toEqual({ success: false, critical: false })
     })
-    it('HIT: returns {hit: true, critical: false} when total meets armor class (melee)', () => {
+    it('HIT: returns {success: true, critical: false} when total meets armor class (melee)', () => {
         vi.spyOn(rollSystem, 'roll').mockReturnValueOnce(15)
 
         const attacker: Hero = {
             ...hero,
             abilities: {
-                ...hero.abilities, str: { score: 16, modifier: 3 }
+                ...hero.abilities,
+                str: { score: 16, modifier: 3 }
             },
             weapon: {
-                ...hero.weapon, range: 'melee'
+                ...hero.weapon,
+                range: 'melee'
             }
         }
         const target = { ...enemy, armorClass: 18 }
 
         const result = attack(attacker, target)
-        expect(result).toEqual({ hit: true, critical: false })
+        expect(result).toEqual({ success: true, critical: false })
     })
-    it('MISS: returns {hit: false, critical: false} when total < armor class (ranged)', () => {
+    it('MISS: returns {success: false, critical: false} when total < armor class (ranged)', () => {
         vi.spyOn(rollSystem, 'roll').mockReturnValueOnce(11)
 
         const attacker: Enemy = {
@@ -113,7 +115,7 @@ describe('attack function', () => {
         }
 
         const result = attack(attacker, target)
-        expect(result).toEqual({ hit: false, critical: false })
+        expect(result).toEqual({ success: false, critical: false })
     })
     it('HIT: uses strength modifier for melee weapons', () => {
         vi.spyOn(rollSystem, 'roll').mockReturnValueOnce(10)
@@ -133,7 +135,7 @@ describe('attack function', () => {
         }
 
         const result = attack(attacker, target)
-        expect(result.hit).toBe(true)
+        expect(result.success).toBe(true)
     })
     it('HIT: uses dexterity modifier for ranged weapons', () => {
         vi.spyOn(rollSystem, 'roll').mockReturnValueOnce(8)
@@ -153,7 +155,6 @@ describe('attack function', () => {
         }
 
         const result = attack(attacker, target)
-        expect(result.hit).toBe(true)
+        expect(result.success).toBe(true)
     })
 })
-

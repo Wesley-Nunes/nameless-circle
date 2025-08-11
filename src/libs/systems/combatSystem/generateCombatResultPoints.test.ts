@@ -2,7 +2,11 @@ import { describe, it, expect } from 'vitest'
 
 import generateCombatResultPoints from './generateCombatResultPoints'
 
-import { type Combatant, type CombatStatus, type WinCondition } from 'libs/entities'
+import {
+    type Combatant,
+    type CombatStatus,
+    type WinCondition
+} from 'libs/entities'
 
 describe('generateCombatResultPoints', () => {
     const mockCombatants: Combatant[] = [
@@ -71,7 +75,11 @@ describe('generateCombatResultPoints', () => {
     it('returns -1 for DEFEAT status', () => {
         const status: CombatStatus = 'DEFEAT'
 
-        const result = generateCombatResultPoints(mockCombatants, status, mockWinCondition)
+        const result = generateCombatResultPoints(
+            mockCombatants,
+            status,
+            mockWinCondition
+        )
 
         expect(result).toBe(-1)
     })
@@ -82,7 +90,11 @@ describe('generateCombatResultPoints', () => {
             { quantity: 1, team: 'enemies', isAlive: false }
         ]
 
-        const result = generateCombatResultPoints(mockCombatants, status, winCondition)
+        const result = generateCombatResultPoints(
+            mockCombatants,
+            status,
+            winCondition
+        )
 
         expect(result).toBe(2)
     })
@@ -93,7 +105,11 @@ describe('generateCombatResultPoints', () => {
             { quantity: 999, team: 'enemies', isAlive: false } // Impossible condition
         ]
 
-        const result = generateCombatResultPoints(mockCombatants, status, winCondition)
+        const result = generateCombatResultPoints(
+            mockCombatants,
+            status,
+            winCondition
+        )
 
         expect(result).toBe(1)
     })
@@ -101,15 +117,20 @@ describe('generateCombatResultPoints', () => {
         const status: CombatStatus = 'VICTORY'
         const winCondition: WinCondition = []
 
-        const result = generateCombatResultPoints(mockCombatants, status, winCondition)
+        const result = generateCombatResultPoints(
+            mockCombatants,
+            status,
+            winCondition
+        )
 
         expect(result).toBe(0)
     })
     it('throws error for unhandled combat status', () => {
         const status = 'UNKNOWN' as CombatStatus
 
-        expect(() => generateCombatResultPoints(mockCombatants, status, mockWinCondition))
-            .toThrowError('Unhandled combat status: UNKNOWN')
+        expect(() =>
+            generateCombatResultPoints(mockCombatants, status, mockWinCondition)
+        ).toThrowError('Unhandled combat status: UNKNOWN')
     })
     it('handles complex conditions with multiple properties', () => {
         const status: CombatStatus = 'VICTORY'
@@ -122,9 +143,12 @@ describe('generateCombatResultPoints', () => {
             }
         ]
 
-        const result = generateCombatResultPoints(mockCombatants, status, winCondition)
+        const result = generateCombatResultPoints(
+            mockCombatants,
+            status,
+            winCondition
+        )
 
         expect(result).toBe(1)
     })
 })
-

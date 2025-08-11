@@ -1,4 +1,5 @@
 import type { Hero } from 'libs/entities'
+import { animalHandling, perception, stealth } from 'libs/data/static/ability'
 
 export const PLAYER_ID = 'hero_0001'
 
@@ -24,10 +25,9 @@ export const player: Hero = {
         range: 'ranged',
         dice: { count: 1, sides: 6, modifier: 0 }
     },
-    actions: ['ATTACK'],
+    actions: ['ATTACK', animalHandling, perception, stealth],
     size: 'medium',
     team: 'heroes',
     type: ['humanoid'],
     isPlayer: true
 }
-

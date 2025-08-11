@@ -10,7 +10,7 @@ const createTestHero = (id: string, hp: number): Hero => ({
     ...HERO_TEST,
     id,
     hp,
-    isAlive: hp > 0,
+    isAlive: hp > 0
 })
 
 const createTestEnemy = (id: string, hp: number): Enemy => ({
@@ -92,4 +92,3 @@ describe('findTarget', () => {
         expect(() => findTarget(invalidAI, party)).toThrow('Team not found')
     })
 })
-

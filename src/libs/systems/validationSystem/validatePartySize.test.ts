@@ -46,7 +46,7 @@ const mockCharacter: Character = {
     species: 'human',
     size: 'medium',
     team: 'heroes',
-    type: ['humanoid'],
+    type: ['humanoid']
 }
 
 describe('validatePartySize', () => {
@@ -64,15 +64,15 @@ describe('validatePartySize', () => {
             'The party size should be two or greater'
         )
     })
-    it('doesn\'t throw for valid party size (2 characters)', () => {
+    it("doesn't throw for valid party size (2 characters)", () => {
         const party: Character[] = [
             { ...mockCharacter },
-            { ...mockCharacter, id: '2' },
+            { ...mockCharacter, id: '2' }
         ]
 
         expect(() => validatePartySize(party)).not.toThrow()
     })
-    it('doesn\'t throw for larger valid party (5 characters)', () => {
+    it("doesn't throw for larger valid party (5 characters)", () => {
         const party = Array(5)
             .fill(null)
             .map((_, i) => ({ ...mockCharacter, id: String(i + 1) }))
@@ -80,4 +80,3 @@ describe('validatePartySize', () => {
         expect(() => validatePartySize(party)).not.toThrow()
     })
 })
-

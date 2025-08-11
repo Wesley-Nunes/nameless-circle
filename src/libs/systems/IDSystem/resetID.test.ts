@@ -12,16 +12,15 @@ describe('resetID', () => {
     })
 
     it('resets all counters to zero', () => {
-        (Object.keys(IDCounters) as IDKey[]).forEach(key => {
+        ;(Object.keys(IDCounters) as IDKey[]).forEach(key => {
             generateID(key)
             generateID(key)
         })
 
-        resetID();
+        resetID()
 
-        (Object.keys(IDCounters) as IDKey[]).forEach(key => {
+        ;(Object.keys(IDCounters) as IDKey[]).forEach(key => {
             expect(IDCounters[key]).toBe(0)
         })
     })
 })
-

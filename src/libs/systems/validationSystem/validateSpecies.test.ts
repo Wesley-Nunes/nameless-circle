@@ -4,8 +4,8 @@ import validateSpecies from './validateSpecies'
 describe('validateSpecies', () => {
     it('should throw an error when species is invalid', () => {
         // @ts-expect-error - Intentionally testing an invalid type
-        expect(() => validateSpecies('high'))
-            .toThrowError("Invalid species: 'high'.")
+        expect(() => validateSpecies('high')).toThrowError(
+            "Invalid species: 'high'."
+        )
     })
 })
-

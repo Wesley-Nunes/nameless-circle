@@ -13,4 +13,3 @@ const validateHeroId = (availableIds: string[], newId: string) => {
 }
 
 export default validateHeroId
-

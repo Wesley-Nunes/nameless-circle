@@ -20,4 +20,3 @@ const useStoryStore = () => {
 }
 
 export default useStoryStore
-

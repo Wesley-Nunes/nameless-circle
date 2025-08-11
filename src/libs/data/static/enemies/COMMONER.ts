@@ -29,4 +29,3 @@ const COMMONER_BASE: Enemy = {
 }
 
 export default COMMONER_BASE
-
