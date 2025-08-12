@@ -17,7 +17,8 @@ export default defineConfig({
                 'src/main.tsx',
                 '**/use*.ts', // Remove React hooks
                 'src/libs/entities', // Remove types
-                'src/story'
+                'src/story',
+                'dist'
             ]
         }
     }
