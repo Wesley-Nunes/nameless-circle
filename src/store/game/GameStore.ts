@@ -27,27 +27,26 @@ import type {
     Hero,
     Mount,
     Skill,
-    SkillSceneChallenge,
+    SkillSceneProgression,
+    SkillSceneReward,
     Team,
     WinCondition
 } from 'libs/entities'
 
 class GameStore {
     private availableHeroIds: string[]
-    private availableSceneSkills: SkillSceneChallenge[]
+    private availableSceneSkills: SkillSceneProgression[]
     private attemptSkillCount: { SUCCESS: number; FAIL: number }
     private charactersOrdered: Combatant[]
     private combatId: string
-    private combatLog: Map<
-        string,
-        { combatStatus: CombatStatus; value: number }
-    >
+    private Log: Map<string, { status: CombatStatus; value: number }>
     private combatStatus: CombatStatus
     private currentCharacterIndex: number
     private currentHeroParty: Hero[]
     private currentMounts: Mount[]
     private lastAttemptSkillResult: 'NONE' | 'SUCCESS' | 'FAIL'
     private skillSceneModifier: number
+    private skillSceneReward: SkillSceneReward
     private skillSceneTurn: number
     private skillSceneId: string
     private turnLog: string[]
@@ -59,27 +58,28 @@ class GameStore {
         this.attemptSkillCount = { SUCCESS: 0, FAIL: 0 }
         this.charactersOrdered = []
         this.combatId = ''
-        this.combatLog = new Map()
+        this.Log = new Map()
         this.combatStatus = getCombatStatus()
         this.currentCharacterIndex = 0
         this.currentHeroParty = [getHeroById(PLAYER_ID)]
         this.currentMounts = []
         this.lastAttemptSkillResult = 'NONE'
         this.skillSceneId = ''
+        this.skillSceneReward = { type: '', items: [] }
         this.skillSceneModifier = 0
         this.skillSceneTurn = 0
         this.turnLog = []
         this.winConditions = []
     }
 
-    // NOTE: It should be moved to a proper system after create more action
+    // TODO: Implement a robust action management system once additional actions are created
     private attackAction(attacker: Combatant, target: Combatant) {
         const attackResult = attack(attacker, target)
 
         if (attackResult.success) {
             const damage = calculateDamage(attacker, attackResult.critical)
-            // NOTE: HP is currently decreased directly from the Character object
-            // for simplicity. This will be handled by a dedicated HP system later.
+            // NOTE: Direct HP access on Character (simplicity)
+            // TODO: Migrate to HealthSystem for damage/healing management
             target.hp -= damage
             if (target.hp <= 0) {
                 target.isAlive = false
@@ -99,19 +99,54 @@ class GameStore {
             this.combatStatus,
             this.winConditions
         )
-        this.combatLog.set(this.combatId, {
-            combatStatus: this.combatStatus,
+        this.Log.set(this.combatId, {
+            status: this.combatStatus,
             value: combatResultPoints
         })
+        this.resetVariables()
+    }
+    private endSkillScene() {
+        const successCount = this.attemptSkillCount.SUCCESS
+        const failCount = this.attemptSkillCount.FAIL
+        const status = successCount > failCount ? 'VICTORY' : 'DEFEAT'
+        let value = 0
 
-        this.charactersOrdered = []
-        this.combatId = ''
-        this.combatStatus = 'UNINITIALIZED'
-        this.currentCharacterIndex = 0
-        // NOTE: The filter of the mounts should be improved
-        // based on mounts availability
-        this.currentMounts = this.currentMounts.filter(mount => mount.isAlive)
-        this.turnLog = []
+        if (successCount > failCount) {
+            value++
+            // TODO: Implement mount system
+            if (
+                this.skillSceneReward.type === 'mounts' &&
+                this.skillSceneReward.items.length <=
+                    this.availableHeroIds.length
+            ) {
+                this.skillSceneReward.items.forEach((mountName, i) => {
+                    const mount = createMount(
+                        mountName,
+                        this.availableHeroIds[i],
+                        'heroes'
+                    )
+                    this.currentMounts.push(mount)
+                })
+            }
+        } else if (failCount > successCount) {
+            value--
+            // TODO: Blocked by deities' story development
+            // When the player fails in a skill scene,
+            // a deity will mark them for later attention.
+        } else {
+            throw new Error(
+                `Skill scene cannot resolve: equal number of successes and failures ` +
+                    `(SUCCESS: ${successCount}, FAIL: ${failCount}). ` +
+                    `Design requires a clear outcome.`
+            )
+        }
+
+        this.Log.set(this.skillSceneId, {
+            status,
+            value
+        })
+
+        this.resetVariables()
     }
     private runInitiative(heroParty: Hero[], enemyParty: Enemy[]) {
         this.charactersOrdered = initiative([...heroParty, ...enemyParty]).map(
@@ -125,6 +160,23 @@ class GameStore {
                 throw new Error('Fail to order the characters')
             }
         )
+    }
+    private resetVariables() {
+        this.availableSceneSkills = []
+        this.attemptSkillCount = { SUCCESS: 0, FAIL: 0 }
+        this.charactersOrdered = []
+        this.combatId = ''
+        this.combatStatus = getCombatStatus()
+        this.currentCharacterIndex = 0
+        // TODO: Filter mounts by availability
+        this.currentMounts = this.currentMounts.filter(mount => mount.isAlive)
+        this.lastAttemptSkillResult = 'NONE'
+        this.skillSceneId = ''
+        this.skillSceneReward = { type: '', items: [] }
+        this.skillSceneModifier = 0
+        this.skillSceneTurn = 0
+        this.turnLog = []
+        this.winConditions = []
     }
     private stringifyWithMarker(characters: Combatant[], i: number): string {
         return characters
@@ -140,6 +192,7 @@ class GameStore {
             .join(' / ')
     }
 
+    // eslint-disable-next-line
     public handleInkFunction(funcName: string, ...args: any[]) {
         switch (funcName) {
             case 'attempt_skill': {
@@ -226,6 +279,11 @@ class GameStore {
 
                 break
             }
+            case 'end_skill_scene': {
+                this.endSkillScene()
+
+                break
+            }
             case 'end_skill_turn': {
                 this.skillSceneTurn += 1
                 break
@@ -291,8 +349,8 @@ class GameStore {
             case 'get_combat_result': {
                 const [combatId] = args as [string]
 
-                if (this.combatLog.has(combatId)) {
-                    const combatResult = this.combatLog.get(combatId)
+                if (this.Log.has(combatId)) {
+                    const combatResult = this.Log.get(combatId)
 
                     return combatResult?.value
                 }
@@ -378,10 +436,12 @@ class GameStore {
                 const [skillSceneId] = args as [string]
                 this.skillSceneId = skillSceneId
                 this.skillSceneTurn = 1
-                this.availableSceneSkills = getSkillScene(
+                const { skillSceneProgression, reward } = getSkillScene(
                     skillSceneId,
                     this.currentHeroParty[0]
                 )
+                this.availableSceneSkills = skillSceneProgression
+                this.skillSceneReward = reward
                 this.skillSceneModifier = getSkillSceneModifier(
                     this.currentHeroParty.filter(hero => !hero.isPlayer)
                 )

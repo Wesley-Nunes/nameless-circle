@@ -5,6 +5,7 @@ EXTERNAL add_to_hero_party(hero_id)
 EXTERNAL ai_action()
 EXTERNAL attack(character_id)
 EXTERNAL attempt_skill(skill_id)
+EXTERNAL end_skill_scene()
 EXTERNAL end_skill_turn()
 EXTERNAL end_turn()
 EXTERNAL get_action_order()
@@ -23,9 +24,7 @@ EXTERNAL last_attempt_skill_result()
 EXTERNAL set_combat(combat_id)
 EXTERNAL set_skill_scene(skill_scene_id)
 
-// TEMP #####
-// -> start
--> steal_horses_quest
+-> start
 
 === start ===
 “When countless mouths are sated with innocent blood,
@@ -135,7 +134,7 @@ The light struggled to penetrate the forest. Only when the shy moon occasionally
         { end_skill_turn() }
         -> skill_scene
     - 3: You set out for the next village, both drained from little sleep. No conversation passed between you until the first rays of sun.
-        // { end_skill_scene() }
+        { end_skill_scene() }
         -> village_quest
     - else:
         -> skill_scene
@@ -150,7 +149,7 @@ The light struggled to penetrate the forest. Only when the shy moon occasionally
         { end_skill_turn() }
         -> skill_scene
     - 3: Fail message 3 
-        // { end_skill_scene() }
+        { end_skill_scene() }
         -> steal_horses_quest_fail
     - else:
         -> skill_scene

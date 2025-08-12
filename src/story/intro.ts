@@ -3,12 +3,7 @@ import type { InkStoryData } from './InkStoryData.type'
 const storyContent: InkStoryData = {
     inkVersion: 21,
     root: [
-        [
-            '\n',
-            { '->': 'steal_horses_quest' },
-            ['done', { '#f': 5, '#n': 'g-0' }],
-            null
-        ],
+        ['\n', { '->': 'start' }, ['done', { '#f': 5, '#n': 'g-0' }], null],
         'done',
         {
             start: [
@@ -532,6 +527,11 @@ const storyContent: InkStoryData = {
                                     '\n',
                                     '^You set out for the next village, both drained from little sleep. No conversation passed between you until the first rays of sun.',
                                     '\n',
+                                    'ev',
+                                    { 'x()': 'end_skill_scene' },
+                                    'out',
+                                    '/ev',
+                                    '\n',
                                     { '->': 'village_quest' },
                                     { '->': '.^.^.^.8' },
                                     null
@@ -619,6 +619,11 @@ const storyContent: InkStoryData = {
                                     'pop',
                                     '\n',
                                     '^Fail message 3',
+                                    '\n',
+                                    'ev',
+                                    { 'x()': 'end_skill_scene' },
+                                    'out',
+                                    '/ev',
                                     '\n',
                                     { '->': 'steal_horses_quest_fail' },
                                     { '->': '.^.^.^.8' },
@@ -720,6 +725,7 @@ const storyContent: InkStoryData = {
                 '\n',
                 { '#f': 1 }
             ],
+            end_skill_scene: ['^end skill scene', '\n', { '#f': 1 }],
             end_skill_turn: ['^end skill turn', '\n', { '#f': 1 }],
             end_turn: ['ev', 0, '/ev', '~ret', { '#f': 1 }],
             get_action_order: [
@@ -1447,3 +1453,4 @@ const storyContent: InkStoryData = {
 }
 
 export default storyContent
+

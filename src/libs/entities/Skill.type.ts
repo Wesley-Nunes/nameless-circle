@@ -6,6 +6,17 @@ export type Skill = {
     modifier: AbilityKey
 }
 
-export type SkillSceneChallenge = { turn: number; skills: Skill[]; dc: number }
+export type SkillSceneProgression = {
+    turn: number
+    skills: Skill[]
+    dc: number
+}
 
-export type SkillSceneMap = Record<string, SkillSceneChallenge[]>
+export type SkillSceneReward = { type: string; items: string[] }
+
+export type SkillSceneChallenge = {
+    skillSceneProgression: SkillSceneProgression[]
+    reward: SkillSceneReward
+}
+
+export type SkillSceneMap = Record<string, SkillSceneChallenge>

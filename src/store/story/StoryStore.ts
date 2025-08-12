@@ -3,9 +3,8 @@ import { Story } from 'inkjs'
 import type { InkStoryData } from 'story'
 
 class StoryStore {
-    private inkFunctionHandler:
-        | ((funcName: string, ...args: any[]) => void)
-        | null = null
+    private inkFunctionHandler: // eslint-disable-next-line
+    ((funcName: string, ...args: any[]) => void) | null = null
     private story: Story
     private updateCallback: (() => void) | null = null
     public content: string = ''
@@ -13,6 +12,7 @@ class StoryStore {
 
     constructor(
         storyContent: InkStoryData,
+        // eslint-disable-next-line
         inkFunctionHandler?: (funcName: string, ...args: any[]) => void
     ) {
         this.story = new Story(storyContent)
@@ -49,7 +49,8 @@ class StoryStore {
             'attempt_skill',
             'last_attempt_skill_result',
             'get_attempt_skill_count',
-            'end_skill_turn'
+            'end_skill_turn',
+            'end_skill_scene'
         ].forEach(fn => {
             this.story.BindExternalFunction(fn, (...args) => {
                 return this.inkFunctionHandler!(fn, ...args)

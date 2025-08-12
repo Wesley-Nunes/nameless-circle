@@ -9,6 +9,8 @@
     attacking { character_id }
 === function attempt_skill(skill_id) ===
     attempt skill { skill_id }
+=== function end_skill_scene() ===
+    end skill scene
 === function end_skill_turn() ===
     end skill turn
 === function end_turn() ===
