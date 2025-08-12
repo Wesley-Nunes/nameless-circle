@@ -656,7 +656,231 @@ const storyContent: InkStoryData = {
                 'end',
                 { '#f': 1 }
             ],
-            village_quest: ['^village_quest TBD', '\n', 'end', { '#f': 1 }],
+            village_quest: [
+                [
+                    '^Riding by your side, nose in the air and gaze austere, Lysandra said:',
+                    '\n',
+                    '^“From now on, address me as Lady Hawkridge — my true name. You will be ',
+                    'ev',
+                    { 'VAR?': 'player_name' },
+                    'out',
+                    '/ev',
+                    '^ Highcrag, my squire. The Highcrags are loyal, valorous vassals of House Hawkridge. Tonight, I’ll brief you further.”',
+                    '\n',
+                    '^With this new perspective, you approached the next village. Dawn’s mist surrendered to the rising sun, revealing the village of Threshold. The road to the Citadel, once narrow, now widened into well-kept pavement. Even at this early hour, it was already busy: a carter with bales of hay trotted heavily southwards.',
+                    '\n',
+                    '^Dominating the village center stood a large square and the prominent ‘Threshold Inn’. Despite the low sun, it buzzed with morning activity.',
+                    '\n',
+                    '^Lysandra dismounted, handing her horse to a stablehand like he was her lifelong servant. You mimicked her. She whispered:',
+                    '\n',
+                    '^“See, squire? People in the square whisper, eyeing the guard post nervously. Wait — hear the commotion inside the inn? Even behind closed doors. Now look there.”',
+                    '\n',
+                    '^She subtly gestured opposite your entry point.',
+                    '\n',
+                    '^“Stones in the sacred circle are cracking. This village breathes fear. Locals dread a local power more than night creatures. The wards were sabotaged. Everyone knows. They pretend not to. Today, you learn to read the unspoken.”',
+                    '\n',
+                    [
+                        'ev',
+                        { '^->': 'village_quest.0.21.$r1' },
+                        { 'temp=': '$r' },
+                        'str',
+                        { '->': '.^.s' },
+                        [{ '#n': '$r1' }],
+                        '/str',
+                        '/ev',
+                        { '*': '.^.^.c-0', flg: 18 },
+                        {
+                            s: [
+                                '^Talk to people in the square',
+                                { '->': '$r', var: true },
+                                null
+                            ]
+                        }
+                    ],
+                    [
+                        'ev',
+                        { '^->': 'village_quest.0.22.$r1' },
+                        { 'temp=': '$r' },
+                        'str',
+                        { '->': '.^.s' },
+                        [{ '#n': '$r1' }],
+                        '/str',
+                        '/ev',
+                        { '*': '.^.^.c-1', flg: 18 },
+                        {
+                            s: [
+                                '^Stop the inn brawl',
+                                { '->': '$r', var: true },
+                                null
+                            ]
+                        }
+                    ],
+                    [
+                        'ev',
+                        { '^->': 'village_quest.0.23.$r1' },
+                        { 'temp=': '$r' },
+                        'str',
+                        { '->': '.^.s' },
+                        [{ '#n': '$r1' }],
+                        '/str',
+                        '/ev',
+                        { '*': '.^.^.c-2', flg: 18 },
+                        {
+                            s: [
+                                '^Inspect the guard post ',
+                                { '->': '$r', var: true },
+                                null
+                            ]
+                        }
+                    ],
+                    {
+                        'c-0': [
+                            'ev',
+                            { '^->': 'village_quest.0.c-0.$r2' },
+                            '/ev',
+                            { 'temp=': '$r' },
+                            { '->': '.^.^.21.s' },
+                            [{ '#n': '$r2' }],
+                            '\n',
+                            { '->': '.^.^.g-0' },
+                            { '#f': 5 }
+                        ],
+                        'c-1': [
+                            'ev',
+                            { '^->': 'village_quest.0.c-1.$r2' },
+                            '/ev',
+                            { 'temp=': '$r' },
+                            { '->': '.^.^.22.s' },
+                            [{ '#n': '$r2' }],
+                            '\n',
+                            { '->': '.^.^.g-0' },
+                            { '#f': 5 }
+                        ],
+                        'c-2': [
+                            'ev',
+                            { '^->': 'village_quest.0.c-2.$r2' },
+                            '/ev',
+                            { 'temp=': '$r' },
+                            { '->': '.^.^.23.s' },
+                            [{ '#n': '$r2' }],
+                            '\n',
+                            { '->': '.^.^.g-0' },
+                            { '#f': 5 }
+                        ],
+                        'g-0': [
+                            '^While you investigated, the innkeeper stormed out shouting:',
+                            '\n',
+                            '^“They stole my grain! Damned guards can’t do their jobs!”',
+                            '\n',
+                            '^Lysandra whispered:',
+                            '\n',
+                            '^“Now comes the true test: how do we use this?”',
+                            '\n',
+                            [
+                                'ev',
+                                { '^->': 'village_quest.0.g-0.8.$r1' },
+                                { 'temp=': '$r' },
+                                'str',
+                                { '->': '.^.s' },
+                                [{ '#n': '$r1' }],
+                                '/str',
+                                '/ev',
+                                { '*': '.^.^.c-3', flg: 18 },
+                                {
+                                    s: [
+                                        '^Publicly support the innkeeper',
+                                        { '->': '$r', var: true },
+                                        null
+                                    ]
+                                }
+                            ],
+                            [
+                                'ev',
+                                { '^->': 'village_quest.0.g-0.9.$r1' },
+                                { 'temp=': '$r' },
+                                'str',
+                                { '->': '.^.s' },
+                                [{ '#n': '$r1' }],
+                                '/str',
+                                '/ev',
+                                { '*': '.^.^.c-4', flg: 18 },
+                                {
+                                    s: [
+                                        '^Defend the guards with logic',
+                                        { '->': '$r', var: true },
+                                        null
+                                    ]
+                                }
+                            ],
+                            [
+                                'ev',
+                                { '^->': 'village_quest.0.g-0.10.$r1' },
+                                { 'temp=': '$r' },
+                                'str',
+                                { '->': '.^.s' },
+                                [{ '#n': '$r1' }],
+                                '/str',
+                                '/ev',
+                                { '*': '.^.^.c-5', flg: 18 },
+                                {
+                                    s: [
+                                        '^Blame the Hidden Cultists',
+                                        { '->': '$r', var: true },
+                                        null
+                                    ]
+                                }
+                            ],
+                            {
+                                'c-3': [
+                                    'ev',
+                                    { '^->': 'village_quest.0.g-0.c-3.$r2' },
+                                    '/ev',
+                                    { 'temp=': '$r' },
+                                    { '->': '.^.^.8.s' },
+                                    [{ '#n': '$r2' }],
+                                    '\n',
+                                    { '->': '.^.^.^.g-1' },
+                                    { '#f': 5 }
+                                ],
+                                'c-4': [
+                                    'ev',
+                                    { '^->': 'village_quest.0.g-0.c-4.$r2' },
+                                    '/ev',
+                                    { 'temp=': '$r' },
+                                    { '->': '.^.^.9.s' },
+                                    [{ '#n': '$r2' }],
+                                    '\n',
+                                    { '->': '.^.^.^.g-1' },
+                                    { '#f': 5 }
+                                ],
+                                'c-5': [
+                                    'ev',
+                                    { '^->': 'village_quest.0.g-0.c-5.$r2' },
+                                    '/ev',
+                                    { 'temp=': '$r' },
+                                    { '->': '.^.^.10.s' },
+                                    [{ '#n': '$r2' }],
+                                    '\n',
+                                    { '->': '.^.^.^.g-1' },
+                                    { '#f': 5 }
+                                ],
+                                '#f': 5
+                            }
+                        ],
+                        'g-1': [
+                            '^“See how a small chaos (‘stolen grain’) hides a greater scheme (‘shattering the stones’)?”',
+                            '\n',
+                            '^She pointed at the fissure, now visible in twilight.',
+                            '\n',
+                            '^“The innkeeper’s a puppet. The true villains are in the Citadel, using commoners as pawns.”',
+                            '\n',
+                            'end',
+                            { '#f': 5 }
+                        ]
+                    }
+                ],
+                { '#f': 1 }
+            ],
             stealth: ['^stealth TBD', '\n', 'end', { '#f': 1 }],
             combat: ['^combat TBD', '\n', 'end', { '#f': 1 }],
             defeat_scene: [
@@ -1445,6 +1669,16 @@ const storyContent: InkStoryData = {
                 'nop',
                 '\n',
                 { '#f': 1 }
+            ],
+            'global decl': [
+                'ev',
+                'str',
+                '^Celcius',
+                '/str',
+                { 'VAR=': 'player_name' },
+                '/ev',
+                'end',
+                null
             ],
             '#f': 1
         }

@@ -24,6 +24,8 @@ EXTERNAL last_attempt_skill_result()
 EXTERNAL set_combat(combat_id)
 EXTERNAL set_skill_scene(skill_scene_id)
 
+VAR player_name = "Celcius"
+
 -> start
 
 === start ===
@@ -160,7 +162,39 @@ steal_horses_quest_fail TBD
 -> END
 
 === village_quest ===
-village_quest TBD
+Riding by your side, nose in the air and gaze austere, Lysandra said:
+“From now on, address me as Lady Hawkridge — my true name. You will be {player_name} Highcrag, my squire. The Highcrags are loyal, valorous vassals of House Hawkridge. Tonight, I’ll brief you further.”
+
+With this new perspective, you approached the next village. Dawn’s mist surrendered to the rising sun, revealing the village of Threshold. The road to the Citadel, once narrow, now widened into well-kept pavement. Even at this early hour, it was already busy: a carter with bales of hay trotted heavily southwards.
+
+Dominating the village center stood a large square and the prominent ‘Threshold Inn’. Despite the low sun, it buzzed with morning activity.
+
+Lysandra dismounted, handing her horse to a stablehand like he was her lifelong servant. You mimicked her. She whispered:
+“See, squire? People in the square whisper, eyeing the guard post nervously. Wait — hear the commotion inside the inn? Even behind closed doors. Now look there.”
+She subtly gestured opposite your entry point.
+“Stones in the sacred circle are cracking. This village breathes fear. Locals dread a local power more than night creatures. The wards were sabotaged. Everyone knows. They pretend not to. Today, you learn to read the unspoken.”
+// TODO: Social scenes TBD
+    * Talk to people in the square
+        
+    * Stop the inn brawl
+        
+    * Inspect the guard post 
+  
+- While you investigated, the innkeeper stormed out shouting:
+“They stole my grain! Damned guards can’t do their jobs!”
+Lysandra whispered:
+“Now comes the true test: how do we use this?”
+// TODO: Web of choices TBD
+    * Publicly support the innkeeper
+        
+    * Defend the guards with logic
+        
+    * Blame the Hidden Cultists
+
+- “See how a small chaos (‘stolen grain’) hides a greater scheme (‘shattering the stones’)?”
+She pointed at the fissure, now visible in twilight.
+“The innkeeper’s a puppet. The true villains are in the Citadel, using commoners as pawns.”
+
 -> END
 
 === stealth ===
