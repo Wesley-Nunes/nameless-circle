@@ -14,9 +14,14 @@ const BLAZEFEN_BASE: Enemy = {
     hp: 0,
     id: 'blazefen_',
     isAlive: false,
-    items: [],
+    weapon: {
+        id: 'shortbow_0001',
+        name: 'Shortbow',
+        range: 'ranged',
+        dice: { count: 1, sides: 6, modifier: 0 }
+    },
     name: 'blazefen',
-    race: 'blazefen',
+    species: 'blazefen',
     size: 'medium',
     team: 'enemies',
     type: ['elemental', 'humanoid'],
@@ -24,4 +29,3 @@ const BLAZEFEN_BASE: Enemy = {
 }
 
 export default BLAZEFEN_BASE
-

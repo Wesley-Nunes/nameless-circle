@@ -13,9 +13,11 @@ describe('getEnemyAbilities ', () => {
             cha: { score: 8, modifier: -1 }
         }
 
-        const abilities = getEnemyAbilities(ENEMY_ROLE_TEMPLATES['sharpshooter'], 60)
+        const abilities = getEnemyAbilities(
+            ENEMY_ROLE_TEMPLATES['sharpshooter'],
+            60
+        )
 
         expect(abilities).toStrictEqual(expectedAbilities)
     })
 })
-

@@ -2,7 +2,10 @@ import { ENEMY_XP } from 'libs/data/static/enemies'
 
 import type { Difficulty } from 'libs/entities'
 
-const xpBudgetPerCharacter: Record<number, { low: number; moderate: number; high: number }> = {
+const xpBudgetPerCharacter: Record<
+    number,
+    { low: number; moderate: number; high: number }
+> = {
     1: { low: 50, moderate: 75, high: 100 },
     2: { low: 100, moderate: 150, high: 200 },
     3: { low: 150, moderate: 225, high: 400 },
@@ -27,11 +30,11 @@ const xpBudgetPerCharacter: Record<number, { low: number; moderate: number; high
 const getEnemyXp = (
     heroPartyLevels: number[],
     enemyQuantity: number,
-    difficulty: Difficulty = 'low',
+    difficulty: Difficulty = 'low'
 ): number[] => {
     let xpBudget = 0
 
-    heroPartyLevels.forEach((level) => {
+    heroPartyLevels.forEach(level => {
         xpBudget += xpBudgetPerCharacter[level][difficulty]
     })
 
@@ -47,4 +50,3 @@ const getEnemyXp = (
 }
 
 export default getEnemyXp
-

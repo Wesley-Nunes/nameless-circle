@@ -19,4 +19,3 @@ const GamePage: React.FC = () => {
 }
 
 export default GamePage
-

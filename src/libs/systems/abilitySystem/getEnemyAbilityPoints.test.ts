@@ -10,4 +10,3 @@ describe('getEnemyAbilityPoints', () => {
         expect(value).toEqual(expectedValue)
     })
 })
-

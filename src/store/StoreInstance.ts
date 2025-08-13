@@ -8,7 +8,6 @@ let storyStoreInstance: StoryStore | null = null
 
 const initStores = (storyContent: InkStoryData) => {
     if (!gameStoreInstance || !storyStoreInstance) {
-
         gameStoreInstance = new GameStore()
         storyStoreInstance = new StoryStore(
             storyContent,
@@ -34,4 +33,3 @@ const getStoryStore = (): StoryStore => {
 }
 
 export { initStores, getGameStore, getStoryStore }
-
