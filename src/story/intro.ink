@@ -15,6 +15,7 @@ EXTERNAL get_attempt_skill_count(skill_result)
 EXTERNAL get_character_info(team, index, prop)
 EXTERNAL get_combat_result(combat_id)
 EXTERNAL get_combat_status()
+EXTERNAL get_combat_round()
 EXTERNAL get_mount_info(team, index, prop)
 EXTERNAL get_party_size(team)
 EXTERNAL get_scene_skill_info(index, prop)
@@ -44,13 +45,13 @@ Lysandra’s eyes blazed, nostrils flared.
 
 As she shouted, you saw her tremble — and felt your own palms sweat.
 
-*   “Your sword serves better in stone courts than swamps, Commander.”
+*   “Commander, Let me join you at the Citadel.”
     -> courtly_intrigue
 
-*   “My blade is silent as the mist.” 
+*   “I can move quietly, Protaxios. Let me scout with you.” 
     -> stealth
 
-*   “The village will bleed, but it will hold.”
+*   “The village needs every blade. I stand with Renpet-Ib.”
     -> combat
 
 === courtly_intrigue ===
