@@ -4,26 +4,31 @@ import type { InkStoryData } from 'story'
 
 class StoryStore {
     private inkFunctionHandler: // eslint-disable-next-line
-    ((funcName: string, ...args: any[]) => void) | null = null
+    (funcName: string, ...args: any[]) => void
     private story: Story
-    private updateCallback: (() => void) | null = null
-    public content: string = ''
-    public choices: { index: number; text: string }[] = []
+    private updateCallback: (() => void) | null
+    public choices: { index: number; text: string }[]
+    public content: { text: string | null; tags: string[] | null }[]
 
     constructor(
         storyContent: InkStoryData,
         // eslint-disable-next-line
-        inkFunctionHandler?: (funcName: string, ...args: any[]) => void
+        inkFunctionHandler: (funcName: string, ...args: any[]) => void
     ) {
-        this.story = new Story(storyContent)
-
-        if (inkFunctionHandler) {
-            this.inkFunctionHandler = inkFunctionHandler
-
-            this.bindInkFunctions()
+        if (!storyContent) {
+            throw new Error('Missing storyContent')
+        }
+        if (!inkFunctionHandler) {
+            throw new Error('Missing inkFunctionHandler')
         }
 
+        this.story = new Story(storyContent)
+        this.choices = []
+        this.content = []
+        this.inkFunctionHandler = inkFunctionHandler
+        this.bindInkFunctions()
         this.progressStory()
+        this.updateCallback = null
     }
 
     private bindInkFunctions() {
@@ -58,17 +63,17 @@ class StoryStore {
         })
     }
     private progressStory() {
-        let newContent = this.content
-
         while (this.story.canContinue) {
-            newContent += this.story.Continue()
+            const text = this.story.Continue()
+            const tags = this.story.currentTags
+
+            // NOTE: Formatting will be done using tags
+            if ((text !== '\n' && text) || tags?.length) {
+                const newContent = { text, tags }
+                this.content.push(newContent)
+            }
         }
 
-        if (newContent !== this.content) {
-            newContent += '\n\n'
-        }
-
-        this.content = newContent
         this.choices = this.story.currentChoices.map(c => ({
             index: c.index,
             text: c.text

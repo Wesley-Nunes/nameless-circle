@@ -5,7 +5,9 @@ const GamePage: React.FC = () => {
 
     return (
         <div>
-            <pre>{content}</pre>
+            {content.map(({ text, tags }, i) => {
+                return <p key={i}>{text}</p>
+            })}
             {choices.map(choice => (
                 <button
                     key={choice.index}

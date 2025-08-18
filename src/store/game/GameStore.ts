@@ -357,6 +357,16 @@ class GameStore {
 
                 throw Error(`Invalid combatId: ${combatId}.`)
             }
+            case 'get_combat_round': {
+                if (this.turnLog.length === 0) {
+                    return 1
+                }
+                const aliveCharacters = this.charactersOrdered.filter(
+                    character => character.isAlive
+                )
+
+                return Math.ceil(this.turnLog.length / aliveCharacters.length)
+            }
             case 'get_combat_status': {
                 return this.combatStatus
             }

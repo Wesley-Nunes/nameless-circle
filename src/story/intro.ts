@@ -1,6 +1,4 @@
-import type { InkStoryData } from './InkStoryData.type'
-
-const storyContent: InkStoryData = {
+var storyContent = {
     inkVersion: 21,
     root: [
         ['\n', { '->': 'start' }, ['done', { '#f': 5, '#n': 'g-0' }], null],
@@ -42,7 +40,7 @@ const storyContent: InkStoryData = {
                         { '*': '.^.^.c-0', flg: 18 },
                         {
                             s: [
-                                '^“Your sword serves better in stone courts than swamps, Commander.”',
+                                '^“Commander, Let me join you at the Citadel.”',
                                 { '->': '$r', var: true },
                                 null
                             ]
@@ -60,7 +58,7 @@ const storyContent: InkStoryData = {
                         { '*': '.^.^.c-1', flg: 18 },
                         {
                             s: [
-                                '^“My blade is silent as the mist.” ',
+                                '^“I can move quietly, Protaxios. Let me scout with you.” ',
                                 { '->': '$r', var: true },
                                 null
                             ]
@@ -78,7 +76,7 @@ const storyContent: InkStoryData = {
                         { '*': '.^.^.c-2', flg: 18 },
                         {
                             s: [
-                                '^“The village will bleed, but it will hold.”',
+                                '^“The village needs every blade. I stand with Renpet-Ib.”',
                                 { '->': '$r', var: true },
                                 null
                             ]
@@ -997,6 +995,7 @@ const storyContent: InkStoryData = {
                 '~ret',
                 { '#f': 1 }
             ],
+            get_combat_round: ['ev', 1, '/ev', '~ret', { '#f': 1 }],
             get_combat_status: [
                 'ev',
                 'str',
@@ -1077,6 +1076,11 @@ const storyContent: InkStoryData = {
                 'pop',
                 '/ev',
                 '\n',
+                '^⚔️🛡️ COMBAT STARTED 🛡️⚔️',
+                '#',
+                '^text-align: center',
+                '/#',
+                '\n',
                 { '->t->': 'combat_loop' },
                 'ev',
                 'void',
@@ -1085,6 +1089,13 @@ const storyContent: InkStoryData = {
                 { '#f': 1 }
             ],
             combat_loop: [
+                '^⚔️🛡️ COMBAT ROUND ',
+                'ev',
+                { 'x()': 'get_combat_round' },
+                'out',
+                '/ev',
+                '^ 🛡️⚔️',
+                '\n',
                 'ev',
                 0,
                 '/ev',
@@ -1109,7 +1120,7 @@ const storyContent: InkStoryData = {
                             '/str',
                             '/ev',
                             { '->t->': 'mount_loop' },
-                            { '->': '.^.^.^.11' },
+                            { '->': '.^.^.^.18' },
                             null
                         ]
                     }
@@ -1140,7 +1151,7 @@ const storyContent: InkStoryData = {
                             '/str',
                             '/ev',
                             { '->t->': 'mount_loop' },
-                            { '->': '.^.^.^.24' },
+                            { '->': '.^.^.^.31' },
                             null
                         ]
                     }
@@ -1162,7 +1173,7 @@ const storyContent: InkStoryData = {
                         b: [
                             '\n',
                             { '->t->': 'player_action_options' },
-                            { '->': '.^.^.^.37' },
+                            { '->': '.^.^.^.44' },
                             null
                         ]
                     }
@@ -1177,7 +1188,7 @@ const storyContent: InkStoryData = {
                             'out',
                             '/ev',
                             '\n',
-                            { '->': '.^.^.^.37' },
+                            { '->': '.^.^.^.44' },
                             null
                         ]
                     }
@@ -1209,7 +1220,7 @@ const storyContent: InkStoryData = {
                             '^Next turn!',
                             '\n',
                             { '->': '.^.^.^' },
-                            { '->': '.^.^.^.57' },
+                            { '->': '.^.^.^.64' },
                             null
                         ]
                     }
@@ -1685,6 +1696,5 @@ const storyContent: InkStoryData = {
     ],
     listDefs: {}
 }
-
 export default storyContent
 

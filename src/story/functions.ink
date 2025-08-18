@@ -27,6 +27,8 @@
     ~ return 1
 === function get_combat_result(combat_id) ===
     ~ return 1
+=== function get_combat_round() ===
+    ~ return 1
 === function get_combat_status() ===
     // IN_PROGRESS || VICTORY || DEFEAT
     ~ return "VICTORY"
@@ -47,16 +49,16 @@
 === function set_skill_scene(skill_scene_id) ===
     { skill_scene_id }
 
-//========================================================//
-
 // scenes
 === combat_scene(combat_id) ===
     ~ set_combat(combat_id)
+    ⚔️🛡️ COMBAT STARTED 🛡️⚔️#text-align: center
     -> combat_loop() ->
     ->->
 
 // add 'combat' to the variables/fn
 === combat_loop ===
+    ⚔️🛡️ COMBAT ROUND { get_combat_round() } 🛡️⚔️
     -> enemy_loop(0) ->
     { has_mounts("enemies"):
         Enemy mounts:
