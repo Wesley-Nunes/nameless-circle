@@ -52,12 +52,14 @@
 // scenes
 === combat_scene(combat_id) ===
     ~ set_combat(combat_id)
-    ⚔️🛡️ COMBAT STARTED 🛡️⚔️#text-align: center
+    ⚔️🛡️ COMBAT STARTED 🛡️⚔️ # style centralizedText
     -> combat_loop() ->
+    ⚔️🛡️ COMBAT END 🛡️⚔️ # style centralizedText
     ->->
 
 // add 'combat' to the variables/fn
 === combat_loop ===
+    # event turn start
     ⚔️🛡️ COMBAT ROUND { get_combat_round() } 🛡️⚔️
     -> enemy_loop(0) ->
     { has_mounts("enemies"):
@@ -75,15 +77,19 @@
     { - is_player_action():
         -> player_action_options ->
       - else:
+        // ONLY LOOP THE UI OF combat_loop WHEN is_player_action
         { ai_action() }
     }
     
+    // get_action_result should be a loop,
+    // and render the last 5(or another good quant)
+    // action results
     { get_action_result() }
     
     { end_turn() }
+    # event turn end
     
     { get_combat_status() == "IN_PROGRESS":
-        Next turn!
         -> combat_loop
     }
     ->->

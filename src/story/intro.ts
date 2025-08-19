@@ -1,4 +1,6 @@
-var storyContent = {
+import type { InkStoryData } from 'libs/entities'
+
+const storyContent: InkStoryData = {
     inkVersion: 21,
     root: [
         ['\n', { '->': 'start' }, ['done', { '#f': 5, '#n': 'g-0' }], null],
@@ -1076,12 +1078,17 @@ var storyContent = {
                 'pop',
                 '/ev',
                 '\n',
-                '^⚔️🛡️ COMBAT STARTED 🛡️⚔️',
+                '^⚔️🛡️ COMBAT STARTED 🛡️⚔️ ',
                 '#',
-                '^text-align: center',
+                '^style centralizedText',
                 '/#',
                 '\n',
                 { '->t->': 'combat_loop' },
+                '^⚔️🛡️ COMBAT END 🛡️⚔️ ',
+                '#',
+                '^style centralizedText',
+                '/#',
+                '\n',
                 'ev',
                 'void',
                 '/ev',
@@ -1089,6 +1096,9 @@ var storyContent = {
                 { '#f': 1 }
             ],
             combat_loop: [
+                '#',
+                '^event turn start',
+                '/#',
                 '^⚔️🛡️ COMBAT ROUND ',
                 'ev',
                 { 'x()': 'get_combat_round' },
@@ -1120,7 +1130,7 @@ var storyContent = {
                             '/str',
                             '/ev',
                             { '->t->': 'mount_loop' },
-                            { '->': '.^.^.^.18' },
+                            { '->': '.^.^.^.21' },
                             null
                         ]
                     }
@@ -1151,7 +1161,7 @@ var storyContent = {
                             '/str',
                             '/ev',
                             { '->t->': 'mount_loop' },
-                            { '->': '.^.^.^.31' },
+                            { '->': '.^.^.^.34' },
                             null
                         ]
                     }
@@ -1173,7 +1183,7 @@ var storyContent = {
                         b: [
                             '\n',
                             { '->t->': 'player_action_options' },
-                            { '->': '.^.^.^.44' },
+                            { '->': '.^.^.^.47' },
                             null
                         ]
                     }
@@ -1188,7 +1198,7 @@ var storyContent = {
                             'out',
                             '/ev',
                             '\n',
-                            { '->': '.^.^.^.44' },
+                            { '->': '.^.^.^.47' },
                             null
                         ]
                     }
@@ -1205,6 +1215,9 @@ var storyContent = {
                 'out',
                 '/ev',
                 '\n',
+                '#',
+                '^event turn end',
+                '/#',
                 'ev',
                 { 'x()': 'get_combat_status' },
                 'str',
@@ -1217,10 +1230,8 @@ var storyContent = {
                     {
                         b: [
                             '\n',
-                            '^Next turn!',
-                            '\n',
                             { '->': '.^.^.^' },
-                            { '->': '.^.^.^.64' },
+                            { '->': '.^.^.^.70' },
                             null
                         ]
                     }
@@ -1696,5 +1707,6 @@ var storyContent = {
     ],
     listDefs: {}
 }
+
 export default storyContent
 

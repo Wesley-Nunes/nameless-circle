@@ -1,12 +1,17 @@
 import { Story } from 'inkjs'
 
-import type { InkStoryData } from 'story'
+import type { InkStoryData } from 'libs/entities'
+
+type EventType = 'turn'
+type TurnAction = 'start' | 'end'
 
 class StoryStore {
     private inkFunctionHandler: // eslint-disable-next-line
     (funcName: string, ...args: any[]) => void
     private story: Story
+    private turnStartIndex: number | null
     private updateCallback: (() => void) | null
+
     public choices: { index: number; text: string }[]
     public content: { text: string | null; tags: string[] | null }[]
 
@@ -23,6 +28,7 @@ class StoryStore {
         }
 
         this.story = new Story(storyContent)
+        this.turnStartIndex = null
         this.choices = []
         this.content = []
         this.inkFunctionHandler = inkFunctionHandler
@@ -55,21 +61,67 @@ class StoryStore {
             'last_attempt_skill_result',
             'get_attempt_skill_count',
             'end_skill_turn',
-            'end_skill_scene'
+            'end_skill_scene',
+            'get_combat_round'
         ].forEach(fn => {
             this.story.BindExternalFunction(fn, (...args) => {
                 return this.inkFunctionHandler!(fn, ...args)
             })
         })
     }
+    private handleEvent(type: EventType, action: TurnAction) {
+        const event = {
+            turn: {
+                start: () => {
+                    this.turnStartIndex = this.content.length
+                },
+                end: () => {
+                    if (this.turnStartIndex === null) {
+                        throw new Error('End event without matching start!')
+                    }
+
+                    this.content = this.content.slice(0, this.turnStartIndex)
+                    this.turnStartIndex = null
+                }
+            }
+        }
+
+        event[type][action]()
+    }
     private progressStory() {
         while (this.story.canContinue) {
             const text = this.story.Continue()
             const tags = this.story.currentTags
+            let cssClass: string[] = []
 
-            // NOTE: Formatting will be done using tags
-            if ((text !== '\n' && text) || tags?.length) {
-                const newContent = { text, tags }
+            if (tags && tags?.length) {
+                tags.forEach(tag => {
+                    const [type, ...rest] = tag.split(' ')
+
+                    try {
+                        switch (type) {
+                            case 'event':
+                                const [eventType, action] = rest as [
+                                    EventType,
+                                    TurnAction
+                                ]
+                                this.handleEvent(eventType, action)
+
+                                break
+                            case 'style':
+                                cssClass = rest
+
+                                break
+                        }
+                    } catch (error) {
+                        console.error(`Error processing tag '${tag}':`, error)
+                    }
+                })
+            }
+
+            if ((text !== '\n' && text) || cssClass?.length) {
+                const newContent = { text, tags: cssClass }
+
                 this.content.push(newContent)
             }
         }

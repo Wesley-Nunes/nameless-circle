@@ -12,6 +12,7 @@ export type { Difficulty } from './Difficulty.type'
 export type { Enemy } from './Enemy.type'
 export type { Hero } from './Hero.type'
 export type { IDKey } from './IDKey.type'
+export type { InkStoryData } from './Ink.type'
 export type { Mount } from './Mount.type'
 export type {
     Skill,
