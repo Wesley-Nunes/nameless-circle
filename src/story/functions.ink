@@ -32,14 +32,12 @@
 === function get_combat_status() ===
     // IN_PROGRESS || VICTORY || DEFEAT
     ~ return "VICTORY"
-=== function get_mount_info(team, index, prop) ===
+=== function get_mount_info(character_id, prop) ===
     ~ return 1
 === function get_party_size(team) ===
     ~ return 1
 === function get_scene_skill_info(index, prop) ===
     ~ return 1
-=== function has_mounts(team) ===
-    ~ return false
 === function is_player_action() ===
     ~ return true
 === function last_attempt_skill_result() ===
@@ -52,27 +50,23 @@
 // scenes
 === combat_scene(combat_id) ===
     ~ set_combat(combat_id)
-    ⚔️🛡️ COMBAT STARTED 🛡️⚔️ # style centralizedText
+    ⚔️ COMBAT STARTED ⚔️ # style centralized-text
     -> combat_loop() ->
-    ⚔️🛡️ COMBAT END 🛡️⚔️ # style centralizedText
+    🏆 COMBAT ENDED 🏆 # style centralized-text
     ->->
 
 // add 'combat' to the variables/fn
 === combat_loop ===
     # event turn start
-    ⚔️🛡️ COMBAT ROUND { get_combat_round() } 🛡️⚔️
+    🌀 ROUND { get_combat_round() }
+
+    ENEMIES
     -> enemy_loop(0) ->
-    { has_mounts("enemies"):
-        Enemy mounts:
-        -> mount_loop(0, "enemies") ->
-    }
+
+    PARTY
     -> hero_loop(0) ->
-    { has_mounts("heroes"):
-        Hero mounts:
-        -> mount_loop(0, "heroes") ->
-    }
     
-    { get_action_order() }
+    { get_action_order() } # style action-order
     
     { - is_player_action():
         -> player_action_options ->
@@ -97,23 +91,36 @@
 === enemy_loop(index) ===
     { index >= get_party_size("enemies"): ->-> }
     
+    ~ temp enemy_id = get_character_info("enemies", index, "id")
     ~ temp enemy_name = get_character_info("enemies", index, "name")
     ~ temp enemy_hp = get_character_info("enemies", index, "hp")
     
     { enemy_hp > 0:
-        Enemy: {enemy_name} (Hp: {enemy_hp})
+        ☠️ {enemy_name} Hp: {enemy_hp} # style monospace-text
+        -> mount_display(enemy_id) ->
     }
     -> enemy_loop(index + 1)
 
 === hero_loop(index) ===
     { index >= get_party_size("heroes"): ->-> }
     
+    ~ temp hero_id = get_character_info("heroes", index, "id")
     ~ temp hero_name = get_character_info("heroes", index, "name")
     ~ temp hero_hp =  get_character_info("heroes", index, "hp")
     
-    Hero: {hero_name} (Hp: {hero_hp})
+    🛡️ {hero_name} Hp: {hero_hp} # style monospace-text
+    -> mount_display(hero_id) ->
     
     -> hero_loop(index + 1)
+
+=== mount_display(character_id) ===
+    ~ temp mount_name = get_mount_info(character_id, "name")
+    ~ temp mount_hp =  get_mount_info(character_id, "hp")
+
+    { mount_hp > 0:
+          └─ 🐴 {mount_name} Hp: {mount_hp}  # style monospace-text
+    }
+    ->->
 
 // Right now, only the attack option is available    
 === player_action_options ===
@@ -131,18 +138,6 @@
         ->->
   }
   { index < get_party_size("enemies") - 1: -> enemy_choice_loop(index + 1)  }
-
-=== mount_loop(index, team) ===
-    { index >= get_party_size(team): ->-> }
-    
-    ~ temp mount_name = get_mount_info(team, index, "name")
-    ~ temp mount_hp =  get_mount_info(team, index, "hp")
-
-    { mount_hp > 0:
-        - {mount_name} (Hp: {mount_hp})
-    }   
-    
-    -> mount_loop(index + 1, team)
 
 === available_skills_loop(index) ===
     ~ temp skill_name = get_scene_skill_info(index, "name")

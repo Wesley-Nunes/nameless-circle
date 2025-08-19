@@ -72,6 +72,9 @@ class GameStore {
         this.winConditions = []
     }
 
+    private adjustNameLength(name: string, spaceSize: number = 40) {
+        return name + '\u00A0'.repeat(spaceSize - name.length)
+    }
     // TODO: Implement a robust action management system once additional actions are created
     private attackAction(attacker: Combatant, target: Combatant) {
         const attackResult = attack(attacker, target)
@@ -182,11 +185,11 @@ class GameStore {
         return characters
             .map((character, index) => {
                 if (character.hp <= 0) {
-                    return `\u{1F480} - ${character.name}`
+                    return `\u{1FAA6} - ${character.name}`
                 }
 
                 return index === i
-                    ? `\u{2694}\u{FE0F} ${character.name}`
+                    ? `\u{25B6} ${character.name}`
                     : `\u{23F3} ${character.name}`
             })
             .join(' / ')
@@ -339,6 +342,10 @@ class GameStore {
                 if (character && prop in character) {
                     const value = character[prop as keyof typeof character]
 
+                    if (prop === 'name' && typeof value === 'string') {
+                        return this.adjustNameLength(value)
+                    }
+
                     return value
                 }
 
@@ -371,21 +378,23 @@ class GameStore {
                 return this.combatStatus
             }
             case 'get_mount_info': {
-                const [teamName, index, prop] = args as [Team, number, string]
+                const [characterId, prop] = args as [string, string]
 
-                const mount = this.currentMounts
-                    .filter(mount => mount.team === teamName)
-                    .find((mount, i) => i === index && prop in mount)
+                const mount = this.currentMounts.find(
+                    mount => mount.ownerId === characterId
+                )
 
                 if (mount && prop in mount) {
                     const value = mount[prop as keyof typeof mount]
 
+                    if (prop === 'name' && typeof value === 'string') {
+                        return this.adjustNameLength(value, 37)
+                    }
+
                     return value
                 }
 
-                throw new Error(
-                    `get_mount_info error! check: ${teamName} - ${index} - ${prop}`
-                )
+                return 0
             }
             case 'get_party_size': {
                 const [teamName] = args as [Team]

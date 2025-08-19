@@ -51,7 +51,6 @@ class StoryStore {
             'get_combat_status',
             'ai_action',
             'add_mount',
-            'has_mounts',
             'get_mount_info',
             'get_combat_result',
             'set_skill_scene',
