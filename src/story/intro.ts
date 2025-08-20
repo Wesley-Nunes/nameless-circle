@@ -10,7 +10,7 @@ const storyContent: InkStoryData = {
                 [
                     '^“When countless mouths are sated with innocent blood,',
                     '\n',
-                    '^The Abyss shall breathe its curse—ash, corruption, void—',
+                    '^The Abyss shall breathe its curse — ash, corruption, void —',
                     '\n',
                     '^To blacken guardian rings of life,',
                     '\n',
@@ -22,7 +22,7 @@ const storyContent: InkStoryData = {
                     '\n',
                     '^And claim the shattered world as darkness drowns.”',
                     '\n',
-                    '^The hue of the setting sun, nearly swallowed by night, blended with the swamp’s dark greens, staining the stagnant waters. Will-o’-wisps, like fragments of the cursed prophecy, broke free from the murk and began their ghostly dance above the sludge. A biting cold—far beyond twilight—enveloped the group, heavy with the stink of rot, sulfur, and decay.',
+                    '^The hue of the setting sun, nearly swallowed by night, blended with the swamp’s dark greens, staining the stagnant waters. Will-o’-wisps, like fragments of the cursed prophecy, broke free from the murk and began their ghostly dance above the sludge. A biting cold — far beyond twilight — enveloped the group, heavy with the stink of rot, sulfur, and decay.',
                     '\n',
                     '^Lysandra’s eyes blazed, nostrils flared.',
                     '\n',
@@ -61,6 +61,9 @@ const storyContent: InkStoryData = {
                         {
                             s: [
                                 '^“I can move quietly, Protaxios. Let me scout with you.” ',
+                                '#',
+                                '^style disabled',
+                                '/#',
                                 { '->': '$r', var: true },
                                 null
                             ]
@@ -78,7 +81,10 @@ const storyContent: InkStoryData = {
                         { '*': '.^.^.c-2', flg: 18 },
                         {
                             s: [
-                                '^“The village needs every blade. I stand with Renpet-Ib.”',
+                                '^“The village needs every blade. I stand with Renpet-Ib.” ',
+                                '#',
+                                '^style disabled',
+                                '/#',
                                 { '->': '$r', var: true },
                                 null
                             ]
@@ -104,7 +110,7 @@ const storyContent: InkStoryData = {
                             { '->': '.^.^.23.s' },
                             [{ '#n': '$r2' }],
                             '\n',
-                            { '->': 'stealth' },
+                            'end',
                             { '#f': 5 }
                         ],
                         'c-2': [
@@ -115,7 +121,7 @@ const storyContent: InkStoryData = {
                             { '->': '.^.^.24.s' },
                             [{ '#n': '$r2' }],
                             '\n',
-                            { '->': 'combat' },
+                            'end',
                             { '#f': 5 }
                         ]
                     }
@@ -177,7 +183,7 @@ const storyContent: InkStoryData = {
                 '\n',
                 '^Lysandra growled.',
                 '\n',
-                '^From the shadows, three blazefen — salamander-men with amber eyes and flaming tongues — attacked. To everyone’s shock, one hurled a spear toward the horses, missing by inches. Lysandra saw their intent.',
+                '^From the shadows, four blazefen — salamander-men with amber eyes and flaming tongues — attacked. To everyone’s shock, one hurled a spear toward the horses, missing by inches. Lysandra saw their intent.',
                 '\n',
                 '^“Protect the mounts!”',
                 '\n',
@@ -250,7 +256,7 @@ const storyContent: InkStoryData = {
                             'pop',
                             '\n',
                             { '->t->': 'consequence_scene' },
-                            { '->': 'steal_horses_quest' },
+                            'end',
                             { '->': '.^.^.^.84' },
                             null
                         ]
@@ -268,7 +274,7 @@ const storyContent: InkStoryData = {
                             'pop',
                             '\n',
                             { '->t->': 'consequence_scene' },
-                            { '->t->': 'village_quest' },
+                            'end',
                             { '->': '.^.^.^.84' },
                             null
                         ]
@@ -279,612 +285,6 @@ const storyContent: InkStoryData = {
                 '\n',
                 { '#f': 1 }
             ],
-            steal_horses_quest: [
-                [
-                    'ev',
-                    'str',
-                    '^steal_horses_01',
-                    '/str',
-                    { 'x()': 'set_skill_scene', exArgs: 1 },
-                    'pop',
-                    '/ev',
-                    '\n',
-                    '^“Listen, recruit.”',
-                    '\n',
-                    '^Lysandra said, wiping battle grime away.',
-                    '\n',
-                    '^“From now on, it’s all about appearance, status, and deceit.”',
-                    '\n',
-                    '^She offered you fabric and water to clean yourself. Her gaze fixed on the horizon as if recalling something.',
-                    '\n',
-                    '^“Should anyone offer you gifts, ask yourself: Why now? Why here? What does this person gain?',
-                    '\n',
-                    '^Never accept gifts without reading the intent behind the wrapping. Never make deals without weighing every consequence.”',
-                    '\n',
-                    '^Lysandra watched you calmly. The impulsive soldier gave way to a measured noblewoman, like she was reliving an old lesson. She searched your eyes, reading your intent, and said:',
-                    '\n',
-                    '^“We can’t enter the next village on foot. Whispers outrun horses. If the Citadel knows us as wanderers, I’ll recruit no soldiers.”',
-                    '\n',
-                    '^She paused, letting you absorb the gravity.',
-                    '\n',
-                    '^“Simplest way: under night’s cover, we steal horses from an outlying villager.”',
-                    '\n',
-                    [
-                        'ev',
-                        { '^->': 'steal_horses_quest.0.28.$r1' },
-                        { 'temp=': '$r' },
-                        'str',
-                        { '->': '.^.s' },
-                        [{ '#n': '$r1' }],
-                        '/str',
-                        '/ev',
-                        { '*': '.^.^.c-0', flg: 18 },
-                        {
-                            s: [
-                                '^Agree — but avoid her gaze',
-                                { '->': '$r', var: true },
-                                null
-                            ]
-                        }
-                    ],
-                    [
-                        'ev',
-                        { '^->': 'steal_horses_quest.0.29.$r1' },
-                        { 'temp=': '$r' },
-                        'str',
-                        { '->': '.^.s' },
-                        [{ '#n': '$r1' }],
-                        '/str',
-                        '/ev',
-                        { '*': '.^.^.c-1', flg: 18 },
-                        {
-                            s: [
-                                '^"There\'s another way, Commander..."',
-                                { '->': '$r', var: true },
-                                null
-                            ]
-                        }
-                    ],
-                    {
-                        'c-0': [
-                            'ev',
-                            { '^->': 'steal_horses_quest.0.c-0.$r2' },
-                            '/ev',
-                            { 'temp=': '$r' },
-                            { '->': '.^.^.28.s' },
-                            [{ '#n': '$r2' }],
-                            '\n',
-                            '^“You agreed too fast, recruit.”',
-                            '\n',
-                            '^Her eyes narrowed, measuring your soul.',
-                            '\n',
-                            '^“Remember: even I could be your inquisitor tomorrow. But today… Today we need horses.”',
-                            '\n',
-                            { '->': '.^.^.g-0' },
-                            { '#f': 5 }
-                        ],
-                        'c-1': [
-                            'ev',
-                            { '^->': 'steal_horses_quest.0.c-1.$r2' },
-                            '/ev',
-                            { 'temp=': '$r' },
-                            { '->': '.^.^.29.s' },
-                            [{ '#n': '$r2' }],
-                            '\n',
-                            '^TBD 2',
-                            '\n',
-                            { '->': '.^.^.g-0' },
-                            { '#f': 5 }
-                        ],
-                        'g-0': [
-                            '^She took a deep breath: “For now, it’s a necessary evil.”',
-                            '\n',
-                            '^You walked on, both in silence. The only sounds piercing the night came from crickets and the occasional nocturnal creature.',
-                            '\n',
-                            '^After a brief time walking, Lysandra found a trail, discernible only by a path of grass slightly lower than its surroundings.',
-                            '\n',
-                            '^The light struggled to penetrate the forest. Only when the shy moon occasionally broke the imprisoning clouds did it offer a few more details of the terrain ahead. The dense woods suggested that whoever lived here — if anyone lived here — led a reclusive life.',
-                            '\n',
-                            '^“Circle around this path and look for any shelter before we near it.” Lysandra whispered.',
-                            '\n',
-                            { '->': '.^.^.^.skill_scene' },
-                            { '#f': 5 }
-                        ]
-                    }
-                ],
-                {
-                    skill_scene: [
-                        'ev',
-                        0,
-                        '/ev',
-                        { '->t->': 'available_skills_loop' },
-                        'ev',
-                        { 'x()': 'last_attempt_skill_result' },
-                        '/ev',
-                        { 'temp=': 'skill_result' },
-                        '\n',
-                        'ev',
-                        { 'VAR?': 'skill_result' },
-                        'out',
-                        '/ev',
-                        '\n',
-                        'ev',
-                        'str',
-                        '^SUCCESS',
-                        '/str',
-                        { 'x()': 'get_attempt_skill_count', exArgs: 1 },
-                        '/ev',
-                        { 'temp=': 'success_count' },
-                        '\n',
-                        'ev',
-                        'str',
-                        '^FAIL',
-                        '/str',
-                        { 'x()': 'get_attempt_skill_count', exArgs: 1 },
-                        '/ev',
-                        { 'temp=': 'fail_count' },
-                        '\n',
-                        'ev',
-                        { 'VAR?': 'skill_result' },
-                        'str',
-                        '^SUCCESS',
-                        '/str',
-                        '==',
-                        '/ev',
-                        [
-                            { '->': '.^.b', c: true },
-                            {
-                                b: [
-                                    '\n',
-                                    'ev',
-                                    { 'VAR?': 'success_count' },
-                                    '/ev',
-                                    { '->': '.^.^.^.^.success' },
-                                    { '->': '.^.^.^.39' },
-                                    null
-                                ]
-                            }
-                        ],
-                        [
-                            { '->': '.^.b' },
-                            {
-                                b: [
-                                    '\n',
-                                    'ev',
-                                    { 'VAR?': 'fail_count' },
-                                    '/ev',
-                                    { '->': '.^.^.^.^.fail' },
-                                    { '->': '.^.^.^.39' },
-                                    null
-                                ]
-                            }
-                        ],
-                        'nop',
-                        '\n',
-                        { '#f': 1 }
-                    ],
-                    success: [
-                        { 'temp=': 'index' },
-                        'ev',
-                        { 'VAR?': 'index' },
-                        '/ev',
-                        [
-                            'du',
-                            'ev',
-                            1,
-                            '==',
-                            '/ev',
-                            { '->': '.^.b', c: true },
-                            {
-                                b: [
-                                    'pop',
-                                    '\n',
-                                    '^A small habitation stood out in a neglected yard. Judging by its size, a few people lived there. Behind it sat an improvised stable. A small, slumbering bulldog lay in the yard.',
-                                    '\n',
-                                    'ev',
-                                    { 'x()': 'end_skill_turn' },
-                                    'out',
-                                    '/ev',
-                                    '\n',
-                                    { '->': '.^.^.^.^.skill_scene' },
-                                    { '->': '.^.^.^.8' },
-                                    null
-                                ]
-                            }
-                        ],
-                        [
-                            'du',
-                            'ev',
-                            2,
-                            '==',
-                            '/ev',
-                            { '->': '.^.b', c: true },
-                            {
-                                b: [
-                                    'pop',
-                                    '\n',
-                                    '^Inside the stable you found a brown mare and an imposing black stallion, both well-kept, a vivid opposition to the decrepit surroundings.',
-                                    '\n',
-                                    'ev',
-                                    { 'x()': 'end_skill_turn' },
-                                    'out',
-                                    '/ev',
-                                    '\n',
-                                    { '->': '.^.^.^.^.skill_scene' },
-                                    { '->': '.^.^.^.8' },
-                                    null
-                                ]
-                            }
-                        ],
-                        [
-                            'du',
-                            'ev',
-                            3,
-                            '==',
-                            '/ev',
-                            { '->': '.^.b', c: true },
-                            {
-                                b: [
-                                    'pop',
-                                    '\n',
-                                    '^You set out for the next village, both drained from little sleep. No conversation passed between you until the first rays of sun.',
-                                    '\n',
-                                    'ev',
-                                    { 'x()': 'end_skill_scene' },
-                                    'out',
-                                    '/ev',
-                                    '\n',
-                                    { '->': 'village_quest' },
-                                    { '->': '.^.^.^.8' },
-                                    null
-                                ]
-                            }
-                        ],
-                        [
-                            { '->': '.^.b' },
-                            {
-                                b: [
-                                    'pop',
-                                    '\n',
-                                    { '->': '.^.^.^.^.skill_scene' },
-                                    { '->': '.^.^.^.8' },
-                                    null
-                                ]
-                            }
-                        ],
-                        'nop',
-                        '\n',
-                        { '#f': 1 }
-                    ],
-                    fail: [
-                        { 'temp=': 'index' },
-                        'ev',
-                        { 'VAR?': 'index' },
-                        '/ev',
-                        [
-                            'du',
-                            'ev',
-                            1,
-                            '==',
-                            '/ev',
-                            { '->': '.^.b', c: true },
-                            {
-                                b: [
-                                    'pop',
-                                    '\n',
-                                    '^Fail message 1',
-                                    '\n',
-                                    'ev',
-                                    { 'x()': 'end_skill_turn' },
-                                    'out',
-                                    '/ev',
-                                    '\n',
-                                    { '->': '.^.^.^.^.skill_scene' },
-                                    { '->': '.^.^.^.8' },
-                                    null
-                                ]
-                            }
-                        ],
-                        [
-                            'du',
-                            'ev',
-                            2,
-                            '==',
-                            '/ev',
-                            { '->': '.^.b', c: true },
-                            {
-                                b: [
-                                    'pop',
-                                    '\n',
-                                    '^Fail message 2',
-                                    '\n',
-                                    'ev',
-                                    { 'x()': 'end_skill_turn' },
-                                    'out',
-                                    '/ev',
-                                    '\n',
-                                    { '->': '.^.^.^.^.skill_scene' },
-                                    { '->': '.^.^.^.8' },
-                                    null
-                                ]
-                            }
-                        ],
-                        [
-                            'du',
-                            'ev',
-                            3,
-                            '==',
-                            '/ev',
-                            { '->': '.^.b', c: true },
-                            {
-                                b: [
-                                    'pop',
-                                    '\n',
-                                    '^Fail message 3',
-                                    '\n',
-                                    'ev',
-                                    { 'x()': 'end_skill_scene' },
-                                    'out',
-                                    '/ev',
-                                    '\n',
-                                    { '->': 'steal_horses_quest_fail' },
-                                    { '->': '.^.^.^.8' },
-                                    null
-                                ]
-                            }
-                        ],
-                        [
-                            { '->': '.^.b' },
-                            {
-                                b: [
-                                    'pop',
-                                    '\n',
-                                    { '->': '.^.^.^.^.skill_scene' },
-                                    { '->': '.^.^.^.8' },
-                                    null
-                                ]
-                            }
-                        ],
-                        'nop',
-                        '\n',
-                        { '#f': 1 }
-                    ],
-                    '#f': 1
-                }
-            ],
-            steal_horses_quest_fail: [
-                '^steal_horses_quest_fail TBD',
-                '\n',
-                'end',
-                { '#f': 1 }
-            ],
-            village_quest: [
-                [
-                    '^Riding by your side, nose in the air and gaze austere, Lysandra said:',
-                    '\n',
-                    '^“From now on, address me as Lady Hawkridge — my true name. You will be ',
-                    'ev',
-                    { 'VAR?': 'player_name' },
-                    'out',
-                    '/ev',
-                    '^ Highcrag, my squire. The Highcrags are loyal, valorous vassals of House Hawkridge. Tonight, I’ll brief you further.”',
-                    '\n',
-                    '^With this new perspective, you approached the next village. Dawn’s mist surrendered to the rising sun, revealing the village of Threshold. The road to the Citadel, once narrow, now widened into well-kept pavement. Even at this early hour, it was already busy: a carter with bales of hay trotted heavily southwards.',
-                    '\n',
-                    '^Dominating the village center stood a large square and the prominent ‘Threshold Inn’. Despite the low sun, it buzzed with morning activity.',
-                    '\n',
-                    '^Lysandra dismounted, handing her horse to a stablehand like he was her lifelong servant. You mimicked her. She whispered:',
-                    '\n',
-                    '^“See, squire? People in the square whisper, eyeing the guard post nervously. Wait — hear the commotion inside the inn? Even behind closed doors. Now look there.”',
-                    '\n',
-                    '^She subtly gestured opposite your entry point.',
-                    '\n',
-                    '^“Stones in the sacred circle are cracking. This village breathes fear. Locals dread a local power more than night creatures. The wards were sabotaged. Everyone knows. They pretend not to. Today, you learn to read the unspoken.”',
-                    '\n',
-                    [
-                        'ev',
-                        { '^->': 'village_quest.0.21.$r1' },
-                        { 'temp=': '$r' },
-                        'str',
-                        { '->': '.^.s' },
-                        [{ '#n': '$r1' }],
-                        '/str',
-                        '/ev',
-                        { '*': '.^.^.c-0', flg: 18 },
-                        {
-                            s: [
-                                '^Talk to people in the square',
-                                { '->': '$r', var: true },
-                                null
-                            ]
-                        }
-                    ],
-                    [
-                        'ev',
-                        { '^->': 'village_quest.0.22.$r1' },
-                        { 'temp=': '$r' },
-                        'str',
-                        { '->': '.^.s' },
-                        [{ '#n': '$r1' }],
-                        '/str',
-                        '/ev',
-                        { '*': '.^.^.c-1', flg: 18 },
-                        {
-                            s: [
-                                '^Stop the inn brawl',
-                                { '->': '$r', var: true },
-                                null
-                            ]
-                        }
-                    ],
-                    [
-                        'ev',
-                        { '^->': 'village_quest.0.23.$r1' },
-                        { 'temp=': '$r' },
-                        'str',
-                        { '->': '.^.s' },
-                        [{ '#n': '$r1' }],
-                        '/str',
-                        '/ev',
-                        { '*': '.^.^.c-2', flg: 18 },
-                        {
-                            s: [
-                                '^Inspect the guard post ',
-                                { '->': '$r', var: true },
-                                null
-                            ]
-                        }
-                    ],
-                    {
-                        'c-0': [
-                            'ev',
-                            { '^->': 'village_quest.0.c-0.$r2' },
-                            '/ev',
-                            { 'temp=': '$r' },
-                            { '->': '.^.^.21.s' },
-                            [{ '#n': '$r2' }],
-                            '\n',
-                            { '->': '.^.^.g-0' },
-                            { '#f': 5 }
-                        ],
-                        'c-1': [
-                            'ev',
-                            { '^->': 'village_quest.0.c-1.$r2' },
-                            '/ev',
-                            { 'temp=': '$r' },
-                            { '->': '.^.^.22.s' },
-                            [{ '#n': '$r2' }],
-                            '\n',
-                            { '->': '.^.^.g-0' },
-                            { '#f': 5 }
-                        ],
-                        'c-2': [
-                            'ev',
-                            { '^->': 'village_quest.0.c-2.$r2' },
-                            '/ev',
-                            { 'temp=': '$r' },
-                            { '->': '.^.^.23.s' },
-                            [{ '#n': '$r2' }],
-                            '\n',
-                            { '->': '.^.^.g-0' },
-                            { '#f': 5 }
-                        ],
-                        'g-0': [
-                            '^While you investigated, the innkeeper stormed out shouting:',
-                            '\n',
-                            '^“They stole my grain! Damned guards can’t do their jobs!”',
-                            '\n',
-                            '^Lysandra whispered:',
-                            '\n',
-                            '^“Now comes the true test: how do we use this?”',
-                            '\n',
-                            [
-                                'ev',
-                                { '^->': 'village_quest.0.g-0.8.$r1' },
-                                { 'temp=': '$r' },
-                                'str',
-                                { '->': '.^.s' },
-                                [{ '#n': '$r1' }],
-                                '/str',
-                                '/ev',
-                                { '*': '.^.^.c-3', flg: 18 },
-                                {
-                                    s: [
-                                        '^Publicly support the innkeeper',
-                                        { '->': '$r', var: true },
-                                        null
-                                    ]
-                                }
-                            ],
-                            [
-                                'ev',
-                                { '^->': 'village_quest.0.g-0.9.$r1' },
-                                { 'temp=': '$r' },
-                                'str',
-                                { '->': '.^.s' },
-                                [{ '#n': '$r1' }],
-                                '/str',
-                                '/ev',
-                                { '*': '.^.^.c-4', flg: 18 },
-                                {
-                                    s: [
-                                        '^Defend the guards with logic',
-                                        { '->': '$r', var: true },
-                                        null
-                                    ]
-                                }
-                            ],
-                            [
-                                'ev',
-                                { '^->': 'village_quest.0.g-0.10.$r1' },
-                                { 'temp=': '$r' },
-                                'str',
-                                { '->': '.^.s' },
-                                [{ '#n': '$r1' }],
-                                '/str',
-                                '/ev',
-                                { '*': '.^.^.c-5', flg: 18 },
-                                {
-                                    s: [
-                                        '^Blame the Hidden Cultists',
-                                        { '->': '$r', var: true },
-                                        null
-                                    ]
-                                }
-                            ],
-                            {
-                                'c-3': [
-                                    'ev',
-                                    { '^->': 'village_quest.0.g-0.c-3.$r2' },
-                                    '/ev',
-                                    { 'temp=': '$r' },
-                                    { '->': '.^.^.8.s' },
-                                    [{ '#n': '$r2' }],
-                                    '\n',
-                                    { '->': '.^.^.^.g-1' },
-                                    { '#f': 5 }
-                                ],
-                                'c-4': [
-                                    'ev',
-                                    { '^->': 'village_quest.0.g-0.c-4.$r2' },
-                                    '/ev',
-                                    { 'temp=': '$r' },
-                                    { '->': '.^.^.9.s' },
-                                    [{ '#n': '$r2' }],
-                                    '\n',
-                                    { '->': '.^.^.^.g-1' },
-                                    { '#f': 5 }
-                                ],
-                                'c-5': [
-                                    'ev',
-                                    { '^->': 'village_quest.0.g-0.c-5.$r2' },
-                                    '/ev',
-                                    { 'temp=': '$r' },
-                                    { '->': '.^.^.10.s' },
-                                    [{ '#n': '$r2' }],
-                                    '\n',
-                                    { '->': '.^.^.^.g-1' },
-                                    { '#f': 5 }
-                                ],
-                                '#f': 5
-                            }
-                        ],
-                        'g-1': [
-                            '^“See how a small chaos (‘stolen grain’) hides a greater scheme (‘shattering the stones’)?”',
-                            '\n',
-                            '^She pointed at the fissure, now visible in twilight.',
-                            '\n',
-                            '^“The innkeeper’s a puppet. The true villains are in the Citadel, using commoners as pawns.”',
-                            '\n',
-                            'end',
-                            { '#f': 5 }
-                        ]
-                    }
-                ],
-                { '#f': 1 }
-            ],
-            stealth: ['^stealth TBD', '\n', 'end', { '#f': 1 }],
-            combat: ['^combat TBD', '\n', 'end', { '#f': 1 }],
             defeat_scene: [
                 '^Your vision blurs as you collapse to the ground. The clatter of your falling weapon echoes in your ears before darkness consumes you.',
                 '\n',
@@ -941,18 +341,6 @@ const storyContent: InkStoryData = {
                 '\n',
                 { '#f': 1 }
             ],
-            attempt_skill: [
-                { 'temp=': 'skill_id' },
-                '^attempt skill ',
-                'ev',
-                { 'VAR?': 'skill_id' },
-                'out',
-                '/ev',
-                '\n',
-                { '#f': 1 }
-            ],
-            end_skill_scene: ['^end skill scene', '\n', { '#f': 1 }],
-            end_skill_turn: ['^end skill turn', '\n', { '#f': 1 }],
             end_turn: ['ev', 0, '/ev', '~ret', { '#f': 1 }],
             get_action_order: [
                 'ev',
@@ -963,21 +351,12 @@ const storyContent: InkStoryData = {
                 '~ret',
                 { '#f': 1 }
             ],
-            get_action_skills_count: ['ev', 3, '/ev', '~ret', { '#f': 1 }],
             get_action_result: [
                 { 'temp=': 'reverse_log_position' },
                 'ev',
                 'str',
                 '^Action result',
                 '/str',
-                '/ev',
-                '~ret',
-                { '#f': 1 }
-            ],
-            get_attempt_skill_count: [
-                { 'temp=': 'skill_result' },
-                'ev',
-                1,
                 '/ev',
                 '~ret',
                 { '#f': 1 }
@@ -1027,38 +406,11 @@ const storyContent: InkStoryData = {
                 '~ret',
                 { '#f': 1 }
             ],
-            get_scene_skill_info: [
-                { 'temp=': 'prop' },
-                { 'temp=': 'index' },
-                'ev',
-                1,
-                '/ev',
-                '~ret',
-                { '#f': 1 }
-            ],
             is_player_action: ['ev', true, '/ev', '~ret', { '#f': 1 }],
-            last_attempt_skill_result: [
-                'ev',
-                'str',
-                '^SUCCESS',
-                '/str',
-                '/ev',
-                '~ret',
-                { '#f': 1 }
-            ],
             set_combat: [
                 { 'temp=': 'combat_id' },
                 'ev',
                 { 'VAR?': 'combat_id' },
-                'out',
-                '/ev',
-                '\n',
-                { '#f': 1 }
-            ],
-            set_skill_scene: [
-                { 'temp=': 'skill_scene_id' },
-                'ev',
-                { 'VAR?': 'skill_scene_id' },
                 'out',
                 '/ev',
                 '\n',
@@ -1607,98 +959,6 @@ const storyContent: InkStoryData = {
                             '/ev',
                             { '->': '.^.^.^' },
                             { '->': '.^.^.^.56' },
-                            null
-                        ]
-                    }
-                ],
-                'nop',
-                '\n',
-                { '#f': 1 }
-            ],
-            available_skills_loop: [
-                { 'temp=': 'index' },
-                'ev',
-                { 'VAR?': 'index' },
-                'str',
-                '^name',
-                '/str',
-                { 'x()': 'get_scene_skill_info', exArgs: 2 },
-                '/ev',
-                { 'temp=': 'skill_name' },
-                '\n',
-                'ev',
-                { 'VAR?': 'index' },
-                'str',
-                '^id',
-                '/str',
-                { 'x()': 'get_scene_skill_info', exArgs: 2 },
-                '/ev',
-                { 'temp=': 'skill_id' },
-                '\n',
-                'ev',
-                { 'VAR?': 'skill_name' },
-                '/ev',
-                [
-                    { '->': '.^.b', c: true },
-                    {
-                        b: [
-                            '\n',
-                            'ev',
-                            'str',
-                            'ev',
-                            { 'VAR?': 'skill_name' },
-                            'out',
-                            '/ev',
-                            '/str',
-                            '/ev',
-                            { '*': '.^.c-0', flg: 4 },
-                            { '->': '.^.^.^.23' },
-                            {
-                                'c-0': [
-                                    '\n',
-                                    'ev',
-                                    { 'VAR?': 'skill_id' },
-                                    { 'x()': 'attempt_skill', exArgs: 1 },
-                                    'pop',
-                                    '/ev',
-                                    '\n',
-                                    'ev',
-                                    0,
-                                    { 'x()': 'get_action_result', exArgs: 1 },
-                                    'out',
-                                    '/ev',
-                                    '\n',
-                                    'ev',
-                                    'void',
-                                    '/ev',
-                                    '->->',
-                                    { '#f': 5 }
-                                ]
-                            }
-                        ]
-                    }
-                ],
-                'nop',
-                '\n',
-                'ev',
-                { 'VAR?': 'index' },
-                { 'x()': 'get_action_skills_count' },
-                1,
-                '-',
-                '<',
-                '/ev',
-                [
-                    { '->': '.^.b', c: true },
-                    {
-                        b: [
-                            '^ ',
-                            'ev',
-                            { 'VAR?': 'index' },
-                            1,
-                            '+',
-                            '/ev',
-                            { '->': '.^.^.^' },
-                            { '->': '.^.^.^.33' },
                             null
                         ]
                     }

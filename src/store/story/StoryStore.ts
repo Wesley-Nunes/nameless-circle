@@ -53,14 +53,6 @@ class StoryStore {
             'add_mount',
             'get_mount_info',
             'get_combat_result',
-            'set_skill_scene',
-            'get_action_skills_count',
-            'get_scene_skill_info',
-            'attempt_skill',
-            'last_attempt_skill_result',
-            'get_attempt_skill_count',
-            'end_skill_turn',
-            'end_skill_scene',
             'get_combat_round'
         ].forEach(fn => {
             this.story.BindExternalFunction(fn, (...args) => {

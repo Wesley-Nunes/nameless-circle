@@ -41,7 +41,6 @@ const generateCombatSentence = (
     const randomIndex = roll(4) - 1
 
     if (attackResult.success) {
-        console.log(damageResult)
         if (attackResult.critical) {
             return criticalHitMessage[randomIndex] + deathMessage
         }
