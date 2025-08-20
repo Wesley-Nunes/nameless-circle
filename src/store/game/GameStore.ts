@@ -78,20 +78,28 @@ class GameStore {
     // TODO: Implement a robust action management system once additional actions are created
     private attackAction(attacker: Combatant, target: Combatant) {
         const attackResult = attack(attacker, target)
+        const damageResult = { damage: 0, oldHp: 0, newHp: 0, stillAlive: true }
 
         if (attackResult.success) {
-            const damage = calculateDamage(attacker, attackResult.critical)
+            damageResult.damage = calculateDamage(
+                attacker,
+                attackResult.critical
+            )
+            damageResult.oldHp = target.hp
+            damageResult.newHp = target.hp - damageResult.damage
             // NOTE: Direct HP access on Character (simplicity)
             // TODO: Migrate to HealthSystem for damage/healing management
-            target.hp -= damage
+            target.hp -= damageResult.damage
             if (target.hp <= 0) {
                 target.isAlive = false
+                damageResult.stillAlive = false
             }
         }
         const combatMessage = generateCombatSentence(
             attacker,
             target,
-            attackResult
+            attackResult,
+            damageResult
         )
 
         this.turnLog.push(combatMessage)
@@ -185,11 +193,11 @@ class GameStore {
         return characters
             .map((character, index) => {
                 if (character.hp <= 0) {
-                    return `\u{1FAA6} - ${character.name}`
+                    return `\u{1FAA6} ${character.name}`
                 }
 
                 return index === i
-                    ? `\u{25B6} ${character.name}`
+                    ? `\u{1F525} ${character.name}`
                     : `\u{23F3} ${character.name}`
             })
             .join(' / ')
@@ -321,7 +329,9 @@ class GameStore {
                 return result
             }
             case 'get_action_result': {
-                const lastLogIndex = this.turnLog.length - 1
+                const [reverseIndex] = args as [number]
+
+                const lastLogIndex = this.turnLog.length - 1 - reverseIndex
                 const lastLog = this.turnLog[lastLogIndex]
 
                 return lastLog

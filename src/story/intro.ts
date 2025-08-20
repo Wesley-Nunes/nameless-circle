@@ -249,6 +249,7 @@ const storyContent: InkStoryData = {
                         b: [
                             'pop',
                             '\n',
+                            { '->t->': 'consequence_scene' },
                             { '->': 'steal_horses_quest' },
                             { '->': '.^.^.^.84' },
                             null
@@ -266,6 +267,7 @@ const storyContent: InkStoryData = {
                         b: [
                             'pop',
                             '\n',
+                            { '->t->': 'consequence_scene' },
                             { '->t->': 'village_quest' },
                             { '->': '.^.^.^.84' },
                             null
@@ -963,6 +965,7 @@ const storyContent: InkStoryData = {
             ],
             get_action_skills_count: ['ev', 3, '/ev', '~ret', { '#f': 1 }],
             get_action_result: [
+                { 'temp=': 'reverse_log_position' },
                 'ev',
                 'str',
                 '^Action result',
@@ -1117,6 +1120,27 @@ const storyContent: InkStoryData = {
                 '^style action-order',
                 '/#',
                 '\n',
+                '^📜 Combat Log',
+                '\n',
+                'ev',
+                'str',
+                '^enemies',
+                '/str',
+                { 'x()': 'get_party_size', exArgs: 1 },
+                'str',
+                '^heroes',
+                '/str',
+                { 'x()': 'get_party_size', exArgs: 1 },
+                '+',
+                1,
+                '+',
+                '/ev',
+                { 'temp=': 'log_size' },
+                '\n',
+                'ev',
+                { 'VAR?': 'log_size' },
+                '/ev',
+                { '->t->': 'combat_log_loop' },
                 'ev',
                 { 'x()': 'is_player_action' },
                 '_',
@@ -1127,7 +1151,7 @@ const storyContent: InkStoryData = {
                         b: [
                             '\n',
                             { '->t->': 'player_action_options' },
-                            { '->': '.^.^.^.36' },
+                            { '->': '.^.^.^.57' },
                             null
                         ]
                     }
@@ -1142,17 +1166,12 @@ const storyContent: InkStoryData = {
                             'out',
                             '/ev',
                             '\n',
-                            { '->': '.^.^.^.36' },
+                            { '->': '.^.^.^.57' },
                             null
                         ]
                     }
                 ],
                 'nop',
-                '\n',
-                'ev',
-                { 'x()': 'get_action_result' },
-                'out',
-                '/ev',
                 '\n',
                 'ev',
                 { 'x()': 'end_turn' },
@@ -1175,7 +1194,7 @@ const storyContent: InkStoryData = {
                         b: [
                             '\n',
                             { '->': '.^.^.^' },
-                            { '->': '.^.^.^.59' },
+                            { '->': '.^.^.^.75' },
                             null
                         ]
                     }
@@ -1265,7 +1284,7 @@ const storyContent: InkStoryData = {
                             { 'VAR?': 'enemy_name' },
                             'out',
                             '/ev',
-                            '^ Hp: ',
+                            '^ HP: ',
                             'ev',
                             { 'VAR?': 'enemy_hp' },
                             'out',
@@ -1361,7 +1380,7 @@ const storyContent: InkStoryData = {
                 { 'VAR?': 'hero_name' },
                 'out',
                 '/ev',
-                '^ Hp: ',
+                '^ HP: ',
                 'ev',
                 { 'VAR?': 'hero_hp' },
                 'out',
@@ -1418,7 +1437,7 @@ const storyContent: InkStoryData = {
                             { 'VAR?': 'mount_name' },
                             'out',
                             '/ev',
-                            '^ Hp: ',
+                            '^ HP: ',
                             'ev',
                             { 'VAR?': 'mount_hp' },
                             'out',
@@ -1439,6 +1458,43 @@ const storyContent: InkStoryData = {
                 'void',
                 '/ev',
                 '->->',
+                { '#f': 1 }
+            ],
+            combat_log_loop: [
+                { 'temp=': 'index' },
+                'ev',
+                { 'VAR?': 'index' },
+                0,
+                '<',
+                '/ev',
+                [
+                    { '->': '.^.b', c: true },
+                    {
+                        b: [
+                            '^ ',
+                            'ev',
+                            'void',
+                            '/ev',
+                            '->->',
+                            { '->': '.^.^.^.7' },
+                            null
+                        ]
+                    }
+                ],
+                'nop',
+                '\n',
+                'ev',
+                { 'VAR?': 'index' },
+                { 'x()': 'get_action_result', exArgs: 1 },
+                'out',
+                '/ev',
+                '\n',
+                'ev',
+                { 'VAR?': 'index' },
+                1,
+                '-',
+                '/ev',
+                { '->': '.^' },
                 { '#f': 1 }
             ],
             player_action_options: [
@@ -1607,7 +1663,8 @@ const storyContent: InkStoryData = {
                                     '/ev',
                                     '\n',
                                     'ev',
-                                    { 'x()': 'get_action_result' },
+                                    0,
+                                    { 'x()': 'get_action_result', exArgs: 1 },
                                     'out',
                                     '/ev',
                                     '\n',
@@ -1648,6 +1705,47 @@ const storyContent: InkStoryData = {
                 ],
                 'nop',
                 '\n',
+                { '#f': 1 }
+            ],
+            consequence_scene: [
+                [
+                    '^The acrid smell of ozone and blood hangs heavy in the air. Among the fallen, something glints.',
+                    '\n',
+                    '^You find:',
+                    '\n',
+                    '^*   23 Gold Crowns',
+                    '\n',
+                    '^*   A minor Healing Potion',
+                    '\n',
+                    [
+                        'ev',
+                        { '^->': 'consequence_scene.0.8.$r1' },
+                        { 'temp=': '$r' },
+                        'str',
+                        { '->': '.^.s' },
+                        [{ '#n': '$r1' }],
+                        '/str',
+                        '/ev',
+                        { '*': '.^.^.c-0', flg: 2 },
+                        { s: ['^Continue ', { '->': '$r', var: true }, null] }
+                    ],
+                    {
+                        'c-0': [
+                            'ev',
+                            { '^->': 'consequence_scene.0.c-0.$r2' },
+                            '/ev',
+                            { 'temp=': '$r' },
+                            { '->': '.^.^.8.s' },
+                            [{ '#n': '$r2' }],
+                            'ev',
+                            'void',
+                            '/ev',
+                            '->->',
+                            '\n',
+                            { '#f': 5 }
+                        ]
+                    }
+                ],
                 { '#f': 1 }
             ],
             'global decl': [

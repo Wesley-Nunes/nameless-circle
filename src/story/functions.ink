@@ -19,7 +19,7 @@
     ~ return "[x] Hero 1 / Enemy 1"
 === function get_action_skills_count() ===
     ~ return 3
-=== function get_action_result() ===
+=== function get_action_result(reverse_log_position) ===
     ~ return "Action result"
 === function get_attempt_skill_count(skill_result) ===
     ~ return 1
@@ -68,17 +68,15 @@
     
     { get_action_order() } # style action-order
     
+    📜 Combat Log
+    ~ temp log_size = get_party_size("enemies") + get_party_size("heroes") + 1
+    -> combat_log_loop(log_size) ->
+
     { - is_player_action():
         -> player_action_options ->
       - else:
-        // ONLY LOOP THE UI OF combat_loop WHEN is_player_action
         { ai_action() }
     }
-    
-    // get_action_result should be a loop,
-    // and render the last 5(or another good quant)
-    // action results
-    { get_action_result() }
     
     { end_turn() }
     # event turn end
@@ -96,7 +94,7 @@
     ~ temp enemy_hp = get_character_info("enemies", index, "hp")
     
     { enemy_hp > 0:
-        ☠️ {enemy_name} Hp: {enemy_hp} # style monospace-text
+        ☠️ {enemy_name} HP: {enemy_hp} # style monospace-text
         -> mount_display(enemy_id) ->
     }
     -> enemy_loop(index + 1)
@@ -108,7 +106,7 @@
     ~ temp hero_name = get_character_info("heroes", index, "name")
     ~ temp hero_hp =  get_character_info("heroes", index, "hp")
     
-    🛡️ {hero_name} Hp: {hero_hp} # style monospace-text
+    🛡️ {hero_name} HP: {hero_hp} # style monospace-text
     -> mount_display(hero_id) ->
     
     -> hero_loop(index + 1)
@@ -118,9 +116,14 @@
     ~ temp mount_hp =  get_mount_info(character_id, "hp")
 
     { mount_hp > 0:
-          └─ 🐴 {mount_name} Hp: {mount_hp}  # style monospace-text
+          └─ 🐴 {mount_name} HP: {mount_hp}  # style monospace-text
     }
     ->->
+
+=== combat_log_loop(index) ===
+    { index < 0: ->-> }
+    { get_action_result(index) }
+    -> combat_log_loop(index - 1)
 
 // Right now, only the attack option is available    
 === player_action_options ===
@@ -146,8 +149,19 @@
     { skill_name: 
         + [{skill_name}]
             ~ attempt_skill(skill_id)
-            { get_action_result() }
+            { get_action_result(0) }
             ->-> 
     }
 
     { index < get_action_skills_count() - 1: -> available_skills_loop(index + 1) }
+
+// TBD - Mock version
+=== consequence_scene ===
+The acrid smell of ozone and blood hangs heavy in the air. Among the fallen, something glints.
+
+You find:
+\*   23 Gold Crowns
+\*   A minor Healing Potion
+
++ Continue ->->
+

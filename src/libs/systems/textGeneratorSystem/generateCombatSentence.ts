@@ -1,37 +1,51 @@
 import { roll } from 'libs/systems/rollSystem'
 
-import type { ActionResult, Enemy, Hero, Mount } from 'libs/entities'
+import type {
+    ActionResult,
+    DamageResult,
+    Enemy,
+    Hero,
+    Mount
+} from 'libs/entities'
 
 const generateCombatSentence = (
     attacker: Enemy | Hero | Mount,
     target: Enemy | Hero | Mount,
-    attackResult: ActionResult
+    attackResult: ActionResult,
+    damageResult?: DamageResult
 ): string => {
     const criticalHitMessage = [
-        `${attacker.name} critically smashes ${target.name}!`,
-        `Devastating hit! ${target.name} reels.`,
-        `${attacker.name} brutalizes ${target.name}!`,
-        `${attacker.name} annihilates ${target.name}!`
+        `${attacker.name} critically annihilates ${target.name} for ${damageResult?.damage} damage!`,
+        `${attacker.name}'s devastating blow crushes ${target.name} (${damageResult?.oldHp} → ${damageResult?.newHp} HP)!`,
+        `${attacker.name} brutally smashes ${target.name} with a critical hit, dealing ${damageResult?.damage} damage!`,
+        `${attacker.name} lands a catastrophic strike on ${target.name} (${damageResult?.oldHp} → ${damageResult?.newHp} HP)!`
     ]
     const hitMessage = [
-        `${attacker.name} hits ${target.name}.`,
-        `${attacker.name} strikes the ${target.species}.`,
-        `${target.name} takes damage.`,
-        'Solid strike.'
+        `${attacker.name} strikes ${target.name} for ${damageResult?.damage} damage.`,
+        `${attacker.name}'s attack hits ${target.name} (${damageResult?.oldHp} → ${damageResult?.newHp} HP).`,
+        `${attacker.name} wounds ${target.name} with a solid strike, dealing ${damageResult?.damage} damage.`,
+        `${attacker.name} damages ${target.name} in combat (${damageResult?.oldHp} → ${damageResult?.newHp} HP).`
     ]
     const missMessage = [
-        `${attacker.name} misses.`,
-        `${target.name} dodges!`,
-        `${target.name} evades.`,
-        'Attack fails.'
+        `${attacker.name}'s attack misses ${target.name}.`,
+        `${target.name} nimbly dodges ${attacker.name}'s assault.`,
+        `${attacker.name} fails to hit the agile ${target.name}.`,
+        `${target.name} evades ${attacker.name}'s attack completely.`
     ]
+
+    const deathMessage =
+        damageResult && !damageResult.stillAlive
+            ? ` ${target.name} has been defeated!`
+            : ''
+
     const randomIndex = roll(4) - 1
 
-    if (attackResult.success && attackResult.critical) {
-        return criticalHitMessage[randomIndex]
-    }
-    if (attackResult.success && !attackResult.critical) {
-        return hitMessage[randomIndex]
+    if (attackResult.success) {
+        console.log(damageResult)
+        if (attackResult.critical) {
+            return criticalHitMessage[randomIndex] + deathMessage
+        }
+        return hitMessage[randomIndex] + deathMessage
     }
     return missMessage[randomIndex]
 }

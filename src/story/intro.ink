@@ -10,7 +10,7 @@ EXTERNAL end_skill_turn()
 EXTERNAL end_turn()
 EXTERNAL get_action_order()
 EXTERNAL get_action_skills_count()
-EXTERNAL get_action_result()
+EXTERNAL get_action_result(reverse_log_position)
 EXTERNAL get_attempt_skill_count(skill_result)
 EXTERNAL get_character_info(team, index, prop)
 EXTERNAL get_combat_result(combat_id)
@@ -82,8 +82,8 @@ Could word of Lysandra’s movements have leaked? Were there spies in the villag
 { combat_result:
     - -1: -> defeat_scene -> END
     - 0: -> draw_scene -> END
-    - 1: -> steal_horses_quest
-    - 2: -> village_quest ->
+    - 1: -> consequence_scene -> steal_horses_quest
+    - 2: -> consequence_scene -> village_quest ->
 }
 
 === steal_horses_quest ===
