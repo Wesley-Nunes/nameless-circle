@@ -91,7 +91,7 @@ class StoryStore {
 
                     try {
                         switch (type) {
-                            case 'event':
+                            case 'event': {
                                 const [eventType, action] = rest as [
                                     EventType,
                                     TurnAction
@@ -99,10 +99,12 @@ class StoryStore {
                                 this.handleEvent(eventType, action)
 
                                 break
-                            case 'style':
+                            }
+                            case 'style': {
                                 cssClass = rest
 
                                 break
+                            }
                         }
                     } catch (error) {
                         console.error(`Error processing tag '${tag}':`, error)
