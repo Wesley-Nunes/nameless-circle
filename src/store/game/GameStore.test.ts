@@ -37,7 +37,7 @@ describe('GameStore', () => {
             'heroes',
             0,
             'name'
-        )
+        ) as string
         const heroHp = gameStore.handleInkFunction(
             'get_character_info',
             'heroes',
@@ -55,7 +55,7 @@ describe('GameStore', () => {
             'enemies',
             0,
             'name'
-        )
+        ) as string
         const enemyHp = gameStore.handleInkFunction(
             'get_character_info',
             'enemies',
@@ -83,15 +83,15 @@ describe('GameStore', () => {
         expect(heroPartySize).toBe(expectedPartySize)
         expect(enemyPartySize).toBe(expectedPartySize)
         expect(combatStatus).toBe(expectedCombatStatus)
-        expect(heroName).toBe(expectedHeroName)
+        expect(heroName.trim()).toBe(expectedHeroName)
         expect(heroHp).toBe(expectedHeroHp)
-        expect(enemyName).toBe(expectedEnemyName)
+        expect(enemyName.trim()).toBe(expectedEnemyName)
         expect(enemyHp).toBeGreaterThanOrEqual(expectedEnemyHp.hp)
         expect(enemyHp).toBeLessThanOrEqual(expectedEnemyHp.maxHp)
 
         const expectedActionOrder = [
-            '⚔️ commoner / ⏳ Celcius',
-            '⚔️ Celcius / ⏳ commoner'
+            '🔥 commoner / ⏳ Celcius',
+            '🔥 Celcius / ⏳ commoner'
         ]
         const actionOrder = gameStore.handleInkFunction('get_action_order')
         expect(actionOrder).toSatisfy(
@@ -104,7 +104,7 @@ describe('GameStore', () => {
         expect(isHeroAction).toBeTypeOf('boolean')
 
         const actionResultOne = gameStore.handleInkFunction('get_action_result')
-        expect(actionResultOne).toBeUndefined()
+        expect(actionResultOne).toBe('')
 
         if (isHeroAction) {
             gameStore.handleInkFunction('attack', enemyId!)

@@ -1,0 +1,13 @@
+.action-order {
+    font-style: italic;
+    font-variant: all-petite-caps;
+}
+
+.centralized-text {
+    text-align: center;
+}
+
+.monospace-text {
+    font-family: "Fira Mono", monospace;
+}
+

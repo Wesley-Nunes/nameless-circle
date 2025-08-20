@@ -1,29 +1,40 @@
 import { Story } from 'inkjs'
 
-import type { InkStoryData } from 'story'
+import type { InkStoryData } from 'libs/entities'
+
+type EventType = 'turn'
+type TurnAction = 'start' | 'end'
 
 class StoryStore {
     private inkFunctionHandler: // eslint-disable-next-line
-    ((funcName: string, ...args: any[]) => void) | null = null
+    (funcName: string, ...args: any[]) => void
     private story: Story
-    private updateCallback: (() => void) | null = null
-    public content: string = ''
-    public choices: { index: number; text: string }[] = []
+    private turnStartIndex: number | null
+    private updateCallback: (() => void) | null
+
+    public choices: { index: number; text: string }[]
+    public content: { text: string | null; tags: string[] | null }[]
 
     constructor(
         storyContent: InkStoryData,
         // eslint-disable-next-line
-        inkFunctionHandler?: (funcName: string, ...args: any[]) => void
+        inkFunctionHandler: (funcName: string, ...args: any[]) => void
     ) {
-        this.story = new Story(storyContent)
-
-        if (inkFunctionHandler) {
-            this.inkFunctionHandler = inkFunctionHandler
-
-            this.bindInkFunctions()
+        if (!storyContent) {
+            throw new Error('Missing storyContent')
+        }
+        if (!inkFunctionHandler) {
+            throw new Error('Missing inkFunctionHandler')
         }
 
+        this.story = new Story(storyContent)
+        this.turnStartIndex = null
+        this.choices = []
+        this.content = []
+        this.inkFunctionHandler = inkFunctionHandler
+        this.bindInkFunctions()
         this.progressStory()
+        this.updateCallback = null
     }
 
     private bindInkFunctions() {
@@ -40,35 +51,74 @@ class StoryStore {
             'get_combat_status',
             'ai_action',
             'add_mount',
-            'has_mounts',
             'get_mount_info',
             'get_combat_result',
-            'set_skill_scene',
-            'get_action_skills_count',
-            'get_scene_skill_info',
-            'attempt_skill',
-            'last_attempt_skill_result',
-            'get_attempt_skill_count',
-            'end_skill_turn',
-            'end_skill_scene'
+            'get_combat_round'
         ].forEach(fn => {
             this.story.BindExternalFunction(fn, (...args) => {
                 return this.inkFunctionHandler!(fn, ...args)
             })
         })
     }
+    private handleEvent(type: EventType, action: TurnAction) {
+        const event = {
+            turn: {
+                start: () => {
+                    this.turnStartIndex = this.content.length
+                },
+                end: () => {
+                    if (this.turnStartIndex === null) {
+                        throw new Error('End event without matching start!')
+                    }
+
+                    this.content = this.content.slice(0, this.turnStartIndex)
+                    this.turnStartIndex = null
+                }
+            }
+        }
+
+        event[type][action]()
+    }
     private progressStory() {
-        let newContent = this.content
-
         while (this.story.canContinue) {
-            newContent += this.story.Continue()
+            const text = this.story.Continue()
+            const tags = this.story.currentTags
+            let cssClass: string[] = []
+
+            if (tags && tags?.length) {
+                tags.forEach(tag => {
+                    const [type, ...rest] = tag.split(' ')
+
+                    try {
+                        switch (type) {
+                            case 'event': {
+                                const [eventType, action] = rest as [
+                                    EventType,
+                                    TurnAction
+                                ]
+                                this.handleEvent(eventType, action)
+
+                                break
+                            }
+                            case 'style': {
+                                cssClass = rest
+
+                                break
+                            }
+                        }
+                    } catch (error) {
+                        console.error(`Error processing tag '${tag}':`, error)
+                    }
+                })
+            }
+
+            if ((text !== '\n' && text) || cssClass?.length) {
+                const newContent = { text, tags: cssClass }
+
+                this.content.push(newContent)
+            }
         }
 
-        if (newContent !== this.content) {
-            newContent += '\n\n'
-        }
-
-        this.content = newContent
         this.choices = this.story.currentChoices.map(c => ({
             index: c.index,
             text: c.text

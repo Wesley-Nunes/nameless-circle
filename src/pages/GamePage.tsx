@@ -1,11 +1,24 @@
 import { useStoryStore } from 'store/story'
+import styles from './GamePage.module.css'
 
 const GamePage: React.FC = () => {
     const { content, choices, makeChoice } = useStoryStore()
 
     return (
         <div>
-            <pre>{content}</pre>
+            {content.map(({ text, tags }, i) => {
+                let classes = ''
+
+                if (tags?.length) {
+                    classes = tags.map(className => styles[className]).join(' ')
+                }
+
+                return (
+                    <p className={classes} key={i}>
+                        {text}
+                    </p>
+                )
+            })}
             {choices.map(choice => (
                 <button
                     key={choice.index}
