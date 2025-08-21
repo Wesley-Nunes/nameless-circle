@@ -1,4 +1,34 @@
 :root {
+    /* Colors */
+    --color-eerie-black: #1E1E1E;
+    --color-pearl: #E8DFCA;
+    --color-deep-brown: #5D4037;
+    --color-silver: #A9A9A9;
+    --color-jonquil: #FFCA00;
+    --color-vivid-sky-blue: #2ED9FF;
+    --color-malachite: #1BE467;
+    --color-poppy: #DF3D3B;
+
+    /* Eerie Black Scale */
+    --color-eerie-black-400: color-mix(in srgb, var(--color-eerie-black) 70%, white);
+    --color-eerie-black-500: var(--color-eerie-black);
+    --color-eerie-black-600: color-mix(in srgb, var(--color-eerie-black) 90%, black);
+
+    /* Deep Brown Scale */
+    --color-deep-brown-500: var(--color-deep-brown);
+    --color-deep-brown-700: color-mix(in srgb, var(--color-deep-brown) 70%, black);
+    --color-deep-brown-800: color-mix(in srgb, var(--color-deep-brown) 50%, black);
+
+    /* Gradient Colors */
+    --gradient-start: color-mix(
+        in srgb, var(--color-eerie-black-400) 70%, var(--color-deep-brown-700)
+    );
+    --gradient-end: color-mix(
+        in srgb, var(--color-eerie-black-600) 80%, var(--color-deep-brown-800)
+    );
+
+
+    /* Sizing */
     font-size: 62.5%;
 }
 
