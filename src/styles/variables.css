@@ -19,6 +19,9 @@
     --color-deep-brown-700: color-mix(in srgb, var(--color-deep-brown) 70%, black);
     --color-deep-brown-800: color-mix(in srgb, var(--color-deep-brown) 50%, black);
 
+    /* Silver Scale */
+    --color-silver-500: var(--color-silver);
+
     /* Gradient Colors */
     --gradient-start: color-mix(
         in srgb, var(--color-eerie-black-400) 70%, var(--color-deep-brown-700)
@@ -27,6 +30,8 @@
         in srgb, var(--color-eerie-black-600) 80%, var(--color-deep-brown-800)
     );
 
+    --bg-primary: var(--color-eerie-black-500);
+    --border-primary: var(--color-silver-500);
 
     /* Sizing */
     font-size: 62.5%;

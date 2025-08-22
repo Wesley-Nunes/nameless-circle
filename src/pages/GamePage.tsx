@@ -1,11 +1,16 @@
+import React from 'react'
+
 import { useStoryStore } from 'store/story'
+
+import { Card } from 'components/Card'
+
 import styles from './GamePage.module.css'
 
 const GamePage: React.FC = () => {
     const { content, choices, makeChoice } = useStoryStore()
 
     return (
-        <div>
+        <Card>
             {content.map(({ text, tags }, i) => {
                 let classes = ''
 
@@ -27,7 +32,7 @@ const GamePage: React.FC = () => {
                     {choice.text}
                 </button>
             ))}
-        </div>
+        </Card>
     )
 }
 
