@@ -12,7 +12,11 @@ class StoryStore {
     private turnStartIndex: number | null
     private updateCallback: (() => void) | null
 
-    public choices: { index: number; text: string }[]
+    public choices: {
+        index: number
+        text: string
+        props?: Record<string, boolean>
+    }[]
     public content: { text: string | null; tags: string[] | null }[]
 
     constructor(
@@ -121,10 +125,25 @@ class StoryStore {
 
         this.choices = this.story.currentChoices.map(c => ({
             index: c.index,
-            text: c.text
+            text: c.text,
+            props: this.propMaker(c.tags)
         }))
 
         this.triggerUpdate()
+    }
+    private propMaker(tags: string[] | null): {} | Record<string, boolean> {
+        if (tags && tags?.length) {
+            // NOTE: Right now, it's only creating boolean props
+            return tags.reduce((acc: Record<string, boolean>, tag) => {
+                if (tag.startsWith('prop ')) {
+                    const propName = tag.split(' ')[1]
+                    acc[propName] = true
+                }
+                return acc
+            }, {})
+        }
+
+        return {}
     }
     private triggerUpdate() {
         if (this.updateCallback) this.updateCallback()

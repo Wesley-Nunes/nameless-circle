@@ -39,10 +39,10 @@ As she shouted, you saw her tremble — and felt your own palms sweat.
 *   “Commander, Let me join you at the Citadel.”
     -> courtly_intrigue
 
-*   “I can move quietly, Protaxios. Let me scout with you.” # style disabled
+*   “I can move quietly, Protaxios. Let me scout with you.” # prop isDisabled
     -> END
 
-*   “The village needs every blade. I stand with Renpet-Ib.” # style disabled
+*   “The village needs every blade. I stand with Renpet-Ib.” # prop isDisabled
     -> END
 
 === courtly_intrigue ===

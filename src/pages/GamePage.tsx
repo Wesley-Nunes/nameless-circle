@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useStoryStore } from 'store/story'
 
-import { Card } from 'components/Card'
+import { Button, Card } from 'components'
 
 import styles from './GamePage.module.css'
 
@@ -24,13 +24,14 @@ const GamePage: React.FC = () => {
                     </p>
                 )
             })}
-            {choices.map(choice => (
-                <button
-                    key={choice.index}
-                    onClick={() => makeChoice(choice.index)}
+            {choices.map(({ index, text, props }) => (
+                <Button
+                    key={index}
+                    onClick={() => makeChoice(index)}
+                    {...props}
                 >
-                    {choice.text}
-                </button>
+                    {text}
+                </Button>
             ))}
         </Card>
     )

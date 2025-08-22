@@ -62,7 +62,7 @@ const storyContent: InkStoryData = {
                             s: [
                                 '^“I can move quietly, Protaxios. Let me scout with you.” ',
                                 '#',
-                                '^style disabled',
+                                '^prop isDisabled',
                                 '/#',
                                 { '->': '$r', var: true },
                                 null
@@ -83,7 +83,7 @@ const storyContent: InkStoryData = {
                             s: [
                                 '^“The village needs every blade. I stand with Renpet-Ib.” ',
                                 '#',
-                                '^style disabled',
+                                '^prop isDisabled',
                                 '/#',
                                 { '->': '$r', var: true },
                                 null

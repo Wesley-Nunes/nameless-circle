@@ -15,9 +15,9 @@ body {
     height: 100dvh;
 
     background: radial-gradient(
-        circle, var(--gradient-start) 0%, var(--gradient-end) 70%
+        circle, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 70%
     );
-    background-color: var(--gradient-end);
+    background-color: var(--bg-gradient-end);
 }
 
 .app-wrapper {
@@ -25,4 +25,3 @@ body {
     min-height: 100dvh;
 
 }
-

@@ -1,0 +1,51 @@
+.btn {
+    width: 100%;
+
+    background: linear-gradient(to bottom, var(--button-primary), var(--color-deep-brown-700));
+    color: var(--text-primary);
+
+    border: none;
+    border-radius: 4px;
+
+    padding: 1rem 2.5rem;
+
+    cursor: pointer;
+
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.5),
+        inset 0 1px 2px rgb(from var(--color-jonquil-100) r g b / 0.3),
+        inset 0 -2px 4px rgb(from var(--color-eerie-black-500) r g b / 0.7);
+    transition: all 0.3s ease;
+}
+.btn:hover {
+    color: var(--accent-reward);
+
+    box-shadow: 
+        0 6px 12px rgba(0, 0, 0, 0.6),
+        inset 0 1px 2px rgb(from var(--color-jonquil-200) r g b / 0.5),
+        inset 0 -2px 4px rgb(from var(--color-eerie-black-400) r g b / 0.4);
+    transform: translateY(-2px);
+}
+.btn:active {
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        inset 0 2px 4px rgb(from var(--color-eerie-black-900) r g b / 0.9);
+
+    transform: translateY(1px);
+}
+.btn:focus-visible {
+    color: var(--accent-reward);
+
+    outline: 2px solid var(--border-secondary);
+}
+.btn:disabled {
+    background: var(--button-disabled);
+    color: var(--text-disabled);
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
