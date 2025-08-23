@@ -117,6 +117,7 @@ class GameStore {
         this.turnLog = []
         this.winConditions = []
     }
+    // FIX: Instead of use unicode use the same code use to the tag/icon logic
     private stringifyWithMarker(characters: Combatant[], i: number): string {
         return characters
             .map((character, index) => {

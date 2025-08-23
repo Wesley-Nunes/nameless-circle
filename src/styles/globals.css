@@ -18,6 +18,7 @@ body {
         circle, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 70%
     );
     background-color: var(--bg-gradient-end);
+    color: var(--text-primary);
 }
 
 .app-wrapper {
