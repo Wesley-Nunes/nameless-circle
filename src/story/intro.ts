@@ -342,15 +342,6 @@ const storyContent: InkStoryData = {
                 { '#f': 1 }
             ],
             end_turn: ['ev', 0, '/ev', '~ret', { '#f': 1 }],
-            get_action_order: [
-                'ev',
-                'str',
-                '^[x] Hero 1 / Enemy 1',
-                '/str',
-                '/ev',
-                '~ret',
-                { '#f': 1 }
-            ],
             get_action_result: [
                 { 'temp=': 'reverse_log_position' },
                 'ev',
@@ -463,15 +454,6 @@ const storyContent: InkStoryData = {
                 0,
                 '/ev',
                 { '->t->': 'hero_loop' },
-                'ev',
-                { 'x()': 'get_action_order' },
-                'out',
-                '/ev',
-                '^ ',
-                '#',
-                '^style action-order',
-                '/#',
-                '\n',
                 '^📜 Combat Log',
                 '\n',
                 'ev',
@@ -503,7 +485,7 @@ const storyContent: InkStoryData = {
                         b: [
                             '\n',
                             { '->t->': 'player_action_options' },
-                            { '->': '.^.^.^.57' },
+                            { '->': '.^.^.^.48' },
                             null
                         ]
                     }
@@ -518,7 +500,7 @@ const storyContent: InkStoryData = {
                             'out',
                             '/ev',
                             '\n',
-                            { '->': '.^.^.^.57' },
+                            { '->': '.^.^.^.48' },
                             null
                         ]
                     }
@@ -546,7 +528,7 @@ const storyContent: InkStoryData = {
                         b: [
                             '\n',
                             { '->': '.^.^.^' },
-                            { '->': '.^.^.^.75' },
+                            { '->': '.^.^.^.66' },
                             null
                         ]
                     }

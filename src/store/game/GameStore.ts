@@ -117,20 +117,6 @@ class GameStore {
         this.turnLog = []
         this.winConditions = []
     }
-    // FIX: Instead of use unicode use the same code use to the tag/icon logic
-    private stringifyWithMarker(characters: Combatant[], i: number): string {
-        return characters
-            .map((character, index) => {
-                if (character.hp <= 0) {
-                    return `\u{1FAA6} ${character.name}`
-                }
-
-                return index === i
-                    ? `\u{1F525} ${character.name}`
-                    : `\u{23F3} ${character.name}`
-            })
-            .join(' / ')
-    }
 
     // eslint-disable-next-line
     public handleInkFunction(funcName: string, ...args: any[]) {
@@ -201,14 +187,6 @@ class GameStore {
                 }
 
                 break
-            }
-            case 'get_action_order': {
-                const initiativeStringified = this.stringifyWithMarker(
-                    this.charactersOrdered,
-                    this.currentCharacterIndex
-                )
-
-                return initiativeStringified
             }
             case 'get_action_result': {
                 const [reverseIndex] = args as [number]

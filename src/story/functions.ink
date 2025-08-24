@@ -9,8 +9,6 @@
     attacking { character_id }
 === function end_turn() ===
     ~ return 0
-=== function get_action_order() ===
-    ~ return "[x] Hero 1 / Enemy 1"
 === function get_action_result(reverse_log_position) ===
     ~ return "Action result"
 === function get_character_info(team, index, prop) ===
@@ -48,8 +46,6 @@
 
     PARTY
     -> hero_loop(0) ->
-    
-    { get_action_order() } # style action-order
     
     📜 Combat Log
     ~ temp log_size = get_party_size("enemies") + get_party_size("heroes") + 1
