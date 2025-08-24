@@ -126,12 +126,12 @@ class StoryStore {
         this.choices = this.story.currentChoices.map(c => ({
             index: c.index,
             text: c.text,
-            props: this.propMaker(c.tags)
+            props: this.propMaker(c.tags) || {}
         }))
 
         this.triggerUpdate()
     }
-    private propMaker(tags: string[] | null): {} | Record<string, boolean> {
+    private propMaker(tags: string[] | null): null | Record<string, boolean> {
         if (tags && tags?.length) {
             // NOTE: Right now, it's only creating boolean props
             return tags.reduce((acc: Record<string, boolean>, tag) => {
@@ -143,7 +143,7 @@ class StoryStore {
             }, {})
         }
 
-        return {}
+        return null
     }
     private triggerUpdate() {
         if (this.updateCallback) this.updateCallback()

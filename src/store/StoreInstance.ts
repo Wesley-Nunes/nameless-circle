@@ -1,7 +1,7 @@
 import { GameStore } from './game'
 import { StoryStore } from './story'
 
-import type { InkStoryData } from 'story'
+import type { InkStoryData } from 'libs/entities'
 
 let gameStoreInstance: GameStore | null = null
 let storyStoreInstance: StoryStore | null = null
