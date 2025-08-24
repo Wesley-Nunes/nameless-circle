@@ -91,11 +91,10 @@
     -> hero_loop(index + 1)
 
 === mount_display(character_id) ===
-    ~ temp mount_name = get_mount_info(character_id, "name")
     ~ temp mount_hp =  get_mount_info(character_id, "hp")
 
     { mount_hp > 0:
-          └─ 🐴 {mount_name} HP: {mount_hp}  # style monospace-text
+        └─ 🐴 HP: {mount_hp}  # style monospace-text
     }
     ->->
 

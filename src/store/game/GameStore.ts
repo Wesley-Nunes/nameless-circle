@@ -50,7 +50,7 @@ class GameStore {
         this.winConditions = []
     }
 
-    private adjustNameLength(name: string, spaceSize: number = 40) {
+    private adjustNameLength(name: string, spaceSize: number = 20) {
         return name + '\u00A0'.repeat(spaceSize - name.length)
     }
     // TODO: Implement a robust action management system once additional actions are created
@@ -255,7 +255,7 @@ class GameStore {
                     const value = mount[prop as keyof typeof mount]
 
                     if (prop === 'name' && typeof value === 'string') {
-                        return this.adjustNameLength(value, 37)
+                        return this.adjustNameLength(value)
                     }
 
                     return value

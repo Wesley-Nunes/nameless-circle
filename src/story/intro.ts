@@ -741,15 +741,6 @@ const storyContent: InkStoryData = {
                 'ev',
                 { 'VAR?': 'character_id' },
                 'str',
-                '^name',
-                '/str',
-                { 'x()': 'get_mount_info', exArgs: 2 },
-                '/ev',
-                { 'temp=': 'mount_name' },
-                '\n',
-                'ev',
-                { 'VAR?': 'character_id' },
-                'str',
                 '^hp',
                 '/str',
                 { 'x()': 'get_mount_info', exArgs: 2 },
@@ -766,12 +757,7 @@ const storyContent: InkStoryData = {
                     {
                         b: [
                             '\n',
-                            '^└─ 🐴 ',
-                            'ev',
-                            { 'VAR?': 'mount_name' },
-                            'out',
-                            '/ev',
-                            '^ HP: ',
+                            '^└─ 🐴 HP: ',
                             'ev',
                             { 'VAR?': 'mount_hp' },
                             'out',
@@ -781,7 +767,7 @@ const storyContent: InkStoryData = {
                             '^style monospace-text',
                             '/#',
                             '\n',
-                            { '->': '.^.^.^.25' },
+                            { '->': '.^.^.^.16' },
                             null
                         ]
                     }
