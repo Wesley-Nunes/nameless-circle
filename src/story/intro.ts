@@ -30,27 +30,15 @@ const storyContent: InkStoryData = {
                     '\n',
                     '^As she shouted, you saw her tremble — and felt your own palms sweat.',
                     '\n',
+                    'ev',
+                    'str',
+                    '^“Commander, Let me join you at the Citadel.”',
+                    '/str',
+                    '/ev',
+                    { '*': '.^.c-0', flg: 20 },
                     [
                         'ev',
-                        { '^->': 'start.0.22.$r1' },
-                        { 'temp=': '$r' },
-                        'str',
-                        { '->': '.^.s' },
-                        [{ '#n': '$r1' }],
-                        '/str',
-                        '/ev',
-                        { '*': '.^.^.c-0', flg: 18 },
-                        {
-                            s: [
-                                '^“Commander, Let me join you at the Citadel.”',
-                                { '->': '$r', var: true },
-                                null
-                            ]
-                        }
-                    ],
-                    [
-                        'ev',
-                        { '^->': 'start.0.23.$r1' },
+                        { '^->': 'start.0.28.$r1' },
                         { 'temp=': '$r' },
                         'str',
                         { '->': '.^.s' },
@@ -71,7 +59,7 @@ const storyContent: InkStoryData = {
                     ],
                     [
                         'ev',
-                        { '^->': 'start.0.24.$r1' },
+                        { '^->': 'start.0.29.$r1' },
                         { 'temp=': '$r' },
                         'str',
                         { '->': '.^.s' },
@@ -92,12 +80,6 @@ const storyContent: InkStoryData = {
                     ],
                     {
                         'c-0': [
-                            'ev',
-                            { '^->': 'start.0.c-0.$r2' },
-                            '/ev',
-                            { 'temp=': '$r' },
-                            { '->': '.^.^.22.s' },
-                            [{ '#n': '$r2' }],
                             '\n',
                             { '->': 'courtly_intrigue' },
                             { '#f': 5 }
@@ -107,7 +89,7 @@ const storyContent: InkStoryData = {
                             { '^->': 'start.0.c-1.$r2' },
                             '/ev',
                             { 'temp=': '$r' },
-                            { '->': '.^.^.23.s' },
+                            { '->': '.^.^.28.s' },
                             [{ '#n': '$r2' }],
                             '\n',
                             'end',
@@ -118,7 +100,7 @@ const storyContent: InkStoryData = {
                             { '^->': 'start.0.c-2.$r2' },
                             '/ev',
                             { 'temp=': '$r' },
-                            { '->': '.^.^.24.s' },
+                            { '->': '.^.^.29.s' },
                             [{ '#n': '$r2' }],
                             '\n',
                             'end',
@@ -164,6 +146,8 @@ const storyContent: InkStoryData = {
                 { 'x()': 'add_mount', exArgs: 3 },
                 'out',
                 '/ev',
+                '\n',
+                '^“Commander, Let me join you at the Citadel.” You asked her, and she nodded.',
                 '\n',
                 '^The sky deepened to indigo as stars slowly awakened. The southern road — the only path to the Citadel — narrowed, with few places to camp. Ancient trees leaned toward the path as if trying to delay travelers.',
                 '\n',
@@ -221,7 +205,7 @@ const storyContent: InkStoryData = {
                             '\n',
                             { '->t->': 'defeat_scene' },
                             'end',
-                            { '->': '.^.^.^.84' },
+                            { '->': '.^.^.^.86' },
                             null
                         ]
                     }
@@ -239,7 +223,7 @@ const storyContent: InkStoryData = {
                             '\n',
                             { '->t->': 'draw_scene' },
                             'end',
-                            { '->': '.^.^.^.84' },
+                            { '->': '.^.^.^.86' },
                             null
                         ]
                     }
@@ -257,7 +241,7 @@ const storyContent: InkStoryData = {
                             '\n',
                             { '->t->': 'consequence_scene' },
                             'end',
-                            { '->': '.^.^.^.84' },
+                            { '->': '.^.^.^.86' },
                             null
                         ]
                     }
@@ -275,7 +259,7 @@ const storyContent: InkStoryData = {
                             '\n',
                             { '->t->': 'consequence_scene' },
                             'end',
-                            { '->': '.^.^.^.84' },
+                            { '->': '.^.^.^.86' },
                             null
                         ]
                     }
@@ -352,6 +336,7 @@ const storyContent: InkStoryData = {
                 '~ret',
                 { '#f': 1 }
             ],
+            get_alive_characters_size: ['ev', 1, '/ev', '~ret', { '#f': 1 }],
             get_character_info: [
                 { 'temp=': 'prop' },
                 { 'temp=': 'index' },
@@ -457,17 +442,9 @@ const storyContent: InkStoryData = {
                 '^📜 Combat Log',
                 '\n',
                 'ev',
-                'str',
-                '^enemies',
-                '/str',
-                { 'x()': 'get_party_size', exArgs: 1 },
-                'str',
-                '^heroes',
-                '/str',
-                { 'x()': 'get_party_size', exArgs: 1 },
-                '+',
+                { 'x()': 'get_alive_characters_size' },
                 1,
-                '+',
+                '-',
                 '/ev',
                 { 'temp=': 'log_size' },
                 '\n',
@@ -485,7 +462,7 @@ const storyContent: InkStoryData = {
                         b: [
                             '\n',
                             { '->t->': 'player_action_options' },
-                            { '->': '.^.^.^.48' },
+                            { '->': '.^.^.^.40' },
                             null
                         ]
                     }
@@ -500,7 +477,7 @@ const storyContent: InkStoryData = {
                             'out',
                             '/ev',
                             '\n',
-                            { '->': '.^.^.^.48' },
+                            { '->': '.^.^.^.40' },
                             null
                         ]
                     }
@@ -528,7 +505,7 @@ const storyContent: InkStoryData = {
                         b: [
                             '\n',
                             { '->': '.^.^.^' },
-                            { '->': '.^.^.^.66' },
+                            { '->': '.^.^.^.58' },
                             null
                         ]
                     }

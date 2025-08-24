@@ -6,6 +6,7 @@ EXTERNAL ai_action()
 EXTERNAL attack(character_id)
 EXTERNAL end_turn()
 EXTERNAL get_action_result(reverse_log_position)
+EXTERNAL get_alive_characters_size()
 EXTERNAL get_character_info(team, index, prop)
 EXTERNAL get_combat_result(combat_id)
 EXTERNAL get_combat_status()
@@ -35,7 +36,7 @@ Lysandra’s eyes blazed, nostrils flared.
 
 As she shouted, you saw her tremble — and felt your own palms sweat.
 
-*   “Commander, Let me join you at the Citadel.”
+*   [“Commander, Let me join you at the Citadel.”]
     -> courtly_intrigue
 
 *   “I can move quietly, Protaxios. Let me scout with you.” # prop isDisabled
@@ -50,6 +51,8 @@ As she shouted, you saw her tremble — and felt your own palms sweat.
 { add_to_hero_party("hero_0002") }
 { add_mount("Riding horse", "hero_0001", "heroes") }
 { add_mount("Riding horse", "hero_0002", "heroes") }
+“Commander, Let me join you at the Citadel.” You asked her, and she nodded.
+
 The sky deepened to indigo as stars slowly awakened. The southern road — the only path to the Citadel — narrowed, with few places to camp. Ancient trees leaned toward the path as if trying to delay travelers.
 
 Lysandra rode ahead, refusing an escort — only you, her new recruit, followed.

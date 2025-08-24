@@ -12,7 +12,7 @@ const GamePage: React.FC = () => {
     return (
         <Card>
             {content.map(({ text, tags }, i) => {
-                let classes = ''
+                let classes = `${styles['game-text']} `
 
                 if (tags?.length) {
                     classes = tags.map(className => styles[className]).join(' ')

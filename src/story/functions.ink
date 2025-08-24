@@ -11,6 +11,8 @@
     ~ return 0
 === function get_action_result(reverse_log_position) ===
     ~ return "Action result"
+=== function get_alive_characters_size() ===
+    ~ return 1
 === function get_character_info(team, index, prop) ===
     ~ return 1
 === function get_combat_result(combat_id) ===
@@ -48,7 +50,7 @@
     -> hero_loop(0) ->
     
     📜 Combat Log
-    ~ temp log_size = get_party_size("enemies") + get_party_size("heroes") + 1
+    ~ temp log_size = get_alive_characters_size() - 1
     -> combat_log_loop(log_size) ->
 
     { - is_player_action():

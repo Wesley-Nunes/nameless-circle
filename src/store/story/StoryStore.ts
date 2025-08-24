@@ -56,7 +56,8 @@ class StoryStore {
             'add_mount',
             'get_mount_info',
             'get_combat_result',
-            'get_combat_round'
+            'get_combat_round',
+            'get_alive_characters_size'
         ].forEach(fn => {
             this.story.BindExternalFunction(fn, (...args) => {
                 return this.inkFunctionHandler!(fn, ...args)

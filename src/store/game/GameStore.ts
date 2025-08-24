@@ -200,6 +200,11 @@ class GameStore {
 
                 return ''
             }
+            case 'get_alive_characters_size': {
+                return this.charactersOrdered.filter(
+                    character => character.isAlive
+                ).length
+            }
             case 'get_character_info': {
                 const [teamName, index, prop] = args as [Team, number, string]
                 const character = this.charactersOrdered
