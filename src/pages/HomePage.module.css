@@ -1,0 +1,147 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    row-gap: 1.6rem;
+
+    padding: 2.4rem 1.6rem;
+}
+
+.description {
+    max-width: 51.2rem;
+
+    text-align: center;
+    line-height: 1.4;
+
+    margin: 0;
+    padding: 0 1.6rem;
+}
+
+.cta-container {
+    width: 100%;
+    max-width: 38.4rem;
+
+    font-family: "Cardo", serif;
+
+    padding: 0 1.6rem;
+
+    margin: 1.6rem;
+}
+
+.features {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 1.6rem 3.2rem;
+
+    margin: 3.2rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    column-gap: 1.6rem;
+
+    color: var(--text-secondary);
+}
+
+.feature-icon {
+    width: 4rem;
+    height: 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+}
+
+.feature-icon-dice {
+    background-color: rgb(from var(--accent-reward) r g b / 0.15);
+    color: var(--accent-reward);
+}
+
+.feature-icon-scroll {
+    background-color: rgb(from var(--accent-magic) r g b / 0.15);
+    color: var(--accent-magic);
+}
+
+.feature-icon-bottle {
+    background-color: rgb(from var(--status-positive) r g b / 0.15);
+    color: var(--status-positive);
+}
+
+.footer {
+    width: 100%;
+    height: 6.4rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    background: black;
+
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+}
+
+.footer-item {
+    width: 25%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+
+    color: var(--text-primary);
+
+    text-decoration: none;
+}
+
+.footer-item:visited {}
+
+.footer-item-text {
+    min-width: 6.4rem;
+
+    text-align: center;
+}
+
+.blue-effect {
+  width: 26.4rem;
+  height: 26.4rem;
+
+  position: fixed;
+  right: -105px;
+  top: 130px;
+
+  background-color: rgb(from var(--accent-magic) r g b / 0.1);
+
+  border-radius: 50%;
+
+  filter: blur(40px);
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+@media (min-width: 420px) {
+    .footer-item {
+        align-items: flex-end;
+        gap: 0.8rem;
+    }
+    .footer-item-text {
+        min-width: fit-content
+    }
+}
+@media (min-width: 1024px) {
+    .blue-effect {
+        right: 120px;
+        top: 100px;
+    }
+}

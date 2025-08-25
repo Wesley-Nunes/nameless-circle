@@ -64,11 +64,17 @@
     --bg-primary: var(--color-eerie-black-500);
     --border-primary: var(--color-silver-500);
     --border-secondary: var(--color-jonquil-400);
+    --border-tertiary: var(--color-deep-brown-500);
     --button-primary: var(--color-deep-brown-500);
     --button-disabled: var(--color-silver-800);
+    --text-title: var(--color-jonquil-500);
     --text-primary: var(--color-pearl);
+    --text-secondary: var(--color-silver-500);
     --text-disabled: var(--color-silver-200);
     --accent-reward: var(--color-jonquil-500);
+    --accent-magic: var(--color-vivid-sky-blue);
+    --status-positive: var(--color-malachite);
+    --status-danger: var(--color-poppy);
 
     /* Sizing */
     font-size: 62.5%;
