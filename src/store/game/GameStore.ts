@@ -276,6 +276,9 @@ class GameStore {
 
                 return team.length
             }
+            case 'get_player_name': {
+                return this.currentHeroParty.find(hero => hero.isPlayer)?.name
+            }
             case 'has_mounts': {
                 const [teamName] = args as [Team]
 

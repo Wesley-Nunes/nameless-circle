@@ -26,6 +26,8 @@
     ~ return 1
 === function get_party_size(team) ===
     ~ return 1
+=== function get_player_name() ===
+    ~ return "Celcius"
 === function is_player_action() ===
     ~ return true
 === function set_combat(combat_id) ===
@@ -34,9 +36,9 @@
 // scenes
 === combat_scene(combat_id) ===
     ~ set_combat(combat_id)
-    ⚔️ COMBAT STARTED ⚔️ # style centralized-text
+    ⚔️ COMBAT STARTED ⚔️ # style centralizedText
     -> combat_loop() ->
-    🏆 COMBAT ENDED 🏆 # style centralized-text
+    🏆 COMBAT ENDED 🏆 # style centralizedText
     ->->
 
 === combat_loop ===
@@ -75,7 +77,7 @@
     ~ temp enemy_hp = get_character_info("enemies", index, "hp")
     
     { enemy_hp > 0:
-        ☠️ {enemy_name} HP: {enemy_hp} # style monospace-text
+        ☠️ {enemy_name} HP: {enemy_hp} # style monospaceText
         -> mount_display(enemy_id) ->
     }
     -> enemy_loop(index + 1)
@@ -87,7 +89,7 @@
     ~ temp hero_name = get_character_info("heroes", index, "name")
     ~ temp hero_hp =  get_character_info("heroes", index, "hp")
     
-    🛡️ {hero_name} HP: {hero_hp} # style monospace-text
+    🛡️ {hero_name} HP: {hero_hp} # style monospaceText
     -> mount_display(hero_id) ->
     
     -> hero_loop(index + 1)
@@ -96,7 +98,7 @@
     ~ temp mount_hp =  get_mount_info(character_id, "hp")
 
     { mount_hp > 0:
-        └─ 🐴 HP: {mount_hp}  # style monospace-text
+        └─ 🐴 HP: {mount_hp}  # style monospaceText
     }
     ->->
 
@@ -124,7 +126,7 @@
 
 // TBD - Mock version
 === consequence_scene ===
-The acrid smell of ozone and blood hangs heavy in the air. Among the fallen, something glints.
+The acrid smell of ozone and blood hangs heavy in the air. Among the fallen, something glints. # style topDivider
 
 You find:
 \*   23 Gold Crowns
