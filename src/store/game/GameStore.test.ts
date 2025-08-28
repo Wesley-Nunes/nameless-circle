@@ -10,7 +10,7 @@ describe('GameStore', () => {
     let gameStore: GameStore
 
     beforeEach(() => {
-        gameStore = new GameStore()
+        gameStore = new GameStore('Celcius')
         resetID()
     })
 

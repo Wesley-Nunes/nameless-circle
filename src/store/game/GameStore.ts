@@ -24,6 +24,7 @@ import type {
     Team,
     WinCondition
 } from 'libs/entities'
+import { validatePlayerName } from 'libs/systems/validationSystem'
 
 class GameStore {
     private availableHeroIds: string[]
@@ -37,14 +38,19 @@ class GameStore {
     private turnLog: string[]
     private winConditions: WinCondition
 
-    constructor() {
+    constructor(playerName: string) {
+        validatePlayerName(playerName)
+
+        const player = getHeroById(PLAYER_ID)
+        player.name = playerName
+
         this.availableHeroIds = [PLAYER_ID, 'hero_0002']
         this.charactersOrdered = []
         this.combatId = ''
         this.Log = new Map()
         this.combatStatus = getCombatStatus()
         this.currentCharacterIndex = 0
-        this.currentHeroParty = [getHeroById(PLAYER_ID)]
+        this.currentHeroParty = [player]
         this.currentMounts = []
         this.turnLog = []
         this.winConditions = []

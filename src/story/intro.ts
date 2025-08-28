@@ -440,6 +440,9 @@ const storyContent: InkStoryData = {
             ],
             combat_scene: [
                 { 'temp=': 'combat_id' },
+                '#',
+                '^style topDivider',
+                '/#',
                 'ev',
                 { 'VAR?': 'combat_id' },
                 { 'x()': 'set_combat', exArgs: 1 },

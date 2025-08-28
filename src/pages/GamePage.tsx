@@ -1,16 +1,49 @@
-import React from 'react'
-import { NavLink } from 'react-router'
+import React, { useEffect, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router'
 
 import { useStoryStore } from 'store/story'
 
-import { Button, Card, Divider, HomeIcon } from 'components'
+import {
+    Button,
+    Card,
+    Divider,
+    HomeIcon,
+    EndGameMessage,
+    Loading
+} from 'components'
 
 import styles from './GamePage.module.css'
+import { areStoresInitialized } from 'store/StoreInstance'
 
 const { container, navigation, textContent, actionWrapper } = styles
 
 const GamePage: React.FC = () => {
-    const { content, choices, makeChoice } = useStoryStore()
+    const { content, choices, makeChoice, isStoryFinished } = useStoryStore()
+    const [storesInitialized, setStoresInitialized] = useState(
+        areStoresInitialized()
+    )
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!areStoresInitialized()) {
+            navigate('/welcome')
+            return
+        }
+
+        setStoresInitialized(true)
+    }, [navigate])
+
+    if (!storesInitialized) {
+        return <Loading />
+    }
+
+    if (isStoryFinished) {
+        return (
+            <Card isReadMode={true}>
+                <EndGameMessage />
+            </Card>
+        )
+    }
 
     return (
         <Card isReadMode={true}>

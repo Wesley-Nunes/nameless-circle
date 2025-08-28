@@ -13,6 +13,8 @@ import {
 } from 'components'
 
 import styles from './WelcomePage.module.css'
+import { initStores } from 'store'
+import { storyContent } from 'story'
 
 const {
     container,
@@ -60,7 +62,8 @@ const WelcomePage: React.FC = () => {
             return
         }
 
-        window.localStorage.setItem('heroName', nickname)
+        initStores(storyContent, nickname)
+
         navigate('/game')
     }
 

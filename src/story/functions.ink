@@ -35,6 +35,7 @@
 
 // scenes
 === combat_scene(combat_id) ===
+    # style topDivider
     ~ set_combat(combat_id)
     ⚔️ COMBAT STARTED ⚔️ # style centralizedText
     -> combat_loop() ->

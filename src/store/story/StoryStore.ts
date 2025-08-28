@@ -18,6 +18,7 @@ class StoryStore {
         props?: Record<string, boolean>
     }[]
     public content: { text: string | null; tags: string[] | null }[]
+    public isFinished: boolean = false
 
     constructor(
         storyContent: InkStoryData,
@@ -129,6 +130,9 @@ class StoryStore {
             text: c.text,
             props: this.propMaker(c.tags) || {}
         }))
+
+        this.isFinished =
+            !this.story.canContinue && this.story.currentChoices.length === 0
 
         this.triggerUpdate()
     }
