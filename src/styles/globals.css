@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: "Inter", sans-serif;
+    font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
@@ -14,7 +14,9 @@ body {
     height: 100dvh;
 
     background: radial-gradient(
-        circle, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 70%
+        circle,
+        var(--bg-gradient-start) 0%,
+        var(--bg-gradient-end) 70%
     );
     background-color: var(--bg-gradient-end);
     color: var(--text-primary);

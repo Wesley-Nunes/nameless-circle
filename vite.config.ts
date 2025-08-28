@@ -5,6 +5,11 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
     plugins: [react(), tsconfigPaths()],
+    css: {
+        modules: {
+            localsConvention: 'camelCaseOnly'
+        }
+    },
     test: {
         environment: 'jsdom',
         coverage: {

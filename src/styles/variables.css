@@ -1,35 +1,99 @@
 :root {
     /* Colors */
-    --color-eerie-black: #1E1E1E;
-    --color-pearl: #E8DFCA;
-    --color-deep-brown: #5D4037;
-    --color-silver: #A9A9A9;
-    --color-jonquil: #FFCA00;
-    --color-vivid-sky-blue: #2ED9FF;
-    --color-malachite: #1BE467;
-    --color-poppy: #DF3D3B;
+    --color-eerie-black: #1e1e1e;
+    --color-pearl: #e8dfca;
+    --color-deep-brown: #5d4037;
+    --color-silver: #a9a9a9;
+    --color-jonquil: #ffca00;
+    --color-vivid-sky-blue: #2ed9ff;
+    --color-malachite: #1be467;
+    --color-poppy: #df3d3b;
 
     /* Eerie Black Scale */
-    --color-eerie-black-100: color-mix(in srgb, var(--color-eerie-black) 10%, white);
-    --color-eerie-black-200: color-mix(in srgb, var(--color-eerie-black) 30%, white);
-    --color-eerie-black-300: color-mix(in srgb, var(--color-eerie-black) 50%, white);
-    --color-eerie-black-400: color-mix(in srgb, var(--color-eerie-black) 70%, white);
+    --color-eerie-black-100: color-mix(
+        in srgb,
+        var(--color-eerie-black) 10%,
+        white
+    );
+    --color-eerie-black-200: color-mix(
+        in srgb,
+        var(--color-eerie-black) 30%,
+        white
+    );
+    --color-eerie-black-300: color-mix(
+        in srgb,
+        var(--color-eerie-black) 50%,
+        white
+    );
+    --color-eerie-black-400: color-mix(
+        in srgb,
+        var(--color-eerie-black) 70%,
+        white
+    );
     --color-eerie-black-500: var(--color-eerie-black);
-    --color-eerie-black-600: color-mix(in srgb, var(--color-eerie-black) 90%, black);
-    --color-eerie-black-700: color-mix(in srgb, var(--color-eerie-black) 70%, black);
-    --color-eerie-black-800: color-mix(in srgb, var(--color-eerie-black) 50%, black);
-    --color-eerie-black-900: color-mix(in srgb, var(--color-eerie-black) 30%, black);
+    --color-eerie-black-600: color-mix(
+        in srgb,
+        var(--color-eerie-black) 90%,
+        black
+    );
+    --color-eerie-black-700: color-mix(
+        in srgb,
+        var(--color-eerie-black) 70%,
+        black
+    );
+    --color-eerie-black-800: color-mix(
+        in srgb,
+        var(--color-eerie-black) 50%,
+        black
+    );
+    --color-eerie-black-900: color-mix(
+        in srgb,
+        var(--color-eerie-black) 30%,
+        black
+    );
 
     /* Deep Brown Scale */
-    --color-deep-brown-100: color-mix(in srgb, var(--color-deep-brown) 10%, white);
-    --color-deep-brown-200: color-mix(in srgb, var(--color-deep-brown) 30%, white);
-    --color-deep-brown-300: color-mix(in srgb, var(--color-deep-brown) 50%, white);
-    --color-deep-brown-400: color-mix(in srgb, var(--color-deep-brown) 70%, white);
+    --color-deep-brown-100: color-mix(
+        in srgb,
+        var(--color-deep-brown) 10%,
+        white
+    );
+    --color-deep-brown-200: color-mix(
+        in srgb,
+        var(--color-deep-brown) 30%,
+        white
+    );
+    --color-deep-brown-300: color-mix(
+        in srgb,
+        var(--color-deep-brown) 50%,
+        white
+    );
+    --color-deep-brown-400: color-mix(
+        in srgb,
+        var(--color-deep-brown) 70%,
+        white
+    );
     --color-deep-brown-500: var(--color-deep-brown);
-    --color-deep-brown-600: color-mix(in srgb, var(--color-deep-brown) 90%, black);
-    --color-deep-brown-700: color-mix(in srgb, var(--color-deep-brown) 70%, black);
-    --color-deep-brown-800: color-mix(in srgb, var(--color-deep-brown) 50%, black);
-    --color-deep-brown-900: color-mix(in srgb, var(--color-deep-brown) 30%, black);
+    --color-deep-brown-600: color-mix(
+        in srgb,
+        var(--color-deep-brown) 90%,
+        black
+    );
+    --color-deep-brown-700: color-mix(
+        in srgb,
+        var(--color-deep-brown) 70%,
+        black
+    );
+    --color-deep-brown-800: color-mix(
+        in srgb,
+        var(--color-deep-brown) 50%,
+        black
+    );
+    --color-deep-brown-900: color-mix(
+        in srgb,
+        var(--color-deep-brown) 30%,
+        black
+    );
 
     /* Silver Scale */
     --color-silver-100: color-mix(in srgb, var(--color-silver) 10%, white);
@@ -55,19 +119,24 @@
 
     /* Gradient Colors */
     --bg-gradient-start: color-mix(
-        in srgb, var(--color-eerie-black-400) 70%, var(--color-deep-brown-700)
+        in srgb,
+        var(--color-eerie-black-400) 70%,
+        var(--color-deep-brown-700)
     );
     --bg-gradient-end: color-mix(
-        in srgb, var(--color-eerie-black-600) 80%, var(--color-deep-brown-800)
+        in srgb,
+        var(--color-eerie-black-600) 80%,
+        var(--color-deep-brown-800)
     );
 
     --bg-primary: var(--color-eerie-black-500);
-    --border-primary: var(--color-silver-500);
+    --border-primary: rgb(from var(--color-silver-500) r g b / 0.2);
     --border-secondary: var(--color-jonquil-400);
     --border-tertiary: var(--color-deep-brown-500);
     --button-primary: var(--color-deep-brown-500);
     --button-disabled: var(--color-silver-800);
     --text-title: var(--color-jonquil-500);
+    --text-subtitle: var(--color-jonquil-400);
     --text-primary: var(--color-pearl);
     --text-secondary: var(--color-silver-500);
     --text-disabled: var(--color-silver-200);
@@ -79,4 +148,3 @@
     /* Sizing */
     font-size: 62.5%;
 }
-

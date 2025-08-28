@@ -1,0 +1,189 @@
+.container {
+    display: grid;
+    grid-template-rows: 2.4rem repeat(3, auto);
+    align-items: baseline;
+    row-gap: 1.6rem;
+
+    margin: 1.6rem;
+}
+
+.navigation {
+    margin: 0 1.6rem;
+}
+
+.navigation > a {
+    color: var(--text-primary);
+}
+
+.header {
+    margin: 0 1.6rem 2.4rem;
+}
+
+.author {
+    font-size: 1.4rem;
+    text-align: right;
+}
+
+.author > a {
+    color: var(--accent-magic);
+}
+
+.flex-col-8 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.description {
+    padding: 1.6rem;
+
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+}
+
+.subtitle {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-subtitle);
+}
+
+.description-list {
+    list-style: none;
+}
+
+.description-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.8rem;
+}
+
+.spider-effect {
+    animation: spiderPulse 3s infinite;
+}
+
+@keyframes spiderPulse {
+    0% {
+        filter: drop-shadow(0 0 1px rgba(51, 255, 0, 0.3))
+            drop-shadow(0 0 3px rgba(51, 255, 0, 0.1));
+    }
+    50% {
+        filter: drop-shadow(0 0 5px rgba(51, 255, 0, 0.5))
+            drop-shadow(0 0 7px rgba(51, 255, 0, 0.3));
+    }
+    100% {
+        filter: drop-shadow(0 0 1px rgba(51, 255, 0, 0.3))
+            drop-shadow(0 0 3px rgba(51, 255, 0, 0.1));
+    }
+}
+
+.tornado-effect {
+    filter: drop-shadow(1px 1px 1px rgba(46, 217, 255, 0.7))
+        drop-shadow(-1px -1px 1px rgba(255, 255, 255, 0.5));
+    animation: tornadoSwirl 2s infinite ease-in-out;
+}
+
+@keyframes tornadoSwirl {
+    0% {
+        filter: drop-shadow(1px 1px 1px rgba(46, 217, 255, 0.8))
+            drop-shadow(-1px -1px 1px rgba(255, 255, 255, 0.6))
+            drop-shadow(3px 3px 2px rgba(46, 217, 255, 0.3));
+        transform: rotate(0deg);
+    }
+    25% {
+        filter: drop-shadow(2px 0px 1px rgba(46, 217, 255, 0.7))
+            drop-shadow(-2px 0px 1px rgba(255, 255, 255, 0.5))
+            drop-shadow(0px 3px 2px rgba(46, 217, 255, 0.4));
+        transform: rotate(5deg);
+    }
+    50% {
+        filter: drop-shadow(1px -1px 1px rgba(255, 255, 255, 0.6))
+            drop-shadow(-1px 1px 1px rgba(46, 217, 255, 0.8))
+            drop-shadow(-3px -2px 2px rgba(46, 217, 255, 0.3));
+        transform: rotate(0deg);
+    }
+    75% {
+        filter: drop-shadow(0px -2px 1px rgba(46, 217, 255, 0.7))
+            drop-shadow(0px 2px 1px rgba(255, 255, 255, 0.5))
+            drop-shadow(-3px 0px 2px rgba(46, 217, 255, 0.4));
+        transform: rotate(-5deg);
+    }
+    100% {
+        filter: drop-shadow(1px 1px 1px rgba(46, 217, 255, 0.8))
+            drop-shadow(-1px -1px 1px rgba(255, 255, 255, 0.6))
+            drop-shadow(3px 3px 2px rgba(46, 217, 255, 0.3));
+        transform: rotate(0deg);
+    }
+}
+.action {
+    margin: 2.4rem 1.6rem;
+}
+
+.inputLabel {
+    display: block;
+}
+
+.input {
+    height: 3.2rem;
+
+    color: var(--text-primary);
+    background-color: rgb(from var(--color-eerie-black-700) r g b / 0.4);
+
+    border: 1px solid var(--border-tertiary);
+    border-radius: 4px;
+
+    padding: 0.8rem;
+}
+
+.input:focus-visible {
+    border-color: var(--border-secondary);
+    outline: 1px solid var(--border-secondary);
+}
+
+.input-error {
+    border-color: var(--status-danger);
+}
+
+.input-error-message {
+    color: var(--status-danger);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.info {
+    font-size: 1.4rem;
+    color: var(--text-secondary);
+}
+
+@media (min-width: 720px) {
+    .container {
+        max-width: 72rem;
+
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: 1fr 2fr;
+        gap: 5.6rem 1.6rem;
+
+        padding: 3.2rem;
+    }
+    .navigation {
+        grid-column: 1 / 2;
+        grid-row: 1;
+    }
+    .header {
+        grid-column: 1 / -1;
+        grid-row: 1;
+
+        justify-self: center;
+    }
+    .description {
+        align-self: baseline;
+        min-height: 25.6rem;
+        grid-column: 1 / 4;
+        grid-row: 2;
+    }
+    .action {
+        align-self: baseline;
+        min-height: 25.6rem;
+        grid-column: 4 / -1;
+        grid-row: 2;
+    }
+}

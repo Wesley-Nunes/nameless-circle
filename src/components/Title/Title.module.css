@@ -1,5 +1,5 @@
 .title {
-    font-family: "Cardo", serif;
+    font-family: 'Cardo', serif;
     font-weight: 700;
     font-style: normal;
     letter-spacing: 0.15px;
@@ -10,7 +10,7 @@
 }
 
 .small {
-    font-size: clamp(2.0rem, 2.5vw, 2.4rem);
+    font-size: clamp(2rem, 2.5vw, 2.4rem);
 }
 
 .medium {
@@ -20,4 +20,3 @@
 .large {
     font-size: clamp(3.6rem, 4.5vw, 4.8rem);
 }
-

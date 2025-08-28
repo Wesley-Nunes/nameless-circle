@@ -3,6 +3,10 @@ export { default as Card } from './Card/Card'
 export { default as Divider } from './Divider/Divider'
 export { default as Title } from './Title/Title'
 
+// Effects
+export { default as PulseEffect } from './Effect/PulseEffect'
+export { default as SideToSideEffect } from './Effect/SideToSideEffect'
+
 // Icons
 export { default as BottleTonicSkullIcon } from './Icons/BottleTonicSkullIcon'
 export { default as CrossedSwordsIcon } from './Icons/CrossedSwordsIcon'
@@ -12,6 +16,7 @@ export { default as EmailIcon } from './Icons/EmailIcon'
 export { default as FireIcon } from './Icons/FireIcon'
 export { default as GithubIcon } from './Icons/GithubIcon'
 export { default as HeadstoneIcon } from './Icons/HeadstoneIcon'
+export { default as HomeIcon } from './Icons/HomeIcon'
 export { default as HorseFaceIcon } from './Icons/HorseFaceIcon'
 export { default as HourglassNotDoneIcon } from './Icons/HourglassNotDoneIcon'
 export { default as LinkedinIcon } from './Icons/LinkedinIcon'

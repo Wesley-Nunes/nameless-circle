@@ -22,7 +22,7 @@
     width: 100%;
     max-width: 38.4rem;
 
-    font-family: "Cardo", serif;
+    font-family: 'Cardo', serif;
 
     padding: 0 1.6rem;
 
@@ -103,45 +103,18 @@
     text-decoration: none;
 }
 
-.footer-item:visited {}
-
 .footer-item-text {
     min-width: 6.4rem;
 
     text-align: center;
 }
 
-.blue-effect {
-  width: 26.4rem;
-  height: 26.4rem;
-
-  position: fixed;
-  right: -105px;
-  top: 130px;
-
-  background-color: rgb(from var(--accent-magic) r g b / 0.1);
-
-  border-radius: 50%;
-
-  filter: blur(40px);
-
-  overflow: hidden;
-
-  pointer-events: none;
-}
-
-@media (min-width: 420px) {
+@media (min-width: 460px) {
     .footer-item {
         align-items: flex-end;
         gap: 0.8rem;
     }
     .footer-item-text {
-        min-width: fit-content
-    }
-}
-@media (min-width: 1024px) {
-    .blue-effect {
-        right: 120px;
-        top: 100px;
+        min-width: fit-content;
     }
 }
