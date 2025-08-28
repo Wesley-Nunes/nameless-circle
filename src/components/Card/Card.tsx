@@ -6,9 +6,7 @@ const Card: React.FC<{ children: React.ReactNode; isReadMode?: boolean }> = ({
     children,
     isReadMode = false
 }) => (
-    <section
-        className={`${styles.card} ${isReadMode ? styles['read-mode'] : ''}`}
-    >
+    <section className={`${styles.card} ${isReadMode ? styles.readMode : ''}`}>
         {children}
     </section>
 )

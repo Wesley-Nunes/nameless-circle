@@ -31,7 +31,8 @@ const {
     spiderEffect,
     tornadoEffect,
     inputError,
-    inputErrorMessage
+    inputErrorMessage,
+    ctaContainer
 } = styles
 
 const WelcomePage: React.FC = () => {
@@ -132,7 +133,9 @@ const WelcomePage: React.FC = () => {
                         <p className={info}>
                             This name will be used for in-game references
                         </p>
-                        <Button>Begin Journey</Button>
+                        <span className={ctaContainer}>
+                            <Button>Begin Journey</Button>
+                        </span>
                     </form>
                 </main>
             </div>

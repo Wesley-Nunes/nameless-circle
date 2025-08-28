@@ -6,7 +6,7 @@ const Button: React.FC<{
     isDisabled?: boolean
 }> = ({ children, onClick, isDisabled }) => (
     <button className={styles.btn} onClick={onClick} disabled={isDisabled}>
-        {children}
+        {children.trim()}
     </button>
 )
 

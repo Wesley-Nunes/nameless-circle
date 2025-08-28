@@ -154,6 +154,12 @@
     color: var(--text-secondary);
 }
 
+.cta-container {
+    font-family: 'Cardo', serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
 @media (min-width: 720px) {
     .container {
         max-width: 72rem;

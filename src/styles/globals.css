@@ -23,7 +23,6 @@ body {
 }
 
 .app-wrapper {
-    min-width: 100dvw;
     min-height: 100dvh;
 
     display: flex;
