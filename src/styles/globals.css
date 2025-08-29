@@ -1,7 +1,30 @@
-body {
-    background-color: #1E1E1E;
-    color: #E8DFCA;
-    width: 100dvw;
-    height: 100dvh;
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
+body {
+    font-family: 'Inter', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(1.6rem, 1.5rem + 0.3vw, 1.8rem);
+
+    height: 100dvh;
+
+    background: radial-gradient(
+        circle,
+        var(--bg-gradient-start) 0%,
+        var(--bg-gradient-end) 70%
+    );
+    background-color: var(--bg-gradient-end);
+    color: var(--text-primary);
+}
+
+.app-wrapper {
+    min-height: 100dvh;
+
+    display: flex;
+    justify-content: center;
+}

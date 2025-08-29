@@ -1,14 +1,14 @@
-import { GameStore } from './game'
-import { StoryStore } from './story'
+import GameStore from './game/GameStore'
+import StoryStore from './story/StoryStore'
 
-import type { InkStoryData } from 'story'
+import type { InkStoryData } from 'libs/entities'
 
-let gameStoreInstance: GameStore | null = null
-let storyStoreInstance: StoryStore | null = null
+let gameStoreInstance: GameStore
+let storyStoreInstance: StoryStore
 
-const initStores = (storyContent: InkStoryData) => {
+const initStores = (storyContent: InkStoryData, playerName: string) => {
     if (!gameStoreInstance || !storyStoreInstance) {
-        gameStoreInstance = new GameStore()
+        gameStoreInstance = new GameStore(playerName)
         storyStoreInstance = new StoryStore(
             storyContent,
             gameStoreInstance.handleInkFunction.bind(gameStoreInstance)
@@ -17,19 +17,14 @@ const initStores = (storyContent: InkStoryData) => {
 }
 
 const getGameStore = (): GameStore => {
-    if (!gameStoreInstance) {
-        throw new Error('Game Store not initialized')
-    }
-
     return gameStoreInstance
 }
 
 const getStoryStore = (): StoryStore => {
-    if (!storyStoreInstance) {
-        throw new Error('Story Store not initialized')
-    }
-
     return storyStoreInstance
 }
 
-export { initStores, getGameStore, getStoryStore }
+const areStoresInitialized = (): boolean =>
+    Boolean(gameStoreInstance && storyStoreInstance)
+
+export { areStoresInitialized, initStores, getGameStore, getStoryStore }

@@ -1,0 +1,54 @@
+.effect {
+    width: 20vmax;
+    height: 20vmax;
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(5vmax);
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.animated {
+    top: 130px;
+    animation: floatAcross 20s ease-in-out infinite;
+}
+
+.reward {
+    background-color: rgb(from var(--accent-reward) r g b / 0.05);
+}
+
+.magic {
+    background-color: rgb(from var(--accent-magic) r g b / 0.05);
+}
+
+.positive {
+    background-color: rgb(from var(--status-positive) r g b / 0.05);
+}
+
+.danger {
+    background-color: rgb(from var(--status-danger) r g b / 0.05);
+}
+
+@keyframes floatAcross {
+    0% {
+        right: -264px;
+    }
+    50% {
+        right: calc(100% - 100px);
+    }
+    100% {
+        right: -264px;
+    }
+}
+
+@media (min-width: 720px) {
+    .animated {
+        animation-duration: 40s;
+    }
+}
+@media (min-width: 1200px) {
+    .animated {
+        animation-duration: 80s;
+    }
+}

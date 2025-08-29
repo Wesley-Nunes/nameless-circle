@@ -8,21 +8,50 @@ const storyContent: InkStoryData = {
         {
             start: [
                 [
-                    '^“When countless mouths are sated with innocent blood,',
+                    'ev',
+                    { 'x()': 'get_player_name' },
+                    '/ev',
+                    { 'VAR=': 'player_name', re: true },
                     '\n',
-                    '^The Abyss shall breathe its curse — ash, corruption, void —',
+                    '^“When countless mouths are sated with innocent blood, ',
+                    '#',
+                    '^style italicText',
+                    '/#',
                     '\n',
-                    '^To blacken guardian rings of life,',
+                    '^The Abyss shall breathe its curse — ash, corruption, void — ',
+                    '#',
+                    '^style italicText',
+                    '/#',
                     '\n',
-                    "^Until Seven Thrones crack and crash from heaven's height.",
+                    '^To blacken guardian rings of life, ',
+                    '#',
+                    '^style italicText',
+                    '/#',
                     '\n',
-                    '^Then, from the weeping ground,',
+                    "^Until Seven Thrones crack and crash from heaven's height. ",
+                    '#',
+                    '^style italicText',
+                    '/#',
                     '\n',
-                    '^The Shadowed One shall raise its silent crown,',
+                    '^Then, from the weeping ground, ',
+                    '#',
+                    '^style italicText',
+                    '/#',
                     '\n',
-                    '^And claim the shattered world as darkness drowns.”',
+                    '^The Shadowed One shall raise its silent crown, ',
+                    '#',
+                    '^style italicText',
+                    '/#',
                     '\n',
-                    '^The hue of the setting sun, nearly swallowed by night, blended with the swamp’s dark greens, staining the stagnant waters. Will-o’-wisps, like fragments of the cursed prophecy, broke free from the murk and began their ghostly dance above the sludge. A biting cold — far beyond twilight — enveloped the group, heavy with the stink of rot, sulfur, and decay.',
+                    '^And claim the shattered world as darkness drowns.” ',
+                    '#',
+                    '^style italicText',
+                    '/#',
+                    '\n',
+                    '^The hue of the setting sun, nearly swallowed by night, blended with the swamp’s dark greens, staining the stagnant waters. Will-o’-wisps, like fragments of the cursed prophecy, broke free from the murk and began their ghostly dance above the sludge. A biting cold — far beyond twilight — enveloped the group, heavy with the stink of rot, sulfur, and decay. ',
+                    '#',
+                    '^style topDivider',
+                    '/#',
                     '\n',
                     '^Lysandra’s eyes blazed, nostrils flared.',
                     '\n',
@@ -30,27 +59,15 @@ const storyContent: InkStoryData = {
                     '\n',
                     '^As she shouted, you saw her tremble — and felt your own palms sweat.',
                     '\n',
+                    'ev',
+                    'str',
+                    '^“Commander, Let me join you at the Citadel.”',
+                    '/str',
+                    '/ev',
+                    { '*': '.^.c-0', flg: 20 },
                     [
                         'ev',
-                        { '^->': 'start.0.22.$r1' },
-                        { 'temp=': '$r' },
-                        'str',
-                        { '->': '.^.s' },
-                        [{ '#n': '$r1' }],
-                        '/str',
-                        '/ev',
-                        { '*': '.^.^.c-0', flg: 18 },
-                        {
-                            s: [
-                                '^“Commander, Let me join you at the Citadel.”',
-                                { '->': '$r', var: true },
-                                null
-                            ]
-                        }
-                    ],
-                    [
-                        'ev',
-                        { '^->': 'start.0.23.$r1' },
+                        { '^->': 'start.0.57.$r1' },
                         { 'temp=': '$r' },
                         'str',
                         { '->': '.^.s' },
@@ -62,7 +79,7 @@ const storyContent: InkStoryData = {
                             s: [
                                 '^“I can move quietly, Protaxios. Let me scout with you.” ',
                                 '#',
-                                '^style disabled',
+                                '^prop isDisabled',
                                 '/#',
                                 { '->': '$r', var: true },
                                 null
@@ -71,7 +88,7 @@ const storyContent: InkStoryData = {
                     ],
                     [
                         'ev',
-                        { '^->': 'start.0.24.$r1' },
+                        { '^->': 'start.0.58.$r1' },
                         { 'temp=': '$r' },
                         'str',
                         { '->': '.^.s' },
@@ -83,7 +100,7 @@ const storyContent: InkStoryData = {
                             s: [
                                 '^“The village needs every blade. I stand with Renpet-Ib.” ',
                                 '#',
-                                '^style disabled',
+                                '^prop isDisabled',
                                 '/#',
                                 { '->': '$r', var: true },
                                 null
@@ -92,12 +109,6 @@ const storyContent: InkStoryData = {
                     ],
                     {
                         'c-0': [
-                            'ev',
-                            { '^->': 'start.0.c-0.$r2' },
-                            '/ev',
-                            { 'temp=': '$r' },
-                            { '->': '.^.^.22.s' },
-                            [{ '#n': '$r2' }],
                             '\n',
                             { '->': 'courtly_intrigue' },
                             { '#f': 5 }
@@ -107,7 +118,7 @@ const storyContent: InkStoryData = {
                             { '^->': 'start.0.c-1.$r2' },
                             '/ev',
                             { 'temp=': '$r' },
-                            { '->': '.^.^.23.s' },
+                            { '->': '.^.^.57.s' },
                             [{ '#n': '$r2' }],
                             '\n',
                             'end',
@@ -118,7 +129,7 @@ const storyContent: InkStoryData = {
                             { '^->': 'start.0.c-2.$r2' },
                             '/ev',
                             { 'temp=': '$r' },
-                            { '->': '.^.^.24.s' },
+                            { '->': '.^.^.58.s' },
                             [{ '#n': '$r2' }],
                             '\n',
                             'end',
@@ -165,6 +176,11 @@ const storyContent: InkStoryData = {
                 'out',
                 '/ev',
                 '\n',
+                '^“Commander, Let me join you at the Citadel.” You asked her, and she nodded. ',
+                '#',
+                '^style topDivider',
+                '/#',
+                '\n',
                 '^The sky deepened to indigo as stars slowly awakened. The southern road — the only path to the Citadel — narrowed, with few places to camp. Ancient trees leaned toward the path as if trying to delay travelers.',
                 '\n',
                 '^Lysandra rode ahead, refusing an escort — only you, her new recruit, followed.',
@@ -185,7 +201,12 @@ const storyContent: InkStoryData = {
                 '\n',
                 '^From the shadows, four blazefen — salamander-men with amber eyes and flaming tongues — attacked. To everyone’s shock, one hurled a spear toward the horses, missing by inches. Lysandra saw their intent.',
                 '\n',
-                '^“Protect the mounts!”',
+                '^“',
+                'ev',
+                { 'VAR?': 'player_name' },
+                'out',
+                '/ev',
+                '^, Protect the mounts!”',
                 '\n',
                 '^Could word of Lysandra’s movements have leaked? Were there spies in the village? What seemed a random attack now had a clear goal: delay her rush to the Citadel.',
                 '\n',
@@ -221,7 +242,7 @@ const storyContent: InkStoryData = {
                             '\n',
                             { '->t->': 'defeat_scene' },
                             'end',
-                            { '->': '.^.^.^.84' },
+                            { '->': '.^.^.^.94' },
                             null
                         ]
                     }
@@ -239,7 +260,7 @@ const storyContent: InkStoryData = {
                             '\n',
                             { '->t->': 'draw_scene' },
                             'end',
-                            { '->': '.^.^.^.84' },
+                            { '->': '.^.^.^.94' },
                             null
                         ]
                     }
@@ -257,7 +278,7 @@ const storyContent: InkStoryData = {
                             '\n',
                             { '->t->': 'consequence_scene' },
                             'end',
-                            { '->': '.^.^.^.84' },
+                            { '->': '.^.^.^.94' },
                             null
                         ]
                     }
@@ -275,7 +296,7 @@ const storyContent: InkStoryData = {
                             '\n',
                             { '->t->': 'consequence_scene' },
                             'end',
-                            { '->': '.^.^.^.84' },
+                            { '->': '.^.^.^.94' },
                             null
                         ]
                     }
@@ -342,15 +363,6 @@ const storyContent: InkStoryData = {
                 { '#f': 1 }
             ],
             end_turn: ['ev', 0, '/ev', '~ret', { '#f': 1 }],
-            get_action_order: [
-                'ev',
-                'str',
-                '^[x] Hero 1 / Enemy 1',
-                '/str',
-                '/ev',
-                '~ret',
-                { '#f': 1 }
-            ],
             get_action_result: [
                 { 'temp=': 'reverse_log_position' },
                 'ev',
@@ -361,6 +373,7 @@ const storyContent: InkStoryData = {
                 '~ret',
                 { '#f': 1 }
             ],
+            get_alive_characters_size: ['ev', 1, '/ev', '~ret', { '#f': 1 }],
             get_character_info: [
                 { 'temp=': 'prop' },
                 { 'temp=': 'index' },
@@ -406,6 +419,15 @@ const storyContent: InkStoryData = {
                 '~ret',
                 { '#f': 1 }
             ],
+            get_player_name: [
+                'ev',
+                'str',
+                '^Celcius',
+                '/str',
+                '/ev',
+                '~ret',
+                { '#f': 1 }
+            ],
             is_player_action: ['ev', true, '/ev', '~ret', { '#f': 1 }],
             set_combat: [
                 { 'temp=': 'combat_id' },
@@ -418,6 +440,9 @@ const storyContent: InkStoryData = {
             ],
             combat_scene: [
                 { 'temp=': 'combat_id' },
+                '#',
+                '^style topDivider',
+                '/#',
                 'ev',
                 { 'VAR?': 'combat_id' },
                 { 'x()': 'set_combat', exArgs: 1 },
@@ -426,13 +451,13 @@ const storyContent: InkStoryData = {
                 '\n',
                 '^⚔️ COMBAT STARTED ⚔️ ',
                 '#',
-                '^style centralized-text',
+                '^style centralizedText',
                 '/#',
                 '\n',
                 { '->t->': 'combat_loop' },
                 '^🏆 COMBAT ENDED 🏆 ',
                 '#',
-                '^style centralized-text',
+                '^style centralizedText',
                 '/#',
                 '\n',
                 'ev',
@@ -463,29 +488,12 @@ const storyContent: InkStoryData = {
                 0,
                 '/ev',
                 { '->t->': 'hero_loop' },
-                'ev',
-                { 'x()': 'get_action_order' },
-                'out',
-                '/ev',
-                '^ ',
-                '#',
-                '^style action-order',
-                '/#',
-                '\n',
                 '^📜 Combat Log',
                 '\n',
                 'ev',
-                'str',
-                '^enemies',
-                '/str',
-                { 'x()': 'get_party_size', exArgs: 1 },
-                'str',
-                '^heroes',
-                '/str',
-                { 'x()': 'get_party_size', exArgs: 1 },
-                '+',
+                { 'x()': 'get_alive_characters_size' },
                 1,
-                '+',
+                '-',
                 '/ev',
                 { 'temp=': 'log_size' },
                 '\n',
@@ -503,7 +511,7 @@ const storyContent: InkStoryData = {
                         b: [
                             '\n',
                             { '->t->': 'player_action_options' },
-                            { '->': '.^.^.^.57' },
+                            { '->': '.^.^.^.40' },
                             null
                         ]
                     }
@@ -518,7 +526,7 @@ const storyContent: InkStoryData = {
                             'out',
                             '/ev',
                             '\n',
-                            { '->': '.^.^.^.57' },
+                            { '->': '.^.^.^.40' },
                             null
                         ]
                     }
@@ -546,7 +554,7 @@ const storyContent: InkStoryData = {
                         b: [
                             '\n',
                             { '->': '.^.^.^' },
-                            { '->': '.^.^.^.75' },
+                            { '->': '.^.^.^.58' },
                             null
                         ]
                     }
@@ -643,7 +651,7 @@ const storyContent: InkStoryData = {
                             '/ev',
                             '^ ',
                             '#',
-                            '^style monospace-text',
+                            '^style monospaceText',
                             '/#',
                             '\n',
                             'ev',
@@ -739,7 +747,7 @@ const storyContent: InkStoryData = {
                 '/ev',
                 '^ ',
                 '#',
-                '^style monospace-text',
+                '^style monospaceText',
                 '/#',
                 '\n',
                 'ev',
@@ -759,15 +767,6 @@ const storyContent: InkStoryData = {
                 'ev',
                 { 'VAR?': 'character_id' },
                 'str',
-                '^name',
-                '/str',
-                { 'x()': 'get_mount_info', exArgs: 2 },
-                '/ev',
-                { 'temp=': 'mount_name' },
-                '\n',
-                'ev',
-                { 'VAR?': 'character_id' },
-                'str',
                 '^hp',
                 '/str',
                 { 'x()': 'get_mount_info', exArgs: 2 },
@@ -784,22 +783,17 @@ const storyContent: InkStoryData = {
                     {
                         b: [
                             '\n',
-                            '^└─ 🐴 ',
-                            'ev',
-                            { 'VAR?': 'mount_name' },
-                            'out',
-                            '/ev',
-                            '^ HP: ',
+                            '^└─ 🐴 HP: ',
                             'ev',
                             { 'VAR?': 'mount_hp' },
                             'out',
                             '/ev',
                             '^  ',
                             '#',
-                            '^style monospace-text',
+                            '^style monospaceText',
                             '/#',
                             '\n',
-                            { '->': '.^.^.^.25' },
+                            { '->': '.^.^.^.16' },
                             null
                         ]
                     }
@@ -969,7 +963,10 @@ const storyContent: InkStoryData = {
             ],
             consequence_scene: [
                 [
-                    '^The acrid smell of ozone and blood hangs heavy in the air. Among the fallen, something glints.',
+                    '^The acrid smell of ozone and blood hangs heavy in the air. Among the fallen, something glints. ',
+                    '#',
+                    '^style topDivider',
+                    '/#',
                     '\n',
                     '^You find:',
                     '\n',
@@ -979,7 +976,7 @@ const storyContent: InkStoryData = {
                     '\n',
                     [
                         'ev',
-                        { '^->': 'consequence_scene.0.8.$r1' },
+                        { '^->': 'consequence_scene.0.11.$r1' },
                         { 'temp=': '$r' },
                         'str',
                         { '->': '.^.s' },
@@ -995,7 +992,7 @@ const storyContent: InkStoryData = {
                             { '^->': 'consequence_scene.0.c-0.$r2' },
                             '/ev',
                             { 'temp=': '$r' },
-                            { '->': '.^.^.8.s' },
+                            { '->': '.^.^.11.s' },
                             [{ '#n': '$r2' }],
                             'ev',
                             'void',
@@ -1011,7 +1008,7 @@ const storyContent: InkStoryData = {
             'global decl': [
                 'ev',
                 'str',
-                '^Celcius',
+                '^',
                 '/str',
                 { 'VAR=': 'player_name' },
                 '/ev',

@@ -10,7 +10,7 @@ describe('GameStore', () => {
     let gameStore: GameStore
 
     beforeEach(() => {
-        gameStore = new GameStore()
+        gameStore = new GameStore('Celcius')
         resetID()
     })
 
@@ -88,17 +88,6 @@ describe('GameStore', () => {
         expect(enemyName.trim()).toBe(expectedEnemyName)
         expect(enemyHp).toBeGreaterThanOrEqual(expectedEnemyHp.hp)
         expect(enemyHp).toBeLessThanOrEqual(expectedEnemyHp.maxHp)
-
-        const expectedActionOrder = [
-            '🔥 commoner / ⏳ Celcius',
-            '🔥 Celcius / ⏳ commoner'
-        ]
-        const actionOrder = gameStore.handleInkFunction('get_action_order')
-        expect(actionOrder).toSatisfy(
-            value =>
-                value === expectedActionOrder[0] ||
-                value === expectedActionOrder[1]
-        )
 
         const isHeroAction = gameStore.handleInkFunction('is_player_action')
         expect(isHeroAction).toBeTypeOf('boolean')

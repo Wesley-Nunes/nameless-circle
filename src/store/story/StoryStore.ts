@@ -12,8 +12,13 @@ class StoryStore {
     private turnStartIndex: number | null
     private updateCallback: (() => void) | null
 
-    public choices: { index: number; text: string }[]
+    public choices: {
+        index: number
+        text: string
+        props?: Record<string, boolean>
+    }[]
     public content: { text: string | null; tags: string[] | null }[]
+    public isFinished: boolean = false
 
     constructor(
         storyContent: InkStoryData,
@@ -43,7 +48,6 @@ class StoryStore {
             'set_combat',
             'get_character_info',
             'get_party_size',
-            'get_action_order',
             'is_player_action',
             'attack',
             'get_action_result',
@@ -53,7 +57,9 @@ class StoryStore {
             'add_mount',
             'get_mount_info',
             'get_combat_result',
-            'get_combat_round'
+            'get_combat_round',
+            'get_alive_characters_size',
+            'get_player_name'
         ].forEach(fn => {
             this.story.BindExternalFunction(fn, (...args) => {
                 return this.inkFunctionHandler!(fn, ...args)
@@ -121,10 +127,28 @@ class StoryStore {
 
         this.choices = this.story.currentChoices.map(c => ({
             index: c.index,
-            text: c.text
+            text: c.text,
+            props: this.propMaker(c.tags) || {}
         }))
 
+        this.isFinished =
+            !this.story.canContinue && this.story.currentChoices.length === 0
+
         this.triggerUpdate()
+    }
+    private propMaker(tags: string[] | null): null | Record<string, boolean> {
+        if (tags && tags?.length) {
+            // NOTE: Right now, it's only creating boolean props
+            return tags.reduce((acc: Record<string, boolean>, tag) => {
+                if (tag.startsWith('prop ')) {
+                    const propName = tag.split(' ')[1]
+                    acc[propName] = true
+                }
+                return acc
+            }, {})
+        }
+
+        return null
     }
     private triggerUpdate() {
         if (this.updateCallback) this.updateCallback()

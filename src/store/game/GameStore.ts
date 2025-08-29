@@ -24,6 +24,7 @@ import type {
     Team,
     WinCondition
 } from 'libs/entities'
+import { validatePlayerName } from 'libs/systems/validationSystem'
 
 class GameStore {
     private availableHeroIds: string[]
@@ -37,20 +38,25 @@ class GameStore {
     private turnLog: string[]
     private winConditions: WinCondition
 
-    constructor() {
+    constructor(playerName: string) {
+        validatePlayerName(playerName)
+
+        const player = getHeroById(PLAYER_ID)
+        player.name = playerName
+
         this.availableHeroIds = [PLAYER_ID, 'hero_0002']
         this.charactersOrdered = []
         this.combatId = ''
         this.Log = new Map()
         this.combatStatus = getCombatStatus()
         this.currentCharacterIndex = 0
-        this.currentHeroParty = [getHeroById(PLAYER_ID)]
+        this.currentHeroParty = [player]
         this.currentMounts = []
         this.turnLog = []
         this.winConditions = []
     }
 
-    private adjustNameLength(name: string, spaceSize: number = 40) {
+    private adjustNameLength(name: string, spaceSize: number = 20) {
         return name + '\u00A0'.repeat(spaceSize - name.length)
     }
     // TODO: Implement a robust action management system once additional actions are created
@@ -116,19 +122,6 @@ class GameStore {
         this.currentMounts = this.currentMounts.filter(mount => mount.isAlive)
         this.turnLog = []
         this.winConditions = []
-    }
-    private stringifyWithMarker(characters: Combatant[], i: number): string {
-        return characters
-            .map((character, index) => {
-                if (character.hp <= 0) {
-                    return `\u{1FAA6} ${character.name}`
-                }
-
-                return index === i
-                    ? `\u{1F525} ${character.name}`
-                    : `\u{23F3} ${character.name}`
-            })
-            .join(' / ')
     }
 
     // eslint-disable-next-line
@@ -201,14 +194,6 @@ class GameStore {
 
                 break
             }
-            case 'get_action_order': {
-                const initiativeStringified = this.stringifyWithMarker(
-                    this.charactersOrdered,
-                    this.currentCharacterIndex
-                )
-
-                return initiativeStringified
-            }
             case 'get_action_result': {
                 const [reverseIndex] = args as [number]
 
@@ -220,6 +205,11 @@ class GameStore {
                 }
 
                 return ''
+            }
+            case 'get_alive_characters_size': {
+                return this.charactersOrdered.filter(
+                    character => character.isAlive
+                ).length
             }
             case 'get_character_info': {
                 const [teamName, index, prop] = args as [Team, number, string]
@@ -276,7 +266,7 @@ class GameStore {
                     const value = mount[prop as keyof typeof mount]
 
                     if (prop === 'name' && typeof value === 'string') {
-                        return this.adjustNameLength(value, 37)
+                        return this.adjustNameLength(value)
                     }
 
                     return value
@@ -291,6 +281,9 @@ class GameStore {
                 )
 
                 return team.length
+            }
+            case 'get_player_name': {
+                return this.currentHeroParty.find(hero => hero.isPlayer)?.name
             }
             case 'has_mounts': {
                 const [teamName] = args as [Team]
