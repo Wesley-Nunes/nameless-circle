@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router'
 
-import { useStoryStore } from 'store/story'
+import { areStoresInitialized, useStoryStore } from 'store'
 
 import {
     Button,
@@ -13,7 +13,6 @@ import {
 } from 'components'
 
 import styles from './GamePage.module.css'
-import { areStoresInitialized } from 'store/StoreInstance'
 
 const { container, navigation, textContent, actionWrapper } = styles
 

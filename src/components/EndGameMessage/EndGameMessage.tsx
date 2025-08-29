@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router'
+
+import Button from 'components/Button/Button'
 
 import styles from './EndGameMessage.module.css'
-import { Link } from 'react-router'
-import Button from 'components/Button/Button'
 
 const {
     centralize,

@@ -1,5 +1,5 @@
-import { GameStore } from './game'
-import { StoryStore } from './story'
+import GameStore from './game/GameStore'
+import StoryStore from './story/StoryStore'
 
 import type { InkStoryData } from 'libs/entities'
 
