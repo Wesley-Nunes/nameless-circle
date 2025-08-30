@@ -23,13 +23,13 @@ VAR player_name = ""
 === start ===
 ~ player_name = get_player_name()
 
-“When countless mouths are sated with innocent blood, # style italicText
-The Abyss shall breathe its curse — ash, corruption, void — # style italicText
-To blacken guardian rings of life, # style italicText
-Until Seven Thrones crack and crash from heaven's height. # style italicText
-Then, from the weeping ground, # style italicText
-The Shadowed One shall raise its silent crown, # style italicText
-And claim the shattered world as darkness drowns.” # style italicText
+“When countless mouths are sated with innocent blood, # style italicText centralizedText
+The Abyss shall breathe its curse — ash, corruption, void — # style italicText centralizedText
+To blacken guardian rings of life, # style italicText centralizedText
+Until Seven Thrones crack and crash from heaven's height. # style italicText centralizedText
+Then, from the weeping ground, # style italicText centralizedText
+The Shadowed One shall raise its silent crown, # style italicText centralizedText
+And claim the shattered world as darkness drowns.” # style italicText centralizedText
 
 The hue of the setting sun, nearly swallowed by night, blended with the swamp’s dark greens, staining the stagnant waters. Will-o’-wisps, like fragments of the cursed prophecy, broke free from the murk and began their ghostly dance above the sludge. A biting cold — far beyond twilight — enveloped the group, heavy with the stink of rot, sulfur, and decay. # style topDivider
 

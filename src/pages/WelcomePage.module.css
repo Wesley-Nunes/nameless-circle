@@ -55,6 +55,8 @@
     align-items: center;
     justify-content: flex-start;
     gap: 0.8rem;
+
+    font-family: 'Fira Mono', monospace;
 }
 
 .spider-effect {
@@ -63,22 +65,20 @@
 
 @keyframes spiderPulse {
     0% {
-        filter: drop-shadow(0 0 1px rgba(51, 255, 0, 0.3))
+        filter: brightness(1.8) drop-shadow(0 0 1px rgba(51, 255, 0, 0.3))
             drop-shadow(0 0 3px rgba(51, 255, 0, 0.1));
     }
     50% {
-        filter: drop-shadow(0 0 5px rgba(51, 255, 0, 0.5))
+        filter: brightness(1.3) drop-shadow(0 0 5px rgba(51, 255, 0, 0.5))
             drop-shadow(0 0 7px rgba(51, 255, 0, 0.3));
     }
     100% {
-        filter: drop-shadow(0 0 1px rgba(51, 255, 0, 0.3))
+        filter: brightness(1.8) drop-shadow(0 0 1px rgba(51, 255, 0, 0.3))
             drop-shadow(0 0 3px rgba(51, 255, 0, 0.1));
     }
 }
 
 .tornado-effect {
-    filter: drop-shadow(1px 1px 1px rgba(46, 217, 255, 0.7))
-        drop-shadow(-1px -1px 1px rgba(255, 255, 255, 0.5));
     animation: tornadoSwirl 2s infinite ease-in-out;
 }
 
@@ -151,6 +151,7 @@
 
 .info {
     font-size: 1.4rem;
+    font-style: italic;
     color: var(--text-secondary);
 }
 

@@ -94,16 +94,16 @@ const WelcomePage: React.FC = () => {
                         <li className={descriptionListItem}>
                             <SpiderIcon
                                 className={spiderEffect}
-                                width={24}
-                                height={24}
+                                width={40}
+                                height={40}
                             />
                             <span>Expect unfinished elements & bugs</span>
                         </li>
                         <li className={descriptionListItem}>
                             <TornadoIcon
                                 className={tornadoEffect}
-                                width={24}
-                                height={24}
+                                width={40}
+                                height={40}
                             />
                             <span>Systems may change radically</span>
                         </li>
