@@ -1,92 +1,92 @@
 name: Cypress Tests
 
 on:
-  push:
-    branches: [main, staging]
-  pull_request:
-    branches: [main, staging]
+    push:
+        branches: [main, staging]
+    pull_request:
+        branches: [main, staging]
 
 jobs:
-  install:
-    runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:22.19.0
-      options: --user 1001
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    install:
+        runs-on: ubuntu-latest
+        container:
+            image: cypress/browsers:22.19.0
+            options: --user 1001
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      - name: Cypress install
-        uses: cypress-io/github-action@v6
-        with:
-          runTests: false
-          build: npm run build # !
+            - name: Cypress install
+              uses: cypress-io/github-action@v6
+              with:
+                  runTests: false
+                  build: npm run build # !
 
-      - name: Save build folder
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          if-no-files-found: error
-          path: dist
+            - name: Save build folder
+              uses: actions/upload-artifact@v4
+              with:
+                  name: build
+                  if-no-files-found: error
+                  path: dist
 
-  ui-chrome-tests:
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:22.19.0
-      options: --user 1001
-    needs: install
-    strategy:
-      matrix:
-        containers: [1, 2, 3, 4, 5]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    ui-chrome-tests:
+        timeout-minutes: 15
+        runs-on: ubuntu-latest
+        container:
+            image: cypress/browsers:22.19.0
+            options: --user 1001
+        needs: install
+        strategy:
+            matrix:
+                containers: [1, 2, 3, 4, 5]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      - name: Download the build folders
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: dist
+            - name: Download the build folders
+              uses: actions/download-artifact@v4
+              with:
+                  name: build
+                  path: dist
 
-      - name: "UI Tests - Chrome"
-        uses: cypress-io/github-action@v6
-        with:
-          start: npm run preview
-          wait-on: "http://localhost:4173"
-          wait-on-timeout: 120
-          browser: chrome
-          group: "UI - Chrome"
-          spec: cypress/e2e/*
-          config-file: cypress.config.ci.ts
+            - name: 'UI Tests - Chrome'
+              uses: cypress-io/github-action@v6
+              with:
+                  start: npm run preview
+                  wait-on: 'http://localhost:4173'
+                  wait-on-timeout: 120
+                  browser: chrome
+                  group: 'UI - Chrome'
+                  spec: cypress/e2e/*
+                  config-file: cypress.config.ci.ts
 
-  ui-firefox-tests:
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:22.19.0
-      options: --user 1001
-    needs: install
-    strategy:
-      matrix:
-        containers: [1, 2, 3, 4, 5]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    ui-firefox-tests:
+        timeout-minutes: 15
+        runs-on: ubuntu-latest
+        container:
+            image: cypress/browsers:22.19.0
+            options: --user 1001
+        needs: install
+        strategy:
+            matrix:
+                containers: [1, 2, 3, 4, 5]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      - name: Download the build folders
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: dist
+            - name: Download the build folders
+              uses: actions/download-artifact@v4
+              with:
+                  name: build
+                  path: dist
 
-      - name: "UI Tests - Firefox"
-        uses: cypress-io/github-action@v6
-        with:
-          start: npm run preview
-          wait-on: "http://localhost:4173"
-          wait-on-timeout: 120
-          browser: firefox
-          group: "UI - Firefox"
-          spec: cypress/e2e/*
-          config-file: cypress.config.ci.ts
+            - name: 'UI Tests - Firefox'
+              uses: cypress-io/github-action@v6
+              with:
+                  start: npm run preview
+                  wait-on: 'http://localhost:4173'
+                  wait-on-timeout: 120
+                  browser: firefox
+                  group: 'UI - Firefox'
+                  spec: cypress/e2e/*
+                  config-file: cypress.config.ci.ts
