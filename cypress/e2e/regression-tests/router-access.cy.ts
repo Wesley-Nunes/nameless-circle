@@ -8,21 +8,21 @@ describe('Regression: router access', () => {
             cy.setDevice(device)
 
             cy.visit('')
-            cy.location().should(loc => {
-                expect(loc.pathname).to.eq('/')
+            cy.location('pathname').should(currentPath => {
+                expect(currentPath).to.eq('/')
             })
 
             cy.visit('welcome')
-            cy.location().should(loc => {
-                expect(loc.pathname).to.eq('/welcome')
+            cy.location('pathname').should(currentPath => {
+                expect(currentPath).to.eq('/welcome')
             })
         })
         it(`should redirect to /welcome when trying to access /game directly - ${device}`, () => {
             cy.setDevice(device)
 
             cy.visit('game')
-            cy.location().should(loc => {
-                expect(loc.pathname).to.eq('/welcome')
+            cy.location('pathname').should(currentPath => {
+                expect(currentPath).to.eq('/welcome')
             })
         })
     })

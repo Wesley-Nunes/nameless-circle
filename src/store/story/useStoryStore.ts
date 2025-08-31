@@ -8,7 +8,7 @@ const useStoryStore = () => {
         choices: [],
         onUpdate: () => {},
         makeChoice: () => {},
-        isStoryFinished: false
+        isFinished: false
     }
     const [content, setContent] = useState(storyStore.content)
     const [choices, setChoices] = useState(storyStore.choices)

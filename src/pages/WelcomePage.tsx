@@ -125,6 +125,7 @@ const WelcomePage: React.FC = () => {
                             type='text'
                             name='nickname'
                             id='nickname'
+                            data-test-id='nickname-input'
                             className={`${input} ${error ? inputError : ''}`}
                             value={nickname}
                             onChange={handleChange}
@@ -137,7 +138,7 @@ const WelcomePage: React.FC = () => {
                             This name will be used for in-game references
                         </p>
                         <span className={ctaContainer}>
-                            <Button>Begin Journey</Button>
+                            <Button dataTestId='submit'>Begin Journey</Button>
                         </span>
                     </form>
                 </main>

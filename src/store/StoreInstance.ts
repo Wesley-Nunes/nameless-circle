@@ -3,8 +3,8 @@ import StoryStore from './story/StoryStore'
 
 import type { InkStoryData } from 'libs/entities'
 
-let gameStoreInstance: GameStore
-let storyStoreInstance: StoryStore
+let gameStoreInstance: GameStore | null
+let storyStoreInstance: StoryStore | null
 
 const initStores = (storyContent: InkStoryData, playerName: string) => {
     if (!gameStoreInstance || !storyStoreInstance) {
@@ -16,15 +16,26 @@ const initStores = (storyContent: InkStoryData, playerName: string) => {
     }
 }
 
-const getGameStore = (): GameStore => {
+const getGameStore = (): GameStore | null => {
     return gameStoreInstance
 }
 
-const getStoryStore = (): StoryStore => {
+const getStoryStore = (): StoryStore | null => {
     return storyStoreInstance
 }
 
 const areStoresInitialized = (): boolean =>
     Boolean(gameStoreInstance && storyStoreInstance)
 
-export { areStoresInitialized, initStores, getGameStore, getStoryStore }
+const resetStores = (): void => {
+    gameStoreInstance = null
+    storyStoreInstance = null
+}
+
+export {
+    areStoresInitialized,
+    initStores,
+    getGameStore,
+    getStoryStore,
+    resetStores
+}
