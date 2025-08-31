@@ -14,7 +14,7 @@ createRoot(root).render(
     <StrictMode>
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<HomePage />} />
+                <Route path='/*' element={<HomePage />} />
                 <Route path='/welcome' element={<WelcomePage />} />
                 <Route path='/game' element={<GamePage />} />
                 <Route path='/thank-you' element={<ThankYouPage />} />
