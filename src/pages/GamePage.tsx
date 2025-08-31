@@ -41,7 +41,7 @@ const GamePage: React.FC = () => {
             <div className={container}>
                 <nav className={navigation}>
                     <NavLink to='/' end>
-                        <HomeIcon />
+                        <HomeIcon data-test-id={'home-page-button'} />
                     </NavLink>
                 </nav>
                 <main className={textContent}>

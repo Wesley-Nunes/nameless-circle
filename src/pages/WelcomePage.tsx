@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router'
 
 import {
@@ -13,7 +13,7 @@ import {
 } from 'components'
 
 import styles from './WelcomePage.module.css'
-import { initStores } from 'store'
+import { areStoresInitialized, initStores } from 'store'
 import { storyContent } from 'story'
 
 const {
@@ -66,6 +66,13 @@ const WelcomePage: React.FC = () => {
 
         navigate('/game')
     }
+
+    useEffect(() => {
+        if (areStoresInitialized()) {
+            navigate('/game')
+            return
+        }
+    }, [navigate])
 
     return (
         <Card>
