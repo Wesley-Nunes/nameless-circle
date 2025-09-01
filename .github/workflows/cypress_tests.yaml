@@ -36,9 +36,6 @@ jobs:
             image: cypress/browsers:22.19.0
             options: --user 1001
         needs: install
-        strategy:
-            matrix:
-                containers: [1, 2, 3, 4, 5]
         steps:
             - name: Checkout
               uses: actions/checkout@v4
@@ -56,7 +53,6 @@ jobs:
                   wait-on: 'http://0.0.0.0:4173'
                   wait-on-timeout: 180
                   browser: chrome
-                  group: 'UI - Chrome'
                   spec: cypress/e2e/*
                   config-file: cypress.config.ci.ts
 
@@ -67,9 +63,6 @@ jobs:
             image: cypress/browsers:22.19.0
             options: --user 1001
         needs: install
-        strategy:
-            matrix:
-                containers: [1, 2, 3, 4, 5]
         steps:
             - name: Checkout
               uses: actions/checkout@v4
@@ -87,6 +80,5 @@ jobs:
                   wait-on: 'http://0.0.0.0:4173'
                   wait-on-timeout: 180
                   browser: firefox
-                  group: 'UI - Firefox'
                   spec: cypress/e2e/*
                   config-file: cypress.config.ci.ts
