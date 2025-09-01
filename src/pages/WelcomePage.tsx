@@ -139,7 +139,12 @@ const WelcomePage: React.FC = () => {
                             required
                         />
                         {error && (
-                            <div className={inputErrorMessage}>{error}</div>
+                            <div
+                                data-test-id={'error-message'}
+                                className={inputErrorMessage}
+                            >
+                                {error}
+                            </div>
                         )}
                         <p className={info}>
                             This name will be used for in-game references
