@@ -57,7 +57,7 @@ const EndGameMessage: React.FC = () => (
             </div>
             <div className={buttonWrapper}>
                 <Link to='/'>
-                    <Button>Home</Button>
+                    <Button dataTestId='home-page-button'>Home</Button>
                 </Link>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router'
 
 import {
@@ -13,7 +13,7 @@ import {
 } from 'components'
 
 import styles from './WelcomePage.module.css'
-import { initStores } from 'store'
+import { areStoresInitialized, initStores } from 'store'
 import { storyContent } from 'story'
 
 const {
@@ -67,6 +67,13 @@ const WelcomePage: React.FC = () => {
         navigate('/game')
     }
 
+    useEffect(() => {
+        if (areStoresInitialized()) {
+            navigate('/game')
+            return
+        }
+    }, [navigate])
+
     return (
         <Card>
             <div className={container}>
@@ -94,16 +101,16 @@ const WelcomePage: React.FC = () => {
                         <li className={descriptionListItem}>
                             <SpiderIcon
                                 className={spiderEffect}
-                                width={24}
-                                height={24}
+                                width={40}
+                                height={40}
                             />
                             <span>Expect unfinished elements & bugs</span>
                         </li>
                         <li className={descriptionListItem}>
                             <TornadoIcon
                                 className={tornadoEffect}
-                                width={24}
-                                height={24}
+                                width={40}
+                                height={40}
                             />
                             <span>Systems may change radically</span>
                         </li>
@@ -125,19 +132,25 @@ const WelcomePage: React.FC = () => {
                             type='text'
                             name='nickname'
                             id='nickname'
+                            data-test-id='nickname-input'
                             className={`${input} ${error ? inputError : ''}`}
                             value={nickname}
                             onChange={handleChange}
                             required
                         />
                         {error && (
-                            <div className={inputErrorMessage}>{error}</div>
+                            <div
+                                data-test-id={'error-message'}
+                                className={inputErrorMessage}
+                            >
+                                {error}
+                            </div>
                         )}
                         <p className={info}>
                             This name will be used for in-game references
                         </p>
                         <span className={ctaContainer}>
-                            <Button>Begin Journey</Button>
+                            <Button dataTestId='submit'>Begin Journey</Button>
                         </span>
                     </form>
                 </main>

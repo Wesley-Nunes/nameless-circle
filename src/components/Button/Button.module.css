@@ -3,6 +3,7 @@
     min-height: 4.8rem;
 
     text-align: center;
+    font-weight: inherit;
 
     background: linear-gradient(
         to bottom,

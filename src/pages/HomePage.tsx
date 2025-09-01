@@ -50,7 +50,9 @@ const HomePage: React.FC = () => (
                 </div>
                 <div className={ctaContainer}>
                     <Link to='/welcome'>
-                        <Button>Unseal The Forsaken Truth</Button>
+                        <Button dataTestId='welcome-page-button'>
+                            Unseal The Forsaken Truth
+                        </Button>
                     </Link>
                 </div>
                 <div className={features}>

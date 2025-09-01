@@ -3,14 +3,7 @@ import { NavLink, useNavigate } from 'react-router'
 
 import { areStoresInitialized, useStoryStore } from 'store'
 
-import {
-    Button,
-    Card,
-    Divider,
-    HomeIcon,
-    EndGameMessage,
-    Loading
-} from 'components'
+import { Button, Card, Divider, HomeIcon, Loading } from 'components'
 
 import styles from './GamePage.module.css'
 
@@ -32,16 +25,15 @@ const GamePage: React.FC = () => {
         setStoresInitialized(true)
     }, [navigate])
 
+    useEffect(() => {
+        if (isStoryFinished) {
+            navigate('/thank-you')
+            return
+        }
+    }, [isStoryFinished, navigate])
+
     if (!storesInitialized) {
         return <Loading />
-    }
-
-    if (isStoryFinished) {
-        return (
-            <Card isReadMode={true}>
-                <EndGameMessage />
-            </Card>
-        )
     }
 
     return (
@@ -49,7 +41,7 @@ const GamePage: React.FC = () => {
             <div className={container}>
                 <nav className={navigation}>
                     <NavLink to='/' end>
-                        <HomeIcon />
+                        <HomeIcon data-test-id={'home-page-button'} />
                     </NavLink>
                 </nav>
                 <main className={textContent}>
@@ -73,6 +65,7 @@ const GamePage: React.FC = () => {
                         {choices.map(({ index, text, props }) => (
                             <Button
                                 key={index}
+                                dataTestId={`choice-${index}`}
                                 onClick={() => makeChoice(index)}
                                 {...props}
                             >
