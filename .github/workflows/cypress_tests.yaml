@@ -20,7 +20,7 @@ jobs:
               uses: cypress-io/github-action@v6
               with:
                   runTests: false
-                  build: npm run build # !
+                  build: npm run build
 
             - name: Save build folder
               uses: actions/upload-artifact@v4
@@ -53,7 +53,7 @@ jobs:
                   wait-on: 'http://0.0.0.0:4173'
                   wait-on-timeout: 180
                   browser: chrome
-                  spec: cypress/e2e/*
+                  spec: cypress/e2e/**/*
                   config-file: cypress.config.ci.ts
 
     ui-firefox-tests:
@@ -81,5 +81,5 @@ jobs:
                   wait-on-timeout: 180
 
                   browser: firefox
-                  spec: cypress/e2e/*
+                  spec: cypress/e2e/**/*
                   config-file: cypress.config.ci.ts
