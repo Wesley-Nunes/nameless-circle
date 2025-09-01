@@ -31,6 +31,7 @@ describe('Core flow: new game', () => {
                 'have.text',
                 'Nickname must be at least 2 characters long'
             )
+            cy.get('[data-test-id="nickname-input"]').clear()
 
             cy.get('[data-test-id="nickname-input"]').type('hero name too long')
             cy.get('[data-test-id="submit"]').click()
