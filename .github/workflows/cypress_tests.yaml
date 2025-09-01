@@ -79,6 +79,7 @@ jobs:
                   start: npm run preview
                   wait-on: 'http://0.0.0.0:4173'
                   wait-on-timeout: 180
+
                   browser: firefox
                   spec: cypress/e2e/*
                   config-file: cypress.config.ci.ts
