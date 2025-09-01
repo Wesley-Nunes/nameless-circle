@@ -2,6 +2,6 @@ import { defineConfig } from 'cypress'
 
 export default defineConfig({
     e2e: {
-        baseUrl: 'http://localhost:4173'
+        baseUrl: 'http://0.0.0.0:4173'
     }
 })

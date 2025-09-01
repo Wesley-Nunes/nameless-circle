@@ -53,8 +53,8 @@ jobs:
               uses: cypress-io/github-action@v6
               with:
                   start: npm run preview
-                  wait-on: 'http://localhost:4173'
-                  wait-on-timeout: 120
+                  wait-on: 'http://0.0.0.0:4173'
+                  wait-on-timeout: 180
                   browser: chrome
                   group: 'UI - Chrome'
                   spec: cypress/e2e/*
@@ -84,8 +84,8 @@ jobs:
               uses: cypress-io/github-action@v6
               with:
                   start: npm run preview
-                  wait-on: 'http://localhost:4173'
-                  wait-on-timeout: 120
+                  wait-on: 'http://0.0.0.0:4173'
+                  wait-on-timeout: 180
                   browser: firefox
                   group: 'UI - Firefox'
                   spec: cypress/e2e/*
