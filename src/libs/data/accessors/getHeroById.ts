@@ -10,7 +10,7 @@ const heroRegistry: Record<string, Hero> = {
 }
 
 const getHeroById = (id: string): Hero => {
-    const hero = heroRegistry[id]
+    const hero = structuredClone(heroRegistry[id])
 
     if (!hero) {
         throw new Error(`Hero id: ${id} not found`)

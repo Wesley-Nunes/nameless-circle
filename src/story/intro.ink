@@ -17,12 +17,9 @@ EXTERNAL get_player_name()
 EXTERNAL is_player_action()
 EXTERNAL set_combat(combat_id)
 
-VAR player_name = ""
 -> start
 
 === start ===
-~ player_name = get_player_name()
-
 “When countless mouths are sated with innocent blood, # style italicText centralizedText
 The Abyss shall breathe its curse — ash, corruption, void — # style italicText centralizedText
 To blacken guardian rings of life, # style italicText centralizedText
@@ -68,7 +65,7 @@ You’d barely shared sparse rations when unnatural heat surged — first, just 
 “An ambush!”
 Lysandra growled.
 From the shadows, four blazefen — salamander-men with amber eyes and flaming tongues — attacked. To everyone’s shock, one hurled a spear toward the horses, missing by inches. Lysandra saw their intent.
-“{player_name}, Protect the mounts!”
+“{get_player_name()}, Protect the mounts!”
 
 Could word of Lysandra’s movements have leaked? Were there spies in the village? What seemed a random attack now had a clear goal: delay her rush to the Citadel.
 

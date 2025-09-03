@@ -1,8 +1,4 @@
-export {
-    areStoresInitialized,
-    initStores,
-    getGameStore,
-    getStoryStore,
-    resetStores
-} from './StoreInstance'
-export { default as useStoryStore } from './story/useStoryStore'
+export { default as GameStore } from './GameStore'
+export { default as StoryStore } from './StoryStore'
+
+export type { Choice, Content } from './StoryStore'

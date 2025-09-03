@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router'
 
-import { areStoresInitialized, useStoryStore } from 'store'
-
+import { useGameContext } from 'contexts'
 import { Button, Card, Divider, HomeIcon, Loading } from 'components'
 
 import styles from './GamePage.module.css'
@@ -10,73 +9,72 @@ import styles from './GamePage.module.css'
 const { container, navigation, textContent, actionWrapper } = styles
 
 const GamePage: React.FC = () => {
-    const { content, choices, makeChoice, isStoryFinished } = useStoryStore()
-    const [storesInitialized, setStoresInitialized] = useState(
-        areStoresInitialized()
-    )
+    const { storyStore, getStoresStatus } = useGameContext()
+    const { content, choices, makeChoice, isFinished } = storyStore
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (!areStoresInitialized()) {
+        if (getStoresStatus() !== 'READY') {
             navigate('/welcome')
-            return
         }
-
-        setStoresInitialized(true)
-    }, [navigate])
-
+    }, [getStoresStatus, navigate])
     useEffect(() => {
-        if (isStoryFinished) {
+        if (isFinished) {
             navigate('/thank-you')
-            return
         }
-    }, [isStoryFinished, navigate])
+    }, [isFinished, navigate])
 
-    if (!storesInitialized) {
-        return <Loading />
+    if (getStoresStatus() === 'READY') {
+        return (
+            <Card isReadMode={true}>
+                <div className={container}>
+                    <nav className={navigation}>
+                        <NavLink to='/' end>
+                            <HomeIcon data-test-id={'home-page-button'} />
+                        </NavLink>
+                    </nav>
+                    <main className={textContent}>
+                        {content &&
+                            content.map(({ text, tags }, i) => {
+                                let classes = ''
+
+                                if (tags?.length) {
+                                    classes = tags
+                                        .map(className => styles[className])
+                                        .join(' ')
+                                }
+
+                                return (
+                                    <p className={classes} key={i}>
+                                        {text}
+                                    </p>
+                                )
+                            })}
+                        <div className={actionWrapper}>
+                            <Divider />
+                            {choices &&
+                                choices.map(({ index, text, props }) => (
+                                    <Button
+                                        key={index}
+                                        dataTestId={`choice-${index}`}
+                                        onClick={() => makeChoice(index)}
+                                        {...props}
+                                    >
+                                        {text}
+                                    </Button>
+                                ))}
+                        </div>
+                    </main>
+                </div>
+            </Card>
+        )
     }
 
-    return (
-        <Card isReadMode={true}>
-            <div className={container}>
-                <nav className={navigation}>
-                    <NavLink to='/' end>
-                        <HomeIcon data-test-id={'home-page-button'} />
-                    </NavLink>
-                </nav>
-                <main className={textContent}>
-                    {content.map(({ text, tags }, i) => {
-                        let classes = ''
+    if (getStoresStatus() === 'ERROR') {
+        return <h1>ERROR</h1>
+    }
 
-                        if (tags?.length) {
-                            classes = tags
-                                .map(className => styles[className])
-                                .join(' ')
-                        }
-
-                        return (
-                            <p className={classes} key={i}>
-                                {text}
-                            </p>
-                        )
-                    })}
-                    <div className={actionWrapper}>
-                        <Divider />
-                        {choices.map(({ index, text, props }) => (
-                            <Button
-                                key={index}
-                                dataTestId={`choice-${index}`}
-                                onClick={() => makeChoice(index)}
-                                {...props}
-                            >
-                                {text}
-                            </Button>
-                        ))}
-                    </div>
-                </main>
-            </div>
-        </Card>
-    )
+    return <Loading />
 }
 
 export default GamePage

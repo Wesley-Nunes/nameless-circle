@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router'
 
+import { useGameContext } from 'contexts'
 import { Button, Card } from 'components'
-import { resetStores } from 'store'
 
 import styles from './ThankYouPage.module.css'
-import { Link } from 'react-router'
 
 const {
     centralize,
@@ -17,9 +17,11 @@ const {
 } = styles
 
 const ThankYouPage: React.FC = () => {
+    const { resetStores } = useGameContext()
+
     useEffect(() => {
         resetStores()
-    }, [])
+    }, [resetStores])
 
     return (
         <Card isReadMode={true}>

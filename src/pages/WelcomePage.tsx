@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router'
 
+import { useGameContext } from 'contexts'
 import {
     Button,
     Card,
@@ -13,8 +14,6 @@ import {
 } from 'components'
 
 import styles from './WelcomePage.module.css'
-import { areStoresInitialized, initStores } from 'store'
-import { storyContent } from 'story'
 
 const {
     container,
@@ -41,6 +40,7 @@ const WelcomePage: React.FC = () => {
     const [nickname, setNickname] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate()
+    const { gameStore, getStoresStatus } = useGameContext()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNickname(e.target.value)
@@ -62,17 +62,18 @@ const WelcomePage: React.FC = () => {
             return
         }
 
-        initStores(storyContent, nickname)
-
+        gameStore.setPlayerName(nickname)
         navigate('/game')
     }
 
     useEffect(() => {
-        if (areStoresInitialized()) {
+        if (
+            getStoresStatus() === 'READY' &&
+            Boolean(gameStore.getPlayerName())
+        ) {
             navigate('/game')
-            return
         }
-    }, [navigate])
+    }, [getStoresStatus, gameStore, navigate])
 
     return (
         <Card>

@@ -38,19 +38,14 @@ class GameStore {
     private turnLog: string[]
     private winConditions: WinCondition
 
-    constructor(playerName: string) {
-        validatePlayerName(playerName)
-
-        const player = getHeroById(PLAYER_ID)
-        player.name = playerName
-
+    constructor() {
         this.availableHeroIds = [PLAYER_ID, 'hero_0002']
         this.charactersOrdered = []
         this.combatId = ''
         this.Log = new Map()
         this.combatStatus = getCombatStatus()
         this.currentCharacterIndex = 0
-        this.currentHeroParty = [player]
+        this.currentHeroParty = [getHeroById(PLAYER_ID)]
         this.currentMounts = []
         this.turnLog = []
         this.winConditions = []
@@ -125,7 +120,7 @@ class GameStore {
     }
 
     // eslint-disable-next-line
-    public handleInkFunction(funcName: string, ...args: any[]) {
+    public handleInkFunction = (funcName: string, ...args: any[]) => {
         switch (funcName) {
             case 'add_mount': {
                 const [mountName, characterId, characterTeam] = args as [
@@ -317,6 +312,19 @@ class GameStore {
                 throw new Error(`Unhandled function: ${funcName}`)
             }
         }
+    }
+    public setPlayerName = (name: string) => {
+        validatePlayerName(name)
+        const player = this.currentHeroParty.find(hero => hero.isPlayer)
+
+        if (player) {
+            player.name = name
+        } else {
+            throw new Error('Player not found.')
+        }
+    }
+    public getPlayerName = (): string => {
+        return this.currentHeroParty.find(hero => hero.isPlayer)?.name || ''
     }
 }
 

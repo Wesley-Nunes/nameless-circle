@@ -4,7 +4,7 @@ export const PLAYER_ID = 'hero_0001'
 
 export const player: Hero = {
     id: PLAYER_ID,
-    name: 'Celcius', // NOTE: This is the player!
+    name: '',
     species: 'human',
     level: 1,
     abilities: {

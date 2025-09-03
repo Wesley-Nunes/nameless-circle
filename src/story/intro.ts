@@ -8,11 +8,6 @@ const storyContent: InkStoryData = {
         {
             start: [
                 [
-                    'ev',
-                    { 'x()': 'get_player_name' },
-                    '/ev',
-                    { 'VAR=': 'player_name', re: true },
-                    '\n',
                     '^“When countless mouths are sated with innocent blood, ',
                     '#',
                     '^style italicText centralizedText',
@@ -67,7 +62,7 @@ const storyContent: InkStoryData = {
                     { '*': '.^.c-0', flg: 20 },
                     [
                         'ev',
-                        { '^->': 'start.0.57.$r1' },
+                        { '^->': 'start.0.52.$r1' },
                         { 'temp=': '$r' },
                         'str',
                         { '->': '.^.s' },
@@ -88,7 +83,7 @@ const storyContent: InkStoryData = {
                     ],
                     [
                         'ev',
-                        { '^->': 'start.0.58.$r1' },
+                        { '^->': 'start.0.53.$r1' },
                         { 'temp=': '$r' },
                         'str',
                         { '->': '.^.s' },
@@ -118,7 +113,7 @@ const storyContent: InkStoryData = {
                             { '^->': 'start.0.c-1.$r2' },
                             '/ev',
                             { 'temp=': '$r' },
-                            { '->': '.^.^.57.s' },
+                            { '->': '.^.^.52.s' },
                             [{ '#n': '$r2' }],
                             '\n',
                             'end',
@@ -129,7 +124,7 @@ const storyContent: InkStoryData = {
                             { '^->': 'start.0.c-2.$r2' },
                             '/ev',
                             { 'temp=': '$r' },
-                            { '->': '.^.^.58.s' },
+                            { '->': '.^.^.53.s' },
                             [{ '#n': '$r2' }],
                             '\n',
                             'end',
@@ -203,7 +198,7 @@ const storyContent: InkStoryData = {
                 '\n',
                 '^“',
                 'ev',
-                { 'VAR?': 'player_name' },
+                { 'x()': 'get_player_name' },
                 'out',
                 '/ev',
                 '^, Protect the mounts!”',
@@ -1005,21 +1000,10 @@ const storyContent: InkStoryData = {
                 ],
                 { '#f': 1 }
             ],
-            'global decl': [
-                'ev',
-                'str',
-                '^',
-                '/str',
-                { 'VAR=': 'player_name' },
-                '/ev',
-                'end',
-                null
-            ],
             '#f': 1
         }
     ],
     listDefs: {}
 }
-
 export default storyContent
 

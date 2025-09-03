@@ -4,6 +4,12 @@ import type { InkStoryData } from 'libs/entities'
 
 type EventType = 'turn'
 type TurnAction = 'start' | 'end'
+export type Choice = {
+    index: number
+    text: string
+    props?: Record<string, boolean>
+}
+export type Content = { text: string | null; tags: string[] | null }
 
 class StoryStore {
     private inkFunctionHandler: // eslint-disable-next-line
@@ -12,12 +18,8 @@ class StoryStore {
     private turnStartIndex: number | null
     private updateCallback: (() => void) | null
 
-    public choices: {
-        index: number
-        text: string
-        props?: Record<string, boolean>
-    }[]
-    public content: { text: string | null; tags: string[] | null }[]
+    public choices: Choice[] | null
+    public content: Content[] | null
     public isFinished: boolean = false
 
     constructor(
@@ -70,14 +72,14 @@ class StoryStore {
         const event = {
             turn: {
                 start: () => {
-                    this.turnStartIndex = this.content.length
+                    this.turnStartIndex = this.content!.length
                 },
                 end: () => {
                     if (this.turnStartIndex === null) {
                         throw new Error('End event without matching start!')
                     }
 
-                    this.content = this.content.slice(0, this.turnStartIndex)
+                    this.content = this.content!.slice(0, this.turnStartIndex)
                     this.turnStartIndex = null
                 }
             }
@@ -121,7 +123,7 @@ class StoryStore {
             if ((text !== '\n' && text) || cssClass?.length) {
                 const newContent = { text, tags: cssClass }
 
-                this.content.push(newContent)
+                this.content!.push(newContent)
             }
         }
 
@@ -154,11 +156,11 @@ class StoryStore {
         if (this.updateCallback) this.updateCallback()
     }
 
-    public makeChoice(index: number) {
+    public makeChoice = (index: number) => {
         this.story.ChooseChoiceIndex(index)
         this.progressStory()
     }
-    public onUpdate(callback: (() => void) | null) {
+    public onUpdate = (callback: (() => void) | null) => {
         this.updateCallback = callback
     }
 }
