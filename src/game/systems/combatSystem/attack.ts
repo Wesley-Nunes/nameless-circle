@@ -1,7 +1,7 @@
 import { getWeaponModifier } from 'game/systems/abilitySystem'
 import { roll } from 'game/systems/rollSystem'
 
-import type { ActionResult, Enemy, Hero, Mount } from 'game/entities'
+import type { ActionResult, Enemy, Hero, Mount } from 'game/types'
 
 const attack = (
     attacker: Hero | Enemy | Mount,

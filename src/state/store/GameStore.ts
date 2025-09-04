@@ -23,7 +23,7 @@ import type {
     Mount,
     Team,
     WinCondition
-} from 'game/entities'
+} from 'game/types'
 import { validatePlayerName } from 'game/systems/validationSystem'
 
 class GameStore {

@@ -15,6 +15,7 @@ describe('getCombat - Functional Tests', () => {
         const heroParty = [{ level: 3 }, { level: 3 }, { level: 4 }]
         const difficulty = 'moderate'
 
+        // @ts-expect-error - Simple version of heroParty
         const combat = getCombat(expectedCombatId, heroParty, difficulty)
 
         expect(combat.id).toBe(expectedCombatId)
@@ -29,6 +30,7 @@ describe('getCombat - Functional Tests', () => {
     it('throws error for unknown combat ID', () => {
         const heroParty = [{ level: 3 }, { level: 3 }, { level: 4 }]
 
+        // @ts-expect-error - Simple version of heroParty
         expect(() => getCombat('unknown_combat', heroParty)).toThrowError(
             'Unknown combat ID: unknown_combat'
         )

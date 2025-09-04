@@ -1,4 +1,4 @@
-import type { CharacterSize } from 'game/entities'
+import type { CharacterSize } from 'game/types'
 
 const CHARACTER_SIZE: CharacterSize[] = [
     'tiny',

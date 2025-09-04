@@ -9,7 +9,7 @@ import {
     ENEMY_ROLE_TEMPLATES
 } from 'game/data/static/enemies'
 
-import type { CharacterType, Enemy } from 'game/entities'
+import type { CharacterType, Enemy } from 'game/types'
 
 describe('enemyFactory - createEnemy', () => {
     it('should return a 10 XP blazefen sharpshooter', () => {

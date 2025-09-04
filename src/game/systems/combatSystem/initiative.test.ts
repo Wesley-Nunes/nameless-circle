@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import initiative from './initiative'
 
-import type { Enemy } from 'game/entities'
+import type { Enemy } from 'game/types'
 
 vi.mock('game/systems/rollSystem/roll', async () => {
     const actual = await vi.importActual<

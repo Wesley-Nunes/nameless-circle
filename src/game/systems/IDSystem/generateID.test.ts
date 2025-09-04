@@ -4,7 +4,7 @@ import IDCounters from './IDCounters'
 import generateID from './generateID'
 import resetID from './resetID'
 
-import type { IDKey } from 'game/entities'
+import type { IDKey } from 'game/types'
 
 describe('generateID', () => {
     beforeEach(() => {

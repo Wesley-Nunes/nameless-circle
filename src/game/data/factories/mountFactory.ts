@@ -3,7 +3,7 @@ import { generateID } from 'game/systems/IDSystem'
 
 import { getHeroById, getMountByName } from 'game/data/accessors'
 
-import type { Mount, Team } from 'game/entities'
+import type { Mount, Team } from 'game/types'
 
 const createMount = (
     mountName: string,

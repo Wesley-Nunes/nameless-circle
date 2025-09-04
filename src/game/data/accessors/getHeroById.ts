@@ -1,6 +1,6 @@
 import { player, lysandra, HERO_TEST } from 'game/data/static/heroes'
 
-import type { Hero } from 'game/entities'
+import type { Hero } from 'game/types'
 import { addID } from 'game/systems/IDSystem'
 
 const heroRegistry: Record<string, Hero> = {

@@ -1,4 +1,4 @@
-import type { Species } from 'game/entities'
+import type { Species } from 'game/types'
 
 const VALID_SPECIES: Species[] = ['blazefen', 'equine', 'human']
 

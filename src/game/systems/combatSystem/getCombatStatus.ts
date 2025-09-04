@@ -1,4 +1,4 @@
-import type { CombatStatus, Enemy, Hero, Mount } from 'game/entities'
+import type { CombatStatus, Enemy, Hero, Mount } from 'game/types'
 
 const getCombatStatus = (
     characters?: (Hero | Enemy | Mount)[]

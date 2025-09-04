@@ -3,7 +3,7 @@ import {
     validateEnemyXp
 } from 'game/systems/validationSystem'
 
-import type { CharacterSize } from 'game/entities'
+import type { CharacterSize } from 'game/types'
 
 const calculateEnemyHp = (
     xp: number,

@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest'
 import { HERO_TEST } from 'game/data/static/heroes/HERO_TEST'
 import getCombatStatus from './getCombatStatus'
 
-import type { Hero, Enemy } from 'game/entities'
+import type { Hero, Enemy } from 'game/types'
 
 const createTestHero = (id: string, hp: number): Hero => ({
     ...HERO_TEST,

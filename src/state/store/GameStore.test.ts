@@ -4,7 +4,7 @@ import GameStore from './GameStore'
 import { calculateEnemyHp } from 'game/systems/hpSystem'
 import { resetID } from 'game/systems/IDSystem'
 
-import type { CharacterSize } from 'game/entities'
+import type { CharacterSize } from 'game/types'
 
 describe('GameStore', () => {
     let gameStore: GameStore

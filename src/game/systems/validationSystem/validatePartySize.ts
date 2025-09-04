@@ -1,4 +1,4 @@
-import type { Character } from 'game/entities'
+import type { Character } from 'game/types'
 
 const validatePartySize = (party: Character[]) => {
     if (party.length < 2) {

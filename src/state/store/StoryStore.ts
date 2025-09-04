@@ -1,7 +1,5 @@
 import { Story } from 'inkjs'
 
-import type { InkStoryData } from 'game/entities'
-
 type EventType = 'turn'
 type TurnAction = 'start' | 'end'
 export type Choice = {
@@ -23,7 +21,7 @@ class StoryStore {
     public isFinished: boolean = false
 
     constructor(
-        storyContent: InkStoryData,
+        storyContent: object,
         // eslint-disable-next-line
         inkFunctionHandler: (funcName: string, ...args: any[]) => void
     ) {

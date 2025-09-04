@@ -2,7 +2,7 @@ import { describe, expect, it, vi, afterEach } from 'vitest'
 import generateCombatSentence from './generateCombatSentence'
 import * as rollSystem from 'game/systems/rollSystem'
 
-import type { Hero, Enemy, DamageResult } from 'game/entities'
+import type { Hero, Enemy, DamageResult } from 'game/types'
 
 const hero: Hero = {
     id: 'hero-001',

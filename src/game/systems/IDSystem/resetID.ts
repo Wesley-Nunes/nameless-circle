@@ -1,6 +1,6 @@
 import IDCounters from './IDCounters'
 
-import type { IDKey } from 'game/entities'
+import type { IDKey } from 'game/types'
 
 const resetID = () =>
     (Object.keys(IDCounters) as Array<IDKey>).forEach(key => {

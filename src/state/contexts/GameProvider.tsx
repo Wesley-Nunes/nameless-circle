@@ -4,12 +4,11 @@ import { GameStore, StoryStore } from 'state/store'
 import GameContext from './GameContext'
 
 import type React from 'react'
-import type { InkStoryData } from 'game/entities'
 import type { StoresStatus } from './GameContext'
 import type { Choice, Content } from 'state/store'
 
 const GameProvider: React.FC<{
-    storyContent: InkStoryData
+    storyContent: object
     children: React.ReactNode
 }> = ({ storyContent, children }) => {
     const [status, setStatus] = useState<StoresStatus>('IDLE')

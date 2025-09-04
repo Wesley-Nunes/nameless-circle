@@ -11,7 +11,7 @@ import {
     ENEMY_ROLE_TEMPLATES
 } from 'game/data/static/enemies'
 
-import type { Combat, CombatTemplate, Difficulty, Hero } from 'game/entities'
+import type { Combat, CombatTemplate, Difficulty, Hero } from 'game/types'
 
 const COMBAT_MAP: Record<string, CombatTemplate> = {
     blazefen_ambush_01: {

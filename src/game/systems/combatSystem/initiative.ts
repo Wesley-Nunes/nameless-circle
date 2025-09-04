@@ -1,7 +1,7 @@
 import { roll } from 'game/systems/rollSystem'
 import { validatePartySize } from 'game/systems/validationSystem'
 
-import type { Character } from 'game/entities'
+import type { Character } from 'game/types'
 
 const initiative = (
     characters: Character[]

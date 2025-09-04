@@ -4,7 +4,7 @@ import {
 } from 'game/systems/validationSystem'
 import { getHeroById } from 'game/data/accessors'
 
-import type { Hero } from 'game/entities'
+import type { Hero } from 'game/types'
 
 const newParty = (
     oldParty: Hero[],

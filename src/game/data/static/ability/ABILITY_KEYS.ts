@@ -1,4 +1,4 @@
-import type { AbilityKey } from 'game/entities'
+import type { AbilityKey } from 'game/types'
 
 const ABILITY_KEYS: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha']
 

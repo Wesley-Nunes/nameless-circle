@@ -1,4 +1,4 @@
-import type { Hero } from 'game/entities'
+import type { Hero } from 'game/types'
 
 const validateHeroPartySize = (heroParty: Hero[]) => {
     if (heroParty.length > 3) {

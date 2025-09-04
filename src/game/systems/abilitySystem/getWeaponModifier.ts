@@ -1,4 +1,4 @@
-import type { AbilityBlock, Weapon } from 'game/entities'
+import type { AbilityBlock, Weapon } from 'game/types'
 
 const getWeaponModifier = (
     weapon: Weapon,

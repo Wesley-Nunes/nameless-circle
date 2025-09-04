@@ -6,7 +6,7 @@ import type {
     Enemy,
     Hero,
     Mount
-} from 'game/entities'
+} from 'game/types'
 
 const generateCombatSentence = (
     attacker: Enemy | Hero | Mount,

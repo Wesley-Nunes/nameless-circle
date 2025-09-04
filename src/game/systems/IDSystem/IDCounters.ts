@@ -1,4 +1,4 @@
-import type { IDKey } from 'game/entities'
+import type { IDKey } from 'game/types'
 
 const IDCounters: Record<IDKey, number> = {
     blazefen: 0,

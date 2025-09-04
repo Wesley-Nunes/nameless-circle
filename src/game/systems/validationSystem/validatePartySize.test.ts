@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import validatePartySize from './validatePartySize'
 
-import { type Character } from 'game/entities'
+import { type Character } from 'game/types'
 
 const mockCharacter: Character = {
     abilities: {

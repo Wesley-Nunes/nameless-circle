@@ -6,7 +6,7 @@ import {
     type Combatant,
     type CombatStatus,
     type WinCondition
-} from 'game/entities'
+} from 'game/types'
 
 describe('generateCombatResultPoints', () => {
     const mockCombatants: Combatant[] = [

@@ -1,4 +1,4 @@
-import type { Combatant } from 'game/entities'
+import type { Combatant } from 'game/types'
 
 const findTarget = (aiCharacter: Combatant, party: Combatant[]): Combatant => {
     if (aiCharacter.team === 'heroes') {

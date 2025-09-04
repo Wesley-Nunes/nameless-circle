@@ -3,7 +3,7 @@ import { validateSpecies } from 'game/systems/validationSystem'
 
 import { NAMES } from 'game/data/static/character'
 
-import type { Species } from 'game/entities'
+import type { Species } from 'game/types'
 
 const randomCharacterName = (species: Species): string => {
     validateSpecies(species)

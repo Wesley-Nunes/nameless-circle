@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { roll } from 'game/systems/rollSystem'
 import calculateDamage from './calculateDamage'
 
-import type { Hero, Weapon } from 'game/entities'
+import type { Hero, Weapon } from 'game/types'
 
 vi.mock('../rollSystem', () => ({
     roll: vi.fn().mockReturnValue(4)

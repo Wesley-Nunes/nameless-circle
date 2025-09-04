@@ -1,4 +1,4 @@
-import type { Mount } from 'game/entities'
+import type { Mount } from 'game/types'
 
 const ridingHorse: Mount = {
     abilities: {

@@ -4,7 +4,7 @@ import validateHeroPartySize from './validateHeroPartySize'
 
 import { getHeroById } from 'game/data/accessors'
 
-import type { Hero } from 'game/entities'
+import type { Hero } from 'game/types'
 
 // TODO: Recreate the tests when more hero characters are available.
 describe.skip('validateHeroPartySize', () => {

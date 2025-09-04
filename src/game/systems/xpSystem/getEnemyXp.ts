@@ -1,6 +1,6 @@
 import { ENEMY_XP } from 'game/data/static/enemies'
 
-import type { Difficulty } from 'game/entities'
+import type { Difficulty } from 'game/types'
 
 const xpBudgetPerCharacter: Record<
     number,

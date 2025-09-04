@@ -2,7 +2,7 @@ import { describe, it } from 'vitest'
 
 // import newParty from './newParty'
 
-// import type { Hero } from 'game/entities'
+// import type { Hero } from 'game/types'
 
 // TODO: Recreate the tests when more hero characters are available.
 describe.skip('newParty', () => {

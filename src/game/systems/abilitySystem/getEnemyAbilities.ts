@@ -6,7 +6,7 @@ import {
 
 import { ABILITY_KEYS } from 'game/data/static/ability'
 
-import type { AbilityBlock, AbilityKey, AbilityTemplate } from 'game/entities'
+import type { AbilityBlock, AbilityKey, AbilityTemplate } from 'game/types'
 
 const getEnemyAbilities = (
     template: AbilityTemplate,

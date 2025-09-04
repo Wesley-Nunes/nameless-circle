@@ -1,4 +1,4 @@
-import type { IDKey } from 'game/entities'
+import type { IDKey } from 'game/types'
 
 import { VALID_SPECIES } from 'game/data/static/character'
 

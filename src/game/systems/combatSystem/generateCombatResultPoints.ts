@@ -1,4 +1,4 @@
-import type { Combatant, CombatStatus, WinCondition } from 'game/entities'
+import type { Combatant, CombatStatus, WinCondition } from 'game/types'
 
 const generateCombatResultPoints = (
     combatants: Combatant[],

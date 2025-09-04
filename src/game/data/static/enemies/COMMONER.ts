@@ -1,4 +1,4 @@
-import type { Enemy } from 'game/entities'
+import type { Enemy } from 'game/types'
 
 const COMMONER_BASE: Enemy = {
     abilities: {

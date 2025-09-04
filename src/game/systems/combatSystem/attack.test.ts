@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import attack from './attack'
 import * as rollSystem from 'game/systems/rollSystem'
 
-import type { Hero, Enemy } from 'game/entities'
+import type { Hero, Enemy } from 'game/types'
 
 const hero: Hero = {
     id: 'hero-001',

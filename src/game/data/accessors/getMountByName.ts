@@ -1,6 +1,6 @@
 import { ridingHorse } from 'game/data/static/mounts'
 
-import type { Mount } from 'game/entities'
+import type { Mount } from 'game/types'
 
 const mountRegistry: Record<string, Mount> = {
     [ridingHorse.name]: ridingHorse

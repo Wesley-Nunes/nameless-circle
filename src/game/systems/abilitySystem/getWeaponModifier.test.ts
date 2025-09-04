@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import getWeaponModifier from './getWeaponModifier'
 
-import type { Weapon, AbilityBlock } from 'game/entities'
+import type { Weapon, AbilityBlock } from 'game/types'
 
 describe('getWeaponModifier', () => {
     const mockAbilities: AbilityBlock = {

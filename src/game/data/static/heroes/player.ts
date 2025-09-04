@@ -1,4 +1,4 @@
-import type { Hero } from 'game/entities'
+import type { Hero } from 'game/types'
 
 export const PLAYER_ID = 'hero_0001'
 

@@ -1,4 +1,4 @@
-import type { Species } from 'game/entities'
+import type { Species } from 'game/types'
 
 const NAMES: Record<Species, { prefix: string[]; suffix?: string[] } | null> = {
     blazefen: {

@@ -1,7 +1,7 @@
 import { validateIDKey, validateIDValue } from 'game/systems/validationSystem'
 import IDCounters from './IDCounters'
 
-import type { IDKey } from 'game/entities'
+import type { IDKey } from 'game/types'
 
 const addID = (ID: string) => {
     const [key, value] = ID.split('_') as [IDKey, number]

@@ -1,6 +1,6 @@
 import { ABILITY_KEYS } from 'game/data/static/ability'
 
-import type { AbilityKey, AbilityTemplate } from 'game/entities'
+import type { AbilityKey, AbilityTemplate } from 'game/types'
 
 const validateTemplate = (template: AbilityTemplate) => {
     const isEmpty = !template || !Object.values(template).length
