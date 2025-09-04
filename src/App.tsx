@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 
-import { GameProvider } from 'contexts'
+import { GameProvider } from 'state/contexts'
 import { storyContent } from 'story'
-import { GamePage, HomePage, ThankYouPage, WelcomePage } from 'pages'
+import { GamePage, HomePage, ThankYouPage, WelcomePage } from 'ui/pages'
 
 import type React from 'react'
 

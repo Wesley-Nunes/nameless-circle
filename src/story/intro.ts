@@ -1,6 +1,4 @@
-import type { InkStoryData } from 'libs/entities'
-
-const storyContent: InkStoryData = {
+const storyContent = {
     inkVersion: 21,
     root: [
         ['\n', { '->': 'start' }, ['done', { '#f': 5, '#n': 'g-0' }], null],
@@ -1006,4 +1004,3 @@ const storyContent: InkStoryData = {
     listDefs: {}
 }
 export default storyContent
-
