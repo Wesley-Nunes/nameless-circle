@@ -248,7 +248,6 @@ class GameStore {
                 return round
             }
             case 'get_combat_status': {
-                // console.log(this.charactersOrdered)
                 return this.combatStatus
             }
             case 'get_mount_info': {

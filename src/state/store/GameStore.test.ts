@@ -1,6 +1,7 @@
 import { expect, describe, it } from 'vitest'
 
 import GameStore from './GameStore'
+
 import { PLAYER_ID } from 'game/data/static/heroes'
 
 describe('GameStore', () => {
@@ -156,5 +157,16 @@ describe('GameStore', () => {
             combatId
         )
         expect(combatResult).toBeOneOf([-1, 0, 1, 2])
+    })
+    it('should set and return the correct player name', () => {
+        const gameStore = new GameStore()
+        const expectedPlayerName = 'Celcius'
+
+        gameStore.setPlayerName(expectedPlayerName)
+        const playerName = gameStore.getPlayerName()
+        const playerNameInk = gameStore.handleInkFunction('get_player_name')
+
+        expect(playerName).toBe(expectedPlayerName)
+        expect(playerNameInk).toBe(expectedPlayerName)
     })
 })
