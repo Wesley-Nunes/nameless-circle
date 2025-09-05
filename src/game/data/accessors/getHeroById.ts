@@ -1,11 +1,13 @@
-import { player, lysandra } from 'game/data/static/heroes'
+import { player, lysandra, protaxios, renpetIb } from 'game/data/static/heroes'
 
 import type { Hero } from 'game/types'
 import { addID } from 'game/systems/IDSystem'
 
 const heroRegistry: Record<string, Hero> = {
     [player.id]: player,
-    [lysandra.id]: lysandra
+    [lysandra.id]: lysandra,
+    [protaxios.id]: protaxios,
+    [renpetIb.id]: renpetIb
 }
 
 const getHeroById = (id: string): Hero => {
