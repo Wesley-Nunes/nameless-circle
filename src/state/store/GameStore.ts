@@ -238,16 +238,17 @@ class GameStore {
                 throw Error(`Invalid combatId: ${combatId}.`)
             }
             case 'get_combat_round': {
-                if (this.turnLog.length === 0) {
+                const turnsTaken = this.turnLog.length
+                if (turnsTaken === 0) {
                     return 1
                 }
-                const aliveCharacters = this.charactersOrdered.filter(
-                    character => character.isAlive
-                )
+                const round =
+                    Math.floor(turnsTaken / this.charactersOrdered.length) + 1
 
-                return Math.ceil(this.turnLog.length / aliveCharacters.length)
+                return round
             }
             case 'get_combat_status': {
+                // console.log(this.charactersOrdered)
                 return this.combatStatus
             }
             case 'get_mount_info': {
@@ -259,10 +260,6 @@ class GameStore {
 
                 if (mount && prop in mount) {
                     const value = mount[prop as keyof typeof mount]
-
-                    if (prop === 'name' && typeof value === 'string') {
-                        return this.adjustNameLength(value)
-                    }
 
                     return value
                 }
@@ -278,7 +275,7 @@ class GameStore {
                 return team.length
             }
             case 'get_player_name': {
-                return this.currentHeroParty.find(hero => hero.isPlayer)?.name
+                return this.getPlayerName()
             }
             case 'has_mounts': {
                 const [teamName] = args as [Team]

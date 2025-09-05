@@ -5,11 +5,7 @@ import {
 } from 'game/systems/abilitySystem'
 import { getEnemyXp } from 'game/systems/xpSystem'
 
-import {
-    BLAZEFEN_BASE,
-    COMMONER_BASE,
-    ENEMY_ROLE_TEMPLATES
-} from 'game/data/static/enemies'
+import { BLAZEFEN_BASE, ENEMY_ROLE_TEMPLATES } from 'game/data/static/enemies'
 
 import type { Combat, CombatTemplate, Difficulty, Hero } from 'game/types'
 

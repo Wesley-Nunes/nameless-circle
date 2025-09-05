@@ -3,23 +3,23 @@ import validateHeroId from './validateHeroId'
 
 describe('validateHeroId', () => {
     it('does not throw when newId exists in availableIds', () => {
-        const availableIds = ['hero-1', 'hero-2', 'hero-3']
-        const validId = 'hero-2'
+        const availableIds = ['hero_0001', 'hero_0002', 'hero_0003']
+        const validId = 'hero_0002'
 
         expect(() => validateHeroId(availableIds, validId)).not.toThrow()
     })
     it('throws error with available IDs when newId is missing in non-empty availableIds', () => {
-        const availableIds = ['hero-1', 'hero-3']
-        const invalidId = 'hero-2'
+        const availableIds = ['hero_0001', 'hero_0003']
+        const invalidId = 'hero_0002'
 
         expect(() => validateHeroId(availableIds, invalidId)).toThrowError(
-            `Invalid (ID: ${invalidId}). Available IDs: hero-1, hero-3`
+            `Invalid (ID: ${invalidId}). Available IDs: hero_0001, hero_0003`
         )
     })
 
     it('throws error showing empty available IDs list when availableIds is empty array', () => {
         const availableIds: string[] = []
-        const invalidId = 'hero-1'
+        const invalidId = 'hero_0001'
 
         expect(() => validateHeroId(availableIds, invalidId)).toThrowError(
             `Invalid (ID: ${invalidId}). Available IDs: `
@@ -27,7 +27,7 @@ describe('validateHeroId', () => {
     })
     it('throws specific error when availableIds is falsy', () => {
         const availableIds = undefined
-        const invalidId = 'hero-1'
+        const invalidId = 'hero_0001'
 
         // @ts-expect-error - undefined Id
         expect(() => validateHeroId(availableIds, invalidId)).toThrowError(

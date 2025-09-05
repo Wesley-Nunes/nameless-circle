@@ -14,7 +14,8 @@ export default defineConfig({
         environment: 'jsdom',
         coverage: {
             reporter: ['html'],
-            include: ['src/game/systems/**/*.ts', 'src/state/store/**/*.ts']
+            include: ['src/game/systems/**/*.ts', 'src/state/store/**/*.ts'],
+            exclude: ['**/index.ts']
         }
     }
 })
