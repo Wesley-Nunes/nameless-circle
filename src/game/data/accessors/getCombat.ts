@@ -40,22 +40,6 @@ const COMBAT_MAP: Record<string, CombatTemplate> = {
             { quantity: 1, team: 'heroes', isTamedMount: true, isAlive: true },
             { quantity: 2, team: 'heroes', isTamedMount: true, isAlive: true }
         ]
-    },
-    // NOTE: Tests combats below:
-    test_combat_01: {
-        id: 'test_combat_01',
-        // NOTE: CR 0 / XP 10 single balanced enemy
-        enemies: () => {
-            const xp = 10
-            const points = getEnemyAbilityPoints(xp)
-            const abilities = getEnemyAbilities(
-                ENEMY_ROLE_TEMPLATES['balanced'],
-                points
-            )
-
-            return [createEnemy(COMMONER_BASE, { abilities, xp })]
-        },
-        winConditions: [{ quantity: 1, team: 'enemies', isAlive: false }]
     }
 }
 

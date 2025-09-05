@@ -14,17 +14,7 @@ export default defineConfig({
         environment: 'jsdom',
         coverage: {
             reporter: ['html'],
-            exclude: [
-                '**/*.type.ts',
-                '**/index.ts',
-                '**/vite-env.d.ts',
-                '**/*.config.*',
-                'src/main.tsx',
-                '**/use*.ts', // Remove React hooks
-                'src/game/entities', // Remove types
-                'src/story',
-                'dist'
-            ]
+            include: ['src/game/systems/**/*.ts', 'src/state/store/**/*.ts']
         }
     }
 })

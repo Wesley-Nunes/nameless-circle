@@ -9,6 +9,7 @@ import { calculateDamage } from 'game/systems/damageSystem'
 import { findTarget } from 'game/systems/aiSystem'
 import { generateCombatSentence } from 'game/systems/textGeneratorSystem'
 import { newParty } from 'game/systems/playerSystem'
+import { validatePlayerName } from 'game/systems/validationSystem'
 
 import { getCombat, getHeroById } from 'game/data/accessors'
 import { createMount } from 'game/data/factories'
@@ -24,7 +25,6 @@ import type {
     Team,
     WinCondition
 } from 'game/types'
-import { validatePlayerName } from 'game/systems/validationSystem'
 
 class GameStore {
     private availableHeroIds: string[]
