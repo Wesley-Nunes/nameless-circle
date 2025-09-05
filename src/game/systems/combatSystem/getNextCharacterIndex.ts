@@ -1,21 +1,21 @@
-import type { Enemy, Hero, Mount } from 'game/types'
+import type { Combatant } from 'game/types'
 
 const getNextCharacterIndex = (
-    characters: (Hero | Enemy | Mount)[],
+    orderedCharacters: Combatant[],
     currentIndex: number
 ): number => {
     let newIndex = currentIndex
     let keepGoing
-    let typesAcc = characters.length - 1
+    let typesAcc = orderedCharacters.length - 1
 
     do {
-        newIndex = (newIndex + 1) % characters.length
+        newIndex = (newIndex + 1) % orderedCharacters.length
 
         typesAcc -= 1
-        keepGoing = characters[newIndex].hp <= 0 && typesAcc >= 0
+        keepGoing = orderedCharacters[newIndex].hp <= 0 && typesAcc >= 0
     } while (keepGoing)
 
-    if (characters[newIndex].hp <= 0) {
+    if (orderedCharacters[newIndex].hp <= 0) {
         throw new Error(
             'All characters are dead.' +
                 'Call getStatusCombat() to check combat status before invoking this function.'
