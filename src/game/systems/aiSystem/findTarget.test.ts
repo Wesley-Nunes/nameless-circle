@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import findTarget from './findTarget'
 
 import { getHeroById } from 'game/data/accessors'
-import { createEnemy } from 'game/data/factories'
+import { createEnemy, createMount } from 'game/data/factories'
 import { COMMONER_BASE } from 'game/data/static/enemies'
 
 describe('findTarget', () => {
@@ -139,5 +139,27 @@ describe('findTarget', () => {
 
             expect(target).toStrictEqual(expectedHero)
         }).toThrowError('Team not found')
+    })
+    it('should prioritize preferred target type (Beast)', () => {
+        const heroes = [getHeroById('hero_0001'), getHeroById('hero_0002')]
+        const beastMount = createMount('Riding horse', heroes[0].id, 'heroes')
+        const enemyConfig = {
+            abilities: {
+                str: { score: 15, modifier: 2 },
+                dex: { score: 14, modifier: 2 },
+                con: { score: 12, modifier: 1 },
+                int: { score: 10, modifier: 0 },
+                wis: { score: 12, modifier: 1 },
+                cha: { score: 12, modifier: 1 }
+            },
+            xp: 200
+        }
+        const enemy = createEnemy(COMMONER_BASE, enemyConfig)
+        enemy.preferredTargets = ['beast']
+        const party = [...heroes, beastMount, enemy]
+
+        const target = findTarget(enemy, party)
+
+        expect(target).toStrictEqual(beastMount)
     })
 })
