@@ -5,15 +5,15 @@ const findTarget = (aiCharacter: Combatant, party: Combatant[]): Combatant => {
         const enemiesAlive = party.filter(
             character => character.team === 'enemies' && character.hp > 0
         )
-        let weakestAlive = enemiesAlive[0]
+        let lowestHpEnemy = enemiesAlive[0]
 
         for (const char of enemiesAlive) {
-            if (!weakestAlive || char.hp < weakestAlive.hp) {
-                weakestAlive = char
+            if (!lowestHpEnemy || char.hp < lowestHpEnemy.hp) {
+                lowestHpEnemy = char
             }
         }
 
-        return weakestAlive
+        return lowestHpEnemy
     }
 
     if (aiCharacter.team === 'enemies') {
@@ -29,15 +29,15 @@ const findTarget = (aiCharacter: Combatant, party: Combatant[]): Combatant => {
         })
         const endTargets = targets.length > 0 ? targets : heroesAlive
 
-        let strongestAlive = endTargets[0]
+        let highestHpHeroAlive = endTargets[0]
 
         for (const char of endTargets) {
-            if (!strongestAlive || char.hp > strongestAlive.hp) {
-                strongestAlive = char
+            if (!highestHpHeroAlive || char.hp > highestHpHeroAlive.hp) {
+                highestHpHeroAlive = char
             }
         }
 
-        return strongestAlive
+        return highestHpHeroAlive
     }
 
     throw new Error('Team not found')
