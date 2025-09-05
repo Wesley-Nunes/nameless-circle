@@ -5,14 +5,49 @@ import getCombatStatus from './getCombatStatus'
 import type { Hero, Enemy } from 'game/types'
 
 describe('getCombatStatus', () => {
-    it.todo('returns UNINITIALIZED when characters is undefined', () => {})
-    it.todo('returns VICTORY when all enemies are defeated', () => {})
-    it.todo('returns VICTORY when no enemies exist', () => {})
-    it.todo('returns DEFEAT when all heroes are defeated', () => {})
-    it.todo('returns DEFEAT when no heroes exist', () => {})
-    it.todo('returns IN_PROGRESS when both teams have living members', () => {})
-    it.todo(
-        'returns IN_PROGRESS when at least one hero and one enemy are alive',
-        () => {}
-    )
+    it('returns UNINITIALIZED when characters is undefined', () => {
+        expect(getCombatStatus()).toBe('UNINITIALIZED')
+    })
+    it('returns VICTORY when all enemies are defeated', () => {
+        const heroes: Hero[] = [
+            { id: 'hero_0001', team: 'heroes', hp: 10 } as Hero
+        ]
+        const enemies: Enemy[] = [
+            { id: 'enemy_0001', team: 'enemies', hp: 0 } as Enemy,
+            { id: 'enemy_0002', team: 'enemies', hp: -5 } as Enemy
+        ]
+        const expectedCombatStatus = 'VICTORY'
+
+        const combatStatus = getCombatStatus([...heroes, ...enemies])
+
+        expect(combatStatus).toBe(expectedCombatStatus)
+    })
+    it('returns DEFEAT when all heroes are defeated', () => {
+        const heroes: Hero[] = [
+            { id: 'hero_0001', team: 'heroes', hp: 0 } as Hero,
+            { id: 'hero_0002', team: 'heroes', hp: -5 } as Hero
+        ]
+        const enemies: Enemy[] = [
+            { id: 'enemy_0001', team: 'enemies', hp: 10 } as Enemy
+        ]
+        const expectedCombatStatus = 'DEFEAT'
+
+        const combatStatus = getCombatStatus([...heroes, ...enemies])
+
+        expect(combatStatus).toBe(expectedCombatStatus)
+    })
+    it('returns IN_PROGRESS when both teams have living members', () => {
+        const heroes: Hero[] = [
+            { id: 'hero_0001', team: 'heroes', hp: 10 } as Hero,
+            { id: 'hero_0002', team: 'heroes', hp: -5 } as Hero
+        ]
+        const enemies: Enemy[] = [
+            { id: 'enemy_0001', team: 'enemies', hp: 10 } as Enemy
+        ]
+        const expectedCombatStatus = 'IN_PROGRESS'
+
+        const combatStatus = getCombatStatus([...heroes, ...enemies])
+
+        expect(combatStatus).toBe(expectedCombatStatus)
+    })
 })
