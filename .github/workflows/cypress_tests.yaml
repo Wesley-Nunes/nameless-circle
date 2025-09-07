@@ -22,6 +22,7 @@ jobs:
                   runTests: false
                   build: npm run build
 
+
             - name: Save build folder
               uses: actions/upload-artifact@v4
               with:
@@ -36,6 +37,7 @@ jobs:
             image: cypress/browsers:22.19.0
             options: --user 1001
         needs: install
+
         steps:
             - name: Checkout
               uses: actions/checkout@v4
@@ -50,6 +52,7 @@ jobs:
               uses: cypress-io/github-action@v6
               with:
                   start: npm run preview
+
                   wait-on: 'http://0.0.0.0:4173'
                   wait-on-timeout: 180
                   browser: chrome
@@ -63,6 +66,7 @@ jobs:
             image: cypress/browsers:22.19.0
             options: --user 1001
         needs: install
+
         steps:
             - name: Checkout
               uses: actions/checkout@v4
@@ -77,9 +81,11 @@ jobs:
               uses: cypress-io/github-action@v6
               with:
                   start: npm run preview
+
                   wait-on: 'http://0.0.0.0:4173'
                   wait-on-timeout: 180
 
                   browser: firefox
                   spec: cypress/e2e/**/*
+
                   config-file: cypress.config.ci.ts
