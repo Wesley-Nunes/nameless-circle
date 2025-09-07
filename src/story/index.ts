@@ -1,1 +1,1 @@
-export { default as storyContent } from './intro'
+export { default as storyContent } from './story'
