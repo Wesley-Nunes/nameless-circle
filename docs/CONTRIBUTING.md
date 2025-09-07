@@ -50,22 +50,39 @@ I welcome ideas for new features and mechanics that align with the game's dark f
 
 **Please do not open a pull request without a related GitHub Issue.** For new features, ensure the proposal has been approved before starting work.
 
-1.  **Set Up the Project** locally. See the [How to Run](../README.md#how-to-run) section in the README.
-2.  Create your branch from `staging`. Use a descriptive name based on the related issue (e.g., `centralize-game-data-access-20`).
-3.  **Make Your Changes.**
+1. **Fork the repository.** Click the "Fork" button at the top of this repository's page on GitHub.
+2. **Set Up the Project Locally.**
+    - `git clone git@github.com:your-username/nameless-circle.git` (Clone your fork to your machine, **not** the original repository).
+    - `cd nameless-circle` (Navigate into the project directory).
+    - `npm install` (Install all project dependencies).
+    - **Add the Upstream Remote:** Connect your local clone to the original repository to stay updated:
+        ```bash
+        git remote add upstream git@github.com:Wesley-Nunes/nameless-circle.git
+        ```
+    - See the [How to Run](../README.md#how-to-run) section in the README for more application-specific setup.
+
+3. **Sync Your Fork (Before Creating a Branch):** Ensure you are starting from the latest `staging` branch.
+    - `git fetch upstream`
+    - `git switch staging`
+    - `git merge upstream/staging`
+
+4. **Create Your Feature Branch.** Create a new branch from the updated `staging` branch. Use a descriptive name based on the related issue (e.g., `feat/centralize-game-data-access-20` where `20` is the issue number).
+    - `git switch -c your-branch-name`
+5. **Make Your Changes.**
     - Follow the existing code style and project structure. See the [Design & Architecture](../README.md#design-and-architecture) section. Ensure your IDE is using the project's `.prettierrc.json` config.
     - Use **TypeScript** with strict typing for new components.
     - **Tests are required:**
-      - New/Modified `src/game/systems`: Add **unit tests**.
-      - New/Modified `src/state/store/`: Add **integration tests**.
-      - Bug fixes: Add **e2e regression tests** in `cypress/e2e/regression-tests`.
-      - New core functionality: Add **e2e tests** in `cypress/e2e/core-flows`.
-4.  **Test Your Changes.**
+        - New/Modified `src/game/systems`: Add **unit tests**.
+        - New/Modified `src/state/store/`: Add **integration tests**.
+        - Bug fixes: Add **e2e regression tests** in `cypress/e2e/regression-tests`.
+        - New core functionality: Add **e2e tests** in `cypress/e2e/core-flows`.
+6. **Test Your Changes.**
     - Run `npm run test:unit` and `npm run test:e2e` to ensure you didn't break anything. **The PR will be automatically rejected if any tests fail.**
     - Test your changes manually in the browser.
-5.  **Commit Your Changes.** Please use [conventional commit messages](https://www.conventionalcommits.org/).
-6.  **Push your branch** and open a Pull Request to the `staging` branch.
-7.  **Describe Your Changes** in the PR, clearly detailing what you did and linking to the relevant issue.
+7. **Commit Your Changes.** Please use [conventional commit messages](https://www.conventionalcommits.org/).
+8. **Push to Your Fork**
+9. **Open a Pull Request** from your branch (in your fork) to the `staging` branch of this repository.
+10. **Describe Your Changes** in the PR, clearly detailing what you did and linking to the relevant issue.
 
 ## Getting Help
 
