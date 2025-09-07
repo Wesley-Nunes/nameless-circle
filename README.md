@@ -201,7 +201,7 @@ To know how could you contribute, please read [How to Contribute](./docs/CONTRIB
 This project uses multiple licenses.
 
 - **Code**: The source code in this repository is licensed under the **MIT License**
-    - see the [LICENSE-CODE-MIT](LICENSE-CODE-MIT.md) file for details.
+    - see the [LICENSE-CODE-MIT](./license/LICENSE-CODE-MIT.md) file for details.
 
         **Code location:**
 
@@ -213,7 +213,7 @@ This project uses multiple licenses.
         ```
 
 - **Story & Narrative:** All original story content, characters, and world-building are licensed under a **CC BY-NC-ND 4.0**
-    - see the [LICENSE-STORY-CC-BY-NC-ND-4.0](LICENSE-STORY-CC-BY-NC-ND-4.0.md) file for details.
+    - see the [LICENSE-STORY-CC-BY-NC-ND-4.0](./license/LICENSE-STORY-CC-BY-NC-ND-4.0.md) file for details.
 
         **Story location:**
 
@@ -223,7 +223,7 @@ This project uses multiple licenses.
         ```
 
 - **Part of the game mechanic use**: SRD 5.2.1 content.
-    - See [LICENSE-SRD-CC-BY-4.0](LICENSE-SRD-CC-BY-4.0.md) for details.
+    - See [LICENSE-SRD-CC-BY-4.0](./license/LICENSE-SRD-CC-BY-4.0.md) for details.
 
 ## <a name="author">Author</a>
 
