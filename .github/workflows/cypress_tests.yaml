@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: E2E Tests
 
 on:
     push:
@@ -20,7 +20,8 @@ jobs:
               uses: cypress-io/github-action@v6
               with:
                   runTests: false
-                  build: npm run build # !
+                  build: npm run build
+
 
             - name: Save build folder
               uses: actions/upload-artifact@v4
@@ -36,9 +37,7 @@ jobs:
             image: cypress/browsers:22.19.0
             options: --user 1001
         needs: install
-        strategy:
-            matrix:
-                containers: [1, 2, 3, 4, 5]
+
         steps:
             - name: Checkout
               uses: actions/checkout@v4
@@ -53,11 +52,11 @@ jobs:
               uses: cypress-io/github-action@v6
               with:
                   start: npm run preview
-                  wait-on: 'http://localhost:4173'
-                  wait-on-timeout: 120
+
+                  wait-on: 'http://0.0.0.0:4173'
+                  wait-on-timeout: 180
                   browser: chrome
-                  group: 'UI - Chrome'
-                  spec: cypress/e2e/*
+                  spec: cypress/e2e/**/*
                   config-file: cypress.config.ci.ts
 
     ui-firefox-tests:
@@ -67,9 +66,7 @@ jobs:
             image: cypress/browsers:22.19.0
             options: --user 1001
         needs: install
-        strategy:
-            matrix:
-                containers: [1, 2, 3, 4, 5]
+
         steps:
             - name: Checkout
               uses: actions/checkout@v4
@@ -84,9 +81,11 @@ jobs:
               uses: cypress-io/github-action@v6
               with:
                   start: npm run preview
-                  wait-on: 'http://localhost:4173'
-                  wait-on-timeout: 120
+
+                  wait-on: 'http://0.0.0.0:4173'
+                  wait-on-timeout: 180
+
                   browser: firefox
-                  group: 'UI - Firefox'
-                  spec: cypress/e2e/*
+                  spec: cypress/e2e/**/*
+
                   config-file: cypress.config.ci.ts

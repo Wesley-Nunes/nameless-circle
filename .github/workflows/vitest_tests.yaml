@@ -1,4 +1,5 @@
-name: Vitest Tests
+name: Unit Tests
+
 
 on:
     push:

@@ -1,0 +1,150 @@
+:root {
+    /* Colors */
+    --color-eerie-black: #1e1e1e;
+    --color-pearl: #e8dfca;
+    --color-deep-brown: #5d4037;
+    --color-silver: #a9a9a9;
+    --color-jonquil: #ffca00;
+    --color-vivid-sky-blue: #2ed9ff;
+    --color-malachite: #1be467;
+    --color-poppy: #df3d3b;
+
+    /* Eerie Black Scale */
+    --color-eerie-black-100: color-mix(
+        in srgb,
+        var(--color-eerie-black) 10%,
+        white
+    );
+    --color-eerie-black-200: color-mix(
+        in srgb,
+        var(--color-eerie-black) 30%,
+        white
+    );
+    --color-eerie-black-300: color-mix(
+        in srgb,
+        var(--color-eerie-black) 50%,
+        white
+    );
+    --color-eerie-black-400: color-mix(
+        in srgb,
+        var(--color-eerie-black) 70%,
+        white
+    );
+    --color-eerie-black-500: var(--color-eerie-black);
+    --color-eerie-black-600: color-mix(
+        in srgb,
+        var(--color-eerie-black) 90%,
+        black
+    );
+    --color-eerie-black-700: color-mix(
+        in srgb,
+        var(--color-eerie-black) 70%,
+        black
+    );
+    --color-eerie-black-800: color-mix(
+        in srgb,
+        var(--color-eerie-black) 50%,
+        black
+    );
+    --color-eerie-black-900: color-mix(
+        in srgb,
+        var(--color-eerie-black) 30%,
+        black
+    );
+
+    /* Deep Brown Scale */
+    --color-deep-brown-100: color-mix(
+        in srgb,
+        var(--color-deep-brown) 10%,
+        white
+    );
+    --color-deep-brown-200: color-mix(
+        in srgb,
+        var(--color-deep-brown) 30%,
+        white
+    );
+    --color-deep-brown-300: color-mix(
+        in srgb,
+        var(--color-deep-brown) 50%,
+        white
+    );
+    --color-deep-brown-400: color-mix(
+        in srgb,
+        var(--color-deep-brown) 70%,
+        white
+    );
+    --color-deep-brown-500: var(--color-deep-brown);
+    --color-deep-brown-600: color-mix(
+        in srgb,
+        var(--color-deep-brown) 90%,
+        black
+    );
+    --color-deep-brown-700: color-mix(
+        in srgb,
+        var(--color-deep-brown) 70%,
+        black
+    );
+    --color-deep-brown-800: color-mix(
+        in srgb,
+        var(--color-deep-brown) 50%,
+        black
+    );
+    --color-deep-brown-900: color-mix(
+        in srgb,
+        var(--color-deep-brown) 30%,
+        black
+    );
+
+    /* Silver Scale */
+    --color-silver-100: color-mix(in srgb, var(--color-silver) 10%, white);
+    --color-silver-200: color-mix(in srgb, var(--color-silver) 30%, white);
+    --color-silver-300: color-mix(in srgb, var(--color-silver) 50%, white);
+    --color-silver-400: color-mix(in srgb, var(--color-silver) 70%, white);
+    --color-silver-500: var(--color-silver);
+    --color-silver-600: color-mix(in srgb, var(--color-silver) 90%, black);
+    --color-silver-700: color-mix(in srgb, var(--color-silver) 70%, black);
+    --color-silver-800: color-mix(in srgb, var(--color-silver) 50%, black);
+    --color-silver-900: color-mix(in srgb, var(--color-silver) 30%, black);
+
+    /* Jonquil Scale */
+    --color-jonquil-100: color-mix(in srgb, var(--color-jonquil) 10%, white);
+    --color-jonquil-200: color-mix(in srgb, var(--color-jonquil) 30%, white);
+    --color-jonquil-300: color-mix(in srgb, var(--color-jonquil) 50%, white);
+    --color-jonquil-400: color-mix(in srgb, var(--color-jonquil) 70%, white);
+    --color-jonquil-500: var(--color-jonquil);
+    --color-jonquil-600: color-mix(in srgb, var(--color-jonquil) 90%, black);
+    --color-jonquil-700: color-mix(in srgb, var(--color-jonquil) 70%, black);
+    --color-jonquil-800: color-mix(in srgb, var(--color-jonquil) 50%, black);
+    --color-jonquil-900: color-mix(in srgb, var(--color-jonquil) 30%, black);
+
+    /* Gradient Colors */
+    --bg-gradient-start: color-mix(
+        in srgb,
+        var(--color-eerie-black-400) 70%,
+        var(--color-deep-brown-700)
+    );
+    --bg-gradient-end: color-mix(
+        in srgb,
+        var(--color-eerie-black-600) 80%,
+        var(--color-deep-brown-800)
+    );
+
+    --bg-primary: var(--color-eerie-black-500);
+    --border-primary: rgb(from var(--color-silver-500) r g b / 0.2);
+    --border-secondary: var(--color-jonquil-400);
+    --border-tertiary: var(--color-deep-brown-500);
+    --button-primary: var(--color-deep-brown-500);
+    --button-disabled: var(--color-silver-800);
+    --text-title: var(--color-jonquil-500);
+    --text-subtitle: var(--color-jonquil-400);
+    --text-primary: var(--color-pearl);
+    --text-secondary: var(--color-silver-500);
+    --text-disabled: var(--color-silver-200);
+    --accent-reward: var(--color-jonquil-500);
+    --accent-magic: var(--color-vivid-sky-blue);
+    --status-positive: var(--color-malachite);
+    --status-danger: var(--color-poppy);
+
+    /* Sizing */
+    font-size: 62.5%;
+}

@@ -1,0 +1,72 @@
+.centralize {
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message {
+    max-width: 64rem;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: var(--bg-primary);
+
+    padding: 3.2rem;
+
+    border: none;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.subtitle {
+    color: var(--text-subtitle);
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.subtitleVariation {
+    color: var(--accent-magic);
+    font-size: 1.8rem;
+    margin: 0.8rem 0;
+}
+
+.links-container {
+    width: 100%;
+
+    background-color: rgb(from var(--color-deep-brown-500) r g b / 0.2);
+
+    border-left: 4px solid var(--border-tertiary);
+    padding: 1.6rem;
+    border-radius: 4px;
+}
+
+.links {
+    margin: 2.4rem 0;
+}
+
+.links > a {
+    color: var(--text-secondary);
+}
+
+.buttonWrapper {
+    width: 100%;
+}
+
+@media (min-width: 720px) {
+    .message {
+        height: 70%;
+    }
+}
+
+@media ((min-width: 960px) and (orientation: landscape)) {
+    .message {
+        height: 90%;
+    }
+}

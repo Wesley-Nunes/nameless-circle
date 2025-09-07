@@ -1,0 +1,25 @@
+import { player, lysandra, protaxios, renpetIb } from 'game/data/static/heroes'
+
+import type { Hero } from 'game/types'
+import { addID } from 'game/systems/IDSystem'
+
+const heroRegistry: Record<string, Hero> = {
+    [player.id]: player,
+    [lysandra.id]: lysandra,
+    [protaxios.id]: protaxios,
+    [renpetIb.id]: renpetIb
+}
+
+const getHeroById = (id: string): Hero => {
+    const hero = structuredClone(heroRegistry[id])
+
+    if (!hero) {
+        throw new Error(`Hero id: ${id} not found`)
+    }
+
+    addID(hero.id)
+
+    return hero
+}
+
+export default getHeroById

@@ -1,0 +1,22 @@
+.title {
+    font-family: 'Cardo', serif;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 0.15px;
+
+    color: var(--text-title);
+
+    margin: 0;
+}
+
+.small {
+    font-size: clamp(2rem, 2.5vw, 2.4rem);
+}
+
+.medium {
+    font-size: clamp(2.8rem, 3.5vw, 3.6rem);
+}
+
+.large {
+    font-size: clamp(3.6rem, 4.5vw, 4.8rem);
+}

@@ -1,7 +1,21 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+    plugins: [react(), tsconfigPaths()],
+    css: {
+        modules: {
+            localsConvention: 'camelCaseOnly'
+        }
+    },
+    test: {
+        environment: 'jsdom',
+        coverage: {
+            reporter: ['html'],
+            include: ['src/game/systems/**/*.ts', 'src/state/store/**/*.ts'],
+            exclude: ['**/index.ts']
+        }
+    }
 })

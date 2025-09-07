@@ -1,0 +1,58 @@
+.effect {
+    width: 60vmax;
+    height: 60vmax;
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(1px);
+    pointer-events: none;
+    z-index: 1;
+    bottom: -25%;
+    left: -25%;
+}
+
+.animated {
+    animation: pulse 15s ease-in-out infinite;
+}
+
+.reward {
+    background-color: rgb(from var(--accent-reward) r g b / 0.1);
+}
+
+.magic {
+    background-color: rgb(from var(--accent-magic) r g b / 0.1);
+}
+
+.positive {
+    background-color: rgb(from var(--status-positive) r g b / 0.1);
+}
+
+.danger {
+    background-color: rgb(from var(--status-danger) r g b / 0.1);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.75);
+        opacity: 0.2;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 0.1;
+    }
+    100% {
+        transform: scale(0.75);
+        opacity: 0.2;
+    }
+}
+
+@media (min-width: 720px) {
+    .animated {
+        animation-duration: 30s;
+    }
+}
+
+@media (min-width: 1200px) {
+    .animated {
+        animation-duration: 60s;
+    }
+}
