@@ -29,6 +29,7 @@ Nameless Circle is a text-based RPG that uses immersive storytelling and strateg
 - [Story](#story)
 - [Preview](#preview)
 - [Contributing](#contributing)
+- [Dev Log](#dev-log)
 - [License](#license)
 - [Author](#author)
 
@@ -195,6 +196,18 @@ Play **[Nameless Circle](https://nameless-circle.vercel.app/)** 🎮 (v0.1.0)
 First off, thank you for your interest in contributing to this project! As a solo indie developer, I greatly appreciate any help, whether it's reporting a bug, suggesting a feature, or submitting code.
 
 To know how could you contribute, please read [How to Contribute](./docs/CONTRIBUTING.md)
+
+## <a name="dev-log">Dev Log</a>
+
+Starting with version 0.2.0, I'll keep a log of the project's development.
+The log will be divided into two parts:
+
+1. The planning: Written before the sprint starts
+2. The result: Analysis of whether the planning was achieved
+
+### Dev logs:
+
+- [0.2.0](./dev-log/0_2_0.md)
 
 ## <a name="license">License</a>
 

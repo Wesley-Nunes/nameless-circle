@@ -6,6 +6,7 @@ const getEnemyAbilityPoints = (xp: number) => {
 
     // NOTE: Starting with the simplest implementation first.
     // The math logic needs refinement.
+    // See #26 for more info
     const abilitiesPoints = 60 + 3 * ENEMY_XP.findIndex(i => i === xp)
 
     return abilitiesPoints
