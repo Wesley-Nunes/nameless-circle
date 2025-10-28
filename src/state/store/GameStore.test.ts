@@ -88,6 +88,7 @@ describe('GameStore', () => {
         )
         expect(charactersAlive).toBe(6)
 
+        gameStore.handleInkFunction('start_turn')
         expect(gameStore.handleInkFunction('get_combat_round')).toBe(1)
 
         const isPlayerAction = gameStore.handleInkFunction('is_player_action')
@@ -115,6 +116,7 @@ describe('GameStore', () => {
         expect(result).toBeTypeOf('string')
         expect(result).toMatch(/^6\. .+$/)
 
+        gameStore.handleInkFunction('start_turn')
         expect(gameStore.handleInkFunction('get_combat_round')).toBe(2)
 
         let counter = 0

@@ -31,6 +31,7 @@ class GameStore {
     private charactersOrdered: Combatant[]
     private combatId: string
     private Log: Map<string, { status: CombatStatus; value: number }>
+    private getCombatRound: number
     private combatStatus: CombatStatus
     private currentCharacterIndex: number
     private currentHeroParty: Hero[]
@@ -43,6 +44,7 @@ class GameStore {
         this.charactersOrdered = []
         this.combatId = ''
         this.Log = new Map()
+        this.getCombatRound = 0
         this.combatStatus = getCombatStatus()
         this.currentCharacterIndex = 0
         this.currentHeroParty = [getHeroById(PLAYER_ID)]
@@ -117,6 +119,10 @@ class GameStore {
         this.currentMounts = this.currentMounts.filter(mount => mount.isAlive)
         this.turnLog = []
         this.winConditions = []
+    }
+    private startTurn() {
+        this.getCombatRound =
+            Math.floor(this.turnLog.length / this.charactersOrdered.length) + 1
     }
 
     // eslint-disable-next-line
@@ -238,14 +244,7 @@ class GameStore {
                 throw Error(`Invalid combatId: ${combatId}.`)
             }
             case 'get_combat_round': {
-                const turnsTaken = this.turnLog.length
-                if (turnsTaken === 0) {
-                    return 1
-                }
-                const round =
-                    Math.floor(turnsTaken / this.charactersOrdered.length) + 1
-
-                return round
+                return this.getCombatRound
             }
             case 'get_combat_status': {
                 return this.combatStatus
@@ -302,6 +301,10 @@ class GameStore {
                 this.combatId = combatId
                 this.winConditions = winConditions
 
+                break
+            }
+            case 'start_turn': {
+                this.startTurn()
                 break
             }
             default: {

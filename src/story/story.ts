@@ -431,6 +431,7 @@ const storyContent = {
                 '\n',
                 { '#f': 1 }
             ],
+            start_turn: ['ev', 1, '/ev', '~ret', { '#f': 1 }],
             combat_scene: [
                 { 'temp=': 'combat_id' },
                 '#',
@@ -463,6 +464,11 @@ const storyContent = {
                 '#',
                 '^event turn start',
                 '/#',
+                'ev',
+                { 'x()': 'start_turn' },
+                'out',
+                '/ev',
+                '\n',
                 '^🌀 ROUND ',
                 'ev',
                 { 'x()': 'get_combat_round' },
@@ -504,7 +510,7 @@ const storyContent = {
                         b: [
                             '\n',
                             { '->t->': 'player_action_options' },
-                            { '->': '.^.^.^.40' },
+                            { '->': '.^.^.^.45' },
                             null
                         ]
                     }
@@ -519,7 +525,7 @@ const storyContent = {
                             'out',
                             '/ev',
                             '\n',
-                            { '->': '.^.^.^.40' },
+                            { '->': '.^.^.^.45' },
                             null
                         ]
                     }
@@ -547,7 +553,7 @@ const storyContent = {
                         b: [
                             '\n',
                             { '->': '.^.^.^' },
-                            { '->': '.^.^.^.58' },
+                            { '->': '.^.^.^.63' },
                             null
                         ]
                     }

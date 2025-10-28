@@ -32,6 +32,8 @@
     ~ return true
 === function set_combat(combat_id) ===
     { combat_id }
+=== function start_turn() ===
+    ~ return 1
 
 // scenes
 === combat_scene(combat_id) ===
@@ -44,6 +46,7 @@
 
 === combat_loop ===
     # event turn start
+    { start_turn() }
     🌀 ROUND { get_combat_round() }
 
     ENEMIES

@@ -16,6 +16,7 @@ EXTERNAL get_party_size(team)
 EXTERNAL get_player_name()
 EXTERNAL is_player_action()
 EXTERNAL set_combat(combat_id)
+EXTERNAL start_turn()
 
 -> start
 

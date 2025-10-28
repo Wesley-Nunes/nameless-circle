@@ -59,7 +59,8 @@ class StoryStore {
             'get_combat_result',
             'get_combat_round',
             'get_alive_characters_size',
-            'get_player_name'
+            'get_player_name',
+            'start_turn'
         ].forEach(fn => {
             this.story.BindExternalFunction(fn, (...args) => {
                 return this.inkFunctionHandler!(fn, ...args)
