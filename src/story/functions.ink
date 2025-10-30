@@ -22,6 +22,8 @@
 === function get_combat_status() ===
     // IN_PROGRESS || VICTORY || DEFEAT
     ~ return "VICTORY"
+=== function get_enemy_party_size() ===
+    ~ return 1
 === function get_mount_info(character_id, prop) ===
     ~ return 1
 === function get_party_size(team) ===
@@ -74,7 +76,7 @@
     ->->
 
 === enemy_loop(index) ===
-    { index >= get_party_size("enemies"): ->-> }
+    { index >= get_enemy_party_size(): ->-> }
     
     ~ temp enemy_id = get_character_info("enemies", index, "id")
     ~ temp enemy_name = get_character_info("enemies", index, "name")

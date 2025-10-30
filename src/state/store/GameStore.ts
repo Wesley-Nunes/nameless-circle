@@ -30,8 +30,9 @@ class GameStore {
     private availableHeroIds: string[]
     private charactersOrdered: Combatant[]
     private combatId: string
+    private combatRound: number
+    private enemyPartySize: number
     private Log: Map<string, { status: CombatStatus; value: number }>
-    private getCombatRound: number
     private combatStatus: CombatStatus
     private currentCharacterIndex: number
     private currentHeroParty: Hero[]
@@ -43,8 +44,9 @@ class GameStore {
         this.availableHeroIds = [PLAYER_ID, 'hero_0002']
         this.charactersOrdered = []
         this.combatId = ''
+        this.combatRound = 0
+        this.enemyPartySize = 0
         this.Log = new Map()
-        this.getCombatRound = 0
         this.combatStatus = getCombatStatus()
         this.currentCharacterIndex = 0
         this.currentHeroParty = [getHeroById(PLAYER_ID)]
@@ -121,8 +123,12 @@ class GameStore {
         this.winConditions = []
     }
     private startTurn() {
-        this.getCombatRound =
+        this.combatRound =
             Math.floor(this.turnLog.length / this.charactersOrdered.length) + 1
+
+        this.enemyPartySize = this.charactersOrdered.filter(
+            char => char.team === 'enemies' && char.isAlive
+        ).length
     }
 
     // eslint-disable-next-line
@@ -244,10 +250,13 @@ class GameStore {
                 throw Error(`Invalid combatId: ${combatId}.`)
             }
             case 'get_combat_round': {
-                return this.getCombatRound
+                return this.combatRound
             }
             case 'get_combat_status': {
                 return this.combatStatus
+            }
+            case 'get_enemy_party_size': {
+                return this.enemyPartySize
             }
             case 'get_mount_info': {
                 const [characterId, prop] = args as [string, string]
@@ -264,6 +273,7 @@ class GameStore {
 
                 return 0
             }
+            // TODO: Delete this after the refactor
             case 'get_party_size': {
                 const [teamName] = args as [Team]
                 const team = this.charactersOrdered.filter(

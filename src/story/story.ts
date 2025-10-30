@@ -395,6 +395,7 @@ const storyContent = {
                 '~ret',
                 { '#f': 1 }
             ],
+            get_enemy_party_size: ['ev', 1, '/ev', '~ret', { '#f': 1 }],
             get_mount_info: [
                 { 'temp=': 'prop' },
                 { 'temp=': 'character_id' },
@@ -570,10 +571,7 @@ const storyContent = {
                 { 'temp=': 'index' },
                 'ev',
                 { 'VAR?': 'index' },
-                'str',
-                '^enemies',
-                '/str',
-                { 'x()': 'get_party_size', exArgs: 1 },
+                { 'x()': 'get_enemy_party_size' },
                 '>=',
                 '/ev',
                 [
@@ -585,7 +583,7 @@ const storyContent = {
                             'void',
                             '/ev',
                             '->->',
-                            { '->': '.^.^.^.10' },
+                            { '->': '.^.^.^.7' },
                             null
                         ]
                     }
@@ -657,7 +655,7 @@ const storyContent = {
                             { 'VAR?': 'enemy_id' },
                             '/ev',
                             { '->t->': 'mount_display' },
-                            { '->': '.^.^.^.54' },
+                            { '->': '.^.^.^.51' },
                             null
                         ]
                     }
@@ -1009,6 +1007,5 @@ const storyContent = {
     ],
     listDefs: {}
 }
-
 export default storyContent
 
