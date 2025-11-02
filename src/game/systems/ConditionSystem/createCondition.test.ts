@@ -30,4 +30,26 @@ describe('createCondition', () => {
 
         expect(rageCondition).toStrictEqual(expectedCondition)
     })
+    it('should return the prone condition', () => {
+        const char: Character = getHeroById('hero_0001')
+        const conditionId = 'condition_0002'
+        const expectedCondition: Condition = {
+            id: 'condition_0002',
+            name: 'Prone',
+            duration: {
+                turns: 1,
+                extension: ['no_stand_action_taken']
+            },
+            effects: {
+                movement_cost: 'half_speed',
+                attack_rolls: 'disadvantage',
+                melee_attacks_against: 'advantage',
+                ranged_attacks_against: 'disadvantage'
+            }
+        }
+
+        const proneCondition = createCondition(char, conditionId)
+
+        expect(proneCondition).toStrictEqual(expectedCondition)
+    })
 })
