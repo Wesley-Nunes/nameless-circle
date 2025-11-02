@@ -3,6 +3,7 @@ import type { Action } from './Action.type'
 import type { Weapon } from './Weapon.type'
 import type { Species } from './Species.type'
 import type { Team } from './Team.type'
+import type { Condition } from './Condition.type'
 
 export type CharacterSize =
     | 'tiny'
@@ -18,14 +19,15 @@ export type Character = {
     abilities: AbilityBlock
     actions: Action[]
     armorClass: number
+    conditions: Condition[]
     hp: number
     id: string
     isAlive: boolean
-    // NOTE: Equipment & Inventory should be developed to improve this feature
-    weapon: Weapon
     name: string
-    species: Species
     size: CharacterSize
+    species: Species
     team: Team
     type: Array<CharacterType>
+    // NOTE: Equipment & Inventory should be developed to improve this feature
+    weapon: Weapon
 }
