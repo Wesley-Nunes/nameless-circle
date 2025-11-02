@@ -8,6 +8,7 @@ export type {
     WinCondition
 } from './Combat.type'
 export type { Combatant } from './Combatant.type'
+export type { Condition } from './Condition.type'
 export type { DamageResult } from './Damage.type'
 export type { Difficulty } from './Difficulty.type'
 export type { Enemy } from './Enemy.type'
