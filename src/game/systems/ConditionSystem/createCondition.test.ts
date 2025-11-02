@@ -52,4 +52,24 @@ describe('createCondition', () => {
 
         expect(proneCondition).toStrictEqual(expectedCondition)
     })
+    it('should return the bardic inspiration condition', () => {
+        const char: Character = getHeroById('hero_0001')
+        const conditionId = 'condition_0003'
+        const expectedCondition: Condition = {
+            id: 'condition_0003',
+            name: 'Bardic inspiration',
+            duration: {
+                turns: 10
+            },
+            effects: {
+                inspiration_die: 'd6',
+                can_add_to_failed_check: true,
+                max_stacks: 1
+            }
+        }
+
+        const bardicInspirationCondition = createCondition(char, conditionId)
+
+        expect(bardicInspirationCondition).toStrictEqual(expectedCondition)
+    })
 })
