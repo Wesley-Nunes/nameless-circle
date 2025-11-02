@@ -130,6 +130,21 @@ class GameStore {
             char => char.team === 'enemies' && char.isAlive
         ).length
     }
+    private endTurn() {
+        this.combatStatus = getCombatStatus(this.charactersOrdered)
+
+        if (this.combatStatus === 'IN_PROGRESS') {
+            this.charactersOrdered = this.charactersOrdered.filter(
+                char => char.team !== 'enemies' || char.isAlive
+            )
+            this.currentCharacterIndex = getNextCharacterIndex(
+                this.charactersOrdered,
+                this.currentCharacterIndex
+            )
+        } else {
+            this.endCombat()
+        }
+    }
 
     // eslint-disable-next-line
     public handleInkFunction = (funcName: string, ...args: any[]) => {
@@ -188,17 +203,7 @@ class GameStore {
                 break
             }
             case 'end_turn': {
-                this.combatStatus = getCombatStatus(this.charactersOrdered)
-
-                if (this.combatStatus === 'IN_PROGRESS') {
-                    this.currentCharacterIndex = getNextCharacterIndex(
-                        this.charactersOrdered,
-                        this.currentCharacterIndex
-                    )
-                } else {
-                    this.endCombat()
-                }
-
+                this.endTurn()
                 break
             }
             case 'get_action_result': {
