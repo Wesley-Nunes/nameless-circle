@@ -79,7 +79,7 @@ Enabling me to keep the codebase simple with concerns separated and easily maint
 
 ### Requirements
 
-- [Node.js](https://nodejs.org/en/download) (developed with **Node.js 22.x**)
+- [Node.js](https://nodejs.org/en/download) (**Node.js 24.x**)
 
 ### Getting Started
 
@@ -178,6 +178,7 @@ This approach ensured the design was driven by the story and gameplay needs, and
     - [Game page](https://design.penpot.app/#/view?file-id=e7c79b0d-7aa0-808c-8006-c3262c815abf&page-id=889bdc0d-54d4-80a1-8006-a8703c940c42&section=interactions&index=0&share-id=e7c79b0d-7aa0-808c-8006-c332e9435004)
 
 > NOTE: If the Penpot preview doesn't load correctly, you can download the Penpot file from this link: [nameless-circle-design-files](https://drive.google.com/file/d/1dt6HaIcuSwAi1XGWnGtbjeeVBnX1yx4S/view?usp=sharing)
+
 ## <a name="story">Story</a>
 
 _This section will be short because the story is growing and changing constantly._
