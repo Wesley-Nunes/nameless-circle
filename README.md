@@ -169,11 +169,15 @@ This approach ensured the design was driven by the story and gameplay needs, and
 
 - [Project 5W1H & Keywords](https://docs.google.com/document/d/13Mi1sZpZwXe66AbvSeDS67OW2OKxNq6cmbg1xFXS908/edit?usp=sharing)
 - [Mood Board](https://design.penpot.app/#/view?file-id=bd830f34-5ac9-8161-8006-c3262c9ac29a&page-id=614077e1-bf93-807e-8006-36fb7bda934e&section=interactions&index=0&share-id=bd830f34-5ac9-8161-8006-c32c3854ea8e)
+
+![Mood Board](https://i.ibb.co/RpTnCmJg/Mood-board.jpg)
+
 - **Web App Mockups:**
     - [Home page](https://design.penpot.app/#/view?file-id=e7c79b0d-7aa0-808c-8006-c3262c815abf&page-id=889bdc0d-54d4-80a1-8006-a893f79e9c12&section=interactions&index=0&share-id=bd830f34-5ac9-8161-8006-c33267cb00b8)
     - [Welcome page](https://design.penpot.app/#/view?file-id=e7c79b0d-7aa0-808c-8006-c3262c815abf&page-id=f028ace2-19eb-8131-8006-a5ebc189c57b&section=interactions&index=0&share-id=bd830f34-5ac9-8161-8006-c332be8309ac)
     - [Game page](https://design.penpot.app/#/view?file-id=e7c79b0d-7aa0-808c-8006-c3262c815abf&page-id=889bdc0d-54d4-80a1-8006-a8703c940c42&section=interactions&index=0&share-id=e7c79b0d-7aa0-808c-8006-c332e9435004)
 
+> NOTE: If the Penpot preview doesn't load correctly, you can download the Penpot file from this link: [nameless-circle-design-files](https://drive.google.com/file/d/1dt6HaIcuSwAi1XGWnGtbjeeVBnX1yx4S/view?usp=sharing)
 ## <a name="story">Story</a>
 
 _This section will be short because the story is growing and changing constantly._
